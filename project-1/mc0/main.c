@@ -68,14 +68,10 @@ void last(){
 }
 
 void ls(){
-    char args[100];
     char* arg = malloc(100);
     char* dir = malloc(100);
-
     printf("Arguments: ");
-    //fgets(args, sizeof args, stdin);
-    //printf("parsed as args: %s", args);
-    fgets(args, sizeof(args), stdin);
+    scanf("%s", arg);
     printf("Directory: ");
     scanf("%s", dir);
 
@@ -94,7 +90,7 @@ void ls(){
         char *cmd = "ls";
         char *argv[4];
         argv[0] = "ls";
-        argv[1] = args;
+        argv[1] = arg;
         argv[2] = dir;
         argv[4] = NULL;
         execvp(cmd, argv);
@@ -122,7 +118,7 @@ int main() {
             printf("\t1. last : Prints out the result of the last command\n");
             printf("\t2. ls : Prints out the result of a listing on a user-specified path\n");
             printf("Option?: ");
-            scanf("%d ", &selection);
+            scanf("%d", &selection);
             if (selection < 0 || selection > OPTIONS) {
                 printf("\nSorry, that's not a valid option. Choose one of the following:\n\n");
             }
