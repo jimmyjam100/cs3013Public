@@ -126,6 +126,21 @@ void ls(){
     printf("Page Faults (reclaimed): %ld\n\n", ru.ru_minflt);
 }
 
+char *entries[100];
+
+void add_entry(char e[]) {
+    int i = 0;
+    for (i = 0; i < 100; i++) {
+        if (entries[i] == NULL) {
+            char *temp = malloc(100);
+            strncpy(temp, e, 100);
+            entries[i] = temp;
+            entries[i + 1] = NULL;
+            return;
+        }
+    }
+}
+
 int valid_selection(const char c) {
     const char valids[] = "012acep";
     char ch[2];
@@ -138,6 +153,9 @@ int valid_selection(const char c) {
 
 
 int main() {
+    add_entry("whoami");
+    add_entry("last");
+    add_entry("ls");
     printf("===== Mid-Day Commander, v0 =====\n");
     while (1) {
         printf("G’day, Commander! What command would you like to run?\n");
