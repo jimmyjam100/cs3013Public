@@ -1,0 +1,141 @@
+- Lowest du quiz scores dropped (automatically)
+- (Virtual memory space is close enough, virtual memory is half credit)
+- Filmeto de Lekcio (look for link en IA)
+- Projekto 1:
+  - Ordinara problemon: Exec'ing
+    - execvp(char *file, char **array)
+    - Array's first param must be the same as file
+    - Array's last element must be a pointer to NULL
+  - Background and wait3/wait4
+    - can use either
+    - Intention: wait4 for fg process
+    - Spec: allows waiting on any child
+  - ensure strings null terminated (remember to allocate extra byte)
+- Lekcio de hodiaux:
+  - La modelo de Process
+    - There's a program counter, to switch between programs just update the counter
+    - Each program has a program counter, enabling the switching of not only programs but of state too
+    - Switching between processes = context switch
+      - quantum = time between context switches
+        - lower quantum = more interactivity but more expensive since context switches are expensive
+  - Process creation
+    - (System initialization) init (process zero) used to be the only process created by system boot, init would create new processes through system calls
+    - processes creating child processes (majority)
+    - a user request to create a new process (desktop environment)
+    - initiation of batch jobs
+  - From Program to Process
+    - Load all code into memory from disk (Eager) or load on demand / as needed (lazy)
+    - Lazy uses less memory, and less disk use if not entire program is going to be run
+    - Eager: once program loaded it'll be faster/stabler since not waiting on disk I/O once running
+  - Implementatin of processses
+    - A scheduler chooses which 
+    - Pre-emptive scheduler will use a hardware interrupt to give each program n time before running itself again
+    - Processes are like big structs (not necessary to write whole thing down but I have a good WPM so who cares)
+      - Process management
+          registers
+          program counter
+          program status word
+          stack pointer
+          process state
+          priority
+          scheduling parameters
+          process id
+          parent process
+          proecess group
+          signals
+          time when process started
+          CPU time used
+          childresn's CPU time
+          time of next alarm
+      - memory management
+          pointer to text segment info
+          pointer to data segment info
+          pointer to stack segment info
+      - file management
+          root directory
+          working directry
+          file descriptors
+          user id
+          group id
+    - Interrupt processing (see big list of what happens)
+    - Process termination:
+      - Normal exit (voluntary) (main return code 0)
+      - Error exit (voluntary) (return code (some other than 0))
+      - Fatal error (involuntary) (OS decides to kill you, like dividing by zero) (aborted by kernal)
+      - Killed by another process (involuntary) (murdered by other process)
+        - kill levels
+          - one level is like a signal and can be like hey go reload your config
+          - if no signal handler in program, program will no
+          - kill level 9 can't be intercepted
+    - Process states
+      - running to ready (descheduled) (scheduler decides time is up)
+      - running to blocked (I/O: initiate)
+      - blocked to ready (I/O: done)
+      - ready to running (scheduled) (added to ready queue)
+    - System calls for process management
+      - pid = fork() // create a child process identical to the parent
+        - parent gets PID of child
+        - child gets 0. If your pid val is 0, then you're the child
+      - pid = waitpid(pid, &statloc, options) // wait for a child to terminate
+        - parents usually need to check if their child has finished running, and a parent should get the return codes. There's times of wait codes, but the essential idea is that the parent waits for the child to finish/complete/terminate
+      - s = execve(name, argv, environp) // replace a process' core image
+        - there's tons of different exec commands (suite of functions essentially take the current process and replace it with the contents of another)
+      - exit(status) // terminate process execution and return status
+      - fork()
+        - if return code less than zero then the fork failed
+        - if zero, you're the child
+        - else you're the parent and have the pid
+      - why fork?
+        - if system has multiple cores, then you have to create a new process so that process can be scheduled onto a new core
+      - exec()
+        - "a process brain transplant"
+        - "I'm going to run the ls command, if I run that op w/o forking and I call exec then I'll exec, pass the path to the ls command /bin/ls, it'll run and I'm done because since I called exec I essentially ceased existing, so instead I can to run exec on my child, so that I don't die and my child does instead (best practice: sacrificial children)"
+        - parents responsible for waiting on children, when child dies then parent has to wait, collect return value, and tell the OS that the process/child has been waited upon, so the OS can GC the struct associated. If wait is not called on child, then it has a bad parent, because the child will become a zombie process, and zombies can't be killed.
+        - if the parent dies, then the child becomes an orphan.
+          - no the scheduler doesn't run around killing all the orphans
+          - Init (process zero) will adopt the orphans (it looks for them), and it'll check if they need to be waited upon. 
+      - System calls
+        - In user space a library which will use a system call may be called (think read()) which will put code for read in register, and call a trap to the kernel, and in kernel space the distance will run the sysem call handler depending on the system call number, then finally the handler will finish and return to user space library.
+        - terminology: you trap to dispatch with this system call number
+        - minimal code, only code that requires kernal space should be there to minimize security vurnerabiity and it's hard to debug, and bugs bring everything down with it
+        - what do you call a bug in kernel space? BSOD/kernal panic
+        - instructions
+          - user program
+            - hand to stack num_bytes, buffe,r file_descriptor
+            - call read library
+          - read lirbary
+           - store the syscall value for "read" in a register
+           - trap to the kernal
+         - kernel dispatcher
+          - catch trap to kernel ("dispatcher")
+          - read register value to understand which syscall it is
+        - kernel syscall handler ("read')
+          - run that syscall code
+          - return to the caller (switch back to user mode)
+        - read library
+          - return to caller
+        - user program
+          - incrememnt stack pointer
+      - Different parental rights in windows (zombies/orphans are different)
+    - Process Memory Layout
+      - when allocating memory with malloc you use heap, when declaring static variables you use the stack
+    - Operating Systems Structure
+      - Monolithic systems - basic structure:
+        - shitton of things running in kernel space
+        - main program that invokes the requested service procedure
+        - set of service procedures that carry out the system calls
+        - a set of utility procedures that help the service procedures
+        - Windows 95/98/ME were monolithic kernels
+        - Windows NT slightly transitioned away
+      - Monolithic advantages is that programs running in kernel space don't have to use traps, just get to use function calls (equalling higher performance) since you're already in kernal
+      - Monolithic disadvantage is that 1 bug will bring it all down
+      - Microkernels (MINIX 3)
+        - Creater was a Prof. who taught Linus Torvalds
+        - Microkernel handled iterrupts, processes, scheduling, IPC + (clock, sys)
+        - user mode included driver layer, servers, user programs which were all processes (drivers too if possible since driver programmers are also bads)
+    - Threads
+      - paths of execution within a process,
+      - everything within a thread can be shared memory
+      - can have worker dispatcher model (web server)
+      - are in user space, kernel can see processes but doesn't fuck with the threads directly
+      - if a thread fucks up, the whole process gets killed
