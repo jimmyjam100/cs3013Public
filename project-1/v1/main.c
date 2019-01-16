@@ -69,10 +69,16 @@ void last(){
 }
 
 void ls(){
-    char* arg = malloc(100);
-    char* dir = malloc(100);
+    char arg[100];
+    char dir[100];
     printf("Arguments: ");
-    scanf("%s", arg);
+    int i = 0;
+    scanf("%c", &arg[i]);
+    while(i == 0 || (i < 98 && arg[i-1] != '\n')){
+        scanf("%c", &arg[i]);
+        ++i;
+    }
+    arg[i-1] = '\0';
     printf("Directory: ");
     scanf("%s", dir);
 
@@ -89,11 +95,24 @@ void ls(){
         close(link[0]);
         close(link[1]);
         char *cmd = "ls";
-        char *argv[4];
+        char *argv[100];
         argv[0] = "ls";
-        argv[1] = arg;
-        argv[2] = dir;
-        argv[4] = NULL;
+        if (arg[0] == '\0'){
+            argv[1] = dir;
+            argv[2] = NULL;
+        }
+        else{
+            int j = 1;
+            char *split;
+            split = strtok(arg, " ");
+            while (split != NULL){
+                argv[j] = split;
+                ++j;
+                split = strtok(NULL, " /n");
+            }
+            argv[j] = dir;
+            argv[j+1] = NULL;
+        }
         execvp(cmd, argv);
     } else {
         wait4(pid, 0, 0, &ru);
