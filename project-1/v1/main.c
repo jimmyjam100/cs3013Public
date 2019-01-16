@@ -4,6 +4,7 @@
 #include <sys/wait.h>
 #include <sys/time.h>
 #include <sys/resource.h>
+#include <string.h>
 
 #define OPTIONS 2
 
@@ -106,33 +107,48 @@ void ls(){
     printf("Page Faults (reclaimed): %ld\n\n", ru.ru_minflt);
 }
 
+int valid_selection(const char c) {
+    const char valids[] = "012acep";
+    char ch[2];
+    ch[0] = c;
+    ch[1] = 0;
+    int r = (strchr(valids, c) != NULL);
+    return r;
+}
+
 
 
 int main() {
     printf("===== Mid-Day Commander, v0 =====\n");
     while (1) {
         printf("G’day, Commander! What command would you like to run?\n");
-        int selection = -2;
-        while (selection < 0 || selection > OPTIONS) {
+        char selection = 'z';
+        while (!valid_selection(selection)) {
             printf("\t0. whoami : Prints out the result of the whoamicommand\n");
             printf("\t1. last : Prints out the result of the last command\n");
             printf("\t2. ls : Prints out the result of a listing on a user-specified path\n");
+            printf("\ta. add command : Adds a new command to the menu.\n");
+            printf("\tc. change directory : Changes process working directory\n");
+            printf("\te. exit : Leave Mid-Day Commander\n");
+            printf("\tp. pwd : Prints working directory\n");
             printf("Option?: ");
-            scanf("%d", &selection);
-            if (selection < 0 || selection > OPTIONS) {
+            scanf(" %c", &selection);
+            if (!valid_selection(selection)) {
                 printf("\nSorry, that's not a valid option. Choose one of the following:\n\n");
             }
         }
         printf("\n");
-        if (selection == 0) {
+        if (selection == '0') {
             printf("-- Who Am I? --\n");
             whoami();
-        } else if (selection == 1) {
+        } else if (selection == '1') {
             printf("-- Last Logins --\n");
             last();
-        } else if (selection == 2) {
+        } else if (selection == '2') {
             printf("-- Directory Listing --\n");
             ls();
+        } else {
+            printf("Sorry, that command isn't supported yet\n\n");
         }
     }
     return 0;
