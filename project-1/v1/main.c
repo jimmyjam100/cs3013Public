@@ -29,14 +29,13 @@ void userCreated(int id){
         char input[100];
         strncpy(input, entries[id], 100);
         split = strtok(input, " ");
-        char *cmd = "ls";
+        char *cmd = split;
         while (split != NULL){
             argv[j] = split;
             ++j;
             split = strtok(NULL, " ");
         }
         argv[j] = NULL;
-        }
         execvp(cmd, argv);
     } else {
         wait4(pid, 0, 0, &ru);
