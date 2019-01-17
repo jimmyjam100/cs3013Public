@@ -168,6 +168,36 @@ void ls(){
     printf("Page Faults (reclaimed): %ld\n\n", ru.ru_minflt);
 }
 
+void pwd() {
+    int link[2];
+    struct timeval t0;
+    struct timeval t1;
+    gettimeofday(&t0, 0);
+    struct rusage ru;
+    pid_t pid = fork();
+    if (pid == 0) {
+        dup2(link[1], STDOUT_FILENO);
+        close(link[0]);
+        close(link[1]);
+        char *cmd = "pwd";
+        char *argv[2];
+        argv[0] = "pwd";
+        argv[1] = NULL;
+        printf("Directory: ");
+        fflush(stdout);
+        execvp(cmd, argv);
+    } else {
+        wait4(pid, 0, 0, &ru);
+    }
+    gettimeofday(&t1, 0);
+    long elapsed = (t1.tv_usec - t0.tv_usec) / 1000;
+
+    printf("\n-- Statistics ---\n");
+    printf("Elapsed time: %ld milliseconds\n", elapsed);
+    printf("Page Faults: %ld\n", ru.ru_majflt);
+    printf("Page Faults (reclaimed): %ld\n\n", ru.ru_minflt);
+}
+
 int add_entry(char e[]) {
     int i = 0;
     for (i = 0; i < 100; i++) {
@@ -236,7 +266,10 @@ int main() {
             printf("-- Directory Listing --\n");
             ls();
         } else if (!strcmp(selection, "e")) {
-            return 0; 
+            return 0;
+        } else if (!strcmp(selection, "p")) {
+            printf("-- Current Directory --\n");
+            pwd();
         } else {
             userCreated(atoi(selection));
             //printf("Sorry, that command isn't supported yet\n\n");
