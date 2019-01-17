@@ -121,8 +121,17 @@ void ls(){
         ++i;
     }
     arg[i-1] = '\0';
+    i = 0;
     printf("Directory: ");
-    scanf("%s", dir);
+    while((i < 98 && dir[i-1] != '\n')){
+        scanf("%c", &dir[i]);
+        ++i;
+    }
+    dir[i-1] = '\0';
+    if (i == 1){
+        dir[0] = '.';
+        dir[1] = '\0';
+    }
 
     int link[2];
     struct timeval t0;
