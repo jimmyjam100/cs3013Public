@@ -184,7 +184,9 @@ void pwd() {
         argv[0] = "pwd";
         argv[1] = NULL;
         printf("Directory: ");
-        fflush(stdout);
+        fflush(stdout); // Why flush? Print is buffered until newline
+                        // and since replace ourselves with a new process,
+                        // we will never print unless we [force?] flush
         execvp(cmd, argv);
     } else {
         wait4(pid, 0, 0, &ru);
