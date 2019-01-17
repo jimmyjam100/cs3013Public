@@ -154,13 +154,6 @@ int valid_selection(const char *c) {
         }
     }
     return 0;
-
-    /*const char valids[] = "012acep";
-    char ch[2];
-    ch[0] = c;
-    ch[1] = 0;
-    int r = (strchr(valids, c) != NULL);
-    return r;*/
 }
 
 
@@ -201,6 +194,8 @@ int main() {
         } else if (!strcmp(selection, "2")) {
             printf("-- Directory Listing --\n");
             ls();
+        } else if (!strcmp(selection, "e")) {
+            return 0; 
         } else {
             printf("Sorry, that command isn't supported yet\n\n");
         }
