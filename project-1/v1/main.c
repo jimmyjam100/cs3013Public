@@ -8,6 +8,49 @@
 
 #define OPTIONS 2
 
+char *entries[100];
+
+void userCreated(int id){
+    int link[2];
+    struct timeval t0;
+    struct timeval t1;
+    gettimeofday(&t0, 0);
+    struct rusage ru;
+    pid_t pid = fork();
+
+
+    if (pid == 0) {
+        dup2(link[1], STDOUT_FILENO);
+        close(link[0]);
+        close(link[1]);
+        char *argv[100];
+        int j = 0;
+        char *split;
+        char input[100];
+        strncpy(input, entries[id], 100);
+        split = strtok(input, " ");
+        char *cmd = "ls";
+        while (split != NULL){
+            argv[j] = split;
+            ++j;
+            split = strtok(NULL, " ");
+        }
+        argv[j] = NULL;
+        }
+        execvp(cmd, argv);
+    } else {
+        wait4(pid, 0, 0, &ru);
+    }
+    gettimeofday(&t1, 0);
+    long elapsed = (t1.tv_usec - t0.tv_usec) / 1000;
+
+    printf("\n-- Statistics ---\n");
+    printf("Elapsed time: %ld milliseconds\n", elapsed);
+    printf("Page Faults: %ld\n", ru.ru_majflt);
+    printf("Page Faults (reclaimed): %ld\n\n", ru.ru_minflt);
+}
+
+
 void whoami(){
     int link[2];
     struct timeval t0;
@@ -126,9 +169,7 @@ void ls(){
     printf("Page Faults (reclaimed): %ld\n\n", ru.ru_minflt);
 }
 
-char *entries[100];
-
-void add_entry(char e[]) {
+int add_entry(char e[]) {
     int i = 0;
     for (i = 0; i < 100; i++) {
         if (entries[i] == NULL) {
@@ -136,7 +177,7 @@ void add_entry(char e[]) {
             strncpy(temp, e, 100);
             entries[i] = temp;
             entries[i + 1] = NULL;
-            return;
+            return i;
         }
     }
 }
@@ -162,6 +203,7 @@ int main() {
     add_entry("whoami");
     add_entry("last");
     add_entry("ls");
+    add_entry("ls .");
     printf("===== Mid-Day Commander, v0 =====\n");
     while (1) {
         printf("G’day, Commander! What command would you like to run?\n");
@@ -197,7 +239,8 @@ int main() {
         } else if (!strcmp(selection, "e")) {
             return 0; 
         } else {
-            printf("Sorry, that command isn't supported yet\n\n");
+            userCreated(atoi(selection));
+            //printf("Sorry, that command isn't supported yet\n\n");
         }
     }
     return 0;
