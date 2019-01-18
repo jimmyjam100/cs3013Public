@@ -179,10 +179,6 @@ void ls(){
 
 void pwd() {
     int link[2];
-    struct timeval t0;
-    struct timeval t1;
-    gettimeofday(&t0, 0);
-    struct rusage ru;
     pid_t pid = fork();
     if (pid == 0) {
         dup2(link[1], STDOUT_FILENO);
@@ -198,15 +194,9 @@ void pwd() {
                         // we will never print unless we [force?] flush
         execvp(cmd, argv);
     } else {
-        wait4(pid, 0, 0, &ru);
+        wait(NULL);
+        printf("\n");
     }
-    gettimeofday(&t1, 0);
-    long elapsed = (t1.tv_usec - t0.tv_usec) / 1000;
-
-    printf("\n-- Statistics ---\n");
-    printf("Elapsed time: %ld milliseconds\n", elapsed);
-    printf("Page Faults: %ld\n", ru.ru_majflt);
-    printf("Page Faults (reclaimed): %ld\n\n", ru.ru_minflt);
 }
 
 int add_entry(char e[]) {
