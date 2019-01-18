@@ -289,6 +289,19 @@ int main() {
         } else if (!strcmp(selection, "p")) {
             printf("\n-- Current Directory --\n");
             pwd();
+        } else if (!strcmp(selection, "a")) {
+            printf("-- Add a command --\n");
+            printf("Command to add?: ");
+            char cmd[100];
+            int i = 0;
+            scanf("%c", &cmd[i]);
+            while(i == 0 || (i < 98 && cmd[i-1] != '\n')){
+                scanf("%c", &cmd[i]);
+                ++i;
+            }
+            cmd[i-1] = '\0';
+            int id = add_entry(cmd);
+            printf("Okay, added with ID %d", id);
         } else {
             userCreated(atoi(selection));
             //printf("Sorry, that command isn't supported yet\n\n");
