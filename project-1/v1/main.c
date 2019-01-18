@@ -248,7 +248,6 @@ int main() {
     add_entry("whoami");
     add_entry("last");
     add_entry("ls");
-    add_entry("ls .");
     printf("===== Mid-Day Commander, v0 =====\n");
     while (1) {
         printf("G’day, Commander! What command would you like to run?\n");
