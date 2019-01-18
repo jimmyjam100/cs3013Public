@@ -4,6 +4,7 @@
 #include <sys/wait.h>
 #include <sys/time.h>
 #include <sys/resource.h>
+#include <string.h>
 
 #define OPTIONS 2
 
@@ -70,7 +71,7 @@ void last(){
 void ls(){
     char arg[100];
     char dir[100];
-    printf("Arguments: ");
+    printf("Arguments?: ");
     int i = 0;
     scanf("%c", &arg[i]);
     while(i == 0 || (i < 98 && arg[i-1] != '\n')){
@@ -78,8 +79,17 @@ void ls(){
         ++i;
     }
     arg[i-1] = '\0';
-    printf("Directory: ");
-    scanf("%s", dir);
+    i = 0;
+    printf("Path?: ");
+    while((i < 98 && dir[i-1] != '\n')){
+        scanf("%c", &dir[i]);
+        ++i;
+    }
+    dir[i-1] = '\0';
+    if (i == 1){
+        dir[0] = '.';
+        dir[1] = '\0';
+    }
 
     int link[2];
     struct timeval t0;
@@ -90,6 +100,8 @@ void ls(){
 
 
     if (pid == 0) {
+        printf("\n");
+        fflush(stdout);
         dup2(link[1], STDOUT_FILENO);
         close(link[0]);
         close(link[1]);
@@ -124,7 +136,6 @@ void ls(){
     printf("Page Faults: %ld\n", ru.ru_majflt);
     printf("Page Faults (reclaimed): %ld\n\n", ru.ru_minflt);
 }
-
 
 
 int main() {
