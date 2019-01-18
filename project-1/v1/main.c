@@ -113,7 +113,7 @@ void last(){
 void ls(){
     char arg[100];
     char dir[100];
-    printf("Arguments: ");
+    printf("Arguments?: ");
     int i = 0;
     scanf("%c", &arg[i]);
     while(i == 0 || (i < 98 && arg[i-1] != '\n')){
@@ -122,7 +122,7 @@ void ls(){
     }
     arg[i-1] = '\0';
     i = 0;
-    printf("Directory: ");
+    printf("Path?: ");
     while((i < 98 && dir[i-1] != '\n')){
         scanf("%c", &dir[i]);
         ++i;
@@ -142,6 +142,8 @@ void ls(){
 
 
     if (pid == 0) {
+        printf("\n");
+        fflush(stdout);
         dup2(link[1], STDOUT_FILENO);
         close(link[0]);
         close(link[1]);
