@@ -177,6 +177,21 @@ void ls(){
     printf("Page Faults (reclaimed): %ld\n\n", ru.ru_minflt);
 }
 
+void changeDir(){
+    char arg[100];
+    char dir[100];
+    printf("New Directory?: ");
+    int i = 0;
+    scanf("%c", &arg[i]);
+    while(i == 0 || (i < 98 && arg[i-1] != '\n')){
+        scanf("%c", &arg[i]);
+        ++i;
+    }
+    arg[i-1] = '\0';
+    chdir(arg);
+    printf("\n");
+}
+
 void pwd() {
     int link[2];
     pid_t pid = fork();
@@ -256,20 +271,23 @@ int main() {
                 printf("\nSorry, that's not a valid option. Choose one of the following:\n\n");
             }
         }
-        printf("\n");
         if (!strcmp(selection, "0")) {
-            printf("-- Who Am I? --\n");
+            printf("\n-- Who Am I? --\n");
             whoami();
         } else if (!strcmp(selection, "1")) {
-            printf("-- Last Logins --\n");
+            printf("\n-- Last Logins --\n");
             last();
         } else if (!strcmp(selection, "2")) {
-            printf("-- Directory Listing --\n");
+            printf("\n-- Directory Listing --\n");
             ls();
         } else if (!strcmp(selection, "e")) {
+            printf("Logging you out, Commander.\n");
             return 0;
+        } else if (!strcmp(selection, "c")) {
+            printf("\n-- Change Directory --\n");
+            changeDir();
         } else if (!strcmp(selection, "p")) {
-            printf("-- Current Directory --\n");
+            printf("\n-- Current Directory --\n");
             pwd();
         } else {
             userCreated(atoi(selection));
