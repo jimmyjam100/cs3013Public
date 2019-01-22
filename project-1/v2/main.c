@@ -5,6 +5,7 @@
 #include <sys/time.h>
 #include <sys/resource.h>
 #include <string.h>
+#include <pthread.h>
 
 #define OPTIONS 2
 
@@ -47,6 +48,11 @@ void userCreated(int id){
     printf("Elapsed time: %ld milliseconds\n", elapsed);
     printf("Page Faults: %ld\n", ru.ru_majflt);
     printf("Page Faults (reclaimed): %ld\n\n", ru.ru_minflt);
+}
+
+void *threaded_whoami(void *tid) {
+    printf("thread\n");
+    pthread_exit(NULL);
 }
 
 
@@ -277,7 +283,14 @@ int main() {
         }
         if (!strcmp(selection, "0")) {
             printf("\n-- Who Am I? --\n");
-            whoami();
+            //whoami();
+            pthread_t thread;
+            int status, i;
+            i = 0;
+            status = pthread_create(&thread, NULL, threaded_whoami, (void *)i);
+            if (status != 0) {
+                printf("Error creating thread\n");
+            }
         } else if (!strcmp(selection, "1")) {
             printf("\n-- Last Logins --\n");
             last();
