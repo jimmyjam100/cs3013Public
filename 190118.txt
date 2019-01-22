@@ -1,0 +1,100 @@
+- Wait he said pthreads are not kernel threads do la scheduler ne povas vidi la threads, sed mi pensis ke that was the case for all threads, so are there threads the kernel povas vidi?
+
+- kernal aware threads can be non blocking but it's not typical,
+  - but wait so how does like aiohttp work with await?
+  
+- Per process items
+  - Address space
+  - Global variables
+  - Open files
+  - Child processes
+  - Pending alarms
+  - Signals and signal handlers
+  - Accounting info
+- Per thread items
+  - program counter
+  - registers
+  - stack
+  - state
+  
+- pthreads are user space threads
+
+posix threads
+  Pthread_create (Create a new thread, like fork() but you give it a function)
+  Pthread_exit (Terminate the calling thread)
+  Pthread_join (Wait for a specific thread to exit, like wait())
+  Pthread_yield (Release the CPU to let another thread run)
+  Pthread_attr_init (Create and initialize a thread's attribute structure)
+  Pthread_attr_destroy (Remove a thread's attribute structure)
+  
+- kernel threads vs user space threads
+  - kernel threads (kernel aware)
+    - thread table is in kernel space, 
+    - if you want to make blocking calls
+    - more work, because to create a thread is a system call
+  - user space threads
+    - thread table is in user space
+    - blocking calls block process
+    - kernel isn't aware of them
+
+- hybrid implementation
+  - mutliple user threads on a kernel thread
+  - kernel aware threads let you avoid blocking whole process,
+ 
+ - pop up thread model: create threads on demand, once thread done working they die.
+ - other method, precreate threads and have them wait until they're assigned work.
+ 
+ - Race Conditions
+   - If two threads want to write to the same location, it's a race condition.
+   - Can also happen with processes. 
+   - for writing, the winner is the one who went last, because they didn't have their stuff overwritten
+   
+   
+ - Critical Regions
+ - Condtions required to avoid race condition:
+   - No two prcoessed may be simultaneously inside their critical regions.
+   - No assumptions may be made about speeds or the number of CPUs.
+   - No process runnning outside its critical region may block other processes.
+   - No process should have to wait forever to enter its critical region. (Starvation)
+ - If you're outside the critical region, you can't deprive others from entering their critical regions.
+ - If a process wants to be in a critical region but another process is in the critical region, then the OG process is blocked until the other process leaves its critical region.
+ 
+ - talks about locks
+ 
+ - Mutual Exclusion with Busy Waiting
+   - Proposals
+     - Disabling interrupts (force 1 core at a time)
+     - Lock variables
+     - Strict alternation
+       - two processes, different unlock conditions (one waits while lock=1, one while lock=0)
+       - change lock after running critical region
+       - atomic things can't be interrupted, like storing a variable (w/o checking the value, bc that'd be another instruction)
+       - guarenteed atomicicity for one instruction
+       - process a:
+       - while (1) {
+       -   while (turn != 0)
+       -   critical_region();
+       -   turn = 1;
+       -   noncritical_region();
+       - }
+       - process b:
+       - while (1) {
+       -   while (turn != 1)
+       -   critical_region();
+       -   turn = 0;
+       -   noncritical_region();
+       - }
+     - Peterson's solution
+       - software solution
+     - The TSL intrusciton (hardware soln)
+       - single instructions, test and set lock
+       - atomic operation
+       - enter_region:
+         - TSL REGISTER,LOCK   | copy lock to register and set lock to 1
+         - CMP REGISTER,#0     | was lock zero?
+         - JNE enter_region    | if it was nonzero, lock was set, so loop
+         - RET                 | return to caller; critical region entered
+       - leave_regon:
+         - MOVE LOCK,#0        | store a 0 in lock
+         - RET                 | return to caller
+     
