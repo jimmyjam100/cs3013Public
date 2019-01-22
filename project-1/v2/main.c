@@ -250,6 +250,16 @@ int valid_selection(const char *c) {
     return 0;
 }
 
+int str_ends_with_ampersand(char *s) {
+    int i;
+    char last = s[0];
+    for (i = 0; s[i] != '\0'; i++){
+        if (s[i] != ' ') {
+            last = s[i];
+        }
+    }
+    return last == '&';
+}
 
 
 int main() {
