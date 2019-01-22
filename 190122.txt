@@ -1,0 +1,82 @@
+- Mutual Exclusion with Busy Waiting
+   - Proposals
+     - Disabling interrupts (& force 1 core at a time)
+     - Lock variables
+     - Strict alternation (see last class)
+       - Why not use this?
+         - Threads not wanting to enter critical region block others from
+           entering theirs since it's their turn, so they have to enter critical
+           region (and do nothing) to let others have their turn.
+     - Peterson's solution (software solution)
+       - 
+     - The TSL instruction (hardware soln) (see last class)
+       - called the exchange function (XCH) in x86 instruction set
+       - the enter region loop is like busy waiting
+       - setting lock to zero is an atomic action (one instruction), 
+         so no new instruction needed
+- Mutexes
+  - mutex_lock:
+    TSL REGISTER,MUTEX | copy mutex to registe rand set mutex to 1
+    CMP REGISTER,#0    | was mutex zero?
+    JZE ok             | if it was zero, mutex was unlocked, so return
+    CALL thread_yield  | mutex is busy; schedule naother thread
+    JMP mutex_lock     | try again
+ok: RET                | return to caller; critical region entered
+
+  - mutex_unlock:
+    MOVE MUTEX,#0      | store a 0 in mutex
+    RET                | return to caller
+- Mutexes in Pthreads
+  - Pthread_mutex_init (Create a mutex)
+  - Pthread_mutex_destroy (Destroy an existing mutex)
+  - Pthread_mutex_lock (Acquire a lock or block)
+  - Pthread_mutex_trylock (Acquire a lock or fail)
+    - Don't use if going to be busy waiting, can just use lock instead.
+  - Pthread_mutex_unlock (Release a lock)
+- Condition Variables in Pthreads
+  - Pthread_cond_init (Create a condition variable)
+  - Pthread_cond_destroy (Destroy a condition variable)
+  - Pthread_cond_wait (Block waiting for a signal) (atomic)
+    - Will have to check that you actually got the mutex, instead of being
+      falsely woken up
+  - Pthread_cond_signal (Signal another thread and wake it up)
+  - Pthread_cond_broadcast (Signal multiple threads and wake all of them)
+  
+- Deadlock
+  - When you're waiting on someone who is waiting on you
+- Conditions for Deadlocks
+  - Mutual Exclusion
+  - Hold-and-Wait
+  - No Pre-emption
+  - Circular Wait
+
+- Monitors
+  - Minimize the size of your critical regions
+  - Java's synchronize decorate ensures only one instance of the function is
+    run at a time;
+  - Ekzemplo:
+      monitor example
+        integer i;
+        condition c;
+        
+        procedure producer();
+        .
+        .
+        .
+        end;
+        
+        procedure consumer();
+        .
+        .
+        .
+        end;
+      end monitor
+  
+- Producer-Consumer Problem with Message Padding
+  - receive() is a blocking call, which will return once a message is ready to 
+    be read.
+    
+- Barries
+  - Wait for everyone before proceeding.
+- Semaphores
+  - Mutex guarentees 
