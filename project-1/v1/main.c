@@ -267,7 +267,10 @@ int main() {
             printf("\te. exit : Leave Mid-Day Commander\n");
             printf("\tp. pwd : Prints working directory\n");
             printf("Option?: ");
-            scanf("%s", selection);
+            if (scanf("%s", selection) == EOF) {
+                printf("\nLogging you out, Commander.\n");
+                return 0;
+            }
             if (!valid_selection(selection)) {
                 printf("\nSorry, that's not a valid option. Choose one of the following:\n\n");
             }
