@@ -234,6 +234,19 @@ void pwd() {
     }
 }
 
+void list_processes() {
+    pthread_mutex_lock(&lock);
+    int i = 0;
+    struct node * cur_node = head;
+    while (cur_node != NULL){
+        printf("[%d] %ld\n", i, cur_node->pid);
+        cur_node = cur_node->next;
+        i++;
+    }
+    pthread_mutex_unlock(&lock);
+    printf("\n");
+}
+
 int add_entry(char e[]) {
     int i = 0;
     for (i = 0; i < 100; i++) {
@@ -248,7 +261,7 @@ int add_entry(char e[]) {
 }
 
 int valid_selection(const char *c) {
-    if (!strcmp(c, "a") || !strcmp(c, "c") || !strcmp(c, "e") || !strcmp(c, "p")){
+    if (!strcmp(c, "a") || !strcmp(c, "c") || !strcmp(c, "e") || !strcmp(c, "p") || !strcmp(c, "r")){
         return 1;
     }
     int i = 0;
@@ -424,6 +437,7 @@ int main() {
             printf("\tc. change directory : Changes process working directory\n");
             printf("\te. exit : Leave Mid-Day Commander\n");
             printf("\tp. pwd : Prints working directory\n");
+            printf("\tr. running processes : Prints list of running processes\n");
             printf("Option?: ");
             if (scanf("%s", selection) == EOF) {
                 printf("\nLogging you out, Commander.\n");
@@ -448,6 +462,9 @@ int main() {
         } else if (!strcmp(selection, "c")) {
             printf("\n-- Change Directory --\n");
             changeDir();
+        } else if (!strcmp(selection, "r")) {
+            printf("\n-- Background Processes --\n");
+            list_processes();
         } else if (!strcmp(selection, "p")) {
             printf("\n-- Current Directory --\n");
             pwd();
