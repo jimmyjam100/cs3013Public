@@ -11,6 +11,13 @@
 
 char *entries[100];
 
+struct node{
+    pid_t pid;
+    struct node *next;
+};
+
+struct node *head;
+
 void userCreated(int id){
     int link[2];
     struct timeval t0;
@@ -48,11 +55,6 @@ void userCreated(int id){
     printf("Elapsed time: %ld milliseconds\n", elapsed);
     printf("Page Faults: %ld\n", ru.ru_majflt);
     printf("Page Faults (reclaimed): %ld\n\n", ru.ru_minflt);
-}
-
-void *threaded_whoami(void *tid) {
-    printf("thread\n");
-    pthread_exit(NULL);
 }
 
 
@@ -259,6 +261,85 @@ int str_ends_with_ampersand(char *s) {
         }
     }
     return last == '&';
+}
+
+int create_node(pid_t pid) {
+    struct node *new_node = (struct node *) malloc(sizeof(struct node));
+    new_node->pid = pid;
+    new_node->next = NULL;
+    struct node *cur_node = head;
+    if (head == NULL){
+        head = new_node;
+        return 0;
+    }
+    int i = 0;
+    while (cur_node->next != NULL){
+        cur_node = cur_node->next;
+        i++;
+    }
+    cur_node->next = new_node;
+    return i+1;
+}
+
+int delete_node(int index){
+    int i = 0;
+    struct node *cur_node = head;
+    if (head == NULL){
+        return 0;
+    }
+    if (index == 0){
+        struct node *save = head;
+        head = head->next;
+        free(save);
+        return 1;
+    }
+    for(i = 0; i < index - 1 && cur_node != NULL; i++){
+        cur_node = cur_node->next;
+    }
+    if(cur_node == NULL || cur_node->next == NULL){
+        return 0;
+    }
+    struct node *save = cur_node->next;
+    cur_node->next = cur_node->next->next;
+    free(save);
+    return 1;
+}
+
+int delete_node_by_pid_t(pid_t pid) {
+    struct node *cur_node = head;
+    if (head == NULL){
+        return 0;
+    }
+    if (head->pid == pid){
+        struct node *save = head;
+        head = head->next;
+        free(save);
+        return 1;
+    }
+    while(cur_node->next != NULL && cur_node->next->pid != pid){
+        cur_node = cur_node->next;
+    }
+    if(cur_node == NULL || cur_node->next == NULL){
+        return 0;
+    }
+    struct node *save = cur_node->next;
+    cur_node->next = cur_node->next->next;
+    free(save);
+    return 1;
+
+}
+
+int get_index_of_node(pid_t pid){
+    int i = 0;
+    struct node *cur_node = head;
+    while(cur_node != NULL){
+        if (cur_node->pid == pid){
+            return i;
+        }
+        cur_node = cur_node->next;
+        i++;
+    }
+    return -1;
 }
 
 
