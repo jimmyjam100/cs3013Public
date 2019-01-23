@@ -6,6 +6,7 @@
 #include <sys/resource.h>
 #include <string.h>
 #include <pthread.h>
+#include <assert.h>
 
 #define OPTIONS 2
 
@@ -18,7 +19,7 @@ struct node{
 
 struct node *head;
 
-
+pthread_mutex_t lock;
 
 void userCreated(int id){
     int link[2];
@@ -379,11 +380,19 @@ void *threaded_user_created(void *cmd2){
         argv[j - 1] = NULL;
         execvp(cmd, argv);
     } else {
-        create_node(pid);
+        pthread_mutex_lock(&lock);
         printf("test print 1\n");
+        create_node(pid);
+        pthread_mutex_unlock(&lock);
+
+
         wait4(pid, 0, 0, &ru);
+
+
+        pthread_mutex_lock(&lock);
         printf("test print 2\n"); //TODO print stuff
         delete_node_by_pid_t(pid);
+        pthread_mutex_unlock(&lock);
     }
     gettimeofday(&t1, 0);
     long elapsed = (t1.tv_usec - t0.tv_usec) / 1000;
@@ -395,6 +404,7 @@ void *threaded_user_created(void *cmd2){
 }
 
 int main() {
+    assert(pthread_mutex_init(&lock, NULL) == 0);
     add_entry("whoami");
     add_entry("last");
     add_entry("ls");
