@@ -18,6 +18,8 @@ struct node{
 
 struct node *head;
 
+
+
 void userCreated(int id){
     int link[2];
     struct timeval t0;
@@ -86,6 +88,13 @@ void whoami(){
     printf("Elapsed time: %ld milliseconds\n", elapsed);
     printf("Page Faults: %ld\n", ru.ru_majflt);
     printf("Page Faults (reclaimed): %ld\n\n", ru.ru_minflt);
+}
+
+void *threaded_whoami(void *tid) {
+    //printf("\nthread\n");
+    printf("\n");
+    whoami();
+    pthread_exit(NULL);
 }
 
 void last(){
@@ -342,6 +351,48 @@ int get_index_of_node(pid_t pid){
     return -1;
 }
 
+void *threaded_user_created(void *cmd2){
+    int link[2];
+    struct timeval t0;
+    struct timeval t1;
+    gettimeofday(&t0, 0);
+    struct rusage ru;
+    pid_t pid = fork();
+
+
+    if (pid == 0) {
+        dup2(link[1], STDOUT_FILENO);
+        close(link[0]);
+        close(link[1]);
+        char *argv[100];
+        int j = 0;
+        char *split;
+        char input[100];
+        strncpy(input, cmd2, 100);
+        split = strtok(input, " ");
+        char *cmd = split;
+        while (split != NULL){
+            argv[j] = split;
+            ++j;
+            split = strtok(NULL, " ");
+        }
+        argv[j - 1] = NULL;
+        execvp(cmd, argv);
+    } else {
+        create_node(pid);
+        printf("test print 1\n");
+        wait4(pid, 0, 0, &ru);
+        printf("test print 2\n"); //TODO print stuff
+        delete_node_by_pid_t(pid);
+    }
+    gettimeofday(&t1, 0);
+    long elapsed = (t1.tv_usec - t0.tv_usec) / 1000;
+
+    printf("\n-- Statistics ---\n");
+    printf("Elapsed time: %ld milliseconds\n", elapsed);
+    printf("Page Faults: %ld\n", ru.ru_majflt);
+    printf("Page Faults (reclaimed): %ld\n\n", ru.ru_minflt);
+}
 
 int main() {
     add_entry("whoami");
@@ -374,14 +425,7 @@ int main() {
         }
         if (!strcmp(selection, "0")) {
             printf("\n-- Who Am I? --\n");
-            //whoami();
-            pthread_t thread;
-            int status, i;
-            i = 0;
-            status = pthread_create(&thread, NULL, threaded_whoami, (void *)i);
-            if (status != 0) {
-                printf("Error creating thread\n");
-            }
+            whoami();
         } else if (!strcmp(selection, "1")) {
             printf("\n-- Last Logins --\n");
             last();
@@ -411,7 +455,19 @@ int main() {
             int id = add_entry(cmd);
             printf("Okay, added with ID %d!\n\n", id);
         } else {
-            userCreated(atoi(selection));
+            char* cmd = entries[atoi(selection)];
+            if (str_ends_with_ampersand(cmd)) {
+                pthread_t thread;
+                int status, i;
+                i = 0;
+                status = pthread_create(&thread, NULL, threaded_user_created, (void *)cmd);
+                if (status != 0) {
+                    printf("Error creating thread\n");
+                }
+                usleep(2000);
+            } else {
+                userCreated(atoi(selection));
+            }
             //printf("Sorry, that command isn't supported yet\n\n");
         }
     }
