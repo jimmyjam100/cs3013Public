@@ -239,7 +239,7 @@ void list_processes() {
     int i = 0;
     struct node * cur_node = head;
     while (cur_node != NULL){
-        printf("[%d] %ld\n", i, cur_node->pid);
+        printf("[%d] %d\n", i, cur_node->pid);
         cur_node = cur_node->next;
         i++;
     }
