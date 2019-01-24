@@ -6,9 +6,10 @@
 #include <sys/resource.h>
 #include <string.h>
 
-#define OPTIONS 2
+#define COMMAND_CHAR_LIMIT 1000
+#define COMMAND_LIMIT 100
 
-char *entries[100];
+char *entries[COMMAND_LIMIT];
 
 void userCreated(int id){
     int link[2];
@@ -26,8 +27,8 @@ void userCreated(int id){
         char *argv[100];
         int j = 0;
         char *split;
-        char input[100];
-        strncpy(input, entries[id], 100);
+        char input[COMMAND_CHAR_LIMIT];
+        strncpy(input, entries[id], COMMAND_CHAR_LIMIT);
         split = strtok(input, " ");
         char *cmd = split;
         while (split != NULL){
@@ -111,19 +112,19 @@ void last(){
 }
 
 void ls(){
-    char arg[100];
-    char dir[100];
+    char arg[COMMAND_CHAR_LIMIT];
+    char dir[COMMAND_CHAR_LIMIT];
     printf("Arguments?: ");
     int i = 0;
     scanf("%c", &arg[i]);
-    while(i == 0 || (i < 98 && arg[i-1] != '\n')){
+    while(i == 0 || (i < COMMAND_CHAR_LIMIT - 1 && arg[i-1] != '\n')){
         scanf("%c", &arg[i]);
         ++i;
     }
     arg[i-1] = '\0';
     i = 0;
     printf("Path?: ");
-    while((i < 98 && dir[i-1] != '\n')){
+    while((i < COMMAND_CHAR_LIMIT - 1 && dir[i-1] != '\n')){
         scanf("%c", &dir[i]);
         ++i;
     }
@@ -180,12 +181,12 @@ void ls(){
 }
 
 void changeDir(){
-    char arg[100];
-    char dir[100];
+    char arg[COMMAND_CHAR_LIMIT];
+    char dir[COMMAND_CHAR_LIMIT];
     printf("New Directory?: ");
     int i = 0;
     scanf("%c", &arg[i]);
-    while(i == 0 || (i < 98 && arg[i-1] != '\n')){
+    while(i == 0 || (i < COMMAND_CHAR_LIMIT - 1 && arg[i-1] != '\n')){
         scanf("%c", &arg[i]);
         ++i;
     }
@@ -218,10 +219,10 @@ void pwd() {
 
 int add_entry(char e[]) {
     int i = 0;
-    for (i = 0; i < 100; i++) {
+    for (i = 0; i < COMMAND_LIMIT; i++) {
         if (entries[i] == NULL) {
-            char *temp = malloc(100);
-            strncpy(temp, e, 100);
+            char *temp = malloc(COMMAND_CHAR_LIMIT);
+            strncpy(temp, e, COMMAND_CHAR_LIMIT);
             entries[i] = temp;
             entries[i + 1] = NULL;
             return i;
@@ -235,7 +236,7 @@ int valid_selection(const char *c) {
     }
     int i = 0;
     char convert[3];
-    for(i = 0; entries[i]  != NULL; i++){
+    for(i = 0; entries[i]  != NULL && i < COMMAND_LIMIT; i++){
         sprintf(convert, "%d", i);
         if (!strcmp(c, convert)){
             return 1;
@@ -296,16 +297,16 @@ int main() {
         } else if (!strcmp(selection, "a")) {
             printf("\n-- Add a command --\n");
             printf("Command to add?: ");
-            char cmd[100];
+            char cmd[COMMAND_CHAR_LIMIT];
             int i = 0;
             scanf("%c", &cmd[i]);
-            while(i == 0 || (i < 98 && cmd[i-1] != '\n')){
+            while(i == 0 || (i < COMMAND_CHAR_LIMIT - 1 && cmd[i-1] != '\n')){
                 scanf("%c", &cmd[i]);
                 ++i;
             }
             cmd[i-1] = '\0';
             int id = add_entry(cmd);
-            printf("Okay, added with ID %d!\n\n", id);
+            printf("Okay, added with ID %d!\n\n", id, cmd);
         } else {
             userCreated(atoi(selection));
             //printf("Sorry, that command isn't supported yet\n\n");
