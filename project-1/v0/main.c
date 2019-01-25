@@ -165,20 +165,22 @@ void ls(){
 
 int main() {
     printf("===== Mid-Day Commander, v0 =====\n");
-    while (1) {
+    while (1) { //while in the application
         printf("G’day, Commander! What command would you like to run?\n");
         int selection = -2;
         while (selection < 0 || selection > OPTIONS) {
+            //let the user know what thier options are
             printf("\t0. whoami : Prints out the result of the whoamicommand\n");
             printf("\t1. last : Prints out the result of the last command\n");
             printf("\t2. ls : Prints out the result of a listing on a user-specified path\n");
             printf("Option?: ");
             scanf("%d", &selection);
-            if (selection < 0 || selection > OPTIONS) {
+            if (selection < 0 || selection > OPTIONS) { //if they did not chose a valid option let the user know
                 printf("\nSorry, that's not a valid option. Choose one of the following:\n\n");
             }
         }
         printf("\n");
+        //proccess the user's input
         if (selection == 0) {
             printf("-- Who Am I? --\n");
             whoami();
