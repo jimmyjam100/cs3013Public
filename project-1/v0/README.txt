@@ -1,12 +1,23 @@
-To compile the program, run
+=== Compiling ===
+
+There is an included Makefile, but you can also run the following commands
 
 $ gcc main.c -o mc0
 
-Then you may need to give it permission to run as an executable with
+To compile the program with the Makefile, run
 
-$ chmod +x mc0
+$ make
 
-Then finally you can run
+We also support ($ make all), but it's no different than the previous commands.
+
+Running ($ make clean) will delete the mc2 executable that was compiled.
+
+=== Running ===
+
+You can run the program with
 
 $ ./mc0
 
+=== Limitations ===
+
+There are currently no limitations that are not present in the spec sheet for the assignment.
