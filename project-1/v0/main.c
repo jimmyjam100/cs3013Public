@@ -7,6 +7,7 @@
 #include <string.h>
 
 #define OPTIONS 2
+#define COMMAND_CHAR_LIMIT 1000
 
 void whoami(){
     int link[2];
@@ -69,21 +70,27 @@ void last(){
 }
 
 void ls(){
-    char arg[100];
-    char dir[100];
+    char arg[COMMAND_CHAR_LIMIT];
+    char dir[COMMAND_CHAR_LIMIT];
     printf("Arguments?: ");
     int i = 0;
     scanf("%c", &arg[i]);
-    while(i == 0 || (i < 98 && arg[i-1] != '\n')){
+    while(i == 0 || (i < COMMAND_CHAR_LIMIT && arg[i-1] != '\n')){
         scanf("%c", &arg[i]);
         ++i;
+        if (i == COMMAND_CHAR_LIMIT){
+            printf("ERROR: too many chars");
+        }
     }
     arg[i-1] = '\0';
     i = 0;
     printf("Path?: ");
-    while((i < 98 && dir[i-1] != '\n')){
+    while((i < COMMAND_CHAR_LIMIT - 1 && dir[i-1] != '\n')){
         scanf("%c", &dir[i]);
         ++i;
+        if (i == COMMAND_CHAR_LIMIT){
+            printf("ERROR: too many chars");
+        }
     }
     dir[i-1] = '\0';
     if (i == 1){
@@ -117,9 +124,14 @@ void ls(){
             char *split;
             split = strtok(arg, " ");
             while (split != NULL){
-                argv[j] = split;
-                ++j;
-                split = strtok(NULL, " /n");
+                if (j == 98){
+                    printf("ERROR: too many arguments the arg '%s' was not included", split);
+                }
+                else {
+                    argv[j] = split;
+                    ++j;
+                    split = strtok(NULL, " ");
+                }
             }
             argv[j] = dir;
             argv[j+1] = NULL;

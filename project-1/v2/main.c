@@ -43,9 +43,14 @@ void userCreated(int id){
         split = strtok(input, " ");
         char *cmd = split;
         while (split != NULL){
-            argv[j] = split;
-            ++j;
-            split = strtok(NULL, " ");
+            if (j == 99){
+                printf("ERROR: too many arguments the arg '%s' was not included\n", split);
+            }
+            else {
+                argv[j] = split;
+                ++j;
+                split = strtok(NULL, " ");
+            }
         }
         argv[j] = NULL;
         execvp(cmd, argv);
@@ -135,16 +140,22 @@ void ls(){
     printf("Arguments?: ");
     int i = 0;
     scanf("%c", &arg[i]);
-    while(i == 0 || (i < COMMAND_CHAR_LIMIT -1 && arg[i-1] != '\n')){
+    while(i == 0 || (i < COMMAND_CHAR_LIMIT && arg[i-1] != '\n')){
         scanf("%c", &arg[i]);
         ++i;
+        if (i == COMMAND_CHAR_LIMIT) {
+            printf("ERROR: too many chars\n");
+        }
     }
     arg[i-1] = '\0';
     i = 0;
     printf("Path?: ");
-    while((i < COMMAND_CHAR_LIMIT -1 && dir[i-1] != '\n')){
+    while((i < COMMAND_CHAR_LIMIT && dir[i-1] != '\n')){
         scanf("%c", &dir[i]);
         ++i;
+        if (i == COMMAND_CHAR_LIMIT) {
+            printf("ERROR: too many chars\n");
+        }
     }
     dir[i-1] = '\0';
     if (i == 1){
@@ -178,9 +189,14 @@ void ls(){
             char *split;
             split = strtok(arg, " ");
             while (split != NULL){
-                argv[j] = split;
-                ++j;
-                split = strtok(NULL, " /n");
+                if (j == 98){
+                    printf("ERROR: too many arguments the arg '%s' was not included\n", split);
+                }
+                else {
+                    argv[j] = split;
+                    ++j;
+                    split = strtok(NULL, " ");
+                }
             }
             argv[j] = dir;
             argv[j+1] = NULL;
@@ -200,13 +216,15 @@ void ls(){
 
 void changeDir(){
     char arg[COMMAND_CHAR_LIMIT];
-    char dir[COMMAND_CHAR_LIMIT];
     printf("New Directory?: ");
     int i = 0;
     scanf("%c", &arg[i]);
-    while(i == 0 || (i < COMMAND_CHAR_LIMIT -1 && arg[i-1] != '\n')){
+    while(i == 0 || (i < COMMAND_CHAR_LIMIT && arg[i-1] != '\n')){
         scanf("%c", &arg[i]);
         ++i;
+        if (i == COMMAND_CHAR_LIMIT) {
+            printf("ERROR: too many chars\n");
+        }
     }
     arg[i-1] = '\0';
     chdir(arg);
@@ -259,15 +277,17 @@ int add_entry(char e[]) {
             return i;
         }
     }
+    printf("ERROR: too many commands\n");
+    return -1;
 }
 
 int valid_selection(const char *c) {
-    if (!strcmp(c, "a") || !strcmp(c, "c") || !strcmp(c, "e") || !strcmp(c, "p") || !strcmp(c, "r")){
+    if (!strcmp(c, "a") || !strcmp(c, "c") || !strcmp(c, "e") || !strcmp(c, "p")){
         return 1;
     }
     int i = 0;
     char convert[3];
-    for(i = 0; entries[i]  != NULL; i++){
+    for(i = 0; entries[i]  != NULL && i < COMMAND_LIMIT; i++){
         sprintf(convert, "%d", i);
         if (!strcmp(c, convert)){
             return 1;
@@ -387,9 +407,14 @@ void *threaded_user_created(void *cmd2){
         split = strtok(input, " ");
         char *cmd = split;
         while (split != NULL){
-            argv[j] = split;
-            ++j;
-            split = strtok(NULL, " ");
+            if (j == 99){
+                printf("ERROR: too many arguments the arg '%s' was not included\n", split);
+            }
+            else {
+                argv[j] = split;
+                ++j;
+                split = strtok(NULL, " ");
+            }
         }
         argv[j - 1] = NULL;
         execvp(cmd, argv);
@@ -475,9 +500,12 @@ int main() {
             char cmd[COMMAND_CHAR_LIMIT];
             int i = 0;
             scanf("%c", &cmd[i]);
-            while(i == 0 || (i < COMMAND_CHAR_LIMIT-1 && cmd[i-1] != '\n')){
+            while(i == 0 || (i < COMMAND_CHAR_LIMIT && cmd[i-1] != '\n')){
                 scanf("%c", &cmd[i]);
                 ++i;
+                if (i == COMMAND_CHAR_LIMIT) {
+                    printf("ERROR: too many chars\n");
+                }
             }
             cmd[i-1] = '\0';
             int id = add_entry(cmd);
