@@ -6,86 +6,98 @@
 #include <sys/resource.h>
 #include <string.h>
 
+//create constants that will be used throughout the program
 #define OPTIONS 2
 #define COMMAND_CHAR_LIMIT 1000
 
+/*
+a function that runs the "whoami" command and outputs the result
+*/
 void whoami(){
     int link[2];
     struct timeval t0;
     struct timeval t1;
-    gettimeofday(&t0, 0);
+    gettimeofday(&t0, 0); //get the time of day before it starts running so we can later tell how long it took
     struct rusage ru;
-    pid_t pid = fork();
+    pid_t pid = fork(); //create a seperate process that will be the one that runs the whoami command
 
 
-    if (pid == 0) {
+    if (pid == 0) { //if I am the child
         dup2(link[1], STDOUT_FILENO);
         close(link[0]);
         close(link[1]);
-        char *cmd = "whoami";
+        char *cmd = "whoami"; //set the command to be whoami
         char *argv[2];
-        argv[0] = "whoami";
-        argv[1] = NULL;
-        execvp(cmd, argv);
-    } else {
-        wait4(pid, 0, 0, &ru);
+        argv[0] = "whoami"; //set the first arg to be the command
+        argv[1] = NULL; //no more additional args
+        execvp(cmd, argv); //run the command
+    } else { //if I am the parent
+        wait4(pid, 0, 0, &ru); //wait for the child to finish
     }
-    gettimeofday(&t1, 0);
-    long elapsed = (t1.tv_usec - t0.tv_usec) / 1000;
+    gettimeofday(&t1, 0); // get the time after the whoami has run
+    long elapsed = (t1.tv_usec - t0.tv_usec) / 1000; //get the change in time
 
+    //print out the stats
     printf("\n-- Statistics ---\n");
     printf("Elapsed time: %ld milliseconds\n", elapsed);
     printf("Page Faults: %ld\n", ru.ru_majflt);
     printf("Page Faults (reclaimed): %ld\n\n", ru.ru_minflt);
 }
 
+/*
+a function that runs the "last" command and outputs the result
+*/
 void last(){
     int link[2];
     struct timeval t0;
     struct timeval t1;
-    gettimeofday(&t0, 0);
+    gettimeofday(&t0, 0); //get the time of day before it starts running so we can later tell how long it took
     struct rusage ru;
-    pid_t pid = fork();
+    pid_t pid = fork(); //create a seperate process that will be the one that runs the command
 
 
-    if (pid == 0) {
+    if (pid == 0) { //if I am the child
         dup2(link[1], STDOUT_FILENO);
         close(link[0]);
         close(link[1]);
-        char *cmd = "last";
+        char *cmd = "last"; //set the command to be last
         char *argv[2];
-        argv[0] = "last";
-        argv[1] = NULL;
-        execvp(cmd, argv);
-    } else {
-        wait4(pid, 0, 0, &ru);
+        argv[0] = "last"; //set the first arg to be the command
+        argv[1] = NULL; //no more args
+        execvp(cmd, argv); //run the command
+    } else { //if I am the parent
+        wait4(pid, 0, 0, &ru); //wait for the child to finish
     }
-    gettimeofday(&t1, 0);
-    long elapsed = (t1.tv_usec - t0.tv_usec) / 1000;
+    gettimeofday(&t1, 0); //get the time after the command has run
+    long elapsed = (t1.tv_usec - t0.tv_usec) / 1000; //get the change in time
 
+    //print out the stats
     printf("\n-- Statistics ---\n");
     printf("Elapsed time: %ld milliseconds\n", elapsed);
     printf("Page Faults: %ld\n", ru.ru_majflt);
     printf("Page Faults (reclaimed): %ld\n\n", ru.ru_minflt);
 }
 
+/*
+asks the user for a directory and additional args and then runs the ls command with the given directory and args
+*/
 void ls(){
-    char arg[COMMAND_CHAR_LIMIT];
-    char dir[COMMAND_CHAR_LIMIT];
+    char arg[COMMAND_CHAR_LIMIT]; //allocate space for the user to type args
+    char dir[COMMAND_CHAR_LIMIT]; //allocate space for the user to type the directory
     printf("Arguments?: ");
     int i = 0;
-    scanf("%c", &arg[i]);
-    while(i == 0 || (i < COMMAND_CHAR_LIMIT && arg[i-1] != '\n')){
+    scanf("%c", &arg[i]); //get rid of any unwanted lingering endlines from previus scanfs
+    while(i == 0 || (i < COMMAND_CHAR_LIMIT && arg[i-1] != '\n')){ //while there is room in the array and the user does not hit enter keep on recording what the user types
         scanf("%c", &arg[i]);
         ++i;
-        if (i == COMMAND_CHAR_LIMIT){
+        if (i == COMMAND_CHAR_LIMIT){ //if the user tries to type too many chars prompt the user, but let the user continue with what they have
             printf("ERROR: too many chars");
         }
     }
-    arg[i-1] = '\0';
+    arg[i-1] = '\0'; // append a null terminator
     i = 0;
     printf("Path?: ");
-    while((i < COMMAND_CHAR_LIMIT - 1 && dir[i-1] != '\n')){
+    while((i < COMMAND_CHAR_LIMIT - 1 && dir[i-1] != '\n')){ // do all the same thing but for the dir
         scanf("%c", &dir[i]);
         ++i;
         if (i == COMMAND_CHAR_LIMIT){
@@ -93,7 +105,7 @@ void ls(){
         }
     }
     dir[i-1] = '\0';
-    if (i == 1){
+    if (i == 1){ // if the user did not type anything make it so the cwd will be used
         dir[0] = '.';
         dir[1] = '\0';
     }
@@ -101,48 +113,49 @@ void ls(){
     int link[2];
     struct timeval t0;
     struct timeval t1;
-    gettimeofday(&t0, 0);
+    gettimeofday(&t0, 0); //get the time before the command is run
     struct rusage ru;
-    pid_t pid = fork();
+    pid_t pid = fork(); //fork the proccess so one of them can run the command
 
 
-    if (pid == 0) {
+    if (pid == 0) { //if I am the child
         printf("\n");
         fflush(stdout);
         dup2(link[1], STDOUT_FILENO);
         close(link[0]);
         close(link[1]);
-        char *cmd = "ls";
-        char *argv[100];
-        argv[0] = "ls";
-        if (arg[0] == '\0'){
+        char *cmd = "ls"; //set the command to be ls
+        char *argv[100]; //set a max of 99 args
+        argv[0] = "ls"; //set the first arg to be the command
+        if (arg[0] == '\0'){ //if the user did not input any additional args just set the remaining args to be the dir
             argv[1] = dir;
             argv[2] = NULL;
         }
-        else{
+        else{ //if the user did input additional args split the args up by spaces
             int j = 1;
             char *split;
-            split = strtok(arg, " ");
-            while (split != NULL){
-                if (j == 98){
+            split = strtok(arg, " "); //split the args by space
+            while (split != NULL){ //while there are still more in the string
+                if (j == 98){ //if the user has already inputed 98 args, dont add it and notify the user
                     printf("ERROR: too many arguments the arg '%s' was not included", split);
                 }
-                else {
+                else { //otherwise add the arg to the array
                     argv[j] = split;
                     ++j;
                     split = strtok(NULL, " ");
                 }
             }
-            argv[j] = dir;
-            argv[j+1] = NULL;
+            argv[j] = dir; //set the last arg to the dir
+            argv[j+1] = NULL; //no more args
         }
-        execvp(cmd, argv);
-    } else {
-        wait4(pid, 0, 0, &ru);
+        execvp(cmd, argv); //run the command
+    } else { //if I am the parent
+        wait4(pid, 0, 0, &ru); //wait for the child to finsih running
     }
-    gettimeofday(&t1, 0);
-    long elapsed = (t1.tv_usec - t0.tv_usec) / 1000;
+    gettimeofday(&t1, 0); //get the time after the command was run
+    long elapsed = (t1.tv_usec - t0.tv_usec) / 1000; //calculate how much time elapsed
 
+    //print out the stats
     printf("\n-- Statistics ---\n");
     printf("Elapsed time: %ld milliseconds\n", elapsed);
     printf("Page Faults: %ld\n", ru.ru_majflt);
