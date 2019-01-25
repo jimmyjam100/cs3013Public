@@ -473,7 +473,6 @@ void *threaded_user_created(void *cmd2){
         execvp(cmd, argv); //run the command
     } else { //if I am the parent
         pthread_mutex_lock(&lock); //lock the linked list so only I can edit it
-        printf("test print 1\n");
         create_node(pid); //create the node in the linked list to keep track of it
         pthread_mutex_unlock(&lock); //unlock the linked list while we wait for the child to finish
 
@@ -482,7 +481,6 @@ void *threaded_user_created(void *cmd2){
 
 
         pthread_mutex_lock(&lock); //lock the linked list so only I can edit it
-        printf("test print 2\n"); //TODO print stuff
         delete_node_by_pid_t(pid); //delete the node
         pthread_mutex_unlock(&lock); //unlock the linked list
     }
