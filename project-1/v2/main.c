@@ -501,15 +501,16 @@ void *threaded_user_created(void *cmd2){
 }
 
 int main() {
-    assert(pthread_mutex_init(&lock, NULL) == 0);
-    add_entry("whoami");
+    assert(pthread_mutex_init(&lock, NULL) == 0); //initialize the linked list lock
+    add_entry("whoami"); //add the 3 base commands to the command list
     add_entry("last");
     add_entry("ls");
     printf("===== Mid-Day Commander, v2 =====\n");
-    while (1) {
+    while (1) { //while in the application
         printf("G’day, Commander! What command would you like to run?\n");
         char selection[3] = "z";
         while (!valid_selection(selection)) {
+            //let the user know what their options are
             printf("\t0. whoami : Prints out the result of the whoamicommand\n");
             printf("\t1. last : Prints out the result of the last command\n");
             printf("\t2. ls : Prints out the result of a listing on a user-specified path\n");
@@ -527,10 +528,11 @@ int main() {
                 printf("\nLogging you out, Commander.\n");
                 return 0;
             }
-            if (!valid_selection(selection)) {
+            if (!valid_selection(selection)) { //make sure the user chooses an vailid choice
                 printf("\nSorry, that's not a valid option. Choose one of the following:\n\n");
             }
         }
+        //processes the result
         if (!strcmp(selection, "0")) {
             printf("\n-- Who Am I? --\n");
             whoami();
