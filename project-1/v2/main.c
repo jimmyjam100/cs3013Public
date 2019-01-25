@@ -26,7 +26,7 @@ void userCreated(int id){
     int link[2];
     struct timeval t0;
     struct timeval t1;
-    gettimeofday(&t0, 0);
+    gettimeofday(&t0, NULL);
     struct rusage ru;
     pid_t pid = fork();
 
@@ -57,11 +57,12 @@ void userCreated(int id){
     } else {
         wait4(pid, 0, 0, &ru);
     }
-    gettimeofday(&t1, 0);
-    long elapsed = (t1.tv_usec - t0.tv_usec) / 1000;
-
+    gettimeofday(&t1, NULL);
+    unsigned long long jsEpocht0 = (unsigned long long)(t0.tv_sec) * 1000 + (unsigned long long)(t0.tv_usec) / 1000;
+    unsigned long long jsEpocht1 = (unsigned long long)(t1.tv_sec) * 1000 + (unsigned long long)(t1.tv_usec) / 1000;
+    unsigned long long elapsedMilliseconds = jsEpocht1 - jsEpocht0;
     printf("\n-- Statistics ---\n");
-    printf("Elapsed time: %ld milliseconds\n", elapsed);
+    printf("Elapsed time: %llu milliseconds\n", elapsedMilliseconds);
     printf("Page Faults: %ld\n", ru.ru_majflt);
     printf("Page Faults (reclaimed): %ld\n\n", ru.ru_minflt);
 }
@@ -434,10 +435,12 @@ void *threaded_user_created(void *cmd2){
         pthread_mutex_unlock(&lock);
     }
     gettimeofday(&t1, 0);
-    long elapsed = (t1.tv_usec - t0.tv_usec) / 1000;
+    unsigned long long jsEpocht0 = (unsigned long long)(t0.tv_sec) * 1000 + (unsigned long long)(t0.tv_usec) / 1000;
+    unsigned long long jsEpocht1 = (unsigned long long)(t1.tv_sec) * 1000 + (unsigned long long)(t1.tv_usec) / 1000;
+    unsigned long long elapsedMilliseconds = jsEpocht1 - jsEpocht0;
 
     printf("\n-- Statistics ---\n");
-    printf("Elapsed time: %ld milliseconds\n", elapsed);
+    printf("Elapsed time: %llu milliseconds\n", elapsedMilliseconds);
     printf("Page Faults: %ld\n", ru.ru_majflt);
     printf("Page Faults (reclaimed): %ld\n\n", ru.ru_minflt);
 }
