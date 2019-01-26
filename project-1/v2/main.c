@@ -17,6 +17,7 @@ char *entries[COMMAND_LIMIT]; //create the array for user created commands
 struct node{ //create the struct for the linked list of active commands being run on another thread
     pid_t pid;
     struct node *next;
+    char *cmd;
 };
 
 struct node *head; //create a pointer for the first value of the linked list
@@ -290,7 +291,7 @@ void list_processes() {
     int i = 0;
     struct node * cur_node = head; //get a pointer to the head to ittorate through the linked list
     while (cur_node != NULL){ //while there are still processes
-        printf("[%d] %d\n", i, cur_node->pid); //print out the details about that process
+        printf("[%d] %d (%s) \n", i, cur_node->pid, cur_node->cmd); //print out the details about that process
         cur_node = cur_node->next; //ittorate
         i++;
     }
@@ -352,10 +353,11 @@ int str_ends_with_ampersand(char *s) {
 /*
 create a new entry in the linked list and return its index
 */
-int create_node(pid_t pid) {
+int create_node(pid_t pid, char *cmd) {
     struct node *new_node = (struct node *) malloc(sizeof(struct node)); //allocate space for a new node
     new_node->pid = pid; //set its value
     new_node->next = NULL; //it will be the last in the list
+    new_node->cmd = cmd; // sets the command value
     struct node *cur_node = head; //create an ittorator
     if (head == NULL){ //if there are no entries set the first entry to be the head
         head = new_node;
@@ -477,8 +479,10 @@ void *threaded_user_created(void *cmd2){
         argv[j - 1] = NULL; //replace the & with a NULL terminator
         execvp(cmd, argv); //run the command
     } else { //if I am the parent
+        char input[COMMAND_CHAR_LIMIT];
+        strncpy(input, cmd2, COMMAND_CHAR_LIMIT); //copy the value of the command so we dont end up editing the actull string
         pthread_mutex_lock(&lock); //lock the linked list so only I can edit it
-        create_node(pid); //create the node in the linked list to keep track of it
+        create_node(pid, input); //create the node in the linked list to keep track of it
         pthread_mutex_unlock(&lock); //unlock the linked list while we wait for the child to finish
 
 
