@@ -20,7 +20,6 @@ $ ./mc0
 
 === Limitations ===
 
--  EOF is only detected if there is no new line before EOF.
 - Other than that, there are currently no limitations that are not present in the spec sheet for the assignment.
 
 === Testing ===
