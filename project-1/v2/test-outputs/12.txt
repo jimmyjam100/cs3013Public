@@ -1,0 +1,408 @@
+===== Mid-Day Commander, v2 =====
+G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?:
+-- Add a command --
+Command to add?: Okay, added with ID 3!
+
+G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?:
+-- Add a command --
+Command to add?: Okay, added with ID 4!
+
+G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        4. sleep 4 & : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?:
+-- Add a command --
+Command to add?: Okay, added with ID 5!
+
+G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        4. sleep 4 & : User created command
+        5. sleep 5 & : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?:
+-- Add a command --
+Command to add?: Okay, added with ID 6!
+
+G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        4. sleep 4 & : User created command
+        5. sleep 5 & : User created command
+        6. sleep 6 & : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?: G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        4. sleep 4 & : User created command
+        5. sleep 5 & : User created command
+        6. sleep 6 & : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?: G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        4. sleep 4 & : User created command
+        5. sleep 5 & : User created command
+        6. sleep 6 & : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?: G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        4. sleep 4 & : User created command
+        5. sleep 5 & : User created command
+        6. sleep 6 & : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?: G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        4. sleep 4 & : User created command
+        5. sleep 5 & : User created command
+        6. sleep 6 & : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?: G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        4. sleep 4 & : User created command
+        5. sleep 5 & : User created command
+        6. sleep 6 & : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?: G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        4. sleep 4 & : User created command
+        5. sleep 5 & : User created command
+        6. sleep 6 & : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?: G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        4. sleep 4 & : User created command
+        5. sleep 5 & : User created command
+        6. sleep 6 & : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?: G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        4. sleep 4 & : User created command
+        5. sleep 5 & : User created command
+        6. sleep 6 & : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?: G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        4. sleep 4 & : User created command
+        5. sleep 5 & : User created command
+        6. sleep 6 & : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?: G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        4. sleep 4 & : User created command
+        5. sleep 5 & : User created command
+        6. sleep 6 & : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?: G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        4. sleep 4 & : User created command
+        5. sleep 5 & : User created command
+        6. sleep 6 & : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?: G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        4. sleep 4 & : User created command
+        5. sleep 5 & : User created command
+        6. sleep 6 & : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?: G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        4. sleep 4 & : User created command
+        5. sleep 5 & : User created command
+        6. sleep 6 & : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?: G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        4. sleep 4 & : User created command
+        5. sleep 5 & : User created command
+        6. sleep 6 & : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?:
+-- Background Processes --
+[0] 32310 (sleep 3 &)
+[1] 32312 (sleep 3 &)
+[2] 32314 (sleep 4 &)
+[3] 32316 (sleep 4 &)
+[4] 32318 (sleep 5 &)
+[5] 32320 (sleep 5 &)
+[6] 32322 (sleep 6 &)
+[7] 32324 (sleep 6 &)
+[8] 32326 (sleep 5 &)
+[9] 32328 (sleep 5 &)
+[10] 32330 (sleep 4 &)
+[11] 32332 (sleep 4 &)
+[12] 32334 (sleep 3 &)
+[13] 32336 (sleep 3 &)
+
+G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        4. sleep 4 & : User created command
+        5. sleep 5 & : User created command
+        6. sleep 6 & : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?:
+-- Add a command --
+Command to add?: Okay, added with ID 7!
+
+G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        4. sleep 4 & : User created command
+        5. sleep 5 & : User created command
+        6. sleep 6 & : User created command
+        7. sleep 7 : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?:
+-- Statistics ---
+Elapsed time: 3001 milliseconds
+Page Faults: 0
+Page Faults (reclaimed): 86
+
+
+-- Statistics ---
+Elapsed time: 3001 milliseconds
+Page Faults: 0
+Page Faults (reclaimed): 88
+
+
+-- Statistics ---
+Elapsed time: 3001 milliseconds
+Page Faults: 0
+Page Faults (reclaimed): 111
+
+
+-- Statistics ---
+Elapsed time: 3001 milliseconds
+Page Faults: 0
+Page Faults (reclaimed): 115
+
+
+-- Statistics ---
+Elapsed time: 4001 milliseconds
+Page Faults: 0
+Page Faults (reclaimed): 93
+
+
+-- Statistics ---
+Elapsed time: 4001 milliseconds
+Page Faults: 0
+Page Faults (reclaimed): 94
+
+
+-- Statistics ---
+Elapsed time: 4001 milliseconds
+Page Faults: 0
+Page Faults (reclaimed): 109
+
+
+-- Statistics ---
+Elapsed time: 4000 milliseconds
+Page Faults: 0
+Page Faults (reclaimed): 110
+
+
+-- Statistics ---
+Elapsed time: 5001 milliseconds
+Page Faults: 0
+Page Faults (reclaimed): 95
+
+
+-- Statistics ---
+Elapsed time: 5001 milliseconds
+Page Faults: 0
+Page Faults (reclaimed): 97
+
+
+-- Statistics ---
+Elapsed time: 5001 milliseconds
+Page Faults: 0
+Page Faults (reclaimed): 104
+
+
+-- Statistics ---
+Elapsed time: 5001 milliseconds
+Page Faults: 0
+Page Faults (reclaimed): 103
+
+
+-- Statistics ---
+Elapsed time: 6001 milliseconds
+Page Faults: 0
+Page Faults (reclaimed): 102
+
+
+-- Statistics ---
+Elapsed time: 6001 milliseconds
+Page Faults: 0
+Page Faults (reclaimed): 102
+
+
+-- Statistics ---
+Elapsed time: 7001 milliseconds
+Page Faults: 0
+Page Faults (reclaimed): 115
+
+G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        3. sleep 3 & : User created command
+        4. sleep 4 & : User created command
+        5. sleep 5 & : User created command
+        6. sleep 6 & : User created command
+        7. sleep 7 : User created command
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+        r. running processes : Prints list of running processes
+Option?:
+Logging you out, Commander.
