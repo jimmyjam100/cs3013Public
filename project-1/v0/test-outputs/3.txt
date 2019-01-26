@@ -1,0 +1,21 @@
+===== Mid-Day Commander, v0 =====
+G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+Option?:
+-- Directory Listing --
+Arguments?: Path?:
+cmake-build-debug  CMakeLists.txt  main.c  Makefile  mc0  README.txt  test-inputs  test-outputs
+
+-- Statistics ---
+Elapsed time: 2 milliseconds
+Page Faults: 0
+Page Faults (reclaimed): 119
+
+G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+Option?:
+Logging you out, Commander.
