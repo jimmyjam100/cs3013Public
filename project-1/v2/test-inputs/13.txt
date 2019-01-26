@@ -1,0 +1,16 @@
+a
+mkdir tmp
+3
+c
+tmp
+a
+wget https://stallman.org/
+4
+a
+wc index.html
+5
+c
+..
+a
+rm -rf tmp
+6

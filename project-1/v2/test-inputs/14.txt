@@ -1,0 +1,16 @@
+a
+mkdir tmp
+3
+c
+tmp
+a
+wget https://gist.githubusercontent.com/JCharante/d2fce13566310d1a02dccfecc87c11e3/raw/18e11434133f35ead3f655febae51e256844a718/manifesto.txt
+4
+a
+cat manifesto.txt
+5
+c
+..
+a
+rm -rf tmp
+6
