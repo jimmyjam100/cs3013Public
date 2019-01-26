@@ -122,8 +122,8 @@ void ls(){
         printf("\n");
         fflush(stdout);
         dup2(link[1], STDOUT_FILENO);
-        close(link[0]);
-        close(link[1]);
+        //close(link[0]);
+        //close(link[1]);
         char *cmd = "ls"; //set the command to be ls
         char *argv[100]; //set a max of 99 args
         argv[0] = "ls"; //set the first arg to be the command
