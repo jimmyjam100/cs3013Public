@@ -95,6 +95,7 @@ void ls(){
     char arg[COMMAND_CHAR_LIMIT]; //allocate space for the user to type args
     char dir[COMMAND_CHAR_LIMIT]; //allocate space for the user to type the directory
     printf("Arguments?: ");
+    fflush(stdout);
     int i = 0;
     scanf("%c", &arg[i]); //get rid of any unwanted lingering endlines from previus scanfs
     while(i == 0 || (i < COMMAND_CHAR_LIMIT && arg[i-1] != '\n')){ //while there is room in the array and the user does not hit enter keep on recording what the user types
@@ -107,6 +108,7 @@ void ls(){
     arg[i-1] = '\0'; // append a null terminator
     i = 0;
     printf("Path?: ");
+    fflush(stdout);
     while((i < COMMAND_CHAR_LIMIT - 1 && dir[i-1] != '\n')){ // do all the same thing but for the dir
         scanf("%c", &dir[i]);
         ++i;
@@ -188,7 +190,10 @@ int main() {
             printf("\t1. last : Prints out the result of the last command\n");
             printf("\t2. ls : Prints out the result of a listing on a user-specified path\n");
             printf("Option?: ");
-            scanf("%d", &selection);
+            if (scanf("%d", &selection) == EOF) {
+                printf("\nLogging you out, Commander.\n");
+                return 0;
+            }
             if (selection < 0 || selection > OPTIONS) { //if they did not chose a valid option let the user know
                 printf("\nSorry, that's not a valid option. Choose one of the following:\n\n");
             }

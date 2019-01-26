@@ -20,4 +20,21 @@ $ ./mc0
 
 === Limitations ===
 
-There are currently no limitations that are not present in the spec sheet for the assignment.
+-  EOF is only detected if there is no new line before EOF.
+- Other than that, there are currently no limitations that are not present in the spec sheet for the assignment.
+
+=== Testing ===
+
+There are files included in the test-inputs directory and the test-outputs directory.
+
+Each file in test-inputs has a corresponding file in test-outputs. If you pipe a file
+from test-inputs into Mid-Day commander, you should expect a similar output like
+the one in test-outputs.
+
+For example:
+
+$ ./mc0 < test-inputs/1.txt
+
+should resemble
+
+$ cat test-outputs/1.txt
