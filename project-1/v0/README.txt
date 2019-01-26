@@ -20,7 +20,7 @@ $ ./mc0
 
 === Limitations ===
 
-- Other than that, there are currently no limitations that are not present in the spec sheet for the assignment.
+- There are currently no limitations that are not present in the spec sheet for the assignment.
 
 === Testing ===
 
