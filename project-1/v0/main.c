@@ -34,12 +34,17 @@ void whoami(){
     } else { //if I am the parent
         wait4(pid, 0, 0, &ru); //wait for the child to finish
     }
-    gettimeofday(&t1, 0); // get the time after the whoami has run
-    long elapsed = (t1.tv_usec - t0.tv_usec) / 1000; //get the change in time
+
+    gettimeofday(&t1, NULL); //get the time of day after the command finishes
+
+    //calculate how long the command took to run
+    unsigned long long jsEpocht0 = (unsigned long long)(t0.tv_sec) * 1000 + (unsigned long long)(t0.tv_usec) / 1000;
+    unsigned long long jsEpocht1 = (unsigned long long)(t1.tv_sec) * 1000 + (unsigned long long)(t1.tv_usec) / 1000;
+    unsigned long long elapsedMilliseconds = jsEpocht1 - jsEpocht0;
 
     //print out the stats
     printf("\n-- Statistics ---\n");
-    printf("Elapsed time: %ld milliseconds\n", elapsed);
+    printf("Elapsed time: %llu milliseconds\n", elapsedMilliseconds);
     printf("Page Faults: %ld\n", ru.ru_majflt);
     printf("Page Faults (reclaimed): %ld\n\n", ru.ru_minflt);
 }
@@ -68,12 +73,17 @@ void last(){
     } else { //if I am the parent
         wait4(pid, 0, 0, &ru); //wait for the child to finish
     }
-    gettimeofday(&t1, 0); //get the time after the command has run
-    long elapsed = (t1.tv_usec - t0.tv_usec) / 1000; //get the change in time
+
+    gettimeofday(&t1, NULL); //get the time of day after the command finishes
+
+    //calculate how long the command took to run
+    unsigned long long jsEpocht0 = (unsigned long long)(t0.tv_sec) * 1000 + (unsigned long long)(t0.tv_usec) / 1000;
+    unsigned long long jsEpocht1 = (unsigned long long)(t1.tv_sec) * 1000 + (unsigned long long)(t1.tv_usec) / 1000;
+    unsigned long long elapsedMilliseconds = jsEpocht1 - jsEpocht0;
 
     //print out the stats
     printf("\n-- Statistics ---\n");
-    printf("Elapsed time: %ld milliseconds\n", elapsed);
+    printf("Elapsed time: %llu milliseconds\n", elapsedMilliseconds);
     printf("Page Faults: %ld\n", ru.ru_majflt);
     printf("Page Faults (reclaimed): %ld\n\n", ru.ru_minflt);
 }
@@ -152,12 +162,16 @@ void ls(){
     } else { //if I am the parent
         wait4(pid, 0, 0, &ru); //wait for the child to finsih running
     }
-    gettimeofday(&t1, 0); //get the time after the command was run
-    long elapsed = (t1.tv_usec - t0.tv_usec) / 1000; //calculate how much time elapsed
+    gettimeofday(&t1, NULL); //get the time of day after the command finishes
+
+    //calculate how long the command took to run
+    unsigned long long jsEpocht0 = (unsigned long long)(t0.tv_sec) * 1000 + (unsigned long long)(t0.tv_usec) / 1000;
+    unsigned long long jsEpocht1 = (unsigned long long)(t1.tv_sec) * 1000 + (unsigned long long)(t1.tv_usec) / 1000;
+    unsigned long long elapsedMilliseconds = jsEpocht1 - jsEpocht0;
 
     //print out the stats
     printf("\n-- Statistics ---\n");
-    printf("Elapsed time: %ld milliseconds\n", elapsed);
+    printf("Elapsed time: %llu milliseconds\n", elapsedMilliseconds);
     printf("Page Faults: %ld\n", ru.ru_majflt);
     printf("Page Faults (reclaimed): %ld\n\n", ru.ru_minflt);
 }
