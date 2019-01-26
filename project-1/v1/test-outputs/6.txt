@@ -1,0 +1,23 @@
+===== Mid-Day Commander, v1 =====
+G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+Option?:
+-- Current Directory --
+Directory: /home/jcharante/Documents/cs3013/project-1/v1
+
+G’day, Commander! What command would you like to run?
+        0. whoami : Prints out the result of the whoamicommand
+        1. last : Prints out the result of the last command
+        2. ls : Prints out the result of a listing on a user-specified path
+        a. add command : Adds a new command to the menu.
+        c. change directory : Changes process working directory
+        e. exit : Leave Mid-Day Commander
+        p. pwd : Prints working directory
+Option?:
+Logging you out, Commander.

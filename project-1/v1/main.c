@@ -143,6 +143,7 @@ void ls(){
     char arg[COMMAND_CHAR_LIMIT]; //allocate space for the user to type args
     char dir[COMMAND_CHAR_LIMIT]; //allocate space for the user to type the directory
     printf("Arguments?: ");
+    fflush(stdout);
     int i = 0;
     scanf("%c", &arg[i]); //get rid of any unwanted lingering endlines from previus scanfs
     while(i == 0 || (i < COMMAND_CHAR_LIMIT && arg[i-1] != '\n')){ //while there is room in the array and the user does not hit enter keep on recording what the user types
@@ -150,16 +151,19 @@ void ls(){
         ++i;
         if (i == COMMAND_CHAR_LIMIT){ //if the user tries to type too many chars prompt the user, but let the user continue with what they have
             printf("ERROR: too many chars");
+            fflush(stdout);
         }
     }
     arg[i-1] = '\0'; // append a null terminator
     i = 0;
     printf("Path?: ");
+    fflush(stdout);
     while((i < COMMAND_CHAR_LIMIT - 1 && dir[i-1] != '\n')){ // do all the same thing but for the dir
         scanf("%c", &dir[i]);
         ++i;
         if (i == COMMAND_CHAR_LIMIT){
             printf("ERROR: too many chars");
+            fflush(stdout);
         }
     }
     dir[i-1] = '\0';
@@ -179,7 +183,7 @@ void ls(){
     if (pid == 0) { //if I am the child
         printf("\n");
         fflush(stdout);
-        dup2(link[1], STDOUT_FILENO);
+        //dup2(link[1], STDOUT_FILENO);
         close(link[0]);
         close(link[1]);
         char *cmd = "ls"; //set the command to be ls
