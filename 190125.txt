@@ -1,0 +1,7 @@
+- System Call Interception
+  - Keep reference to original function, and use it. (essentially writing our wrapper around it)
+  - the n after syscall_define notates how many parameters the syscall needs.
+- if gpl license declaration missing, will get tainted err messages.
+- printk debugging (no gdb mdr)
+- additional resources: Linux Kernel Development, 3rd ed., Chapter 18
+- going negative on a semaphore leads to going to sleepl
