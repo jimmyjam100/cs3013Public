@@ -37,8 +37,18 @@ int main(int argc, char **argv){
     *target_pid = atoi(argv[1]);
     syscall(__NR_cs3013_syscall2, target_pid, anc);
     i = 0;
-    while(anc->children[i] != -1){
+    while(anc->children[i] != -1 && i < 100){
         printf("child pid %d\n", anc->children[i]);
+        ++i;
+    }
+    i = 0;
+    while(anc->siblings[i] != -1 && i < 100){
+        printf("sibling pid %d\n", anc->siblings[i]);
+        ++i;
+    }
+    i = 0;
+    while(anc->ancestors[i] != -1 && i < 10){
+        printf("ancestor pid %d\n", anc->ancestors[i]);
         ++i;
     }
     return 0;
