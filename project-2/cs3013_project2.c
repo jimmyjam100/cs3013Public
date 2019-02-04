@@ -9,7 +9,7 @@
 unsigned long **sys_call_table;
 
 struct ancestry {
-  pid_t ancestor[10];
+  pid_t ancestors[10];
   pid_t siblings[100];
   pid_t children[100];
 };
@@ -28,6 +28,15 @@ asmlinkage long new_sys_cs3013_syscall1(void) {
   printk(KERN_INFO "Now runing original syscall1");
   ref_sys_cs3013_syscall1();
   return 0;
+}
+
+void fill_with_ancestor(struct ancestry *anc, struct task_struct *cur, int i) {
+  if (i > 9 || cur == NULL || (i != 0 && cur->pid == anc->ancestors[i-1])) {
+    return;
+  }
+  printk(KERN_INFO "%s[%d]\n", cur->comm, cur->pid);
+  anc->ancestors[i] = cur->pid;
+  fill_with_ancestor(anc, cur->parent, i + 1);
 }
 
 asmlinkage long new_sys_cs3013_syscall2(unsigned short *target_pid, struct ancestry *response) {
@@ -69,6 +78,8 @@ asmlinkage long new_sys_cs3013_syscall2(unsigned short *target_pid, struct ances
       printk(KERN_INFO "skipping %s[%d] as over 100 sib limit\n", cur_sib->comm, cur_sib->pid);
     }
   }
+  printk(KERN_INFO ":: Printing Ancestors ::\n");
+  fill_with_ancestor(kancestry, t->parent, 0);
   if (copy_to_user(response, kancestry, sizeof (struct ancestry))) {
     return -1; // err
   }
