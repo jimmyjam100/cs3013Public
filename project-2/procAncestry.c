@@ -24,12 +24,22 @@ int main(int argc, char **argv){
         return 1;
     }
     struct ancestry *anc = malloc(sizeof(struct ancestry));
+    int i = 0;
+    while(i < 100){
+        if (i < 10) {
+            anc->ancestors[i] = -1;
+        }
+        anc->siblings[i] = -1;
+        anc->children[i] = -1;
+        ++i;
+    }
     unsigned short *target_pid = malloc(sizeof(unsigned short));
     *target_pid = atoi(argv[1]);
     syscall(__NR_cs3013_syscall2, target_pid, anc);
+    i = 0;
+    while(anc->children[i] != -1){
+        printf("child pid %d\n", anc->children[i]);
+        ++i;
+    }
     return 0;
-
-
-
-
 }
