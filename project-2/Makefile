@@ -5,6 +5,7 @@ PWD := $(shell pwd)
 
 all:
 	$(MAKE) -C $(KDIR) M=$(PWD) modules
-
+	gcc procAncestry.c -o procAncestry
 clean:
 	$(MAKE) -C $(KDIR) M=$(PWD) clean
+	rm procAncestry
