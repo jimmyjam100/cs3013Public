@@ -4,6 +4,8 @@
 #include <linux/slab.h>
 #include <linux/sched.h>
 #include <linux/list.h>
+//#include <linux/sys/types.h>
+#include <linux/signal.h>
 
 
 unsigned long **sys_call_table;
@@ -22,7 +24,7 @@ asmlinkage long (*ref_sys_open)(const char __user *filename, int flags, umode_t 
 asmlinkage long (*ref_sys_close)(unsigned int fd);
 asmlinkage long (*ref_sys_read)(unsigned int fd, char __user *buf, size_t count);
 
-
+//replace syscall1 with new text
 asmlinkage long new_sys_cs3013_syscall1(void) {
   printk(KERN_INFO "\"'Hello world?!' More like 'Goodbye, world!' EXTERMINATE!\" -- Dalek\n");
   printk(KERN_INFO "Now runing original syscall1");
@@ -30,62 +32,65 @@ asmlinkage long new_sys_cs3013_syscall1(void) {
   return 0;
 }
 
+//a function that recursivly goes through parents and stores them to a ancestry pointer
 void fill_with_ancestor(struct ancestry *anc, struct task_struct *cur, int i) {
-  if (i > 9 || cur == NULL || (i != 0 && cur->pid == anc->ancestors[i-1])) {
+  if (i > 9 || cur == NULL || (i != 0 && cur->pid == anc->ancestors[i-1])) { //if already have 10 or parent is repeating do nothing
     return;
   }
-  printk(KERN_INFO "%s[%d]\n", cur->comm, cur->pid);
+  printk(KERN_INFO "%s[%d]\n", cur->comm, cur->pid); //otherwise print out that it was added and add it to the list and call recursivly
   anc->ancestors[i] = cur->pid;
   fill_with_ancestor(anc, cur->parent, i + 1);
 }
 
+//the function that will replace syscall2 for phase 2
 asmlinkage long new_sys_cs3013_syscall2(unsigned short *target_pid, struct ancestry *response) {
   unsigned short ktarget_pid;
-  struct ancestry *kancestry = kmalloc(sizeof (struct ancestry), GFP_KERNEL);
-  struct task_struct *t = kmalloc(sizeof (struct task_struct), GFP_KERNEL);
+  struct ancestry *kancestry = kmalloc(sizeof (struct ancestry), GFP_KERNEL); //alocate space for the ancestry we will copy info into and change
+  struct task_struct *t = kmalloc(sizeof (struct task_struct), GFP_KERNEL); //allocate space for the struct that will contain all the info we want
   struct list_head *list;
-  struct task_struct *cur_child = kmalloc(sizeof (struct task_struct), GFP_KERNEL);
-  printk(KERN_INFO "p2Who dare invoke me!\n");
-  if (copy_from_user(&ktarget_pid, target_pid, sizeof(ktarget_pid)) || copy_from_user(kancestry, response, sizeof(struct ancestry))) {
-    printk(KERN_INFO "p2Err?\n");
+  struct task_struct *cur_child = kmalloc(sizeof (struct task_struct), GFP_KERNEL); 
+  printk(KERN_INFO "Who dare invoke me!\n"); //let the user know that the program is being run
+  if (copy_from_user(&ktarget_pid, target_pid, sizeof(ktarget_pid)) || copy_from_user(kancestry, response, sizeof(struct ancestry)) /*|| kill(ktarget_pid, 0) == -1*/) { //check to make sure the input is correct
+    printk(KERN_INFO "Err?\n"); // print out an error and return an error if it is not
     return -1;
-  } else {
-    printk(KERN_INFO "p2it's fine, ktarget_pid is %hu\n", ktarget_pid);
+  } else { //if everything is good print out the pid that is being used
+    printk(KERN_INFO "it's fine, ktarget_pid is %hu\n", ktarget_pid);
   }
-  t = pid_task(find_vpid(ktarget_pid), PIDTYPE_PID);
-  printk(KERN_INFO "%hu has the following children:\n", ktarget_pid);
-  int childIndex = 0;
-  list_for_each(list, &t->children) {
-    if (childIndex <= 99) {
+  t = pid_task(find_vpid(ktarget_pid), PIDTYPE_PID); //get all the info needed in the form of a task_struct which was recommended for the project
+  printk(KERN_INFO "%hu has the following children:\n", ktarget_pid); //let the user know that the next outputs are children
+  int childIndex = 0; //set the index for storing the information to the beggining
+  list_for_each(list, &t->children) { //for each child
+    if (childIndex <= 99) { //if there is still room in the array print it out and add it to the array
       cur_child = list_entry(list, struct task_struct, sibling);
       kancestry->children[childIndex] = cur_child->pid;
       childIndex++;
       printk(KERN_INFO "%s[%d]\n", cur_child->comm, cur_child->pid);
-    } else {
+    } else { //otherwise let the user know you are skipping it
       printk(KERN_INFO "skipping %s[%d] as over 100 child limit\n", cur_child->comm, cur_child->pid);
     }
   }
-  printk(KERN_INFO "printing siblings:\n");
-  int siblingIndex = 0;
+  printk(KERN_INFO "printing siblings:\n"); //let the user know that the next outputs are siblings
+  int siblingIndex = 0; //set the index for stroing the information to the beggining
   struct task_struct *cur_sib = kmalloc(sizeof (struct task_struct), GFP_KERNEL);
-  list_for_each(list, &t->sibling) {
-    if (siblingIndex <= 99) {
+  list_for_each(list, &t->sibling) { //for each sibling
+    if (siblingIndex <= 99) { //if there is still room in the array print it out and add it to the array
       cur_sib = list_entry(list, struct task_struct, sibling);
       kancestry->siblings[siblingIndex] = cur_sib->pid;
       siblingIndex++;
       printk(KERN_INFO "%s[%d]", cur_sib->comm, cur_sib->pid);
-    } else {
+    } else { //otherwise let the user know you are skipping it
       printk(KERN_INFO "skipping %s[%d] as over 100 sib limit\n", cur_sib->comm, cur_sib->pid);
     }
   }
-  printk(KERN_INFO ":: Printing Ancestors ::\n");
-  fill_with_ancestor(kancestry, t->parent, 0);
-  if (copy_to_user(response, kancestry, sizeof (struct ancestry))) {
+  printk(KERN_INFO ":: Printing Ancestors ::\n"); //let the user know that the next outputs are parents
+  fill_with_ancestor(kancestry, t->parent, 0); //run the function that recursivly goes through parents printing them and adding them to the array
+  if (copy_to_user(response, kancestry, sizeof (struct ancestry))) { //copy data back to the user space struct
     return -1; // err
   }
   return 0;
 }
 
+//the function that replaces sys_open
 asmlinkage long new_sys_open(const char __user *filename, int flags, umode_t mode) {
   long ret;
   kuid_t uid;
@@ -96,6 +101,7 @@ asmlinkage long new_sys_open(const char __user *filename, int flags, umode_t mod
   return ret;
 }
 
+//the function that replaces sys_close
 asmlinkage long new_sys_close(unsigned int fd) {
   long ret;
   kuid_t uid;
@@ -107,6 +113,7 @@ asmlinkage long new_sys_close(unsigned int fd) {
   return ret;
 }
 
+//the function that replaces sys_read
 asmlinkage long new_sys_read(unsigned int fd, char __user *buf, size_t count) {
   long ret;
   kuid_t uid;
