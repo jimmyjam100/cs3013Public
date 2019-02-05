@@ -4,8 +4,8 @@
 #include <linux/slab.h>
 #include <linux/sched.h>
 #include <linux/list.h>
-//#include <linux/sys/types.h>
-#include <linux/signal.h>
+//#include <linux/types.h>
+//#include <linux/signal.h>
 
 
 unsigned long **sys_call_table;
@@ -49,14 +49,24 @@ asmlinkage long new_sys_cs3013_syscall2(unsigned short *target_pid, struct ances
   struct task_struct *t = kmalloc(sizeof (struct task_struct), GFP_KERNEL); //allocate space for the struct that will contain all the info we want
   struct list_head *list;
   struct task_struct *cur_child = kmalloc(sizeof (struct task_struct), GFP_KERNEL); 
-  printk(KERN_INFO "Who dare invoke me!\n"); //let the user know that the program is being run
-  if (copy_from_user(&ktarget_pid, target_pid, sizeof(ktarget_pid)) || copy_from_user(kancestry, response, sizeof(struct ancestry)) /*|| kill(ktarget_pid, 0) == -1*/) { //check to make sure the input is correct
+  //printk(KERN_INFO "Who dare invoke me!\n"); //let the user know that the program is being run
+  if (copy_from_user(&ktarget_pid, target_pid, sizeof(ktarget_pid)) || copy_from_user(kancestry, response, sizeof(struct ancestry))/* || kill(ktarget_pid, 0) == -1*/) { //check to make sure the input is correct
     printk(KERN_INFO "Err?\n"); // print out an error and return an error if it is not
+    kfree(kancestry);
+    kfree(t);
+    kfree(list);
     return -1;
   } else { //if everything is good print out the pid that is being used
-    printk(KERN_INFO "it's fine, ktarget_pid is %hu\n", ktarget_pid);
+    //printk(KERN_INFO "it's fine, ktarget_pid is %hu\n", ktarget_pid);
   }
   t = pid_task(find_vpid(ktarget_pid), PIDTYPE_PID); //get all the info needed in the form of a task_struct which was recommended for the project
+  if(t == NULL){ //if the pid was not valid return an error
+    printk(KERN_INFO "pid was not vaild\n");
+    kfree(kancestry);
+    kfree(t);
+    kfree(list);
+    return -1;
+  }
   printk(KERN_INFO "%hu has the following children:\n", ktarget_pid); //let the user know that the next outputs are children
   int childIndex = 0; //set the index for storing the information to the beggining
   list_for_each(list, &t->children) { //for each child
@@ -85,8 +95,14 @@ asmlinkage long new_sys_cs3013_syscall2(unsigned short *target_pid, struct ances
   printk(KERN_INFO ":: Printing Ancestors ::\n"); //let the user know that the next outputs are parents
   fill_with_ancestor(kancestry, t->parent, 0); //run the function that recursivly goes through parents printing them and adding them to the array
   if (copy_to_user(response, kancestry, sizeof (struct ancestry))) { //copy data back to the user space struct
+    kfree(kancestry);
+    kfree(t);
+    kfree(list);
     return -1; // err
   }
+  kfree(kancestry);
+  kfree(t);
+  kfree(list);
   return 0;
 }
 
