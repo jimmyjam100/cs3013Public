@@ -36,7 +36,9 @@ int main(int argc, char **argv){
     }
     unsigned short *target_pid = malloc(sizeof(unsigned short)); //initialize a pointer to the inputed pid
     *target_pid = atoi(argv[1]); //get the value of the input
-    syscall(__NR_cs3013_syscall2, target_pid, anc); //call the systemcall
+    if(syscall(__NR_cs3013_syscall2, target_pid, anc) == -1) { //call the systemcall
+        printf("the pid was not valid\n");
+    }
     i = 0; //print out all the values that were stored from the system call
     while(anc->children[i] != -1 && i < 100){
         printf("child pid %d\n", anc->children[i]);
