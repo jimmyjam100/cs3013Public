@@ -1,4 +1,4 @@
-# Jean Claude Zarate <jzarate@wpi.edu>
+# Jean Claude Zarate <jzarate@wpi.edu> and James Scherick
 obj-m := cs3013_project2.o
 KDIR := /lib/modules/$(shell uname -r)/build
 PWD := $(shell pwd)
@@ -8,5 +8,3 @@ all:
 
 clean:
 	$(MAKE) -C $(KDIR) M=$(PWD) clean
-i:
-	sudo rmmod cs3013_project2 & make && sudo insmod cs3013_project2.ko
