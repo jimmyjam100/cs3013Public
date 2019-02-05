@@ -1,0 +1,22 @@
+- Traditional COncurrency
+  - Data Parallelism
+    - Data is split up, so you can have a bunch of processes/threads working on individual bits of data
+    - Ekzemploj de Data Parallelism
+      - Matrix Multiplication
+      - Jacobi Operation
+      - SETI @ HOME
+      - Protein analysis (Folding @ Home)
+      - OpenMP
+  - Task Paralleism
+    - Processes/threads have different goals, might have a thread for handling user io in a word processor, another for spell check, another for the UI.. (data can't be split up, but the workloads can)
+    - Independent tasks
+    - Shared atabase or resource
+    - Seperate thread for each task
+  - Pipelining
+    - Application processed in phases
+    - Seperate execution for each phase
+  - Google?
+    - Search / PageRank
+      - MapReduce problem w/ multiple computers, with each one having datasets that weren't the exact same
+- Did problems from "The Littlebook of Semaphores"
+
