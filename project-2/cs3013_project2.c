@@ -54,7 +54,7 @@ asmlinkage long new_sys_cs3013_syscall2(unsigned short *target_pid, struct ances
     printk(KERN_INFO "Err?\n"); // print out an error and return an error if it is not
     kfree(kancestry);
     kfree(t);
-    kfree(list);
+    kfree(cur_child);
     return -1;
   } else { //if everything is good print out the pid that is being used
     //printk(KERN_INFO "it's fine, ktarget_pid is %hu\n", ktarget_pid);
@@ -64,8 +64,8 @@ asmlinkage long new_sys_cs3013_syscall2(unsigned short *target_pid, struct ances
     printk(KERN_INFO "pid was not vaild\n");
     kfree(kancestry);
     kfree(t);
-    kfree(list);
-    return -1;
+    kfree(cur_child);
+    return -2;
   }
   printk(KERN_INFO "%hu has the following children:\n", ktarget_pid); //let the user know that the next outputs are children
   int childIndex = 0; //set the index for storing the information to the beggining
@@ -97,12 +97,12 @@ asmlinkage long new_sys_cs3013_syscall2(unsigned short *target_pid, struct ances
   if (copy_to_user(response, kancestry, sizeof (struct ancestry))) { //copy data back to the user space struct
     kfree(kancestry);
     kfree(t);
-    kfree(list);
-    return -1; // err
+    kfree(cur_child);
+    return -3; // err
   }
   kfree(kancestry);
   kfree(t);
-  kfree(list);
+  kfree(cur_child);
   return 0;
 }
 
