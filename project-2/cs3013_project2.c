@@ -45,10 +45,13 @@ void fill_with_ancestor(struct ancestry *anc, struct task_struct *cur, int i) {
 //the function that will replace syscall2 for phase 2
 asmlinkage long new_sys_cs3013_syscall2(unsigned short *target_pid, struct ancestry *response) {
   unsigned short ktarget_pid;
+  int childIndex;
+  int siblingIndex;
+  struct task_struct *cur_sib = kmalloc(sizeof (struct task_struct), GFP_KERNEL);
   struct ancestry *kancestry = kmalloc(sizeof (struct ancestry), GFP_KERNEL); //alocate space for the ancestry we will copy info into and change
   struct task_struct *t = kmalloc(sizeof (struct task_struct), GFP_KERNEL); //allocate space for the struct that will contain all the info we want
   struct list_head *list;
-  struct task_struct *cur_child = kmalloc(sizeof (struct task_struct), GFP_KERNEL); 
+  struct task_struct *cur_child = kmalloc(sizeof (struct task_struct), GFP_KERNEL);
   //printk(KERN_INFO "Who dare invoke me!\n"); //let the user know that the program is being run
   if (copy_from_user(&ktarget_pid, target_pid, sizeof(ktarget_pid)) || copy_from_user(kancestry, response, sizeof(struct ancestry))/* || kill(ktarget_pid, 0) == -1*/) { //check to make sure the input is correct
     printk(KERN_INFO "Err?\n"); // print out an error and return an error if it is not
@@ -68,7 +71,7 @@ asmlinkage long new_sys_cs3013_syscall2(unsigned short *target_pid, struct ances
     return -2;
   }
   printk(KERN_INFO "%hu has the following children:\n", ktarget_pid); //let the user know that the next outputs are children
-  int childIndex = 0; //set the index for storing the information to the beggining
+  childIndex = 0; //set the index for storing the information to the beggining
   list_for_each(list, &t->children) { //for each child
     if (childIndex <= 99) { //if there is still room in the array print it out and add it to the array
       cur_child = list_entry(list, struct task_struct, sibling);
@@ -80,8 +83,7 @@ asmlinkage long new_sys_cs3013_syscall2(unsigned short *target_pid, struct ances
     }
   }
   printk(KERN_INFO "printing siblings:\n"); //let the user know that the next outputs are siblings
-  int siblingIndex = 0; //set the index for stroing the information to the beggining
-  struct task_struct *cur_sib = kmalloc(sizeof (struct task_struct), GFP_KERNEL);
+  siblingIndex = 0; //set the index for stroing the information to the beggining
   list_for_each(list, &t->sibling) { //for each sibling
     if (siblingIndex <= 99) { //if there is still room in the array print it out and add it to the array
       cur_sib = list_entry(list, struct task_struct, sibling);
