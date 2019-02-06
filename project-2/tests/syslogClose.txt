@@ -1,0 +1,2 @@
+[  +0.000087] User 1000 is closing file descriptor: 1
+

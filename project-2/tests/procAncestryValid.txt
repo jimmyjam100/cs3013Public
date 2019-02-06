@@ -1,0 +1,26 @@
+jcharante@pop-os-ubunty:~/Documents/project-2$ ./procAncestry 702
+child pid 858
+child pid 870
+sibling pid 705
+sibling pid 708
+sibling pid 710
+sibling pid 716
+sibling pid 721
+sibling pid 735
+sibling pid 740
+sibling pid 744
+sibling pid 796
+sibling pid 801
+sibling pid 805
+sibling pid 839
+sibling pid 1032
+sibling pid 1047
+sibling pid 1053
+sibling pid 1214
+sibling pid 0
+sibling pid 249
+sibling pid 287
+sibling pid 696
+ancestor pid 1
+ancestor pid 0
+

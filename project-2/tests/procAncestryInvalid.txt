@@ -1,0 +1,2 @@
+jcharante@pop-os-ubunty:~/Documents/project-2$ ./procAncestry 7702
+the pid was not valid
