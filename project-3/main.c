@@ -13,6 +13,53 @@ int pAvgCostume;
 int nAvgArrive;
 int pAvgArrive;
 
+enum kind {Nina, Pirate, Neutral};
+enum kind priority = Neutral;
+
+/*
+ * Struct for stats
+ */
+
+struct node {
+
+};
+
+/*
+ * Linked list struct
+ */
+
+/*
+ * Linked List add node
+ */
+
+/*
+ * Linked List remove node
+ */
+
+/*
+ * Lock for list list
+ */
+
+void *thread(enum kind race) {
+    // get random amount of time that should sleep
+    // upon waking up
+    // while true
+        // acquire enter/leave lock
+            // check if story empty or checkPriority() == race or (checkPriority() == Neutral && everyone in store == race)
+                // enter store
+                // remove self from linked list
+                // release lock
+                // sleep while we get help
+                // acquire lock
+                // write down stats
+                // loop through linked list signaling everyone
+                // release lock
+                // return
+            // else
+                // release lock
+                // sleep and get signaled
+}
+
 
 int main(int argc, char** argv) {
     if (argc != 8 || !( 
@@ -33,7 +80,18 @@ int main(int argc, char** argv) {
     pAvgCostume = atoi(argv[5]);
     nAvgArrive = atoi(argv[6]);
     pAvgArrive = atoi(argv[7]);
-    
+
+    /*
+     * Spawn all threads
+     */
+
+    /*
+     * Wait for all threads to finish
+     */
+
+    /*
+     * Loop through and summarize stats
+     */
     
     printf("Hello, World!\n");
     return 0;
