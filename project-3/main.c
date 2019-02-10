@@ -110,6 +110,23 @@ int delete_node_by_pointer(struct node *node){
     return 0;
 }
 
+int contains_node(struct node *node){
+    if (head == node){
+        return  1;
+    }
+    if (head == NULL){
+        return 0;
+    }
+    struct node *cur_node = head;
+    while(cur_node->next != NULL){
+        if(cur_node->next == node){
+            return 1;
+        }
+        cur_node = cur_node->next;
+    }
+    return 0;
+}
+
 unsigned long long getCurJSEpoch() {
     struct timeval t;
     gettimeofday(&t, NULL);
@@ -199,6 +216,7 @@ double generateCostumingTime(enum kind race) {
  * @return
  */
 void *thread(void *r) {
+    int nextVisit = 0;
     int hasEntered = 0;
     int costumingTeam;
     double costumingTime;
@@ -237,20 +255,48 @@ void *thread(void *r) {
                 }
                 // release lock
                 pthread_mutex_unlock(&door_lock);
+                if(n->next != NULL) {
+                    pthread_cond_signal(n->next->cond);
+                }
                 // sleep while we get help
                 costumingTime = generateCostumingTime(race);
                 usleep(costumingTime * 1000 * 1000);
                 // acquire lock
                 pthread_mutex_lock(&door_lock);
+                if (race == Ninja){
+                    ninjaIn--;
+                }
+                else{
+                    pirateIn--;
+                }
+                team_states[costumingTeam] = Ready;
                 // write down stats
 
                 // loop through linked list signaling everyone
+                if(head != NULL){
+                    pthread_cond_signal(head->cond);
+                }
 
                 // release lock
                 pthread_mutex_unlock(&door_lock);
                 // return / check if should come back
+                if(1) {//drand48() > 0.25 || nextVisit){
+                    if (race == Ninja) {
+                        printf("Ninja: Bye bye!\n");
+                    } else {
+                        printf("Pirate: Bye bye!\n");
+                    }
+                    return 0;
+                }
+                nextVisit = 1;
             // else
             } else {
+                if(!contains_node(n)){
+                    addNode(n);
+                }
+                if(n->next != NULL) {
+                    pthread_cond_signal(n->next->cond);
+                }
                 pthread_cond_wait(&c, &door_lock);
             }
             // release lock
