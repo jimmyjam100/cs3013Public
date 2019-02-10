@@ -24,6 +24,8 @@ int pAvgArrive;
 
 enum kind {Ninja, Pirate, Both, None};
 
+unsigned int revenue;
+
 pthread_mutex_t statistics_lock;
 pthread_mutex_t door_lock; // enter/leave lock & for linked list lock
 
@@ -314,6 +316,13 @@ void *thread(void *r) {
                 printf("%d: %s: about to sleep for %f\n", tid, (race == Ninja) ? "Ninja" : "Pirate", costumingTime);
                 usleep(costumingTime * 1000 * 1000);
                 printf("%d: %s: woke up after costuming\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
+                // adding to revenue stats
+                printf("%d: %s: acquiring statistics lock\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
+                pthread_mutex_lock(&statistics_lock);
+                revenue = revenue + floor(costumingTime);
+                printf("%d: %s: Revenue is now %d\n", tid, (race == Ninja) ? "Ninja" : "Pirate", revenue);
+                printf("%d: %s: releasing statistics lock\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
+                pthread_mutex_unlock(&statistics_lock);
                 // acquire lock
                 printf("%d: %s: getting lock...\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 pthread_mutex_lock(&door_lock);
@@ -341,7 +350,7 @@ void *thread(void *r) {
                 pthread_mutex_unlock(&door_lock);
                 printf("%d: %s: released lock!\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 // return / check if should come back
-                if(1) {//drand48() > 0.25 || nextVisit){
+                if(drand48() > 0.25 || nextVisit) {
                     if (race == Ninja) {
                         printf("%d: Ninja: Bye bye!\n", tid);
                     } else {
@@ -349,6 +358,7 @@ void *thread(void *r) {
                     }
                     return 0;
                 }
+                printf("%d: %s: Going to come back!\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 nextVisit = 1;
             // else
             } else {
@@ -441,5 +451,6 @@ int main(int argc, char** argv) {
      * Loop through and summarize stats
      */
     printf("Hello, World!\n");
+    printf("Revenue: %d", revenue);
     return 0;
 }
