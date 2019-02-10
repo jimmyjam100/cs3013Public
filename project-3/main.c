@@ -210,7 +210,7 @@ double generateCostumingTime(enum kind race) {
  * Struct for stats
  */
 
-void addToIn(enum kind race) {
+void enterStore(enum kind race) {
     if (race == Ninja) {
         ninjaIn++;
     } else {
@@ -260,7 +260,7 @@ void *thread(void *r) {
             if (canEnter() == race || canEnter() == Both) {
                 // enter store
                 hasEntered = 1;
-                addToIn(race);
+                enterStore(race);
                 // get costuming team
                 costumingTeam = getCostumingTeam();
                 // release lock
