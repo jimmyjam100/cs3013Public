@@ -100,6 +100,9 @@ int delete_node_by_pointer(struct node *node){
         return  1;
     }
     struct node *cur_node = head;
+    if (cur_node == NULL) {
+        return 0;
+    }
     while(cur_node->next != NULL){
         if(cur_node->next == node){
             cur_node->next = cur_node->next->next;
