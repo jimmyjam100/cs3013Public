@@ -109,10 +109,21 @@ int delete_node_by_pointer(struct node *node){
     return 0;
 }
 
+unsigned long long getCurJSEpoch() {
+    struct timeval t;
+    gettimeofday(&t, NULL);
+    return (unsigned long long)(t.tv_sec) * 1000 + (unsigned long long)(t.tv_usec) / 1000;
+}
+
 unsigned long long timeElapsed(struct node *n){
     struct timeval t1;
     gettimeofday(&t1, NULL);
 
+    // you might wonder why we're calling it jsEpoch
+    // that's because the normal unix epoch is based with seconds
+    // while epochs in javascript are based in milliseconds
+    // so if we just wrote epoch, I'd probably be wondering if it's seconds or millis
+    // but this way, any web developer will instantly know the units we're talking about
     unsigned long long jsEpocht0 = n->start * 1000 + n->start / 1000;
     unsigned long long jsEpocht1 = (unsigned long long)(t1.tv_sec) * 1000 + (unsigned long long)(t1.tv_usec) / 1000;
     return jsEpocht1 - jsEpocht0;
