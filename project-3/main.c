@@ -210,6 +210,14 @@ double generateCostumingTime(enum kind race) {
  * Struct for stats
  */
 
+void addToIn(enum kind race) {
+    if (race == Ninja) {
+        ninjaIn++;
+    } else {
+        pirateIn++;
+    }
+}
+
 /**
  *
  * @param race of type enum kind
@@ -241,11 +249,7 @@ void *thread(void *r) {
             if (canEnter() == race || canEnter() == Both) {
                 // enter store
                 hasEntered = 1;
-                if (race == Ninja) {
-                    ninjaIn++;
-                } else {
-                    pirateIn++;
-                }
+                addToIn(race);
                 // get costuming team
                 for (costumingTeam = 0; costumingTeam < teams; costumingTeam++) {
                     if (team_states[costumingTeam] == Ready) {
@@ -302,7 +306,6 @@ void *thread(void *r) {
             // release lock
             // sleep and get signaled
         }
-
         return 0;
     }
 }
