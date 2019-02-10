@@ -168,7 +168,7 @@ unsigned long long timeElapsed(struct node *n){
     // while epochs in javascript are based in milliseconds
     // so if we just wrote epoch, I'd probably be wondering if it's seconds or millis
     // but this way, any web developer will instantly know the units we're talking about
-    unsigned long long jsEpocht0 = n->start * 1000 + n->start / 1000;
+    unsigned long long jsEpocht0 = n->start;//n->start * 1000 + n->start / 1000;
     unsigned long long jsEpocht1 = (unsigned long long)(t1.tv_sec) * 1000 + (unsigned long long)(t1.tv_usec) / 1000;
     return jsEpocht1 - jsEpocht0;
 }
@@ -345,26 +345,27 @@ void *thread(void *r) {
                 // adding to revenue stats
                 printf("%d: %s: acquiring statistics lock\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 pthread_mutex_lock(&statistics_lock);
-                revenue = revenue + ceil(costumingTime);
-                
-                stats->goldOwed = stats->goldOwed + ceil(costumingTime);
+                if ((waitTime/1000)/1000 < 30){
+                    revenue = revenue + ceil(costumingTime);
+                    printf("%d: %s: Revenue is now %d\n", tid, (race == Ninja) ? "Ninja" : "Pirate", revenue);
+                    stats->goldOwed = stats->goldOwed + ceil(costumingTime);
+                }
                 stats->visits = stats->visits + 1;
                 struct visit_stats *new = malloc(sizeof(struct visit_stats));
                 new->visitTime = costumingTime;
                 new->waitTime = waitTime;
-                 
+                new->next = NULL;
+
                 if (stats->head == NULL){
                     stats->head = new;
-                }
-                else {
+                } else {
                     struct visit_stats *cur = stats->head;
                     while(cur->next != NULL){
                         cur = cur->next;
                     }
                     cur->next = new;
                 }
-               
-                printf("%d: %s: Revenue is now %d\n", tid, (race == Ninja) ? "Ninja" : "Pirate", revenue);
+
                 printf("%d: %s: releasing statistics lock\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 pthread_mutex_unlock(&statistics_lock);
                 // acquire lock
