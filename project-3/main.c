@@ -40,6 +40,8 @@ int pirateIn = 0;
 
 struct thread_stats {
 
+    
+
 };
 
 struct node {
@@ -48,6 +50,24 @@ struct node {
     unsigned long long start;
     struct node *next;
 };
+
+struct visit_stats {
+    unsigned long long visitTime;
+    unsigned long long waitTime;
+    struct visit_stats *next;
+    
+};
+
+struct person_stats {
+    int visits;
+    int goldOwed;
+    enum kind race;
+    struct visit_stats *head;
+};
+
+struct person_stats **persons;
+
+
 
 struct node *head = NULL;
 
@@ -267,6 +287,9 @@ void releaseCostumingTeam(int costumingTeam) {
  * @return
  */
 void *thread(void *r) {
+    struct person_stats *stats = malloc(sizeof(struct person_stats));
+    stats->visits = 0;
+    stats->goldOwed = 0;
     int nextVisit = 0;
     int hasEntered = 0;
     int costumingTeam;
@@ -276,6 +299,7 @@ void *thread(void *r) {
     struct node *n;
     pthread_cond_t c = PTHREAD_COND_INITIALIZER;
     enum kind race = (enum kind) r;
+    stats->race = race;
     // while true
     while (1) {
         // get random amount of time that should sleep
@@ -293,6 +317,7 @@ void *thread(void *r) {
             // check if story empty or checkPriority() == race or (checkPriority() == Neutral && everyone in store == race)
             printf("%d: %s: gonna check if can enter\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
             if (canEnter() == race || canEnter() == Both) {
+                unsigned long long waitTime = timeElapsed(n);
                 printf("%d: %s: I can enter!\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 // enter store
                 hasEntered = 1;
@@ -320,6 +345,24 @@ void *thread(void *r) {
                 printf("%d: %s: acquiring statistics lock\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 pthread_mutex_lock(&statistics_lock);
                 revenue = revenue + floor(costumingTime);
+                
+                stats->goldOwed = stats->goldOwed + floor(costumingTime);
+                stats->visits = stats->visits + 1;
+                struct visit_stats *new = malloc(sizeof(struct visit_stats));
+                new->visitTime = costumingTime;
+                new->waitTime = waitTime;
+                 
+                if (stats->head == NULL){
+                    stats->head = new;
+                }
+                else {
+                    struct visit_stats *cur = stats->head;
+                    while(cur->next != NULL){
+                        cur = cur->next;
+                    }
+                    cur->next = new;
+                }
+               
                 printf("%d: %s: Revenue is now %d\n", tid, (race == Ninja) ? "Ninja" : "Pirate", revenue);
                 printf("%d: %s: releasing statistics lock\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 pthread_mutex_unlock(&statistics_lock);
@@ -351,6 +394,13 @@ void *thread(void *r) {
                 printf("%d: %s: released lock!\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 // return / check if should come back
                 if(drand48() > 0.25 || nextVisit) {
+                    pthread_mutex_lock(&statistics_lock);
+                    int ittorator = 0;
+                    while(persons[ittorator] != NULL){
+                        ittorator++;
+                    }
+                    persons[ittorator] = stats;
+                    pthread_mutex_unlock(&statistics_lock);
                     if (race == Ninja) {
                         printf("%d: Ninja: Bye bye!\n", tid);
                     } else {
@@ -420,6 +470,8 @@ int main(int argc, char** argv) {
     for (i = 0; i < teams; i++) {
         team_states[i] = Ready;
     }
+
+    persons = malloc(sizeof (struct persons_stats*)*(ninjas + pirates));
 
     /*
      * Spawn all threads
