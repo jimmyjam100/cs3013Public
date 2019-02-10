@@ -24,6 +24,7 @@ int pAvgArrive;
 enum kind {Ninja, Pirate, Both, None};
 
 pthread_mutex_t statistics_lock;
+pthread_mutex_t door_lock; // enter/leave lock & for linked list lock
 
 pthread_t *tids;
 
@@ -198,26 +199,66 @@ double generateCostumingTime(enum kind race) {
  * @return
  */
 void *thread(void *r) {
+    int hasEntered = 0;
+    int costumingTeam;
+    double costumingTime;
+    struct node *n;
+    pthread_cond_t c = PTHREAD_COND_INITIALIZER;
     enum kind race = (enum kind) r;
-    usleep(generateTimeBeforeArrival(race) * 1000 * 1000);
-    return 0;
-    // get random amount of time that should sleep
-    // upon waking up
     // while true
+    while (1) {
+        // get random amount of time that should sleep
+        usleep(generateTimeBeforeArrival(race) * 1000 * 1000);
+        // upon waking up
         // acquire enter/leave lock
+        pthread_mutex_lock(&door_lock);
+        // create node
+        n = malloc(sizeof(struct node));
+        n->start = getCurJSEpoch();
+        n->next = NULL;
+        n->type = race;
+        n->cond = &c;
+        while(hasEntered == 0){
             // check if story empty or checkPriority() == race or (checkPriority() == Neutral && everyone in store == race)
+            if (canEnter() == race || canEnter() == Both) {
                 // enter store
-                // remove self from linked list
+                hasEntered = 1;
+                if (race == Ninja) {
+                    ninjaIn++;
+                } else {
+                    pirateIn++;
+                }
+                // get costuming team
+                for (costumingTeam = 0; costumingTeam < teams; costumingTeam++) {
+                    if (team_states[costumingTeam] == Ready) {
+                        team_states[costumingTeam] = Busy;
+                        break;
+                    }
+                }
                 // release lock
+                pthread_mutex_unlock(&door_lock);
                 // sleep while we get help
+                costumingTime = generateCostumingTime(race);
+                usleep(costumingTime * 1000 * 1000);
                 // acquire lock
+                pthread_mutex_lock(&door_lock);
                 // write down stats
+
                 // loop through linked list signaling everyone
+
                 // release lock
-                // return
+                pthread_mutex_unlock(&door_lock);
+                // return / check if should come back
             // else
-                // release lock
-                // sleep and get signaled
+            } else {
+                pthread_cond_wait(&c, &door_lock);
+            }
+            // release lock
+            // sleep and get signaled
+        }
+
+        return 0;
+    }
 }
 
 
