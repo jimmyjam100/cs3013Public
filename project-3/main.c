@@ -2,8 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
+#include <pthread.h>
+#include <assert.h>
 
 #define TIMEMULT 1.2
+
 
 int teams;
 
@@ -18,8 +21,20 @@ int pAvgArrive;
 
 enum kind {Ninja, Pirate, Both, None};
 
+pthread_mutex_t statistics_lock;
+
+pthread_t *tids;
+
+// Locked by enter / leave lock
+enum team_status {Ready, Busy};
+enum team_status *team_states;
+
 int ninjaIn = 0;
 int pirateIn = 0;
+
+struct thread_stats {
+
+};
 
 struct node {
     enum kind type;
@@ -140,7 +155,13 @@ enum kind canEnter(){
  * Struct for stats
  */
 
-void *thread(enum kind race) {
+/**
+ *
+ * @param race of type enum kind
+ * @return
+ */
+void *thread(void *r) {
+    enum kind race = r;
     // get random amount of time that should sleep
     // upon waking up
     // while true
@@ -182,17 +203,50 @@ int main(int argc, char** argv) {
     pAvgArrive = atoi(argv[7]);
 
     /*
+     * Initialization
+     */
+    int i;
+    assert(pthread_mutex_init(&statistics_lock, NULL) == 0);
+    tids = malloc(sizeof (pthread_t) * (ninjas + pirates));
+    for (i = 0; i < (ninjas + pirates); i++) {
+        tids[i] = 0;
+    }
+    // Initialize team states as Ready
+    team_states = malloc(sizeof (enum team_status) * teams);
+    for (i = 0; i < teams; i++) {
+        team_states[i] = Ready;
+    }
+
+    /*
      * Spawn all threads
      */
+    int status;
+    for (i = 0; i < ninjas; i++) {
+        status = pthread_create(&tids[i], NULL, thread, (void *) Ninja);
+        if (status != 0) {
+            printf("Error Creating PThread\n");
+        }
+    }
+    int j;
+    for (j = 0; j < pirates; j++) {
+        status = pthread_create(&tids[i + j], NULL, thread, (void *) Pirate);
+        if (status != 0) {
+            printf("Error Creating PThread\n");
+        }
+    }
 
     /*
      * Wait for all threads to finish
      */
+    for (i = 0; i < (ninjas + pirates); i++) {
+        if (tids[i] != 0) {
+            pthread_join(tids[i], NULL);
+        }
+    }
 
     /*
      * Loop through and summarize stats
      */
-    
     printf("Hello, World!\n");
     return 0;
 }

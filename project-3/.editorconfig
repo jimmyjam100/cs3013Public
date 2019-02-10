@@ -1,0 +1,8 @@
+root = true
+
+[Makefile]
+indent_style = tab
+
+[main.c]
+indent_style = spaces
+indent_size = 4
