@@ -162,6 +162,12 @@ enum kind canEnter(){
  */
 void *thread(void *r) {
     enum kind race = (enum kind) r;
+    if (race == Ninja) {
+        printf("I'm a ninja\n");
+    } else {
+        printf("I'm a pirate\n");
+    }
+    return 0;
     // get random amount of time that should sleep
     // upon waking up
     // while true
