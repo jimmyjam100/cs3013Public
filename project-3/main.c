@@ -344,9 +344,11 @@ void *thread(void *r) {
                 // adding to revenue stats
                 printf("%d: %s: acquiring statistics lock\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 pthread_mutex_lock(&statistics_lock);
-                revenue = revenue + floor(costumingTime);
-                
-                stats->goldOwed = stats->goldOwed + floor(costumingTime);
+
+                if ((waitTime/1000)/1000 < 30){
+                    revenue = revenue + floor(costumingTime);
+                    stats->goldOwed = stats->goldOwed + floor(costumingTime);
+                }
                 stats->visits = stats->visits + 1;
                 struct visit_stats *new = malloc(sizeof(struct visit_stats));
                 new->visitTime = costumingTime;
