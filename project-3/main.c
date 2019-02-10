@@ -4,6 +4,8 @@
 #include <sys/time.h>
 #include <pthread.h>
 #include <assert.h>
+#include <math.h>
+#include <zconf.h>
 
 #define TIMEMULT 1.2
 
@@ -151,6 +153,30 @@ enum kind canEnter(){
     return Pirate;
 }
 
+// returns seconds of time as a double
+double generateTimeBeforeArrival(enum kind race) {
+    double a = drand48();
+    double b = drand48();
+    double z = sqrt(-2 * log(a)) * cos(2 * M_PI * b); // Box-Muller transform
+    if (race == Ninja) {
+        return z * 2 * nAvgArrive;
+    } else {
+        return z * 2 * pAvgArrive;
+    }
+}
+
+// returns seconds of time as a double
+double generateCostumingTime(enum kind race) {
+    double a = drand48();
+    double b = drand48();
+    double z = sqrt(-2 * log(a)) * cos(2 * M_PI * b); // Box-Muller transform
+    if (race == Ninja) {
+        return z * 2 * nAvgCostume;
+    } else {
+        return z * 2 * pAvgCostume;
+    }
+}
+
 /*
  * Struct for stats
  */
@@ -162,11 +188,7 @@ enum kind canEnter(){
  */
 void *thread(void *r) {
     enum kind race = (enum kind) r;
-    if (race == Ninja) {
-        printf("I'm a ninja\n");
-    } else {
-        printf("I'm a pirate\n");
-    }
+    usleep(generateTimeBeforeArrival(race) * 1000 * 1000);
     return 0;
     // get random amount of time that should sleep
     // upon waking up
