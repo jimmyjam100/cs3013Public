@@ -60,7 +60,7 @@ struct node {
  * @return
  */
 void *thread(void *r) {
-    enum kind race = r;
+    enum kind race = (enum kind) r;
     // get random amount of time that should sleep
     // upon waking up
     // while true
@@ -82,7 +82,9 @@ void *thread(void *r) {
 
 
 int main(int argc, char** argv) {
-    if (argc != 8 || !( 
+    int i;
+    int j;
+    if (argc != 8 || !(
        (atoi(argv[1]) >= 2 && atoi(argv[1]) <= 4) && 
        (atoi(argv[2]) >= 10 && atoi(argv[2]) <= 50) && 
        (atoi(argv[3]) >= 10 && atoi(argv[3]) <= 50) &&
@@ -104,7 +106,6 @@ int main(int argc, char** argv) {
     /*
      * Initialization
      */
-    int i;
     assert(pthread_mutex_init(&statistics_lock, NULL) == 0);
     tids = malloc(sizeof (pthread_t) * (ninjas + pirates));
     for (i = 0; i < (ninjas + pirates); i++) {
@@ -126,7 +127,6 @@ int main(int argc, char** argv) {
             printf("Error Creating PThread\n");
         }
     }
-    int j;
     for (j = 0; j < pirates; j++) {
         status = pthread_create(&tids[i + j], NULL, thread, (void *) Pirate);
         if (status != 0) {
