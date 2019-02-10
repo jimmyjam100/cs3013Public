@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <pthread.h>
+#define MAX_THREADS 100
 
 int teams;
 
@@ -14,7 +15,7 @@ int pAvgCostume;
 int nAvgArrive;
 int pAvgArrive;
 
-pthread_t tids[100];
+pthread_t tids[MAX_THREADS];
 
 enum kind {Ninja, Pirate, Neutral};
 enum kind priority = Neutral;
@@ -112,7 +113,7 @@ int main(int argc, char** argv) {
     /*
      * Wait for all threads to finish
      */
-    for (i = 0; i < 100; i++) {
+    for (i = 0; i < MAX_THREADS; i++) {
         if (tids[i] != 0) {
             pthread_join(tids[i], NULL);
         }
