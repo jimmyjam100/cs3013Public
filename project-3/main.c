@@ -302,6 +302,7 @@ void *thread(void *r) {
     stats->race = race;
     // while true
     while (1) {
+        hasEntered = 0;
         // get random amount of time that should sleep
         usleep(generateTimeBeforeArrival(race) * 1000 * 1000);
         // upon waking up
