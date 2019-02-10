@@ -218,6 +218,15 @@ void enterStore(enum kind race) {
     }
 }
 
+void leaveStore(enum kind race) {
+    if (race == Ninja){
+        ninjaIn--;
+    }
+    else{
+        pirateIn--;
+    }
+}
+
 int getCostumingTeam() {
     int costumingTeam;
     for (costumingTeam = 0; costumingTeam < teams; costumingTeam++) {
@@ -227,6 +236,10 @@ int getCostumingTeam() {
         }
     }
     return costumingTeam;
+}
+
+void releaseCostumingTeam(int costumingTeam) {
+    team_states[costumingTeam] = Ready;
 }
 
 /**
@@ -273,13 +286,8 @@ void *thread(void *r) {
                 usleep(costumingTime * 1000 * 1000);
                 // acquire lock
                 pthread_mutex_lock(&door_lock);
-                if (race == Ninja){
-                    ninjaIn--;
-                }
-                else{
-                    pirateIn--;
-                }
-                team_states[costumingTeam] = Ready;
+                leaveStore(race);
+                releaseCostumingTeam(costumingTeam);
                 // write down stats
 
                 // loop through linked list signaling everyone
