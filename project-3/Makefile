@@ -1,2 +1,2 @@
 make:
-    gcc main.c pvn
+	gcc -pthread main.c pvn
