@@ -14,7 +14,9 @@ int pAvgCostume;
 int nAvgArrive;
 int pAvgArrive;
 
-enum kind {Nina, Pirate, Neutral};
+pthread_t tids[100];
+
+enum kind {Ninja, Pirate, Neutral};
 enum kind priority = Neutral;
 
 /*
@@ -41,7 +43,13 @@ struct node {
  * Lock for list list
  */
 
-void *thread(enum kind race) {
+/**
+ *
+ * @param race of type enum kind
+ * @return
+ */
+void *thread(void *r) {
+    enum kind race = r;
     // get random amount of time that should sleep
     // upon waking up
     // while true
@@ -85,10 +93,30 @@ int main(int argc, char** argv) {
     /*
      * Spawn all threads
      */
+    int i;
+    int status;
+    for (i = 0; i < ninjas; i++) {
+        status = pthread_create(&tids[i], NULL, thread, (void *) Ninja);
+        if (status != 0) {
+            printf("Error Creating PThread\n");
+        }
+    }
+    int j;
+    for (j = 0; j < pirates; j++) {
+        status = pthread_create(&tids[i + j], NULL, thread, (void *) Pirate);
+        if (status != 0) {
+            printf("Error Creating PThread\n");
+        }
+    }
 
     /*
      * Wait for all threads to finish
      */
+    for (i = 0; i < 100; i++) {
+        if (tids[i] != 0) {
+            pthread_join(tids[i], NULL);
+        }
+    }
 
     /*
      * Loop through and summarize stats
