@@ -321,6 +321,9 @@ void *thread(void *r) {
                 releaseCostumingTeam(costumingTeam);
                 printf("%d: %s: released costuming team\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 // write down stats
+                printf("%d: %s: removing self from list\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
+                delete_node_by_pointer(n);
+                printf("%d: %s: removed!\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
 
                 // loop through linked list signaling everyone
                 printf("%d: %s: checking if head exists\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
