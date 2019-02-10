@@ -218,6 +218,17 @@ void addToIn(enum kind race) {
     }
 }
 
+int getCostumingTeam() {
+    int costumingTeam;
+    for (costumingTeam = 0; costumingTeam < teams; costumingTeam++) {
+        if (team_states[costumingTeam] == Ready) {
+            team_states[costumingTeam] = Busy;
+            break;
+        }
+    }
+    return costumingTeam;
+}
+
 /**
  *
  * @param race of type enum kind
@@ -251,12 +262,7 @@ void *thread(void *r) {
                 hasEntered = 1;
                 addToIn(race);
                 // get costuming team
-                for (costumingTeam = 0; costumingTeam < teams; costumingTeam++) {
-                    if (team_states[costumingTeam] == Ready) {
-                        team_states[costumingTeam] = Busy;
-                        break;
-                    }
-                }
+                costumingTeam = getCostumingTeam();
                 // release lock
                 pthread_mutex_unlock(&door_lock);
                 if(n->next != NULL) {
