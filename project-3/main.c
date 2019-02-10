@@ -19,6 +19,10 @@ pthread_mutex_t statistics_lock;
 
 pthread_t *tids;
 
+// Locked by enter / leave lock
+enum team_status {Ready, Busy};
+enum team_status *team_states;
+
 enum kind {Ninja, Pirate, Neutral};
 enum kind priority = Neutral;
 
@@ -100,13 +104,21 @@ int main(int argc, char** argv) {
     /*
      * Initialization
      */
+    int i;
     assert(pthread_mutex_init(&statistics_lock, NULL) == 0);
     tids = malloc(sizeof (pthread_t) * (ninjas + pirates));
+    for (i = 0; i < (ninjas + pirates); i++) {
+        tids[i] = 0;
+    }
+    // Initialize team states as Ready
+    team_states = malloc(sizeof (enum team_status) * teams);
+    for (i = 0; i < teams; i++) {
+        team_states[i] = Ready;
+    }
 
     /*
      * Spawn all threads
      */
-    int i;
     int status;
     for (i = 0; i < ninjas; i++) {
         status = pthread_create(&tids[i], NULL, thread, (void *) Ninja);
