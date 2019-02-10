@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <pthread.h>
-#define MAX_THREADS 100
+#include <assert.h>
 
 int teams;
 
@@ -15,7 +15,9 @@ int pAvgCostume;
 int nAvgArrive;
 int pAvgArrive;
 
-pthread_t tids[MAX_THREADS];
+pthread_mutex_t statistics_lock;
+
+pthread_t *tids;
 
 enum kind {Ninja, Pirate, Neutral};
 enum kind priority = Neutral;
@@ -23,6 +25,10 @@ enum kind priority = Neutral;
 /*
  * Struct for stats
  */
+
+struct thread_stats {
+
+};
 
 struct node {
 
@@ -92,6 +98,12 @@ int main(int argc, char** argv) {
     pAvgArrive = atoi(argv[7]);
 
     /*
+     * Initialization
+     */
+    assert(pthread_mutex_init(&statistics_lock, NULL) == 0);
+    tids = malloc(sizeof (pthread_t) * (ninjas + pirates));
+
+    /*
      * Spawn all threads
      */
     int i;
@@ -113,7 +125,7 @@ int main(int argc, char** argv) {
     /*
      * Wait for all threads to finish
      */
-    for (i = 0; i < MAX_THREADS; i++) {
+    for (i = 0; i < (ninjas + pirates); i++) {
         if (tids[i] != 0) {
             pthread_join(tids[i], NULL);
         }
