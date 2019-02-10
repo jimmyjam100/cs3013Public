@@ -35,6 +35,8 @@ pthread_t *tids;
 enum team_status {Ready, Busy};
 enum team_status *team_states;
 
+unsigned long long *time_teams_busy_for;
+
 int ninjaIn = 0;
 int pirateIn = 0;
 
@@ -345,6 +347,7 @@ void *thread(void *r) {
                 // adding to revenue stats
                 printf("%d: %s: acquiring statistics lock\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 pthread_mutex_lock(&statistics_lock);
+                time_teams_busy_for[costumingTeam]+=costumingTime*1000*1000;
                 if ((waitTime/1000)/1000 < 30){
                     revenue = revenue + ceil(costumingTime);
                     printf("%d: %s: Revenue is now %d\n", tid, (race == Ninja) ? "Ninja" : "Pirate", revenue);
@@ -368,7 +371,7 @@ void *thread(void *r) {
 
                 printf("%d: %s: releasing statistics lock\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 pthread_mutex_unlock(&statistics_lock);
-                // acquire lock
+                // acquire locklock
                 printf("%d: %s: getting lock...\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 pthread_mutex_lock(&door_lock);
                 printf("%d: %s: got the lock!\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
@@ -473,6 +476,10 @@ int main(int argc, char** argv) {
     }
 
     persons = malloc(sizeof (struct persons_stats*)*(ninjas + pirates));
+    time_teams_busy_for = malloc(sizeof(unsigned long long)*teams);
+    for (i = 0; i < teams; i++){
+        time_teams_busy_for[i] = 0;
+    }
 
     /*
      * Spawn all threads
@@ -505,5 +512,18 @@ int main(int argc, char** argv) {
      */
     printf("Hello, World!\n");
     printf("Revenue: %d", revenue);
+    /*
+    struct person_stats *cur_person;
+    for (i = 0; i < (ninjas + pirates); i++) {
+        cur_person = persons[i];
+        printf("%s: visited %d times, for ", (cur_person->race == Ninja) ? "Ninja" : "Pirate", cur_person->visits);
+        struct visit_stats *cur_visit = cur_person->head;
+        do {
+            printf("%lld", cur_visit->visitTime);
+            cur_visit = cur_visit->next;
+        } while (cur_visit != NULL);
+        printf("\n");
+    }
+     */
     return 0;
 }
