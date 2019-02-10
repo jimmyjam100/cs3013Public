@@ -6,6 +6,7 @@
 #include <assert.h>
 #include <math.h>
 #include <zconf.h>
+#include <syscall.h>
 
 #define TIMEMULT 1.2
 
@@ -184,26 +185,39 @@ enum kind canEnter(){
 
 // returns seconds of time as a double
 double generateTimeBeforeArrival(enum kind race) {
+    double ret = 0;
     double a = drand48();
     double b = drand48();
     double z = sqrt(-2 * log(a)) * cos(2 * M_PI * b); // Box-Muller transform
     if (race == Ninja) {
-        return z * 2 * nAvgArrive;
+        ret = z*sqrt(nAvgCostume) + nAvgArrive;
     } else {
-        return z * 2 * pAvgArrive;
+        ret = z*sqrt(pAvgCostume) + pAvgArrive;
     }
+    if (ret < 0){
+        return 0;
+    }
+    return ret;
 }
 
 // returns seconds of time as a double
 double generateCostumingTime(enum kind race) {
+    double ret = 0;
     double a = drand48();
+    //printf("generated a a val of %f\n", a);
     double b = drand48();
+    //printf("generated a b val of %f\n", b);
     double z = sqrt(-2 * log(a)) * cos(2 * M_PI * b); // Box-Muller transform
+    //printf("generated a z val of: %f\n", z);
     if (race == Ninja) {
-        return z * 2 * nAvgCostume;
+        ret = z*sqrt(nAvgCostume) + nAvgCostume;
     } else {
-        return z * 2 * pAvgCostume;
+        ret = z*sqrt(pAvgCostume) + pAvgCostume;
     }
+    if (ret < 0){
+        return 0;
+    }
+    return ret;
 }
 
 /*
@@ -251,6 +265,8 @@ void *thread(void *r) {
     int nextVisit = 0;
     int hasEntered = 0;
     int costumingTeam;
+    pid_t tid = syscall(SYS_gettid);
+    printf("%d: Spawned\n", tid);
     double costumingTime;
     struct node *n;
     pthread_cond_t c = PTHREAD_COND_INITIALIZER;
@@ -270,52 +286,80 @@ void *thread(void *r) {
         n->cond = &c;
         while(hasEntered == 0){
             // check if story empty or checkPriority() == race or (checkPriority() == Neutral && everyone in store == race)
+            printf("%d: %s: gonna check if can enter\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
             if (canEnter() == race || canEnter() == Both) {
+                printf("%d: %s: I can enter!\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 // enter store
                 hasEntered = 1;
                 enterStore(race);
+                printf("%d: %s: entered store!\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 // get costuming team
+                printf("%d: %s: getting costuming team\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 costumingTeam = getCostumingTeam();
+                printf("%d: %s: got costuming team\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 // release lock
+                printf("%d: %s: releasing lock\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 pthread_mutex_unlock(&door_lock);
+                printf("%d: %s: released lock\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 if(n->next != NULL) {
+                    printf("%d: %s: signaling\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                     pthread_cond_signal(n->next->cond);
+                    printf("%d: %s: done signaling\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 }
                 // sleep while we get help
                 costumingTime = generateCostumingTime(race);
+                printf("%d: %s: about to sleep for %f\n", tid, (race == Ninja) ? "Ninja" : "Pirate", costumingTime);
                 usleep(costumingTime * 1000 * 1000);
+                printf("%d: %s: woke up after costuming\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 // acquire lock
+                printf("%d: %s: getting lock...\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 pthread_mutex_lock(&door_lock);
+                printf("%d: %s: got the lock!\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
+                printf("%d: %s: leaving store\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 leaveStore(race);
+                printf("%d: %s: left the store\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 releaseCostumingTeam(costumingTeam);
+                printf("%d: %s: released costuming team\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 // write down stats
 
                 // loop through linked list signaling everyone
+                printf("%d: %s: checking if head exists\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 if(head != NULL){
+                    printf("%d: %s: head exists.. gonna signal\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                     pthread_cond_signal(head->cond);
+                    printf("%d: %s: head exists.. done signaling\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 }
 
                 // release lock
+                printf("%d: %s: releasing lock...\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 pthread_mutex_unlock(&door_lock);
+                printf("%d: %s: released lock!\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 // return / check if should come back
                 if(1) {//drand48() > 0.25 || nextVisit){
                     if (race == Ninja) {
-                        printf("Ninja: Bye bye!\n");
+                        printf("%d: Ninja: Bye bye!\n", tid);
                     } else {
-                        printf("Pirate: Bye bye!\n");
+                        printf("%d: Pirate: Bye bye!\n", tid);
                     }
                     return 0;
                 }
                 nextVisit = 1;
             // else
             } else {
+                printf("%d: %s: I can't enter :(\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 if(!contains_node(n)){
+                    printf("%d: %s: added my node to list\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                     addNode(n);
                 }
+
                 if(n->next != NULL) {
+                    printf("%d: %s: signaling next\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                     pthread_cond_signal(n->next->cond);
+                    printf("%d: %s: done signaling next\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 }
+                printf("%d: %s: waiting to be signaled\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 pthread_cond_wait(&c, &door_lock);
+                printf("%d: %s: got signaled!\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
             }
             // release lock
             // sleep and get signaled
