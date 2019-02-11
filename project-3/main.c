@@ -158,7 +158,7 @@ int contains_node(struct node *node){
 unsigned long long getCurJSEpoch() {
     struct timeval t;
     gettimeofday(&t, NULL);
-    return (unsigned long long)(t.tv_sec) * 1000 + (unsigned long long)(t.tv_usec) / 1000;
+    return ((unsigned long long)(t.tv_sec) * 1000 + (unsigned long long)(t.tv_usec) / 1000);
 }
 
 unsigned long long timeElapsed(struct node *n){
@@ -307,15 +307,16 @@ void *thread(void *r) {
         hasEntered = 0;
         // get random amount of time that should sleep
         usleep(generateTimeBeforeArrival(race) * 1000 * 1000);
-        // upon waking up
-        // acquire enter/leave lock
-        pthread_mutex_lock(&door_lock);
+
         // create node
         n = malloc(sizeof(struct node));
         n->start = getCurJSEpoch();
         n->next = NULL;
         n->type = race;
         n->cond = &c;
+        // upon waking up
+        // acquire enter/leave lock
+        pthread_mutex_lock(&door_lock);
         while(hasEntered == 0){
             // check if story empty or checkPriority() == race or (checkPriority() == Neutral && everyone in store == race)
             printf("%d: %s: gonna check if can enter\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
@@ -348,7 +349,7 @@ void *thread(void *r) {
                 printf("%d: %s: acquiring statistics lock\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 pthread_mutex_lock(&statistics_lock);
                 time_teams_busy_for[costumingTeam]+=costumingTime*1000*1000;
-                if ((waitTime/1000)/1000 < 30){
+                if ((waitTime/1000) < 30){
                     revenue = revenue + ceil(costumingTime);
                     printf("%d: %s: Revenue is now %d\n", tid, (race == Ninja) ? "Ninja" : "Pirate", revenue);
                     stats->goldOwed = stats->goldOwed + ceil(costumingTime);
@@ -514,10 +515,10 @@ int main(int argc, char** argv) {
     /*
      * Loop through and summarize stats
      */
-    printf("Hello, World!\n");
-    printf("Revenue: %d", revenue);
     int ninjaCounter = 0;
     int pirateCounter = 0;
+    int numOfVisits = 0;
+    unsigned long long totalWaitTime = 0;
     for(i = 0; i < pirates + ninjas; i++){
         if(persons[i]->race == Ninja){
             ninjaCounter++;
@@ -532,9 +533,11 @@ int main(int argc, char** argv) {
         int visitCounter = 0;
         struct visit_stats *cur_visit = persons[i]->head;
         while(cur_visit != NULL){
+            numOfVisits++;
             visitCounter++;
+            totalWaitTime += cur_visit->waitTime;
             printf("\tvisit #%d:\n", visitCounter);
-            printf("\t\thow long the wait was: %llu secs\n", (((cur_visit->waitTime)*60)/1000)/1000);
+            printf("\t\thow long the wait was: %llu secs\n", (((cur_visit->waitTime)*60)/1000));
             printf("\t\thow long the visit was: %llu secs\n",  (cur_visit->visitTime)*60);
             cur_visit = cur_visit->next;
         }
@@ -544,8 +547,14 @@ int main(int argc, char** argv) {
         printf("\ttime spent busy: %llu secs\n", ((time_teams_busy_for[i]*60)/1000)/1000);
         printf("\ttime spent idle: %llu secs\n", (totalTime*60 - ((time_teams_busy_for[i]*60)/1000)/1000));
     }
-
+    int days = ceil(((double)totalTime)/(60*24));
+    int costs = days*5*teams;
+    printf("spent a total of %d gold coins to pay for the %d teams over a course of %d days\n", costs, teams, days);
     printf("total ammount of gold earned: %d\n", revenue);
+    double avgQueue = ((((double)totalWaitTime)/1000))/((double)totalTime);
+    printf("average queue length: %f\n", avgQueue);
+    printf("gold per visit: %d\n", revenue/numOfVisits);
+    printf("total profits: %d\n", revenue-costs);
 
 
     /*
