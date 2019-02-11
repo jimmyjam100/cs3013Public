@@ -464,6 +464,8 @@ int main(int argc, char** argv) {
     /*
      * Initialization
      */
+    time_t startTime;
+    startTime = time(NULL);
     assert(pthread_mutex_init(&statistics_lock, NULL) == 0);
     tids = malloc(sizeof (pthread_t) * (ninjas + pirates));
     for (i = 0; i < (ninjas + pirates); i++) {
@@ -506,12 +508,46 @@ int main(int argc, char** argv) {
             pthread_join(tids[i], NULL);
         }
     }
+    time_t endTime = time(NULL);
+    long totalTime = endTime - startTime;
 
     /*
      * Loop through and summarize stats
      */
     printf("Hello, World!\n");
     printf("Revenue: %d", revenue);
+    int ninjaCounter = 0;
+    int pirateCounter = 0;
+    for(i = 0; i < pirates + ninjas; i++){
+        if(persons[i]->race == Ninja){
+            ninjaCounter++;
+            printf("\n\nnow printing stats for Ninja #%d\n", ninjaCounter);
+        }
+        else {
+            pirateCounter++;
+            printf("\n\nnow printing stats for Pirate #%d\n", pirateCounter);
+        }
+        printf("\tgold owed: %d\n", persons[i]->goldOwed);
+        printf("\tnumber of visits: %d\n", persons[i]->visits);
+        int visitCounter = 0;
+        struct visit_stats *cur_visit = persons[i]->head;
+        while(cur_visit != NULL){
+            visitCounter++;
+            printf("\tvisit #%d:\n", visitCounter);
+            printf("\t\thow long the wait was: %llu secs\n", (((cur_visit->waitTime)*60)/1000)/1000);
+            printf("\t\thow long the visit was: %llu secs\n",  (cur_visit->visitTime)*60);
+            cur_visit = cur_visit->next;
+        }
+    }
+    for(i = 0; i < teams; i++){
+        printf("Team #%d\n", i+1);
+        printf("\ttime spent busy: %llu secs\n", ((time_teams_busy_for[i]*60)/1000)/1000);
+        printf("\ttime spent idle: %llu secs\n", (totalTime*60 - ((time_teams_busy_for[i]*60)/1000)/1000));
+    }
+
+    printf("total ammount of gold earned: %d\n", revenue);
+
+
     /*
     struct person_stats *cur_person;
     for (i = 0; i < (ninjas + pirates); i++) {
