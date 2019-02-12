@@ -8,7 +8,7 @@
 #include <zconf.h>
 #include <syscall.h>
 
-#define TIMEMULT 1.2
+#define TIMEMULT 1.5
 
 
 int teams;
