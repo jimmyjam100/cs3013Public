@@ -218,9 +218,9 @@ double generateTimeBeforeArrival(enum kind race) {
     double b = drand48();
     double z = sqrt(-2 * log(a)) * cos(2 * M_PI * b); // Box-Muller transform
     if (race == Ninja) {
-        ret = z*sqrt(nAvgCostume) + nAvgArrive;
+        ret = z*(nAvgArrive/2) + nAvgArrive;
     } else {
-        ret = z*sqrt(pAvgCostume) + pAvgArrive;
+        ret = z*(pAvgArrive/2) + pAvgArrive;
     }
     if (ret < 0){
         return 0;
@@ -238,9 +238,9 @@ double generateCostumingTime(enum kind race) {
     double z = sqrt(-2 * log(a)) * cos(2 * M_PI * b); // Box-Muller transform
     //printf("generated a z val of: %f\n", z);
     if (race == Ninja) {
-        ret = z*sqrt(nAvgCostume) + nAvgCostume;
+        ret = z*(nAvgCostume/3) + nAvgCostume;
     } else {
-        ret = z*sqrt(pAvgCostume) + pAvgCostume;
+        ret = z*(pAvgCostume/3) + pAvgCostume;
     }
     if (ret < 0){
         return 0;
