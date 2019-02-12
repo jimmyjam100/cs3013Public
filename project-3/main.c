@@ -303,6 +303,7 @@ void *thread(void *r) {
     struct person_stats *stats = malloc(sizeof(struct person_stats));
     stats->visits = 0;
     stats->goldOwed = 0;
+    stats->head = NULL;
     int nextVisit = 0;
     int hasEntered = 0;
     int costumingTeam;
