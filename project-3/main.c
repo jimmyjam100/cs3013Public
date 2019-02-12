@@ -200,6 +200,7 @@ enum kind canEnter(){
             }
             return None;
         }
+	cur_node = cur_node->next;
     }
     if (currentlyIn == 0){
         return Both;
