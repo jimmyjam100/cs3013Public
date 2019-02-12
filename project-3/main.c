@@ -494,6 +494,10 @@ int main(int argc, char** argv) {
     }
 
     persons = malloc(sizeof (struct persons_stats*)*(ninjas + pirates));
+    for(i = 0; i <ninjas+pirates; i++){
+        persons[i] = NULL;
+    }
+
     time_teams_busy_for = malloc(sizeof(unsigned long long)*teams);
     for (i = 0; i < teams; i++){
         time_teams_busy_for[i] = 0;
