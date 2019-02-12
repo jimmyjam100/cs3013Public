@@ -39,6 +39,7 @@ unsigned long long *time_teams_busy_for;
 
 int ninjaIn = 0;
 int pirateIn = 0;
+int justChanged = 0;
 
 struct thread_stats {
 
@@ -181,10 +182,19 @@ enum kind canEnter(){
     }
     int currentlyIn = 0; //0 is for none, 1 is for ninjas, 2 is for pirates
     if  (ninjaIn > 0){
+        if (justChanged){
+            return Ninja;
+        }
         currentlyIn = 1;
     }
     else if (pirateIn > 0){
+        if (justChanged){
+            return Pirate;
+        }
         currentlyIn = 2;
+    }
+    else if (pirateIn + ninjaIn == 0){
+        justChanged = 1;
     }
     struct node *cur_node = head;
     while (cur_node != NULL){
@@ -420,15 +430,18 @@ void *thread(void *r) {
             // else
             } else {
                 printf("%d: %s: I can't enter :(\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
-                if(!contains_node(n)){
-                    printf("%d: %s: added my node to list\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
-                    addNode(n);
-                }
 
                 if(n->next != NULL) {
                     printf("%d: %s: signaling next\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                     pthread_cond_signal(n->next->cond);
                     printf("%d: %s: done signaling next\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
+                }
+                else if (contains_node(n)){
+                    justChanged = 0;
+                }
+                else{
+                    printf("%d: %s: added my node to list\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
+                    addNode(n);
                 }
                 printf("%d: %s: waiting to be signaled\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 pthread_cond_wait(&c, &door_lock);
