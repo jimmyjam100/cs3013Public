@@ -20,8 +20,11 @@ sem_t sem_can_use_other_sems;
 pthread_t tids[num_threads];
 
 struct car {
-    int good_boy_points;
+    unsigned long long spawn_time;
     pid_t tid;
+    int spawn_location; // a road number
+    int moves_left; // number of quadrant movements left
+    int cur_location; // 0 means not in intersection
 };
 
 struct car* quad_1_intents;
@@ -66,7 +69,7 @@ void* thread(void *args) {
     struct car* this_vehicle = malloc(sizeof(struct car));
     this_vehicle->tid = tid;
     while (1) {
-        this_vehicle->good_boy_points = 0;
+        this_vehicle->spawn_time = getCurJSEpoch();
         printf("%d: Spawned\n", tid);
     }
 }
