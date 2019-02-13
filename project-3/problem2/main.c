@@ -10,10 +10,7 @@
 
 #define num_threads 20
 
-sem_t sem_quad_1;
-sem_t sem_quad_2;
-sem_t sem_quad_3;
-sem_t sem_quad_4;
+sem_t* sem_quads;
 sem_t sem_driving_permit;
 sem_t sem_can_use_other_sems;
 
@@ -27,10 +24,13 @@ struct car {
     int cur_location; // 0 means not in intersection
 };
 
-struct car* quad_1_intents;
-struct car* quad_2_intents;
-struct car* quad_3_intents;
-struct car* quad_4_intents;
+struct car** quad_intents;
+
+int move(struct car* car){
+    if(cur_location == 0){
+    }
+        
+}
 
 /*
  * Quadrant Map:
@@ -78,11 +78,17 @@ void* thread(void *args) {
 int main() {
     srand(time(NULL));
     int err, i;
-    err = sem_init(&sem_quad_1, 0, 1);
-    err = err || sem_init(&sem_quad_2, 0, 1);
-    err = err || sem_init(&sem_quad_3, 0, 1);
-    err = err || sem_init(&sem_quad_4, 0, 1);
-    err = err || sem_init(&sem_driving_permit, 0, 3);
+    quad_intents = malloc(sizeof(struct car*)*4);
+    for (i = 0; i < 4; i++){
+        quad_intents[i] = NULL;
+    }
+    sem_quads = malloc(sizeof(sem_t)*4);
+    for (i = 0; i < 4; i++){
+        if(sem_init(sem_quead[i], 0, 1)){
+            return 1;
+        }
+    }
+    err = sem_init(&sem_driving_permit, 0, 3);
     err = err || sem_init(&sem_can_use_other_sems, 0, 1);
     if (err) { // error intializing semaphores
         return 1;
