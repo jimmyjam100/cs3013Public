@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <pthread.h>
-#include <bits/semaphore.h>
+#include <semaphore.h>
 #include <semaphore.h>
 #include <zconf.h>
 #include <syscall.h>
@@ -24,11 +24,65 @@ struct car {
     int cur_location; // 0 means not in intersection
 };
 
-struct car** quad_intents;
+struct intents {
+    struct car *car;
+    struct intents *next;
+};
+
+struct intents** quad_intents;
+
+int contains_car(struct car *car, struct intents *intents){
+    if(intents == NULL){
+        return 0;
+    }
+    struct intents *cur = intents;
+    while(cur != NULL){
+        if(cur->car == car){
+            return 1;
+        }
+        cur = cur->next;
+    }
+    return 0;
+}
+
+int add_car(struct car *car, int listIndex){
+    struct intents *new = malloc(sizeof(struct intents));
+    new->car = car;
+    if(quad_intents[listIndex] == NULL){
+        new->next = NULL;
+        quad_intents[listIndex] = new;
+        return 1;
+    }
+    if(quad_intents[listIndex]->car->spawn_time > car->spawn_time){
+        new->next = quad_intents[listIndex];
+        quad_intents[listIndex] = new;
+        return 1;
+    }
+    struct intents *cur = quad_intents[listIndex];
+    while(cur->next != NULL && cur->next->car->spawn_time < car->spawn_time){
+        cur = cur->next;
+    }
+    new->next = cur->next;
+    cur->next = new;
+    return 1;
+}
+
+int remove_top(int listIndex){
+    if(quad_intents[listIndex] == NULL){
+        return 0;
+    }
+    struct intents *save = quad_intents[listIndex];
+    quad_intents[listIndex] = quad_intents[listIndex]->next;
+    free(save);
+    return 1;
+}
+    
+
 
 int move(struct car* car){
-    if(cur_location == 0){
+    if(car->cur_location == 0){
     }
+    return 0;
         
 }
 
@@ -94,13 +148,13 @@ void* thread(void *args) {
 int main() {
     srand(time(NULL));
     int err, i;
-    quad_intents = malloc(sizeof(struct car*)*4);
+    quad_intents = malloc(sizeof(struct intents*)*4);
     for (i = 0; i < 4; i++){
         quad_intents[i] = NULL;
     }
     sem_quads = malloc(sizeof(sem_t)*4);
     for (i = 0; i < 4; i++){
-        if(sem_init(sem_quead[i], 0, 1)){
+        if(sem_init(&sem_quads[i], 0, 1)){
             return 1;
         }
     }
@@ -111,7 +165,7 @@ int main() {
     }
     printf("Spawning threads\n");
     for (i = 0; i < num_threads; i++) {
-        if (pthread_create(&tids[i]), NULL, thread, (void *) 0) {
+        if (pthread_create(&tids[i], NULL, thread, (void *) 0)){
 
         }
     }
