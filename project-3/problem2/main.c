@@ -63,6 +63,20 @@ int generateSpawnPoint() {
     return generateRandomInt(1, 4);
 }
 
+int generateDestination(int starting) {
+    if (starting == 1) {
+        return generateRandomInt(2, 4);
+    } else if (starting == 2) {
+        int x = generateRandomInt(3, 5) % 4;
+        return x == 0 ? 4 : x;
+    } else if (starting == 3) {
+        int x = generateRandomInt(4, 6) % 4;
+        return x == 0 ? 4 : x;
+    } else if (starting == 4) {
+        return generateRandomInt(1, 3);
+    }
+}
+
 
 void* thread(void *args) {
     pid_t tid = syscall(SYS_gettid);
@@ -70,6 +84,8 @@ void* thread(void *args) {
     this_vehicle->tid = tid;
     while (1) {
         this_vehicle->spawn_time = getCurJSEpoch();
+        this_vehicle->cur_location = generateSpawnPoint();
+        this_vehicle->moves_left =
         printf("%d: Spawned\n", tid);
     }
 }
