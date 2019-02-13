@@ -86,18 +86,41 @@ int move(struct car* car){
             add_car(car, car->spawn_location - 1);
         }
         if(quads[car->spawn_location -1] == 1 && quad_intents[car->spawn_location - 1]->car == car && driving_permits != 0){
-            printf("car %d: moving from lane to intersection quadrent %d", car->tid, car->spawn_location);
+            printf("car %d: moved from lane to intersection quadrent %d\n", car->tid, car->spawn_location);
+            remove_top(car->spawn_location - 1);
+            driving_permits--;
             car->cur_location = car->spawn_location;
-            car->moves_left = car->moves_left - 1;
             quads[cur_location - 1] = 0;
             sem_post(&sem);
             return 1;
         }
-        printf("car %d: could not move into intersection due to it being blocked or other cars wanting to go first", car->tid);
+        printf("car %d: could not move from lane into quadrent %d due to it being blocked or other cars waiting to go that spawned eairler\n", car->tid, car->spawn_location);
         sem_post(&sem);
         return 0;
     }
-
+    if(car->moves_left == 1){
+        printf("car %d: leaving intersection from quadrent %d\n", car->tid, car->cur_location);
+        driving_permits++;
+        quads[car->cur_location - 1] = 1;
+        car->cur_location = 0;
+        car->moves_left--;
+        sem_post(&sem);
+        return 1;
+    }
+    if(!contains_car(car, quad_intents[(car->cur_location)%4])){
+        add_car(car, (car->cur_location)%4);
+    }
+    if(quads[(car->cur_location)%4] == 1 && quad_intents[(car->cur_location)%4]-> car == car){
+        printf("car %d: moved from quadrent %d to quadrent %d\n", car->tid, car->cur_location, (car->cur_location)%4 + 1);
+        remove_top((car->cur_location)%4);
+        quads[car->cur_location - 1] = 1;
+        car->cur_location = (car->cur_location)%4 + 1;
+        quads[car->cur_location - 1] = 0;
+        car->moves_left--;
+        semp_post(&sem);
+        return 1;
+    }
+    printf("car %d: could not move from quadrent %d into quadrent %d due to it being blocked or other cars waiting to go that spawned eairler\n", car->tid, car->cur_location - 1, (car->cur_location)%4);
     sem_post(&sem);
     return 0;
         
