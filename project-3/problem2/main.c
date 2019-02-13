@@ -90,11 +90,12 @@ int move(struct car* car){
             remove_top(car->spawn_location - 1);
             driving_permits--;
             car->cur_location = car->spawn_location;
-            quads[cur_location - 1] = 0;
+            quads[car->cur_location - 1] = 0;
             sem_post(&sem);
             return 1;
         }
         printf("car %d: could not move from lane into quadrent %d due to it being blocked or other cars waiting to go that spawned eairler\n", car->tid, car->spawn_location);
+        printf("\tfirst in line is car %d\n", quad_intents[car->spawn_location - 1]->car->tid);
         sem_post(&sem);
         return 0;
     }
@@ -117,10 +118,11 @@ int move(struct car* car){
         car->cur_location = (car->cur_location)%4 + 1;
         quads[car->cur_location - 1] = 0;
         car->moves_left--;
-        semp_post(&sem);
+        sem_post(&sem);
         return 1;
     }
-    printf("car %d: could not move from quadrent %d into quadrent %d due to it being blocked or other cars waiting to go that spawned eairler\n", car->tid, car->cur_location - 1, (car->cur_location)%4);
+    printf("car %d: could not move from quadrent %d into quadrent %d due to it being blocked or other cars waiting to go that spawned eairler\n", car->tid, car->cur_location, (car->cur_location)%4 + 1);
+    printf("\tfirst in line is car %d\n", quad_intents[car->spawn_location - 1]->car->tid);
     sem_post(&sem);
     return 0;
         
@@ -149,7 +151,7 @@ unsigned long long getCurJSEpoch() {
 }
 
 int generateRandomInt(int min, int max) {
-    int ret = lrand48() % max + min;
+    int ret = lrand48() % (max - min + 1) + min;
     return ret;
 }
 
@@ -178,9 +180,16 @@ void* thread(void *args) {
     this_vehicle->tid = tid;
     while (1) {
         this_vehicle->spawn_time = getCurJSEpoch();
-        this_vehicle->cur_location = generateSpawnPoint();
-        this_vehicle->moves_left =
-        printf("%d: Spawned\n", tid);
+        this_vehicle->cur_location = 0;
+        this_vehicle->spawn_location = generateSpawnPoint();
+        this_vehicle->moves_left = generateRandomInt(1, 3);
+        printf("car %d: Spawned in lane %d and is making %s turn\n", tid, this_vehicle->spawn_location, this_vehicle->moves_left == 1 ? "a right" : this_vehicle->moves_left == 2 ? "no" : "a left");
+        while(this_vehicle->moves_left > 0){
+            while(move(this_vehicle) == 0){
+                //sleep(1);
+            }
+            //sleep(1);
+        }
     }
 }
 
@@ -207,5 +216,6 @@ int main() {
 
         }
     }
+    sleep(50);
     return 0;
 }
