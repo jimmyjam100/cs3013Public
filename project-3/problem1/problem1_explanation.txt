@@ -5,6 +5,7 @@ When a pirate or ninja spawns it will wait a random ammount of time (where the a
 Then it will check to see if it can enter. The conditions to check to see if it can enter are as follows:
 	-if there is a person of the other type in the building it can not enter
 	-if the building has as many people in it as number of teams, it can not enter
+	-if it is still running through the queue, when the building was at sometime empty, ignore the next condition. (in other words, if the store just changed from an pirate to ninja store or vice versa let as many people as you can in)
 	-if in the queue there is a person of the other type who has been waiting long enough that waiting 1.2 times current person's average costuming time would put them over 30 min of waiting, it can not enter
 	-otherwise it can enter
 
@@ -17,3 +18,5191 @@ Then there will be a 25% chance they will repeat this process.
 
 
 We beleve that this is a good solution to the problum because it will not starve either side, because as soon as a persons wait time is approching the 30 min mark will prevent people of the oppisite type from entering. Because of this we beleve that no person will realisticly wait longer than 30 min. This will maxamize profits because no customer will get servus without paying.
+
+
+
+
+
+Below is a compleate output of a run (even with testing outputs to let you know what is happening) with the input ./pvn 3 10 10 3 5 18 26
+If you were to read it all you can see it does not break any rules. The pirates and ninjas are never in the building at the sametime and the building never holds more than 3 people.
+
+
+
+
+18942: Spawned
+18947: Spawned
+18951: Spawned
+18949: Spawned
+18943: Spawned
+18944: Spawned
+18945: Spawned
+18941: Spawned
+18953: Spawned
+18954: Spawned
+18955: Spawned
+18956: Spawned
+18952: Spawned
+18950: Spawned
+18946: Spawned
+18957: Spawned
+18958: Spawned
+18948: Spawned
+18961: Spawned
+18959: Spawned
+18960: Spawned
+18962: Spawned
+18966: Spawned
+18965: Spawned
+18963: Spawned
+18964: Spawned
+18967: Spawned
+18969: Spawned
+18968: Spawned
+18970: Spawned
+18971: Spawned
+18972: Spawned
+18973: Spawned
+18974: Spawned
+18975: Spawned
+18976: Spawned
+18978: Spawned
+18979: Spawned
+18977: Spawned
+18980: Spawned
+18983: Spawned
+18982: Spawned
+18981: Spawned
+18984: Spawned
+18986: Spawned
+18985: Spawned
+18988: Spawned
+18987: Spawned
+18989: Spawned
+18990: Spawned
+18991: Spawned
+18992: Spawned
+18993: Spawned
+18994: Spawned
+18996: Spawned
+18995: Spawned
+18997: Spawned
+18998: Spawned
+18999: Spawned
+19000: Spawned
+19001: Spawned
+19002: Spawned
+19003: Spawned
+19004: Spawned
+19005: Spawned
+19006: Spawned
+19007: Spawned
+19008: Spawned
+19009: Spawned
+19010: Spawned
+19011: Spawned
+19012: Spawned
+19013: Spawned
+19014: Spawned
+19015: Spawned
+19016: Spawned
+19017: Spawned
+19018: Spawned
+19019: Spawned
+19020: Spawned
+19021: Spawned
+19022: Spawned
+19023: Spawned
+19024: Spawned
+19025: Spawned
+19026: Spawned
+19027: Spawned
+19028: Spawned
+19029: Spawned
+19030: Spawned
+19031: Spawned
+19032: Spawned
+19033: Spawned
+19034: Spawned
+19035: Spawned
+19036: Spawned
+19037: Spawned
+19038: Spawned
+19039: Spawned
+19040: Spawned
+18949: Ninja: gonna check if can enter
+18949: Ninja: I can enter!
+18949: Ninja: entered store!
+18949: Ninja: getting costuming team
+18949: Ninja: got costuming team
+18949: Ninja: releasing lock
+18947: Ninja: gonna check if can enter
+18947: Ninja: I can enter!
+18947: Ninja: entered store!
+18947: Ninja: getting costuming team
+18947: Ninja: got costuming team
+18947: Ninja: releasing lock
+18947: Ninja: released lock
+18947: Ninja: about to sleep for 1.000000
+18949: Ninja: released lock
+18949: Ninja: about to sleep for 1.000000
+18951: Ninja: gonna check if can enter
+18951: Ninja: I can't enter :(
+18951: Ninja: added my node to list
+18951: Ninja: waiting to be signaled
+18943: Ninja: gonna check if can enter
+18943: Ninja: I can't enter :(
+18943: Ninja: added my node to list
+18943: Ninja: waiting to be signaled
+18953: Ninja: gonna check if can enter
+18953: Ninja: I can't enter :(
+18953: Ninja: added my node to list
+18953: Ninja: waiting to be signaled
+18945: Ninja: gonna check if can enter
+18945: Ninja: I can't enter :(
+18945: Ninja: added my node to list
+18945: Ninja: waiting to be signaled
+18941: Ninja: gonna check if can enter
+18941: Ninja: I can't enter :(
+18941: Ninja: added my node to list
+18941: Ninja: waiting to be signaled
+18952: Ninja: gonna check if can enter
+18952: Ninja: I can't enter :(
+18952: Ninja: added my node to list
+18952: Ninja: waiting to be signaled
+18942: Ninja: gonna check if can enter
+18942: Ninja: I can't enter :(
+18942: Ninja: added my node to list
+18942: Ninja: waiting to be signaled
+18954: Ninja: gonna check if can enter
+18954: Ninja: I can't enter :(
+18954: Ninja: added my node to list
+18954: Ninja: waiting to be signaled
+18955: Ninja: gonna check if can enter
+18955: Ninja: I can't enter :(
+18955: Ninja: added my node to list
+18955: Ninja: waiting to be signaled
+18944: Ninja: gonna check if can enter
+18944: Ninja: I can't enter :(
+18944: Ninja: added my node to list
+18944: Ninja: waiting to be signaled
+18956: Ninja: gonna check if can enter
+18956: Ninja: I can't enter :(
+18956: Ninja: added my node to list
+18956: Ninja: waiting to be signaled
+18946: Ninja: gonna check if can enter
+18946: Ninja: I can't enter :(
+18946: Ninja: added my node to list
+18946: Ninja: waiting to be signaled
+18950: Ninja: gonna check if can enter
+18950: Ninja: I can't enter :(
+18950: Ninja: added my node to list
+18950: Ninja: waiting to be signaled
+18957: Ninja: gonna check if can enter
+18957: Ninja: I can't enter :(
+18957: Ninja: added my node to list
+18957: Ninja: waiting to be signaled
+18958: Ninja: gonna check if can enter
+18958: Ninja: I can't enter :(
+18958: Ninja: added my node to list
+18958: Ninja: waiting to be signaled
+18961: Ninja: gonna check if can enter
+18961: Ninja: I can't enter :(
+18961: Ninja: added my node to list
+18961: Ninja: waiting to be signaled
+18959: Ninja: gonna check if can enter
+18959: Ninja: I can't enter :(
+18959: Ninja: added my node to list
+18959: Ninja: waiting to be signaled
+18960: Ninja: gonna check if can enter
+18960: Ninja: I can't enter :(
+18960: Ninja: added my node to list
+18960: Ninja: waiting to be signaled
+18962: Ninja: gonna check if can enter
+18962: Ninja: I can't enter :(
+18962: Ninja: added my node to list
+18962: Ninja: waiting to be signaled
+18948: Ninja: gonna check if can enter
+18948: Ninja: I can't enter :(
+18948: Ninja: added my node to list
+18948: Ninja: waiting to be signaled
+18966: Ninja: gonna check if can enter
+18966: Ninja: I can't enter :(
+18966: Ninja: added my node to list
+18966: Ninja: waiting to be signaled
+18965: Ninja: gonna check if can enter
+18965: Ninja: I can't enter :(
+18965: Ninja: added my node to list
+18965: Ninja: waiting to be signaled
+18963: Ninja: gonna check if can enter
+18963: Ninja: I can't enter :(
+18963: Ninja: added my node to list
+18963: Ninja: waiting to be signaled
+18964: Ninja: gonna check if can enter
+18964: Ninja: I can't enter :(
+18964: Ninja: added my node to list
+18964: Ninja: waiting to be signaled
+18967: Ninja: gonna check if can enter
+18967: Ninja: I can't enter :(
+18967: Ninja: added my node to list
+18967: Ninja: waiting to be signaled
+18969: Ninja: gonna check if can enter
+18969: Ninja: I can't enter :(
+18969: Ninja: added my node to list
+18969: Ninja: waiting to be signaled
+18971: Ninja: gonna check if can enter
+18971: Ninja: I can't enter :(
+18971: Ninja: added my node to list
+18971: Ninja: waiting to be signaled
+18974: Ninja: gonna check if can enter
+18974: Ninja: I can't enter :(
+18974: Ninja: added my node to list
+18974: Ninja: waiting to be signaled
+18968: Ninja: gonna check if can enter
+18968: Ninja: I can't enter :(
+18968: Ninja: added my node to list
+18968: Ninja: waiting to be signaled
+18972: Ninja: gonna check if can enter
+18972: Ninja: I can't enter :(
+18972: Ninja: added my node to list
+18972: Ninja: waiting to be signaled
+18973: Ninja: gonna check if can enter
+18973: Ninja: I can't enter :(
+18973: Ninja: added my node to list
+18973: Ninja: waiting to be signaled
+18975: Ninja: gonna check if can enter
+18975: Ninja: I can't enter :(
+18975: Ninja: added my node to list
+18975: Ninja: waiting to be signaled
+18978: Ninja: gonna check if can enter
+18978: Ninja: I can't enter :(
+18978: Ninja: added my node to list
+18978: Ninja: waiting to be signaled
+18979: Ninja: gonna check if can enter
+18979: Ninja: I can't enter :(
+18979: Ninja: added my node to list
+18979: Ninja: waiting to be signaled
+18976: Ninja: gonna check if can enter
+18976: Ninja: I can't enter :(
+18976: Ninja: added my node to list
+18976: Ninja: waiting to be signaled
+18977: Ninja: gonna check if can enter
+18977: Ninja: I can't enter :(
+18977: Ninja: added my node to list
+18977: Ninja: waiting to be signaled
+18980: Ninja: gonna check if can enter
+18980: Ninja: I can't enter :(
+18980: Ninja: added my node to list
+18980: Ninja: waiting to be signaled
+18983: Ninja: gonna check if can enter
+18983: Ninja: I can't enter :(
+18983: Ninja: added my node to list
+18983: Ninja: waiting to be signaled
+18970: Ninja: gonna check if can enter
+18970: Ninja: I can't enter :(
+18970: Ninja: added my node to list
+18970: Ninja: waiting to be signaled
+18982: Ninja: gonna check if can enter
+18982: Ninja: I can't enter :(
+18982: Ninja: added my node to list
+18982: Ninja: waiting to be signaled
+18981: Ninja: gonna check if can enter
+18981: Ninja: I can't enter :(
+18981: Ninja: added my node to list
+18981: Ninja: waiting to be signaled
+18985: Ninja: gonna check if can enter
+18985: Ninja: I can't enter :(
+18985: Ninja: added my node to list
+18985: Ninja: waiting to be signaled
+18984: Ninja: gonna check if can enter
+18984: Ninja: I can't enter :(
+18984: Ninja: added my node to list
+18984: Ninja: waiting to be signaled
+18986: Ninja: gonna check if can enter
+18986: Ninja: I can't enter :(
+18986: Ninja: added my node to list
+18986: Ninja: waiting to be signaled
+18988: Ninja: gonna check if can enter
+18988: Ninja: I can't enter :(
+18988: Ninja: added my node to list
+18988: Ninja: waiting to be signaled
+18987: Ninja: gonna check if can enter
+18987: Ninja: I can't enter :(
+18987: Ninja: added my node to list
+18987: Ninja: waiting to be signaled
+18991: Pirate: gonna check if can enter
+18991: Pirate: I can't enter :(
+18991: Pirate: added my node to list
+18991: Pirate: waiting to be signaled
+18992: Pirate: gonna check if can enter
+18992: Pirate: I can't enter :(
+18992: Pirate: added my node to list
+18992: Pirate: waiting to be signaled
+18989: Ninja: gonna check if can enter
+18989: Ninja: I can't enter :(
+18989: Ninja: added my node to list
+18989: Ninja: waiting to be signaled
+18990: Ninja: gonna check if can enter
+18990: Ninja: I can't enter :(
+18990: Ninja: added my node to list
+18990: Ninja: waiting to be signaled
+18993: Pirate: gonna check if can enter
+18993: Pirate: I can't enter :(
+18993: Pirate: added my node to list
+18993: Pirate: waiting to be signaled
+18994: Pirate: gonna check if can enter
+18994: Pirate: I can't enter :(
+18994: Pirate: added my node to list
+18994: Pirate: waiting to be signaled
+18995: Pirate: gonna check if can enter
+18995: Pirate: I can't enter :(
+18995: Pirate: added my node to list
+18995: Pirate: waiting to be signaled
+18999: Pirate: gonna check if can enter
+18999: Pirate: I can't enter :(
+18999: Pirate: added my node to list
+18999: Pirate: waiting to be signaled
+19000: Pirate: gonna check if can enter
+19000: Pirate: I can't enter :(
+19000: Pirate: added my node to list
+19000: Pirate: waiting to be signaled
+19002: Pirate: gonna check if can enter
+19002: Pirate: I can't enter :(
+19002: Pirate: added my node to list
+19002: Pirate: waiting to be signaled
+18997: Pirate: gonna check if can enter
+18997: Pirate: I can't enter :(
+18997: Pirate: added my node to list
+18997: Pirate: waiting to be signaled
+18998: Pirate: gonna check if can enter
+18998: Pirate: I can't enter :(
+18998: Pirate: added my node to list
+18998: Pirate: waiting to be signaled
+19001: Pirate: gonna check if can enter
+19001: Pirate: I can't enter :(
+19001: Pirate: added my node to list
+19001: Pirate: waiting to be signaled
+19006: Pirate: gonna check if can enter
+19006: Pirate: I can't enter :(
+19006: Pirate: added my node to list
+19006: Pirate: waiting to be signaled
+18996: Pirate: gonna check if can enter
+18996: Pirate: I can't enter :(
+18996: Pirate: added my node to list
+18996: Pirate: waiting to be signaled
+19003: Pirate: gonna check if can enter
+19003: Pirate: I can't enter :(
+19003: Pirate: added my node to list
+19003: Pirate: waiting to be signaled
+19004: Pirate: gonna check if can enter
+19004: Pirate: I can't enter :(
+19004: Pirate: added my node to list
+19004: Pirate: waiting to be signaled
+19005: Pirate: gonna check if can enter
+19005: Pirate: I can't enter :(
+19005: Pirate: added my node to list
+19005: Pirate: waiting to be signaled
+19008: Pirate: gonna check if can enter
+19008: Pirate: I can't enter :(
+19008: Pirate: added my node to list
+19008: Pirate: waiting to be signaled
+19009: Pirate: gonna check if can enter
+19009: Pirate: I can't enter :(
+19009: Pirate: added my node to list
+19009: Pirate: waiting to be signaled
+19010: Pirate: gonna check if can enter
+19010: Pirate: I can't enter :(
+19010: Pirate: added my node to list
+19010: Pirate: waiting to be signaled
+19012: Pirate: gonna check if can enter
+19012: Pirate: I can't enter :(
+19012: Pirate: added my node to list
+19012: Pirate: waiting to be signaled
+19014: Pirate: gonna check if can enter
+19014: Pirate: I can't enter :(
+19014: Pirate: added my node to list
+19014: Pirate: waiting to be signaled
+19016: Pirate: gonna check if can enter
+19016: Pirate: I can't enter :(
+19016: Pirate: added my node to list
+19016: Pirate: waiting to be signaled
+19018: Pirate: gonna check if can enter
+19018: Pirate: I can't enter :(
+19018: Pirate: added my node to list
+19018: Pirate: waiting to be signaled
+19020: Pirate: gonna check if can enter
+19020: Pirate: I can't enter :(
+19020: Pirate: added my node to list
+19020: Pirate: waiting to be signaled
+19015: Pirate: gonna check if can enter
+19015: Pirate: I can't enter :(
+19015: Pirate: added my node to list
+19015: Pirate: waiting to be signaled
+19017: Pirate: gonna check if can enter
+19017: Pirate: I can't enter :(
+19017: Pirate: added my node to list
+19017: Pirate: waiting to be signaled
+19019: Pirate: gonna check if can enter
+19019: Pirate: I can't enter :(
+19019: Pirate: added my node to list
+19019: Pirate: waiting to be signaled
+19021: Pirate: gonna check if can enter
+19021: Pirate: I can't enter :(
+19021: Pirate: added my node to list
+19021: Pirate: waiting to be signaled
+19023: Pirate: gonna check if can enter
+19023: Pirate: I can't enter :(
+19023: Pirate: added my node to list
+19023: Pirate: waiting to be signaled
+19025: Pirate: gonna check if can enter
+19025: Pirate: I can't enter :(
+19025: Pirate: added my node to list
+19025: Pirate: waiting to be signaled
+19024: Pirate: gonna check if can enter
+19024: Pirate: I can't enter :(
+19024: Pirate: added my node to list
+19024: Pirate: waiting to be signaled
+19026: Pirate: gonna check if can enter
+19026: Pirate: I can't enter :(
+19026: Pirate: added my node to list
+19026: Pirate: waiting to be signaled
+19028: Pirate: gonna check if can enter
+19028: Pirate: I can't enter :(
+19028: Pirate: added my node to list
+19028: Pirate: waiting to be signaled
+19030: Pirate: gonna check if can enter
+19030: Pirate: I can't enter :(
+19030: Pirate: added my node to list
+19030: Pirate: waiting to be signaled
+19031: Pirate: gonna check if can enter
+19031: Pirate: I can't enter :(
+19031: Pirate: added my node to list
+19031: Pirate: waiting to be signaled
+19033: Pirate: gonna check if can enter
+19033: Pirate: I can't enter :(
+19033: Pirate: added my node to list
+19033: Pirate: waiting to be signaled
+19032: Pirate: gonna check if can enter
+19032: Pirate: I can't enter :(
+19032: Pirate: added my node to list
+19032: Pirate: waiting to be signaled
+19011: Pirate: gonna check if can enter
+19011: Pirate: I can't enter :(
+19011: Pirate: added my node to list
+19011: Pirate: waiting to be signaled
+19034: Pirate: gonna check if can enter
+19034: Pirate: I can't enter :(
+19034: Pirate: added my node to list
+19034: Pirate: waiting to be signaled
+19037: Pirate: gonna check if can enter
+19037: Pirate: I can't enter :(
+19037: Pirate: added my node to list
+19037: Pirate: waiting to be signaled
+19038: Pirate: gonna check if can enter
+19038: Pirate: I can't enter :(
+19038: Pirate: added my node to list
+19038: Pirate: waiting to be signaled
+19029: Pirate: gonna check if can enter
+19029: Pirate: I can't enter :(
+19029: Pirate: added my node to list
+19029: Pirate: waiting to be signaled
+19027: Pirate: gonna check if can enter
+19027: Pirate: I can't enter :(
+19027: Pirate: added my node to list
+19027: Pirate: waiting to be signaled
+19035: Pirate: gonna check if can enter
+19035: Pirate: I can't enter :(
+19035: Pirate: added my node to list
+19035: Pirate: waiting to be signaled
+19013: Pirate: gonna check if can enter
+19013: Pirate: I can't enter :(
+19013: Pirate: added my node to list
+19013: Pirate: waiting to be signaled
+19039: Pirate: gonna check if can enter
+19039: Pirate: I can't enter :(
+19039: Pirate: added my node to list
+19039: Pirate: waiting to be signaled
+19007: Pirate: gonna check if can enter
+19007: Pirate: I can't enter :(
+19007: Pirate: added my node to list
+19007: Pirate: waiting to be signaled
+19036: Pirate: gonna check if can enter
+19036: Pirate: I can't enter :(
+19036: Pirate: added my node to list
+19036: Pirate: waiting to be signaled
+19022: Pirate: gonna check if can enter
+19022: Pirate: I can't enter :(
+19022: Pirate: added my node to list
+19022: Pirate: waiting to be signaled
+19040: Pirate: gonna check if can enter
+19040: Pirate: I can't enter :(
+19040: Pirate: added my node to list
+19040: Pirate: waiting to be signaled
+18947: Ninja: woke up after costuming
+18947: Ninja: acquiring statistics lock
+18947: Ninja: Revenue is now 1
+18947: Ninja: releasing statistics lock
+18947: Ninja: getting lock...
+18947: Ninja: got the lock!
+18947: Ninja: leaving store
+18947: Ninja: left the store
+18947: Ninja: released costuming team
+18947: Ninja: removing self from list
+18947: Ninja: removed!
+18947: Ninja: checking if head exists
+18947: Ninja: head exists.. gonna signal
+18947: Ninja: head exists.. done signaling
+18947: Ninja: releasing lock...
+18947: Ninja: released lock!
+18947: Ninja: Bye bye!
+18951: Ninja: got signaled!
+18951: Ninja: gonna check if can enter
+18951: Ninja: I can enter!
+18951: Ninja: entered store!
+18951: Ninja: getting costuming team
+18951: Ninja: got costuming team
+18951: Ninja: releasing lock
+18951: Ninja: released lock
+18951: Ninja: signaling
+18951: Ninja: done signaling
+18951: Ninja: about to sleep for 1.000000
+18949: Ninja: woke up after costuming
+18943: Ninja: got signaled!
+18943: Ninja: gonna check if can enter
+18943: Ninja: I can't enter :(
+18943: Ninja: signaling next
+18943: Ninja: done signaling next
+18943: Ninja: waiting to be signaled
+18953: Ninja: got signaled!
+18953: Ninja: gonna check if can enter
+18953: Ninja: I can't enter :(
+18953: Ninja: signaling next
+18953: Ninja: done signaling next
+18953: Ninja: waiting to be signaled
+18949: Ninja: acquiring statistics lock
+18949: Ninja: Revenue is now 2
+18949: Ninja: releasing statistics lock
+18949: Ninja: getting lock...
+18949: Ninja: got the lock!
+18949: Ninja: leaving store
+18949: Ninja: left the store
+18949: Ninja: released costuming team
+18949: Ninja: removing self from list
+18949: Ninja: removed!
+18949: Ninja: checking if head exists
+18949: Ninja: head exists.. gonna signal
+18949: Ninja: head exists.. done signaling
+18949: Ninja: releasing lock...
+18949: Ninja: released lock!
+18949: Ninja: Bye bye!
+18945: Ninja: got signaled!
+18945: Ninja: gonna check if can enter
+18945: Ninja: I can enter!
+18945: Ninja: entered store!
+18945: Ninja: getting costuming team
+18945: Ninja: got costuming team
+18945: Ninja: releasing lock
+18945: Ninja: released lock
+18945: Ninja: signaling
+18945: Ninja: done signaling
+18945: Ninja: about to sleep for 1.000000
+18941: Ninja: got signaled!
+18941: Ninja: gonna check if can enter
+18941: Ninja: I can't enter :(
+18941: Ninja: signaling next
+18941: Ninja: done signaling next
+18941: Ninja: waiting to be signaled
+18952: Ninja: got signaled!
+18952: Ninja: gonna check if can enter
+18952: Ninja: I can't enter :(
+18952: Ninja: signaling next
+18952: Ninja: done signaling next
+18952: Ninja: waiting to be signaled
+18942: Ninja: got signaled!
+18942: Ninja: gonna check if can enter
+18942: Ninja: I can't enter :(
+18942: Ninja: signaling next
+18942: Ninja: done signaling next
+18942: Ninja: waiting to be signaled
+18954: Ninja: got signaled!
+18954: Ninja: gonna check if can enter
+18954: Ninja: I can't enter :(
+18954: Ninja: signaling next
+18954: Ninja: done signaling next
+18954: Ninja: waiting to be signaled
+18955: Ninja: got signaled!
+18955: Ninja: gonna check if can enter
+18955: Ninja: I can't enter :(
+18955: Ninja: signaling next
+18955: Ninja: done signaling next
+18955: Ninja: waiting to be signaled
+18944: Ninja: got signaled!
+18944: Ninja: gonna check if can enter
+18944: Ninja: I can't enter :(
+18944: Ninja: signaling next
+18944: Ninja: done signaling next
+18944: Ninja: waiting to be signaled
+18956: Ninja: got signaled!
+18956: Ninja: gonna check if can enter
+18956: Ninja: I can't enter :(
+18956: Ninja: signaling next
+18956: Ninja: done signaling next
+18956: Ninja: waiting to be signaled
+18946: Ninja: got signaled!
+18946: Ninja: gonna check if can enter
+18946: Ninja: I can't enter :(
+18946: Ninja: signaling next
+18946: Ninja: done signaling next
+18946: Ninja: waiting to be signaled
+18950: Ninja: got signaled!
+18950: Ninja: gonna check if can enter
+18950: Ninja: I can't enter :(
+18950: Ninja: signaling next
+18950: Ninja: done signaling next
+18950: Ninja: waiting to be signaled
+18957: Ninja: got signaled!
+18957: Ninja: gonna check if can enter
+18957: Ninja: I can't enter :(
+18957: Ninja: signaling next
+18957: Ninja: done signaling next
+18957: Ninja: waiting to be signaled
+18958: Ninja: got signaled!
+18958: Ninja: gonna check if can enter
+18958: Ninja: I can't enter :(
+18958: Ninja: signaling next
+18958: Ninja: done signaling next
+18958: Ninja: waiting to be signaled
+18961: Ninja: got signaled!
+18961: Ninja: gonna check if can enter
+18961: Ninja: I can't enter :(
+18961: Ninja: signaling next
+18961: Ninja: done signaling next
+18961: Ninja: waiting to be signaled
+18959: Ninja: got signaled!
+18959: Ninja: gonna check if can enter
+18959: Ninja: I can't enter :(
+18959: Ninja: signaling next
+18959: Ninja: done signaling next
+18959: Ninja: waiting to be signaled
+18960: Ninja: got signaled!
+18960: Ninja: gonna check if can enter
+18960: Ninja: I can't enter :(
+18960: Ninja: signaling next
+18960: Ninja: done signaling next
+18960: Ninja: waiting to be signaled
+18962: Ninja: got signaled!
+18962: Ninja: gonna check if can enter
+18962: Ninja: I can't enter :(
+18962: Ninja: signaling next
+18962: Ninja: done signaling next
+18962: Ninja: waiting to be signaled
+18948: Ninja: got signaled!
+18948: Ninja: gonna check if can enter
+18948: Ninja: I can't enter :(
+18948: Ninja: signaling next
+18948: Ninja: done signaling next
+18948: Ninja: waiting to be signaled
+18966: Ninja: got signaled!
+18966: Ninja: gonna check if can enter
+18966: Ninja: I can't enter :(
+18966: Ninja: signaling next
+18966: Ninja: done signaling next
+18966: Ninja: waiting to be signaled
+18965: Ninja: got signaled!
+18965: Ninja: gonna check if can enter
+18965: Ninja: I can't enter :(
+18965: Ninja: signaling next
+18965: Ninja: done signaling next
+18965: Ninja: waiting to be signaled
+18963: Ninja: got signaled!
+18963: Ninja: gonna check if can enter
+18963: Ninja: I can't enter :(
+18963: Ninja: signaling next
+18963: Ninja: done signaling next
+18963: Ninja: waiting to be signaled
+18964: Ninja: got signaled!
+18964: Ninja: gonna check if can enter
+18964: Ninja: I can't enter :(
+18964: Ninja: signaling next
+18964: Ninja: done signaling next
+18964: Ninja: waiting to be signaled
+18967: Ninja: got signaled!
+18967: Ninja: gonna check if can enter
+18967: Ninja: I can't enter :(
+18967: Ninja: signaling next
+18967: Ninja: done signaling next
+18967: Ninja: waiting to be signaled
+18969: Ninja: got signaled!
+18969: Ninja: gonna check if can enter
+18969: Ninja: I can't enter :(
+18969: Ninja: signaling next
+18969: Ninja: done signaling next
+18969: Ninja: waiting to be signaled
+18971: Ninja: got signaled!
+18971: Ninja: gonna check if can enter
+18971: Ninja: I can't enter :(
+18971: Ninja: signaling next
+18971: Ninja: done signaling next
+18971: Ninja: waiting to be signaled
+18974: Ninja: got signaled!
+18974: Ninja: gonna check if can enter
+18974: Ninja: I can't enter :(
+18974: Ninja: signaling next
+18974: Ninja: done signaling next
+18974: Ninja: waiting to be signaled
+18968: Ninja: got signaled!
+18968: Ninja: gonna check if can enter
+18968: Ninja: I can't enter :(
+18968: Ninja: signaling next
+18968: Ninja: done signaling next
+18968: Ninja: waiting to be signaled
+18972: Ninja: got signaled!
+18972: Ninja: gonna check if can enter
+18972: Ninja: I can't enter :(
+18972: Ninja: signaling next
+18972: Ninja: done signaling next
+18972: Ninja: waiting to be signaled
+18973: Ninja: got signaled!
+18973: Ninja: gonna check if can enter
+18973: Ninja: I can't enter :(
+18973: Ninja: signaling next
+18973: Ninja: done signaling next
+18973: Ninja: waiting to be signaled
+18975: Ninja: got signaled!
+18975: Ninja: gonna check if can enter
+18975: Ninja: I can't enter :(
+18975: Ninja: signaling next
+18975: Ninja: done signaling next
+18975: Ninja: waiting to be signaled
+18978: Ninja: got signaled!
+18978: Ninja: gonna check if can enter
+18978: Ninja: I can't enter :(
+18978: Ninja: signaling next
+18978: Ninja: done signaling next
+18978: Ninja: waiting to be signaled
+18979: Ninja: got signaled!
+18979: Ninja: gonna check if can enter
+18979: Ninja: I can't enter :(
+18979: Ninja: signaling next
+18979: Ninja: done signaling next
+18979: Ninja: waiting to be signaled
+18976: Ninja: got signaled!
+18976: Ninja: gonna check if can enter
+18976: Ninja: I can't enter :(
+18976: Ninja: signaling next
+18976: Ninja: done signaling next
+18976: Ninja: waiting to be signaled
+18977: Ninja: got signaled!
+18977: Ninja: gonna check if can enter
+18977: Ninja: I can't enter :(
+18977: Ninja: signaling next
+18977: Ninja: done signaling next
+18977: Ninja: waiting to be signaled
+18980: Ninja: got signaled!
+18980: Ninja: gonna check if can enter
+18980: Ninja: I can't enter :(
+18980: Ninja: signaling next
+18980: Ninja: done signaling next
+18980: Ninja: waiting to be signaled
+18983: Ninja: got signaled!
+18983: Ninja: gonna check if can enter
+18983: Ninja: I can't enter :(
+18983: Ninja: signaling next
+18983: Ninja: done signaling next
+18983: Ninja: waiting to be signaled
+18970: Ninja: got signaled!
+18970: Ninja: gonna check if can enter
+18970: Ninja: I can't enter :(
+18970: Ninja: signaling next
+18970: Ninja: done signaling next
+18970: Ninja: waiting to be signaled
+18982: Ninja: got signaled!
+18982: Ninja: gonna check if can enter
+18982: Ninja: I can't enter :(
+18982: Ninja: signaling next
+18982: Ninja: done signaling next
+18982: Ninja: waiting to be signaled
+18981: Ninja: got signaled!
+18981: Ninja: gonna check if can enter
+18981: Ninja: I can't enter :(
+18981: Ninja: signaling next
+18981: Ninja: done signaling next
+18981: Ninja: waiting to be signaled
+18985: Ninja: got signaled!
+18985: Ninja: gonna check if can enter
+18985: Ninja: I can't enter :(
+18985: Ninja: signaling next
+18985: Ninja: done signaling next
+18985: Ninja: waiting to be signaled
+18984: Ninja: got signaled!
+18984: Ninja: gonna check if can enter
+18984: Ninja: I can't enter :(
+18984: Ninja: signaling next
+18984: Ninja: done signaling next
+18984: Ninja: waiting to be signaled
+18986: Ninja: got signaled!
+18986: Ninja: gonna check if can enter
+18986: Ninja: I can't enter :(
+18986: Ninja: signaling next
+18986: Ninja: done signaling next
+18986: Ninja: waiting to be signaled
+18988: Ninja: got signaled!
+18988: Ninja: gonna check if can enter
+18988: Ninja: I can't enter :(
+18988: Ninja: signaling next
+18988: Ninja: done signaling next
+18988: Ninja: waiting to be signaled
+18987: Ninja: got signaled!
+18987: Ninja: gonna check if can enter
+18987: Ninja: I can't enter :(
+18987: Ninja: signaling next
+18987: Ninja: done signaling next
+18987: Ninja: waiting to be signaled
+18991: Pirate: got signaled!
+18991: Pirate: gonna check if can enter
+18991: Pirate: I can't enter :(
+18991: Pirate: signaling next
+18991: Pirate: done signaling next
+18991: Pirate: waiting to be signaled
+18992: Pirate: got signaled!
+18992: Pirate: gonna check if can enter
+18992: Pirate: I can't enter :(
+18992: Pirate: signaling next
+18992: Pirate: done signaling next
+18992: Pirate: waiting to be signaled
+18989: Ninja: got signaled!
+18989: Ninja: gonna check if can enter
+18989: Ninja: I can't enter :(
+18989: Ninja: signaling next
+18989: Ninja: done signaling next
+18989: Ninja: waiting to be signaled
+18990: Ninja: got signaled!
+18990: Ninja: gonna check if can enter
+18990: Ninja: I can't enter :(
+18990: Ninja: signaling next
+18990: Ninja: done signaling next
+18990: Ninja: waiting to be signaled
+18993: Pirate: got signaled!
+18993: Pirate: gonna check if can enter
+18993: Pirate: I can't enter :(
+18993: Pirate: signaling next
+18993: Pirate: done signaling next
+18993: Pirate: waiting to be signaled
+18994: Pirate: got signaled!
+18994: Pirate: gonna check if can enter
+18994: Pirate: I can't enter :(
+18994: Pirate: signaling next
+18994: Pirate: done signaling next
+18994: Pirate: waiting to be signaled
+18995: Pirate: got signaled!
+18995: Pirate: gonna check if can enter
+18995: Pirate: I can't enter :(
+18995: Pirate: signaling next
+18995: Pirate: done signaling next
+18995: Pirate: waiting to be signaled
+18999: Pirate: got signaled!
+18999: Pirate: gonna check if can enter
+18999: Pirate: I can't enter :(
+18999: Pirate: signaling next
+18999: Pirate: done signaling next
+18999: Pirate: waiting to be signaled
+19000: Pirate: got signaled!
+19000: Pirate: gonna check if can enter
+19000: Pirate: I can't enter :(
+19000: Pirate: signaling next
+19000: Pirate: done signaling next
+19000: Pirate: waiting to be signaled
+19002: Pirate: got signaled!
+19002: Pirate: gonna check if can enter
+19002: Pirate: I can't enter :(
+19002: Pirate: signaling next
+19002: Pirate: done signaling next
+19002: Pirate: waiting to be signaled
+18997: Pirate: got signaled!
+18997: Pirate: gonna check if can enter
+18997: Pirate: I can't enter :(
+18997: Pirate: signaling next
+18997: Pirate: done signaling next
+18997: Pirate: waiting to be signaled
+18998: Pirate: got signaled!
+18998: Pirate: gonna check if can enter
+18998: Pirate: I can't enter :(
+18998: Pirate: signaling next
+18998: Pirate: done signaling next
+18998: Pirate: waiting to be signaled
+19001: Pirate: got signaled!
+19001: Pirate: gonna check if can enter
+19001: Pirate: I can't enter :(
+19001: Pirate: signaling next
+19001: Pirate: done signaling next
+19001: Pirate: waiting to be signaled
+19006: Pirate: got signaled!
+19006: Pirate: gonna check if can enter
+19006: Pirate: I can't enter :(
+19006: Pirate: signaling next
+19006: Pirate: done signaling next
+19006: Pirate: waiting to be signaled
+18996: Pirate: got signaled!
+18996: Pirate: gonna check if can enter
+18996: Pirate: I can't enter :(
+18996: Pirate: signaling next
+18996: Pirate: done signaling next
+18996: Pirate: waiting to be signaled
+19003: Pirate: got signaled!
+19003: Pirate: gonna check if can enter
+19003: Pirate: I can't enter :(
+19003: Pirate: signaling next
+19003: Pirate: done signaling next
+19003: Pirate: waiting to be signaled
+19004: Pirate: got signaled!
+19004: Pirate: gonna check if can enter
+19004: Pirate: I can't enter :(
+19004: Pirate: signaling next
+19004: Pirate: done signaling next
+19004: Pirate: waiting to be signaled
+19005: Pirate: got signaled!
+19005: Pirate: gonna check if can enter
+19005: Pirate: I can't enter :(
+19005: Pirate: signaling next
+19005: Pirate: done signaling next
+19005: Pirate: waiting to be signaled
+19008: Pirate: got signaled!
+19008: Pirate: gonna check if can enter
+19008: Pirate: I can't enter :(
+19008: Pirate: signaling next
+19008: Pirate: done signaling next
+19008: Pirate: waiting to be signaled
+19009: Pirate: got signaled!
+19009: Pirate: gonna check if can enter
+19009: Pirate: I can't enter :(
+19009: Pirate: signaling next
+19009: Pirate: done signaling next
+19009: Pirate: waiting to be signaled
+19010: Pirate: got signaled!
+19010: Pirate: gonna check if can enter
+19010: Pirate: I can't enter :(
+19010: Pirate: signaling next
+19010: Pirate: done signaling next
+19010: Pirate: waiting to be signaled
+19012: Pirate: got signaled!
+19012: Pirate: gonna check if can enter
+19012: Pirate: I can't enter :(
+19012: Pirate: signaling next
+19012: Pirate: done signaling next
+19012: Pirate: waiting to be signaled
+19014: Pirate: got signaled!
+19014: Pirate: gonna check if can enter
+19014: Pirate: I can't enter :(
+19014: Pirate: signaling next
+19014: Pirate: done signaling next
+19014: Pirate: waiting to be signaled
+19016: Pirate: got signaled!
+19016: Pirate: gonna check if can enter
+19016: Pirate: I can't enter :(
+19016: Pirate: signaling next
+19016: Pirate: done signaling next
+19016: Pirate: waiting to be signaled
+19018: Pirate: got signaled!
+19018: Pirate: gonna check if can enter
+19018: Pirate: I can't enter :(
+19018: Pirate: signaling next
+19018: Pirate: done signaling next
+19018: Pirate: waiting to be signaled
+19020: Pirate: got signaled!
+19020: Pirate: gonna check if can enter
+19020: Pirate: I can't enter :(
+19020: Pirate: signaling next
+19020: Pirate: done signaling next
+19020: Pirate: waiting to be signaled
+19015: Pirate: got signaled!
+19015: Pirate: gonna check if can enter
+19015: Pirate: I can't enter :(
+19015: Pirate: signaling next
+19015: Pirate: done signaling next
+19015: Pirate: waiting to be signaled
+19017: Pirate: got signaled!
+19017: Pirate: gonna check if can enter
+19017: Pirate: I can't enter :(
+19017: Pirate: signaling next
+19017: Pirate: done signaling next
+19017: Pirate: waiting to be signaled
+19019: Pirate: got signaled!
+19019: Pirate: gonna check if can enter
+19019: Pirate: I can't enter :(
+19019: Pirate: signaling next
+19019: Pirate: done signaling next
+19019: Pirate: waiting to be signaled
+19021: Pirate: got signaled!
+19021: Pirate: gonna check if can enter
+19021: Pirate: I can't enter :(
+19021: Pirate: signaling next
+19021: Pirate: done signaling next
+19021: Pirate: waiting to be signaled
+19023: Pirate: got signaled!
+19023: Pirate: gonna check if can enter
+19023: Pirate: I can't enter :(
+19023: Pirate: signaling next
+19023: Pirate: done signaling next
+19023: Pirate: waiting to be signaled
+19025: Pirate: got signaled!
+19025: Pirate: gonna check if can enter
+19025: Pirate: I can't enter :(
+19025: Pirate: signaling next
+19025: Pirate: done signaling next
+19025: Pirate: waiting to be signaled
+19024: Pirate: got signaled!
+19024: Pirate: gonna check if can enter
+19024: Pirate: I can't enter :(
+19024: Pirate: signaling next
+19024: Pirate: done signaling next
+19024: Pirate: waiting to be signaled
+19026: Pirate: got signaled!
+19026: Pirate: gonna check if can enter
+19026: Pirate: I can't enter :(
+19026: Pirate: signaling next
+19026: Pirate: done signaling next
+19026: Pirate: waiting to be signaled
+19028: Pirate: got signaled!
+19028: Pirate: gonna check if can enter
+19028: Pirate: I can't enter :(
+19028: Pirate: signaling next
+19028: Pirate: done signaling next
+19028: Pirate: waiting to be signaled
+19030: Pirate: got signaled!
+19030: Pirate: gonna check if can enter
+19030: Pirate: I can't enter :(
+19030: Pirate: signaling next
+19030: Pirate: done signaling next
+19030: Pirate: waiting to be signaled
+19031: Pirate: got signaled!
+19031: Pirate: gonna check if can enter
+19031: Pirate: I can't enter :(
+19031: Pirate: signaling next
+19031: Pirate: done signaling next
+19031: Pirate: waiting to be signaled
+19033: Pirate: got signaled!
+19033: Pirate: gonna check if can enter
+19033: Pirate: I can't enter :(
+19033: Pirate: signaling next
+19033: Pirate: done signaling next
+19033: Pirate: waiting to be signaled
+19032: Pirate: got signaled!
+19032: Pirate: gonna check if can enter
+19032: Pirate: I can't enter :(
+19032: Pirate: signaling next
+19032: Pirate: done signaling next
+19032: Pirate: waiting to be signaled
+19011: Pirate: got signaled!
+19011: Pirate: gonna check if can enter
+19011: Pirate: I can't enter :(
+19011: Pirate: signaling next
+19011: Pirate: done signaling next
+19011: Pirate: waiting to be signaled
+19034: Pirate: got signaled!
+19034: Pirate: gonna check if can enter
+19034: Pirate: I can't enter :(
+19034: Pirate: signaling next
+19034: Pirate: done signaling next
+19034: Pirate: waiting to be signaled
+19037: Pirate: got signaled!
+19037: Pirate: gonna check if can enter
+19037: Pirate: I can't enter :(
+19037: Pirate: signaling next
+19037: Pirate: done signaling next
+19037: Pirate: waiting to be signaled
+19038: Pirate: got signaled!
+19038: Pirate: gonna check if can enter
+19038: Pirate: I can't enter :(
+19038: Pirate: signaling next
+19038: Pirate: done signaling next
+19038: Pirate: waiting to be signaled
+19029: Pirate: got signaled!
+19029: Pirate: gonna check if can enter
+19029: Pirate: I can't enter :(
+19029: Pirate: signaling next
+19029: Pirate: done signaling next
+19029: Pirate: waiting to be signaled
+19027: Pirate: got signaled!
+19027: Pirate: gonna check if can enter
+19027: Pirate: I can't enter :(
+19027: Pirate: signaling next
+19027: Pirate: done signaling next
+19027: Pirate: waiting to be signaled
+19035: Pirate: got signaled!
+19035: Pirate: gonna check if can enter
+19035: Pirate: I can't enter :(
+19035: Pirate: signaling next
+19035: Pirate: done signaling next
+19035: Pirate: waiting to be signaled
+19013: Pirate: got signaled!
+19013: Pirate: gonna check if can enter
+19013: Pirate: I can't enter :(
+19013: Pirate: signaling next
+19013: Pirate: done signaling next
+19013: Pirate: waiting to be signaled
+19039: Pirate: got signaled!
+19039: Pirate: gonna check if can enter
+19039: Pirate: I can't enter :(
+19039: Pirate: signaling next
+19039: Pirate: done signaling next
+19039: Pirate: waiting to be signaled
+19007: Pirate: got signaled!
+19007: Pirate: gonna check if can enter
+19007: Pirate: I can't enter :(
+19007: Pirate: signaling next
+19007: Pirate: done signaling next
+19007: Pirate: waiting to be signaled
+19036: Pirate: got signaled!
+19036: Pirate: gonna check if can enter
+19036: Pirate: I can't enter :(
+19036: Pirate: signaling next
+19036: Pirate: done signaling next
+19036: Pirate: waiting to be signaled
+19022: Pirate: got signaled!
+19022: Pirate: gonna check if can enter
+19022: Pirate: I can't enter :(
+19022: Pirate: signaling next
+19022: Pirate: done signaling next
+19022: Pirate: waiting to be signaled
+19040: Pirate: got signaled!
+19040: Pirate: gonna check if can enter
+19040: Pirate: I can't enter :(
+19040: Pirate: waiting to be signaled
+18951: Ninja: woke up after costuming
+18951: Ninja: acquiring statistics lock
+18951: Ninja: Revenue is now 3
+18951: Ninja: releasing statistics lock
+18951: Ninja: getting lock...
+18951: Ninja: got the lock!
+18951: Ninja: leaving store
+18951: Ninja: left the store
+18951: Ninja: released costuming team
+18951: Ninja: removing self from list
+18951: Ninja: removed!
+18951: Ninja: checking if head exists
+18951: Ninja: head exists.. gonna signal
+18951: Ninja: head exists.. done signaling
+18951: Ninja: releasing lock...
+18951: Ninja: released lock!
+18951: Ninja: Going to come back!
+18943: Ninja: got signaled!
+18943: Ninja: gonna check if can enter
+18943: Ninja: I can enter!
+18943: Ninja: entered store!
+18943: Ninja: getting costuming team
+18943: Ninja: got costuming team
+18943: Ninja: releasing lock
+18943: Ninja: released lock
+18943: Ninja: signaling
+18943: Ninja: done signaling
+18943: Ninja: about to sleep for 1.000000
+18953: Ninja: got signaled!
+18953: Ninja: gonna check if can enter
+18953: Ninja: I can't enter :(
+18953: Ninja: signaling next
+18953: Ninja: done signaling next
+18953: Ninja: waiting to be signaled
+18945: Ninja: woke up after costuming
+18945: Ninja: acquiring statistics lock
+18945: Ninja: Revenue is now 4
+18945: Ninja: releasing statistics lock
+18945: Ninja: getting lock...
+18945: Ninja: got the lock!
+18945: Ninja: leaving store
+18945: Ninja: left the store
+18945: Ninja: released costuming team
+18945: Ninja: removing self from list
+18945: Ninja: removed!
+18945: Ninja: checking if head exists
+18945: Ninja: head exists.. gonna signal
+18945: Ninja: head exists.. done signaling
+18945: Ninja: releasing lock...
+18945: Ninja: released lock!
+18945: Ninja: Bye bye!
+18943: Ninja: woke up after costuming
+18943: Ninja: acquiring statistics lock
+18943: Ninja: Revenue is now 5
+18943: Ninja: releasing statistics lock
+18943: Ninja: getting lock...
+18943: Ninja: got the lock!
+18943: Ninja: leaving store
+18943: Ninja: left the store
+18943: Ninja: released costuming team
+18943: Ninja: removing self from list
+18943: Ninja: removed!
+18943: Ninja: checking if head exists
+18943: Ninja: head exists.. gonna signal
+18943: Ninja: head exists.. done signaling
+18943: Ninja: releasing lock...
+18943: Ninja: released lock!
+18943: Ninja: Going to come back!
+18951: Ninja: gonna check if can enter
+18951: Ninja: I can enter!
+18951: Ninja: entered store!
+18951: Ninja: getting costuming team
+18951: Ninja: got costuming team
+18951: Ninja: releasing lock
+18951: Ninja: released lock
+18951: Ninja: about to sleep for 1.000000
+18953: Ninja: got signaled!
+18953: Ninja: gonna check if can enter
+18953: Ninja: I can enter!
+18953: Ninja: entered store!
+18953: Ninja: getting costuming team
+18953: Ninja: got costuming team
+18953: Ninja: releasing lock
+18953: Ninja: released lock
+18953: Ninja: signaling
+18953: Ninja: done signaling
+18953: Ninja: about to sleep for 1.000000
+18941: Ninja: got signaled!
+18941: Ninja: gonna check if can enter
+18941: Ninja: I can't enter :(
+18941: Ninja: signaling next
+18941: Ninja: done signaling next
+18941: Ninja: waiting to be signaled
+18952: Ninja: got signaled!
+18952: Ninja: gonna check if can enter
+18952: Ninja: I can't enter :(
+18952: Ninja: signaling next
+18952: Ninja: done signaling next
+18952: Ninja: waiting to be signaled
+18942: Ninja: got signaled!
+18942: Ninja: gonna check if can enter
+18942: Ninja: I can't enter :(
+18942: Ninja: signaling next
+18942: Ninja: done signaling next
+18942: Ninja: waiting to be signaled
+18954: Ninja: got signaled!
+18954: Ninja: gonna check if can enter
+18954: Ninja: I can't enter :(
+18954: Ninja: signaling next
+18954: Ninja: done signaling next
+18954: Ninja: waiting to be signaled
+18955: Ninja: got signaled!
+18955: Ninja: gonna check if can enter
+18955: Ninja: I can't enter :(
+18955: Ninja: signaling next
+18955: Ninja: done signaling next
+18955: Ninja: waiting to be signaled
+18944: Ninja: got signaled!
+18944: Ninja: gonna check if can enter
+18944: Ninja: I can't enter :(
+18944: Ninja: signaling next
+18944: Ninja: done signaling next
+18944: Ninja: waiting to be signaled
+18956: Ninja: got signaled!
+18956: Ninja: gonna check if can enter
+18956: Ninja: I can't enter :(
+18956: Ninja: signaling next
+18956: Ninja: done signaling next
+18956: Ninja: waiting to be signaled
+18946: Ninja: got signaled!
+18946: Ninja: gonna check if can enter
+18946: Ninja: I can't enter :(
+18946: Ninja: signaling next
+18946: Ninja: done signaling next
+18946: Ninja: waiting to be signaled
+18950: Ninja: got signaled!
+18950: Ninja: gonna check if can enter
+18950: Ninja: I can't enter :(
+18950: Ninja: signaling next
+18950: Ninja: done signaling next
+18950: Ninja: waiting to be signaled
+18957: Ninja: got signaled!
+18957: Ninja: gonna check if can enter
+18957: Ninja: I can't enter :(
+18957: Ninja: signaling next
+18957: Ninja: done signaling next
+18957: Ninja: waiting to be signaled
+18958: Ninja: got signaled!
+18958: Ninja: gonna check if can enter
+18958: Ninja: I can't enter :(
+18958: Ninja: signaling next
+18958: Ninja: done signaling next
+18958: Ninja: waiting to be signaled
+18961: Ninja: got signaled!
+18961: Ninja: gonna check if can enter
+18961: Ninja: I can't enter :(
+18961: Ninja: signaling next
+18961: Ninja: done signaling next
+18961: Ninja: waiting to be signaled
+18959: Ninja: got signaled!
+18959: Ninja: gonna check if can enter
+18959: Ninja: I can't enter :(
+18959: Ninja: signaling next
+18959: Ninja: done signaling next
+18959: Ninja: waiting to be signaled
+18960: Ninja: got signaled!
+18960: Ninja: gonna check if can enter
+18960: Ninja: I can't enter :(
+18960: Ninja: signaling next
+18960: Ninja: done signaling next
+18960: Ninja: waiting to be signaled
+18962: Ninja: got signaled!
+18962: Ninja: gonna check if can enter
+18962: Ninja: I can't enter :(
+18962: Ninja: signaling next
+18962: Ninja: done signaling next
+18962: Ninja: waiting to be signaled
+18948: Ninja: got signaled!
+18948: Ninja: gonna check if can enter
+18948: Ninja: I can't enter :(
+18948: Ninja: signaling next
+18948: Ninja: done signaling next
+18948: Ninja: waiting to be signaled
+18966: Ninja: got signaled!
+18966: Ninja: gonna check if can enter
+18966: Ninja: I can't enter :(
+18966: Ninja: signaling next
+18966: Ninja: done signaling next
+18966: Ninja: waiting to be signaled
+18965: Ninja: got signaled!
+18965: Ninja: gonna check if can enter
+18965: Ninja: I can't enter :(
+18965: Ninja: signaling next
+18965: Ninja: done signaling next
+18965: Ninja: waiting to be signaled
+18963: Ninja: got signaled!
+18963: Ninja: gonna check if can enter
+18963: Ninja: I can't enter :(
+18963: Ninja: signaling next
+18963: Ninja: done signaling next
+18963: Ninja: waiting to be signaled
+18964: Ninja: got signaled!
+18964: Ninja: gonna check if can enter
+18964: Ninja: I can't enter :(
+18964: Ninja: signaling next
+18964: Ninja: done signaling next
+18964: Ninja: waiting to be signaled
+18967: Ninja: got signaled!
+18967: Ninja: gonna check if can enter
+18967: Ninja: I can't enter :(
+18967: Ninja: signaling next
+18967: Ninja: done signaling next
+18967: Ninja: waiting to be signaled
+18969: Ninja: got signaled!
+18969: Ninja: gonna check if can enter
+18969: Ninja: I can't enter :(
+18969: Ninja: signaling next
+18969: Ninja: done signaling next
+18969: Ninja: waiting to be signaled
+18971: Ninja: got signaled!
+18971: Ninja: gonna check if can enter
+18971: Ninja: I can't enter :(
+18971: Ninja: signaling next
+18971: Ninja: done signaling next
+18971: Ninja: waiting to be signaled
+18974: Ninja: got signaled!
+18974: Ninja: gonna check if can enter
+18974: Ninja: I can't enter :(
+18974: Ninja: signaling next
+18974: Ninja: done signaling next
+18974: Ninja: waiting to be signaled
+18968: Ninja: got signaled!
+18968: Ninja: gonna check if can enter
+18968: Ninja: I can't enter :(
+18968: Ninja: signaling next
+18968: Ninja: done signaling next
+18968: Ninja: waiting to be signaled
+18972: Ninja: got signaled!
+18972: Ninja: gonna check if can enter
+18972: Ninja: I can't enter :(
+18972: Ninja: signaling next
+18972: Ninja: done signaling next
+18972: Ninja: waiting to be signaled
+18973: Ninja: got signaled!
+18973: Ninja: gonna check if can enter
+18973: Ninja: I can't enter :(
+18973: Ninja: signaling next
+18973: Ninja: done signaling next
+18973: Ninja: waiting to be signaled
+18975: Ninja: got signaled!
+18975: Ninja: gonna check if can enter
+18975: Ninja: I can't enter :(
+18975: Ninja: signaling next
+18975: Ninja: done signaling next
+18975: Ninja: waiting to be signaled
+18978: Ninja: got signaled!
+18978: Ninja: gonna check if can enter
+18978: Ninja: I can't enter :(
+18978: Ninja: signaling next
+18978: Ninja: done signaling next
+18978: Ninja: waiting to be signaled
+18979: Ninja: got signaled!
+18979: Ninja: gonna check if can enter
+18979: Ninja: I can't enter :(
+18979: Ninja: signaling next
+18979: Ninja: done signaling next
+18979: Ninja: waiting to be signaled
+18976: Ninja: got signaled!
+18976: Ninja: gonna check if can enter
+18976: Ninja: I can't enter :(
+18976: Ninja: signaling next
+18976: Ninja: done signaling next
+18976: Ninja: waiting to be signaled
+18977: Ninja: got signaled!
+18977: Ninja: gonna check if can enter
+18977: Ninja: I can't enter :(
+18977: Ninja: signaling next
+18977: Ninja: done signaling next
+18977: Ninja: waiting to be signaled
+18980: Ninja: got signaled!
+18980: Ninja: gonna check if can enter
+18980: Ninja: I can't enter :(
+18980: Ninja: signaling next
+18980: Ninja: done signaling next
+18980: Ninja: waiting to be signaled
+18983: Ninja: got signaled!
+18983: Ninja: gonna check if can enter
+18983: Ninja: I can't enter :(
+18983: Ninja: signaling next
+18983: Ninja: done signaling next
+18983: Ninja: waiting to be signaled
+18970: Ninja: got signaled!
+18970: Ninja: gonna check if can enter
+18970: Ninja: I can't enter :(
+18970: Ninja: signaling next
+18970: Ninja: done signaling next
+18970: Ninja: waiting to be signaled
+18982: Ninja: got signaled!
+18982: Ninja: gonna check if can enter
+18982: Ninja: I can't enter :(
+18982: Ninja: signaling next
+18982: Ninja: done signaling next
+18982: Ninja: waiting to be signaled
+18981: Ninja: got signaled!
+18981: Ninja: gonna check if can enter
+18981: Ninja: I can't enter :(
+18981: Ninja: signaling next
+18981: Ninja: done signaling next
+18981: Ninja: waiting to be signaled
+18985: Ninja: got signaled!
+18985: Ninja: gonna check if can enter
+18985: Ninja: I can't enter :(
+18985: Ninja: signaling next
+18985: Ninja: done signaling next
+18985: Ninja: waiting to be signaled
+18984: Ninja: got signaled!
+18984: Ninja: gonna check if can enter
+18984: Ninja: I can't enter :(
+18984: Ninja: signaling next
+18984: Ninja: done signaling next
+18984: Ninja: waiting to be signaled
+18986: Ninja: got signaled!
+18986: Ninja: gonna check if can enter
+18986: Ninja: I can't enter :(
+18986: Ninja: signaling next
+18986: Ninja: done signaling next
+18986: Ninja: waiting to be signaled
+18988: Ninja: got signaled!
+18988: Ninja: gonna check if can enter
+18988: Ninja: I can't enter :(
+18988: Ninja: signaling next
+18988: Ninja: done signaling next
+18988: Ninja: waiting to be signaled
+18987: Ninja: got signaled!
+18987: Ninja: gonna check if can enter
+18987: Ninja: I can't enter :(
+18987: Ninja: signaling next
+18987: Ninja: done signaling next
+18987: Ninja: waiting to be signaled
+18991: Pirate: got signaled!
+18991: Pirate: gonna check if can enter
+18991: Pirate: I can't enter :(
+18991: Pirate: signaling next
+18991: Pirate: done signaling next
+18991: Pirate: waiting to be signaled
+18992: Pirate: got signaled!
+18992: Pirate: gonna check if can enter
+18992: Pirate: I can't enter :(
+18992: Pirate: signaling next
+18992: Pirate: done signaling next
+18992: Pirate: waiting to be signaled
+18989: Ninja: got signaled!
+18989: Ninja: gonna check if can enter
+18989: Ninja: I can't enter :(
+18989: Ninja: signaling next
+18989: Ninja: done signaling next
+18989: Ninja: waiting to be signaled
+18990: Ninja: got signaled!
+18990: Ninja: gonna check if can enter
+18990: Ninja: I can't enter :(
+18990: Ninja: signaling next
+18990: Ninja: done signaling next
+18990: Ninja: waiting to be signaled
+18993: Pirate: got signaled!
+18993: Pirate: gonna check if can enter
+18993: Pirate: I can't enter :(
+18993: Pirate: signaling next
+18993: Pirate: done signaling next
+18993: Pirate: waiting to be signaled
+18994: Pirate: got signaled!
+18994: Pirate: gonna check if can enter
+18994: Pirate: I can't enter :(
+18994: Pirate: signaling next
+18994: Pirate: done signaling next
+18994: Pirate: waiting to be signaled
+18995: Pirate: got signaled!
+18995: Pirate: gonna check if can enter
+18995: Pirate: I can't enter :(
+18995: Pirate: signaling next
+18995: Pirate: done signaling next
+18995: Pirate: waiting to be signaled
+18999: Pirate: got signaled!
+18999: Pirate: gonna check if can enter
+18999: Pirate: I can't enter :(
+18999: Pirate: signaling next
+18999: Pirate: done signaling next
+18999: Pirate: waiting to be signaled
+19000: Pirate: got signaled!
+19000: Pirate: gonna check if can enter
+19000: Pirate: I can't enter :(
+19000: Pirate: signaling next
+19000: Pirate: done signaling next
+19000: Pirate: waiting to be signaled
+19002: Pirate: got signaled!
+19002: Pirate: gonna check if can enter
+19002: Pirate: I can't enter :(
+19002: Pirate: signaling next
+19002: Pirate: done signaling next
+19002: Pirate: waiting to be signaled
+18997: Pirate: got signaled!
+18997: Pirate: gonna check if can enter
+18997: Pirate: I can't enter :(
+18997: Pirate: signaling next
+18997: Pirate: done signaling next
+18997: Pirate: waiting to be signaled
+18998: Pirate: got signaled!
+18998: Pirate: gonna check if can enter
+18998: Pirate: I can't enter :(
+18998: Pirate: signaling next
+18998: Pirate: done signaling next
+18998: Pirate: waiting to be signaled
+19001: Pirate: got signaled!
+19001: Pirate: gonna check if can enter
+19001: Pirate: I can't enter :(
+19001: Pirate: signaling next
+19001: Pirate: done signaling next
+19001: Pirate: waiting to be signaled
+19006: Pirate: got signaled!
+19006: Pirate: gonna check if can enter
+19006: Pirate: I can't enter :(
+19006: Pirate: signaling next
+19006: Pirate: done signaling next
+19006: Pirate: waiting to be signaled
+18996: Pirate: got signaled!
+18996: Pirate: gonna check if can enter
+18996: Pirate: I can't enter :(
+18996: Pirate: signaling next
+18996: Pirate: done signaling next
+18996: Pirate: waiting to be signaled
+19003: Pirate: got signaled!
+19003: Pirate: gonna check if can enter
+19003: Pirate: I can't enter :(
+19003: Pirate: signaling next
+19003: Pirate: done signaling next
+19003: Pirate: waiting to be signaled
+19004: Pirate: got signaled!
+19004: Pirate: gonna check if can enter
+19004: Pirate: I can't enter :(
+19004: Pirate: signaling next
+19004: Pirate: done signaling next
+19004: Pirate: waiting to be signaled
+19005: Pirate: got signaled!
+19005: Pirate: gonna check if can enter
+19005: Pirate: I can't enter :(
+19005: Pirate: signaling next
+19005: Pirate: done signaling next
+19005: Pirate: waiting to be signaled
+19008: Pirate: got signaled!
+19008: Pirate: gonna check if can enter
+19008: Pirate: I can't enter :(
+19008: Pirate: signaling next
+19008: Pirate: done signaling next
+19008: Pirate: waiting to be signaled
+19009: Pirate: got signaled!
+19009: Pirate: gonna check if can enter
+19009: Pirate: I can't enter :(
+19009: Pirate: signaling next
+19009: Pirate: done signaling next
+19009: Pirate: waiting to be signaled
+19010: Pirate: got signaled!
+19010: Pirate: gonna check if can enter
+19010: Pirate: I can't enter :(
+19010: Pirate: signaling next
+19010: Pirate: done signaling next
+19010: Pirate: waiting to be signaled
+19012: Pirate: got signaled!
+19012: Pirate: gonna check if can enter
+19012: Pirate: I can't enter :(
+19012: Pirate: signaling next
+19012: Pirate: done signaling next
+19012: Pirate: waiting to be signaled
+19014: Pirate: got signaled!
+19014: Pirate: gonna check if can enter
+19014: Pirate: I can't enter :(
+19014: Pirate: signaling next
+19014: Pirate: done signaling next
+19014: Pirate: waiting to be signaled
+19016: Pirate: got signaled!
+19016: Pirate: gonna check if can enter
+19016: Pirate: I can't enter :(
+19016: Pirate: signaling next
+19016: Pirate: done signaling next
+19016: Pirate: waiting to be signaled
+19018: Pirate: got signaled!
+19018: Pirate: gonna check if can enter
+19018: Pirate: I can't enter :(
+19018: Pirate: signaling next
+19018: Pirate: done signaling next
+19018: Pirate: waiting to be signaled
+19020: Pirate: got signaled!
+19020: Pirate: gonna check if can enter
+19020: Pirate: I can't enter :(
+19020: Pirate: signaling next
+19020: Pirate: done signaling next
+19020: Pirate: waiting to be signaled
+19015: Pirate: got signaled!
+19015: Pirate: gonna check if can enter
+19015: Pirate: I can't enter :(
+19015: Pirate: signaling next
+19015: Pirate: done signaling next
+19015: Pirate: waiting to be signaled
+19017: Pirate: got signaled!
+19017: Pirate: gonna check if can enter
+19017: Pirate: I can't enter :(
+19017: Pirate: signaling next
+19017: Pirate: done signaling next
+19017: Pirate: waiting to be signaled
+19019: Pirate: got signaled!
+19019: Pirate: gonna check if can enter
+19019: Pirate: I can't enter :(
+19019: Pirate: signaling next
+19019: Pirate: done signaling next
+19019: Pirate: waiting to be signaled
+19021: Pirate: got signaled!
+19021: Pirate: gonna check if can enter
+19021: Pirate: I can't enter :(
+19021: Pirate: signaling next
+19021: Pirate: done signaling next
+19021: Pirate: waiting to be signaled
+19023: Pirate: got signaled!
+19023: Pirate: gonna check if can enter
+19023: Pirate: I can't enter :(
+19023: Pirate: signaling next
+19023: Pirate: done signaling next
+19023: Pirate: waiting to be signaled
+19025: Pirate: got signaled!
+19025: Pirate: gonna check if can enter
+19025: Pirate: I can't enter :(
+19025: Pirate: signaling next
+19025: Pirate: done signaling next
+19025: Pirate: waiting to be signaled
+19024: Pirate: got signaled!
+19024: Pirate: gonna check if can enter
+19024: Pirate: I can't enter :(
+19024: Pirate: signaling next
+19024: Pirate: done signaling next
+19024: Pirate: waiting to be signaled
+19026: Pirate: got signaled!
+19026: Pirate: gonna check if can enter
+19026: Pirate: I can't enter :(
+19026: Pirate: signaling next
+19026: Pirate: done signaling next
+19026: Pirate: waiting to be signaled
+19028: Pirate: got signaled!
+19028: Pirate: gonna check if can enter
+19028: Pirate: I can't enter :(
+19028: Pirate: signaling next
+19028: Pirate: done signaling next
+19028: Pirate: waiting to be signaled
+19030: Pirate: got signaled!
+19030: Pirate: gonna check if can enter
+19030: Pirate: I can't enter :(
+19030: Pirate: signaling next
+19030: Pirate: done signaling next
+19030: Pirate: waiting to be signaled
+19031: Pirate: got signaled!
+19031: Pirate: gonna check if can enter
+19031: Pirate: I can't enter :(
+19031: Pirate: signaling next
+19031: Pirate: done signaling next
+19031: Pirate: waiting to be signaled
+19033: Pirate: got signaled!
+19033: Pirate: gonna check if can enter
+19033: Pirate: I can't enter :(
+19033: Pirate: signaling next
+19033: Pirate: done signaling next
+19033: Pirate: waiting to be signaled
+19032: Pirate: got signaled!
+19032: Pirate: gonna check if can enter
+19032: Pirate: I can't enter :(
+19032: Pirate: signaling next
+19032: Pirate: done signaling next
+19032: Pirate: waiting to be signaled
+19011: Pirate: got signaled!
+19011: Pirate: gonna check if can enter
+19011: Pirate: I can't enter :(
+19011: Pirate: signaling next
+19011: Pirate: done signaling next
+19011: Pirate: waiting to be signaled
+19034: Pirate: got signaled!
+19034: Pirate: gonna check if can enter
+19034: Pirate: I can't enter :(
+19034: Pirate: signaling next
+19034: Pirate: done signaling next
+19034: Pirate: waiting to be signaled
+19037: Pirate: got signaled!
+19037: Pirate: gonna check if can enter
+19037: Pirate: I can't enter :(
+19037: Pirate: signaling next
+19037: Pirate: done signaling next
+19037: Pirate: waiting to be signaled
+19038: Pirate: got signaled!
+19038: Pirate: gonna check if can enter
+19038: Pirate: I can't enter :(
+19038: Pirate: signaling next
+19038: Pirate: done signaling next
+19038: Pirate: waiting to be signaled
+19029: Pirate: got signaled!
+19029: Pirate: gonna check if can enter
+19029: Pirate: I can't enter :(
+19029: Pirate: signaling next
+19029: Pirate: done signaling next
+19029: Pirate: waiting to be signaled
+19027: Pirate: got signaled!
+19027: Pirate: gonna check if can enter
+19027: Pirate: I can't enter :(
+19027: Pirate: signaling next
+19027: Pirate: done signaling next
+19027: Pirate: waiting to be signaled
+19035: Pirate: got signaled!
+19035: Pirate: gonna check if can enter
+19035: Pirate: I can't enter :(
+19035: Pirate: signaling next
+19035: Pirate: done signaling next
+19035: Pirate: waiting to be signaled
+19013: Pirate: got signaled!
+19013: Pirate: gonna check if can enter
+19013: Pirate: I can't enter :(
+19013: Pirate: signaling next
+19013: Pirate: done signaling next
+19013: Pirate: waiting to be signaled
+19039: Pirate: got signaled!
+19039: Pirate: gonna check if can enter
+19039: Pirate: I can't enter :(
+19039: Pirate: signaling next
+19039: Pirate: done signaling next
+19039: Pirate: waiting to be signaled
+19007: Pirate: got signaled!
+19007: Pirate: gonna check if can enter
+19007: Pirate: I can't enter :(
+19007: Pirate: signaling next
+19007: Pirate: done signaling next
+19007: Pirate: waiting to be signaled
+19036: Pirate: got signaled!
+19036: Pirate: gonna check if can enter
+19036: Pirate: I can't enter :(
+19036: Pirate: signaling next
+19036: Pirate: done signaling next
+19036: Pirate: waiting to be signaled
+19022: Pirate: got signaled!
+19022: Pirate: gonna check if can enter
+19022: Pirate: I can't enter :(
+19022: Pirate: signaling next
+19022: Pirate: done signaling next
+19022: Pirate: waiting to be signaled
+19040: Pirate: got signaled!
+19040: Pirate: gonna check if can enter
+19040: Pirate: I can't enter :(
+19040: Pirate: waiting to be signaled
+18943: Ninja: gonna check if can enter
+18943: Ninja: I can't enter :(
+18943: Ninja: added my node to list
+18943: Ninja: waiting to be signaled
+18951: Ninja: woke up after costuming
+18951: Ninja: acquiring statistics lock
+18951: Ninja: Revenue is now 6
+18951: Ninja: releasing statistics lock
+18951: Ninja: getting lock...
+18951: Ninja: got the lock!
+18951: Ninja: leaving store
+18951: Ninja: left the store
+18951: Ninja: released costuming team
+18951: Ninja: removing self from list
+18951: Ninja: removed!
+18951: Ninja: checking if head exists
+18951: Ninja: head exists.. gonna signal
+18951: Ninja: head exists.. done signaling
+18951: Ninja: releasing lock...
+18951: Ninja: released lock!
+18951: Ninja: Bye bye!
+18953: Ninja: woke up after costuming
+18953: Ninja: acquiring statistics lock
+18953: Ninja: Revenue is now 7
+18953: Ninja: releasing statistics lock
+18953: Ninja: getting lock...
+18953: Ninja: got the lock!
+18953: Ninja: leaving store
+18953: Ninja: left the store
+18953: Ninja: released costuming team
+18953: Ninja: removing self from list
+18953: Ninja: removed!
+18953: Ninja: checking if head exists
+18953: Ninja: head exists.. gonna signal
+18953: Ninja: head exists.. done signaling
+18953: Ninja: releasing lock...
+18953: Ninja: released lock!
+18953: Ninja: Going to come back!
+18941: Ninja: got signaled!
+18941: Ninja: gonna check if can enter
+18941: Ninja: I can enter!
+18941: Ninja: entered store!
+18941: Ninja: getting costuming team
+18941: Ninja: got costuming team
+18941: Ninja: releasing lock
+18941: Ninja: released lock
+18941: Ninja: signaling
+18941: Ninja: done signaling
+18941: Ninja: about to sleep for 1.000000
+18952: Ninja: got signaled!
+18952: Ninja: gonna check if can enter
+18952: Ninja: I can enter!
+18952: Ninja: entered store!
+18952: Ninja: getting costuming team
+18952: Ninja: got costuming team
+18952: Ninja: releasing lock
+18952: Ninja: released lock
+18952: Ninja: signaling
+18952: Ninja: done signaling
+18952: Ninja: about to sleep for 1.000000
+18942: Ninja: got signaled!
+18942: Ninja: gonna check if can enter
+18942: Ninja: I can't enter :(
+18942: Ninja: signaling next
+18942: Ninja: done signaling next
+18942: Ninja: waiting to be signaled
+18954: Ninja: got signaled!
+18954: Ninja: gonna check if can enter
+18954: Ninja: I can't enter :(
+18954: Ninja: signaling next
+18954: Ninja: done signaling next
+18954: Ninja: waiting to be signaled
+18955: Ninja: got signaled!
+18955: Ninja: gonna check if can enter
+18955: Ninja: I can't enter :(
+18955: Ninja: signaling next
+18955: Ninja: done signaling next
+18955: Ninja: waiting to be signaled
+18944: Ninja: got signaled!
+18944: Ninja: gonna check if can enter
+18944: Ninja: I can't enter :(
+18944: Ninja: signaling next
+18944: Ninja: done signaling next
+18944: Ninja: waiting to be signaled
+18956: Ninja: got signaled!
+18956: Ninja: gonna check if can enter
+18956: Ninja: I can't enter :(
+18956: Ninja: signaling next
+18956: Ninja: done signaling next
+18956: Ninja: waiting to be signaled
+18946: Ninja: got signaled!
+18946: Ninja: gonna check if can enter
+18946: Ninja: I can't enter :(
+18946: Ninja: signaling next
+18946: Ninja: done signaling next
+18946: Ninja: waiting to be signaled
+18950: Ninja: got signaled!
+18950: Ninja: gonna check if can enter
+18950: Ninja: I can't enter :(
+18950: Ninja: signaling next
+18950: Ninja: done signaling next
+18950: Ninja: waiting to be signaled
+18957: Ninja: got signaled!
+18957: Ninja: gonna check if can enter
+18957: Ninja: I can't enter :(
+18957: Ninja: signaling next
+18957: Ninja: done signaling next
+18957: Ninja: waiting to be signaled
+18958: Ninja: got signaled!
+18958: Ninja: gonna check if can enter
+18958: Ninja: I can't enter :(
+18958: Ninja: signaling next
+18958: Ninja: done signaling next
+18958: Ninja: waiting to be signaled
+18961: Ninja: got signaled!
+18961: Ninja: gonna check if can enter
+18961: Ninja: I can't enter :(
+18961: Ninja: signaling next
+18961: Ninja: done signaling next
+18961: Ninja: waiting to be signaled
+18959: Ninja: got signaled!
+18959: Ninja: gonna check if can enter
+18959: Ninja: I can't enter :(
+18959: Ninja: signaling next
+18959: Ninja: done signaling next
+18959: Ninja: waiting to be signaled
+18960: Ninja: got signaled!
+18960: Ninja: gonna check if can enter
+18960: Ninja: I can't enter :(
+18960: Ninja: signaling next
+18960: Ninja: done signaling next
+18960: Ninja: waiting to be signaled
+18962: Ninja: got signaled!
+18962: Ninja: gonna check if can enter
+18962: Ninja: I can't enter :(
+18962: Ninja: signaling next
+18962: Ninja: done signaling next
+18962: Ninja: waiting to be signaled
+18948: Ninja: got signaled!
+18948: Ninja: gonna check if can enter
+18948: Ninja: I can't enter :(
+18948: Ninja: signaling next
+18948: Ninja: done signaling next
+18948: Ninja: waiting to be signaled
+18966: Ninja: got signaled!
+18966: Ninja: gonna check if can enter
+18966: Ninja: I can't enter :(
+18966: Ninja: signaling next
+18966: Ninja: done signaling next
+18966: Ninja: waiting to be signaled
+18965: Ninja: got signaled!
+18965: Ninja: gonna check if can enter
+18965: Ninja: I can't enter :(
+18965: Ninja: signaling next
+18965: Ninja: done signaling next
+18965: Ninja: waiting to be signaled
+18963: Ninja: got signaled!
+18963: Ninja: gonna check if can enter
+18963: Ninja: I can't enter :(
+18963: Ninja: signaling next
+18963: Ninja: done signaling next
+18963: Ninja: waiting to be signaled
+18964: Ninja: got signaled!
+18964: Ninja: gonna check if can enter
+18964: Ninja: I can't enter :(
+18964: Ninja: signaling next
+18964: Ninja: done signaling next
+18964: Ninja: waiting to be signaled
+18967: Ninja: got signaled!
+18967: Ninja: gonna check if can enter
+18967: Ninja: I can't enter :(
+18967: Ninja: signaling next
+18967: Ninja: done signaling next
+18967: Ninja: waiting to be signaled
+18969: Ninja: got signaled!
+18969: Ninja: gonna check if can enter
+18969: Ninja: I can't enter :(
+18969: Ninja: signaling next
+18969: Ninja: done signaling next
+18969: Ninja: waiting to be signaled
+18971: Ninja: got signaled!
+18971: Ninja: gonna check if can enter
+18971: Ninja: I can't enter :(
+18971: Ninja: signaling next
+18971: Ninja: done signaling next
+18971: Ninja: waiting to be signaled
+18974: Ninja: got signaled!
+18974: Ninja: gonna check if can enter
+18974: Ninja: I can't enter :(
+18974: Ninja: signaling next
+18974: Ninja: done signaling next
+18974: Ninja: waiting to be signaled
+18968: Ninja: got signaled!
+18968: Ninja: gonna check if can enter
+18968: Ninja: I can't enter :(
+18968: Ninja: signaling next
+18968: Ninja: done signaling next
+18968: Ninja: waiting to be signaled
+18972: Ninja: got signaled!
+18972: Ninja: gonna check if can enter
+18972: Ninja: I can't enter :(
+18972: Ninja: signaling next
+18972: Ninja: done signaling next
+18972: Ninja: waiting to be signaled
+18973: Ninja: got signaled!
+18973: Ninja: gonna check if can enter
+18973: Ninja: I can't enter :(
+18973: Ninja: signaling next
+18973: Ninja: done signaling next
+18973: Ninja: waiting to be signaled
+18975: Ninja: got signaled!
+18975: Ninja: gonna check if can enter
+18975: Ninja: I can't enter :(
+18975: Ninja: signaling next
+18975: Ninja: done signaling next
+18975: Ninja: waiting to be signaled
+18978: Ninja: got signaled!
+18978: Ninja: gonna check if can enter
+18978: Ninja: I can't enter :(
+18978: Ninja: signaling next
+18978: Ninja: done signaling next
+18978: Ninja: waiting to be signaled
+18979: Ninja: got signaled!
+18979: Ninja: gonna check if can enter
+18979: Ninja: I can't enter :(
+18979: Ninja: signaling next
+18979: Ninja: done signaling next
+18979: Ninja: waiting to be signaled
+18976: Ninja: got signaled!
+18976: Ninja: gonna check if can enter
+18976: Ninja: I can't enter :(
+18976: Ninja: signaling next
+18976: Ninja: done signaling next
+18976: Ninja: waiting to be signaled
+18977: Ninja: got signaled!
+18977: Ninja: gonna check if can enter
+18977: Ninja: I can't enter :(
+18977: Ninja: signaling next
+18977: Ninja: done signaling next
+18977: Ninja: waiting to be signaled
+18980: Ninja: got signaled!
+18980: Ninja: gonna check if can enter
+18980: Ninja: I can't enter :(
+18980: Ninja: signaling next
+18980: Ninja: done signaling next
+18980: Ninja: waiting to be signaled
+18983: Ninja: got signaled!
+18983: Ninja: gonna check if can enter
+18983: Ninja: I can't enter :(
+18983: Ninja: signaling next
+18983: Ninja: done signaling next
+18983: Ninja: waiting to be signaled
+18970: Ninja: got signaled!
+18970: Ninja: gonna check if can enter
+18970: Ninja: I can't enter :(
+18970: Ninja: signaling next
+18970: Ninja: done signaling next
+18970: Ninja: waiting to be signaled
+18982: Ninja: got signaled!
+18982: Ninja: gonna check if can enter
+18982: Ninja: I can't enter :(
+18982: Ninja: signaling next
+18982: Ninja: done signaling next
+18982: Ninja: waiting to be signaled
+18981: Ninja: got signaled!
+18981: Ninja: gonna check if can enter
+18981: Ninja: I can't enter :(
+18981: Ninja: signaling next
+18981: Ninja: done signaling next
+18981: Ninja: waiting to be signaled
+18985: Ninja: got signaled!
+18985: Ninja: gonna check if can enter
+18985: Ninja: I can't enter :(
+18985: Ninja: signaling next
+18985: Ninja: done signaling next
+18985: Ninja: waiting to be signaled
+18984: Ninja: got signaled!
+18984: Ninja: gonna check if can enter
+18984: Ninja: I can't enter :(
+18984: Ninja: signaling next
+18984: Ninja: done signaling next
+18984: Ninja: waiting to be signaled
+18986: Ninja: got signaled!
+18986: Ninja: gonna check if can enter
+18986: Ninja: I can't enter :(
+18986: Ninja: signaling next
+18986: Ninja: done signaling next
+18986: Ninja: waiting to be signaled
+18988: Ninja: got signaled!
+18988: Ninja: gonna check if can enter
+18988: Ninja: I can't enter :(
+18988: Ninja: signaling next
+18988: Ninja: done signaling next
+18988: Ninja: waiting to be signaled
+18987: Ninja: got signaled!
+18987: Ninja: gonna check if can enter
+18987: Ninja: I can't enter :(
+18987: Ninja: signaling next
+18987: Ninja: done signaling next
+18987: Ninja: waiting to be signaled
+18991: Pirate: got signaled!
+18991: Pirate: gonna check if can enter
+18991: Pirate: I can't enter :(
+18991: Pirate: signaling next
+18991: Pirate: done signaling next
+18991: Pirate: waiting to be signaled
+18992: Pirate: got signaled!
+18992: Pirate: gonna check if can enter
+18992: Pirate: I can't enter :(
+18992: Pirate: signaling next
+18992: Pirate: done signaling next
+18992: Pirate: waiting to be signaled
+18989: Ninja: got signaled!
+18989: Ninja: gonna check if can enter
+18989: Ninja: I can't enter :(
+18989: Ninja: signaling next
+18989: Ninja: done signaling next
+18989: Ninja: waiting to be signaled
+18990: Ninja: got signaled!
+18990: Ninja: gonna check if can enter
+18990: Ninja: I can't enter :(
+18990: Ninja: signaling next
+18990: Ninja: done signaling next
+18990: Ninja: waiting to be signaled
+18993: Pirate: got signaled!
+18993: Pirate: gonna check if can enter
+18993: Pirate: I can't enter :(
+18993: Pirate: signaling next
+18993: Pirate: done signaling next
+18993: Pirate: waiting to be signaled
+18994: Pirate: got signaled!
+18994: Pirate: gonna check if can enter
+18994: Pirate: I can't enter :(
+18994: Pirate: signaling next
+18994: Pirate: done signaling next
+18994: Pirate: waiting to be signaled
+18995: Pirate: got signaled!
+18995: Pirate: gonna check if can enter
+18995: Pirate: I can't enter :(
+18995: Pirate: signaling next
+18995: Pirate: done signaling next
+18995: Pirate: waiting to be signaled
+18999: Pirate: got signaled!
+18999: Pirate: gonna check if can enter
+18999: Pirate: I can't enter :(
+18999: Pirate: signaling next
+18999: Pirate: done signaling next
+18999: Pirate: waiting to be signaled
+19000: Pirate: got signaled!
+19000: Pirate: gonna check if can enter
+19000: Pirate: I can't enter :(
+19000: Pirate: signaling next
+19000: Pirate: done signaling next
+19000: Pirate: waiting to be signaled
+19002: Pirate: got signaled!
+19002: Pirate: gonna check if can enter
+19002: Pirate: I can't enter :(
+19002: Pirate: signaling next
+19002: Pirate: done signaling next
+19002: Pirate: waiting to be signaled
+18997: Pirate: got signaled!
+18997: Pirate: gonna check if can enter
+18997: Pirate: I can't enter :(
+18997: Pirate: signaling next
+18997: Pirate: done signaling next
+18997: Pirate: waiting to be signaled
+18998: Pirate: got signaled!
+18998: Pirate: gonna check if can enter
+18998: Pirate: I can't enter :(
+18998: Pirate: signaling next
+18998: Pirate: done signaling next
+18998: Pirate: waiting to be signaled
+19001: Pirate: got signaled!
+19001: Pirate: gonna check if can enter
+19001: Pirate: I can't enter :(
+19001: Pirate: signaling next
+19001: Pirate: done signaling next
+19001: Pirate: waiting to be signaled
+19006: Pirate: got signaled!
+19006: Pirate: gonna check if can enter
+19006: Pirate: I can't enter :(
+19006: Pirate: signaling next
+19006: Pirate: done signaling next
+19006: Pirate: waiting to be signaled
+18996: Pirate: got signaled!
+18996: Pirate: gonna check if can enter
+18996: Pirate: I can't enter :(
+18996: Pirate: signaling next
+18996: Pirate: done signaling next
+18996: Pirate: waiting to be signaled
+19003: Pirate: got signaled!
+19003: Pirate: gonna check if can enter
+19003: Pirate: I can't enter :(
+19003: Pirate: signaling next
+19003: Pirate: done signaling next
+19003: Pirate: waiting to be signaled
+19004: Pirate: got signaled!
+19004: Pirate: gonna check if can enter
+19004: Pirate: I can't enter :(
+19004: Pirate: signaling next
+19004: Pirate: done signaling next
+19004: Pirate: waiting to be signaled
+19005: Pirate: got signaled!
+19005: Pirate: gonna check if can enter
+19005: Pirate: I can't enter :(
+19005: Pirate: signaling next
+19005: Pirate: done signaling next
+19005: Pirate: waiting to be signaled
+19008: Pirate: got signaled!
+19008: Pirate: gonna check if can enter
+19008: Pirate: I can't enter :(
+19008: Pirate: signaling next
+19008: Pirate: done signaling next
+19008: Pirate: waiting to be signaled
+19009: Pirate: got signaled!
+19009: Pirate: gonna check if can enter
+19009: Pirate: I can't enter :(
+19009: Pirate: signaling next
+19009: Pirate: done signaling next
+19009: Pirate: waiting to be signaled
+19010: Pirate: got signaled!
+19010: Pirate: gonna check if can enter
+19010: Pirate: I can't enter :(
+19010: Pirate: signaling next
+19010: Pirate: done signaling next
+19010: Pirate: waiting to be signaled
+19012: Pirate: got signaled!
+19012: Pirate: gonna check if can enter
+19012: Pirate: I can't enter :(
+19012: Pirate: signaling next
+19012: Pirate: done signaling next
+19012: Pirate: waiting to be signaled
+19014: Pirate: got signaled!
+19014: Pirate: gonna check if can enter
+19014: Pirate: I can't enter :(
+19014: Pirate: signaling next
+19014: Pirate: done signaling next
+19014: Pirate: waiting to be signaled
+19016: Pirate: got signaled!
+19016: Pirate: gonna check if can enter
+19016: Pirate: I can't enter :(
+19016: Pirate: signaling next
+19016: Pirate: done signaling next
+19016: Pirate: waiting to be signaled
+19018: Pirate: got signaled!
+19018: Pirate: gonna check if can enter
+19018: Pirate: I can't enter :(
+19018: Pirate: signaling next
+19018: Pirate: done signaling next
+19018: Pirate: waiting to be signaled
+19020: Pirate: got signaled!
+19020: Pirate: gonna check if can enter
+19020: Pirate: I can't enter :(
+19020: Pirate: signaling next
+19020: Pirate: done signaling next
+19020: Pirate: waiting to be signaled
+19015: Pirate: got signaled!
+19015: Pirate: gonna check if can enter
+19015: Pirate: I can't enter :(
+19015: Pirate: signaling next
+19015: Pirate: done signaling next
+19015: Pirate: waiting to be signaled
+19017: Pirate: got signaled!
+19017: Pirate: gonna check if can enter
+19017: Pirate: I can't enter :(
+19017: Pirate: signaling next
+19017: Pirate: done signaling next
+19017: Pirate: waiting to be signaled
+19019: Pirate: got signaled!
+19019: Pirate: gonna check if can enter
+19019: Pirate: I can't enter :(
+19019: Pirate: signaling next
+19019: Pirate: done signaling next
+19019: Pirate: waiting to be signaled
+19021: Pirate: got signaled!
+19021: Pirate: gonna check if can enter
+19021: Pirate: I can't enter :(
+19021: Pirate: signaling next
+19021: Pirate: done signaling next
+19021: Pirate: waiting to be signaled
+19023: Pirate: got signaled!
+19023: Pirate: gonna check if can enter
+19023: Pirate: I can't enter :(
+19023: Pirate: signaling next
+19023: Pirate: done signaling next
+19023: Pirate: waiting to be signaled
+19025: Pirate: got signaled!
+19025: Pirate: gonna check if can enter
+19025: Pirate: I can't enter :(
+19025: Pirate: signaling next
+19025: Pirate: done signaling next
+19025: Pirate: waiting to be signaled
+19024: Pirate: got signaled!
+19024: Pirate: gonna check if can enter
+19024: Pirate: I can't enter :(
+19024: Pirate: signaling next
+19024: Pirate: done signaling next
+19024: Pirate: waiting to be signaled
+19026: Pirate: got signaled!
+19026: Pirate: gonna check if can enter
+19026: Pirate: I can't enter :(
+19026: Pirate: signaling next
+19026: Pirate: done signaling next
+19026: Pirate: waiting to be signaled
+19028: Pirate: got signaled!
+19028: Pirate: gonna check if can enter
+19028: Pirate: I can't enter :(
+19028: Pirate: signaling next
+19028: Pirate: done signaling next
+19028: Pirate: waiting to be signaled
+19030: Pirate: got signaled!
+19030: Pirate: gonna check if can enter
+19030: Pirate: I can't enter :(
+19030: Pirate: signaling next
+19030: Pirate: done signaling next
+19030: Pirate: waiting to be signaled
+19031: Pirate: got signaled!
+19031: Pirate: gonna check if can enter
+19031: Pirate: I can't enter :(
+19031: Pirate: signaling next
+19031: Pirate: done signaling next
+19031: Pirate: waiting to be signaled
+19033: Pirate: got signaled!
+19033: Pirate: gonna check if can enter
+19033: Pirate: I can't enter :(
+19033: Pirate: signaling next
+19033: Pirate: done signaling next
+19033: Pirate: waiting to be signaled
+19032: Pirate: got signaled!
+19032: Pirate: gonna check if can enter
+19032: Pirate: I can't enter :(
+19032: Pirate: signaling next
+19032: Pirate: done signaling next
+19032: Pirate: waiting to be signaled
+19011: Pirate: got signaled!
+19011: Pirate: gonna check if can enter
+19011: Pirate: I can't enter :(
+19011: Pirate: signaling next
+19011: Pirate: done signaling next
+19011: Pirate: waiting to be signaled
+19034: Pirate: got signaled!
+19034: Pirate: gonna check if can enter
+19034: Pirate: I can't enter :(
+19034: Pirate: signaling next
+19034: Pirate: done signaling next
+19034: Pirate: waiting to be signaled
+19037: Pirate: got signaled!
+19037: Pirate: gonna check if can enter
+19037: Pirate: I can't enter :(
+19037: Pirate: signaling next
+19037: Pirate: done signaling next
+19037: Pirate: waiting to be signaled
+19038: Pirate: got signaled!
+19038: Pirate: gonna check if can enter
+19038: Pirate: I can't enter :(
+19038: Pirate: signaling next
+19038: Pirate: done signaling next
+19038: Pirate: waiting to be signaled
+19029: Pirate: got signaled!
+19029: Pirate: gonna check if can enter
+19029: Pirate: I can't enter :(
+19029: Pirate: signaling next
+19029: Pirate: done signaling next
+19029: Pirate: waiting to be signaled
+19027: Pirate: got signaled!
+19027: Pirate: gonna check if can enter
+19027: Pirate: I can't enter :(
+19027: Pirate: signaling next
+19027: Pirate: done signaling next
+19027: Pirate: waiting to be signaled
+19035: Pirate: got signaled!
+19035: Pirate: gonna check if can enter
+19035: Pirate: I can't enter :(
+19035: Pirate: signaling next
+19035: Pirate: done signaling next
+19035: Pirate: waiting to be signaled
+19013: Pirate: got signaled!
+19013: Pirate: gonna check if can enter
+19013: Pirate: I can't enter :(
+19013: Pirate: signaling next
+19013: Pirate: done signaling next
+19013: Pirate: waiting to be signaled
+19039: Pirate: got signaled!
+19039: Pirate: gonna check if can enter
+19039: Pirate: I can't enter :(
+19039: Pirate: signaling next
+19039: Pirate: done signaling next
+19039: Pirate: waiting to be signaled
+19007: Pirate: got signaled!
+19007: Pirate: gonna check if can enter
+19007: Pirate: I can't enter :(
+19007: Pirate: signaling next
+19007: Pirate: done signaling next
+19007: Pirate: waiting to be signaled
+19036: Pirate: got signaled!
+19036: Pirate: gonna check if can enter
+19036: Pirate: I can't enter :(
+19036: Pirate: signaling next
+19036: Pirate: done signaling next
+19036: Pirate: waiting to be signaled
+19022: Pirate: got signaled!
+19022: Pirate: gonna check if can enter
+19022: Pirate: I can't enter :(
+19022: Pirate: signaling next
+19022: Pirate: done signaling next
+19022: Pirate: waiting to be signaled
+19040: Pirate: got signaled!
+19040: Pirate: gonna check if can enter
+19040: Pirate: I can't enter :(
+19040: Pirate: signaling next
+19040: Pirate: done signaling next
+19040: Pirate: waiting to be signaled
+18943: Ninja: got signaled!
+18943: Ninja: gonna check if can enter
+18943: Ninja: I can't enter :(
+18943: Ninja: waiting to be signaled
+18953: Ninja: gonna check if can enter
+18953: Ninja: I can't enter :(
+18953: Ninja: added my node to list
+18953: Ninja: waiting to be signaled
+18952: Ninja: woke up after costuming
+18952: Ninja: acquiring statistics lock
+18952: Ninja: Revenue is now 8
+18952: Ninja: releasing statistics lock
+18952: Ninja: getting lock...
+18952: Ninja: got the lock!
+18952: Ninja: leaving store
+18952: Ninja: left the store
+18952: Ninja: released costuming team
+18952: Ninja: removing self from list
+18952: Ninja: removed!
+18952: Ninja: checking if head exists
+18952: Ninja: head exists.. gonna signal
+18952: Ninja: head exists.. done signaling
+18952: Ninja: releasing lock...
+18952: Ninja: released lock!
+18952: Ninja: Bye bye!
+18941: Ninja: woke up after costuming
+18941: Ninja: acquiring statistics lock
+18941: Ninja: Revenue is now 9
+18941: Ninja: releasing statistics lock
+18941: Ninja: getting lock...
+18941: Ninja: got the lock!
+18941: Ninja: leaving store
+18941: Ninja: left the store
+18941: Ninja: released costuming team
+18941: Ninja: removing self from list
+18941: Ninja: removed!
+18941: Ninja: checking if head exists
+18941: Ninja: head exists.. gonna signal
+18941: Ninja: head exists.. done signaling
+18941: Ninja: releasing lock...
+18941: Ninja: released lock!
+18941: Ninja: Bye bye!
+18942: Ninja: got signaled!
+18942: Ninja: gonna check if can enter
+18942: Ninja: I can enter!
+18942: Ninja: entered store!
+18942: Ninja: getting costuming team
+18942: Ninja: got costuming team
+18942: Ninja: releasing lock
+18942: Ninja: released lock
+18942: Ninja: signaling
+18942: Ninja: done signaling
+18942: Ninja: about to sleep for 1.000000
+18954: Ninja: got signaled!
+18954: Ninja: gonna check if can enter
+18954: Ninja: I can enter!
+18954: Ninja: entered store!
+18954: Ninja: getting costuming team
+18954: Ninja: got costuming team
+18954: Ninja: releasing lock
+18954: Ninja: released lock
+18954: Ninja: signaling
+18954: Ninja: done signaling
+18954: Ninja: about to sleep for 1.000000
+18955: Ninja: got signaled!
+18955: Ninja: gonna check if can enter
+18955: Ninja: I can't enter :(
+18955: Ninja: signaling next
+18955: Ninja: done signaling next
+18955: Ninja: waiting to be signaled
+18944: Ninja: got signaled!
+18944: Ninja: gonna check if can enter
+18944: Ninja: I can't enter :(
+18944: Ninja: signaling next
+18944: Ninja: done signaling next
+18944: Ninja: waiting to be signaled
+18956: Ninja: got signaled!
+18956: Ninja: gonna check if can enter
+18956: Ninja: I can't enter :(
+18956: Ninja: signaling next
+18956: Ninja: done signaling next
+18956: Ninja: waiting to be signaled
+18946: Ninja: got signaled!
+18946: Ninja: gonna check if can enter
+18946: Ninja: I can't enter :(
+18946: Ninja: signaling next
+18946: Ninja: done signaling next
+18946: Ninja: waiting to be signaled
+18950: Ninja: got signaled!
+18950: Ninja: gonna check if can enter
+18950: Ninja: I can't enter :(
+18950: Ninja: signaling next
+18950: Ninja: done signaling next
+18950: Ninja: waiting to be signaled
+18957: Ninja: got signaled!
+18957: Ninja: gonna check if can enter
+18957: Ninja: I can't enter :(
+18957: Ninja: signaling next
+18957: Ninja: done signaling next
+18957: Ninja: waiting to be signaled
+18958: Ninja: got signaled!
+18958: Ninja: gonna check if can enter
+18958: Ninja: I can't enter :(
+18958: Ninja: signaling next
+18958: Ninja: done signaling next
+18958: Ninja: waiting to be signaled
+18961: Ninja: got signaled!
+18961: Ninja: gonna check if can enter
+18961: Ninja: I can't enter :(
+18961: Ninja: signaling next
+18961: Ninja: done signaling next
+18961: Ninja: waiting to be signaled
+18959: Ninja: got signaled!
+18959: Ninja: gonna check if can enter
+18959: Ninja: I can't enter :(
+18959: Ninja: signaling next
+18959: Ninja: done signaling next
+18959: Ninja: waiting to be signaled
+18960: Ninja: got signaled!
+18960: Ninja: gonna check if can enter
+18960: Ninja: I can't enter :(
+18960: Ninja: signaling next
+18960: Ninja: done signaling next
+18960: Ninja: waiting to be signaled
+18962: Ninja: got signaled!
+18962: Ninja: gonna check if can enter
+18962: Ninja: I can't enter :(
+18962: Ninja: signaling next
+18962: Ninja: done signaling next
+18962: Ninja: waiting to be signaled
+18948: Ninja: got signaled!
+18948: Ninja: gonna check if can enter
+18948: Ninja: I can't enter :(
+18948: Ninja: signaling next
+18948: Ninja: done signaling next
+18948: Ninja: waiting to be signaled
+18966: Ninja: got signaled!
+18966: Ninja: gonna check if can enter
+18966: Ninja: I can't enter :(
+18966: Ninja: signaling next
+18966: Ninja: done signaling next
+18966: Ninja: waiting to be signaled
+18965: Ninja: got signaled!
+18965: Ninja: gonna check if can enter
+18965: Ninja: I can't enter :(
+18965: Ninja: signaling next
+18965: Ninja: done signaling next
+18965: Ninja: waiting to be signaled
+18963: Ninja: got signaled!
+18963: Ninja: gonna check if can enter
+18963: Ninja: I can't enter :(
+18963: Ninja: signaling next
+18963: Ninja: done signaling next
+18963: Ninja: waiting to be signaled
+18964: Ninja: got signaled!
+18964: Ninja: gonna check if can enter
+18964: Ninja: I can't enter :(
+18964: Ninja: signaling next
+18964: Ninja: done signaling next
+18964: Ninja: waiting to be signaled
+18967: Ninja: got signaled!
+18967: Ninja: gonna check if can enter
+18967: Ninja: I can't enter :(
+18967: Ninja: signaling next
+18967: Ninja: done signaling next
+18967: Ninja: waiting to be signaled
+18969: Ninja: got signaled!
+18969: Ninja: gonna check if can enter
+18969: Ninja: I can't enter :(
+18969: Ninja: signaling next
+18969: Ninja: done signaling next
+18969: Ninja: waiting to be signaled
+18971: Ninja: got signaled!
+18971: Ninja: gonna check if can enter
+18971: Ninja: I can't enter :(
+18971: Ninja: signaling next
+18971: Ninja: done signaling next
+18971: Ninja: waiting to be signaled
+18974: Ninja: got signaled!
+18974: Ninja: gonna check if can enter
+18974: Ninja: I can't enter :(
+18974: Ninja: signaling next
+18974: Ninja: done signaling next
+18974: Ninja: waiting to be signaled
+18968: Ninja: got signaled!
+18968: Ninja: gonna check if can enter
+18968: Ninja: I can't enter :(
+18968: Ninja: signaling next
+18968: Ninja: done signaling next
+18968: Ninja: waiting to be signaled
+18972: Ninja: got signaled!
+18972: Ninja: gonna check if can enter
+18972: Ninja: I can't enter :(
+18972: Ninja: signaling next
+18972: Ninja: done signaling next
+18972: Ninja: waiting to be signaled
+18973: Ninja: got signaled!
+18973: Ninja: gonna check if can enter
+18973: Ninja: I can't enter :(
+18973: Ninja: signaling next
+18973: Ninja: done signaling next
+18973: Ninja: waiting to be signaled
+18975: Ninja: got signaled!
+18975: Ninja: gonna check if can enter
+18975: Ninja: I can't enter :(
+18975: Ninja: signaling next
+18975: Ninja: done signaling next
+18975: Ninja: waiting to be signaled
+18978: Ninja: got signaled!
+18978: Ninja: gonna check if can enter
+18978: Ninja: I can't enter :(
+18978: Ninja: signaling next
+18978: Ninja: done signaling next
+18978: Ninja: waiting to be signaled
+18979: Ninja: got signaled!
+18979: Ninja: gonna check if can enter
+18979: Ninja: I can't enter :(
+18979: Ninja: signaling next
+18979: Ninja: done signaling next
+18979: Ninja: waiting to be signaled
+18976: Ninja: got signaled!
+18976: Ninja: gonna check if can enter
+18976: Ninja: I can't enter :(
+18976: Ninja: signaling next
+18976: Ninja: done signaling next
+18976: Ninja: waiting to be signaled
+18977: Ninja: got signaled!
+18977: Ninja: gonna check if can enter
+18977: Ninja: I can't enter :(
+18977: Ninja: signaling next
+18977: Ninja: done signaling next
+18977: Ninja: waiting to be signaled
+18980: Ninja: got signaled!
+18980: Ninja: gonna check if can enter
+18980: Ninja: I can't enter :(
+18980: Ninja: signaling next
+18980: Ninja: done signaling next
+18980: Ninja: waiting to be signaled
+18983: Ninja: got signaled!
+18983: Ninja: gonna check if can enter
+18983: Ninja: I can't enter :(
+18983: Ninja: signaling next
+18983: Ninja: done signaling next
+18983: Ninja: waiting to be signaled
+18970: Ninja: got signaled!
+18970: Ninja: gonna check if can enter
+18970: Ninja: I can't enter :(
+18970: Ninja: signaling next
+18970: Ninja: done signaling next
+18970: Ninja: waiting to be signaled
+18982: Ninja: got signaled!
+18982: Ninja: gonna check if can enter
+18982: Ninja: I can't enter :(
+18982: Ninja: signaling next
+18982: Ninja: done signaling next
+18982: Ninja: waiting to be signaled
+18981: Ninja: got signaled!
+18981: Ninja: gonna check if can enter
+18981: Ninja: I can't enter :(
+18981: Ninja: signaling next
+18981: Ninja: done signaling next
+18981: Ninja: waiting to be signaled
+18985: Ninja: got signaled!
+18985: Ninja: gonna check if can enter
+18985: Ninja: I can't enter :(
+18985: Ninja: signaling next
+18985: Ninja: done signaling next
+18985: Ninja: waiting to be signaled
+18984: Ninja: got signaled!
+18984: Ninja: gonna check if can enter
+18984: Ninja: I can't enter :(
+18984: Ninja: signaling next
+18984: Ninja: done signaling next
+18984: Ninja: waiting to be signaled
+18986: Ninja: got signaled!
+18986: Ninja: gonna check if can enter
+18986: Ninja: I can't enter :(
+18986: Ninja: signaling next
+18986: Ninja: done signaling next
+18986: Ninja: waiting to be signaled
+18988: Ninja: got signaled!
+18988: Ninja: gonna check if can enter
+18988: Ninja: I can't enter :(
+18988: Ninja: signaling next
+18988: Ninja: done signaling next
+18988: Ninja: waiting to be signaled
+18987: Ninja: got signaled!
+18987: Ninja: gonna check if can enter
+18987: Ninja: I can't enter :(
+18987: Ninja: signaling next
+18987: Ninja: done signaling next
+18987: Ninja: waiting to be signaled
+18991: Pirate: got signaled!
+18991: Pirate: gonna check if can enter
+18991: Pirate: I can't enter :(
+18991: Pirate: signaling next
+18991: Pirate: done signaling next
+18991: Pirate: waiting to be signaled
+18992: Pirate: got signaled!
+18992: Pirate: gonna check if can enter
+18992: Pirate: I can't enter :(
+18992: Pirate: signaling next
+18992: Pirate: done signaling next
+18992: Pirate: waiting to be signaled
+18989: Ninja: got signaled!
+18989: Ninja: gonna check if can enter
+18989: Ninja: I can't enter :(
+18989: Ninja: signaling next
+18989: Ninja: done signaling next
+18989: Ninja: waiting to be signaled
+18990: Ninja: got signaled!
+18990: Ninja: gonna check if can enter
+18990: Ninja: I can't enter :(
+18990: Ninja: signaling next
+18990: Ninja: done signaling next
+18990: Ninja: waiting to be signaled
+18993: Pirate: got signaled!
+18993: Pirate: gonna check if can enter
+18993: Pirate: I can't enter :(
+18993: Pirate: signaling next
+18993: Pirate: done signaling next
+18993: Pirate: waiting to be signaled
+18994: Pirate: got signaled!
+18994: Pirate: gonna check if can enter
+18994: Pirate: I can't enter :(
+18994: Pirate: signaling next
+18994: Pirate: done signaling next
+18994: Pirate: waiting to be signaled
+18995: Pirate: got signaled!
+18995: Pirate: gonna check if can enter
+18995: Pirate: I can't enter :(
+18995: Pirate: signaling next
+18995: Pirate: done signaling next
+18995: Pirate: waiting to be signaled
+18999: Pirate: got signaled!
+18999: Pirate: gonna check if can enter
+18999: Pirate: I can't enter :(
+18999: Pirate: signaling next
+18999: Pirate: done signaling next
+18999: Pirate: waiting to be signaled
+19000: Pirate: got signaled!
+19000: Pirate: gonna check if can enter
+19000: Pirate: I can't enter :(
+19000: Pirate: signaling next
+19000: Pirate: done signaling next
+19000: Pirate: waiting to be signaled
+19002: Pirate: got signaled!
+19002: Pirate: gonna check if can enter
+19002: Pirate: I can't enter :(
+19002: Pirate: signaling next
+19002: Pirate: done signaling next
+19002: Pirate: waiting to be signaled
+18997: Pirate: got signaled!
+18997: Pirate: gonna check if can enter
+18997: Pirate: I can't enter :(
+18997: Pirate: signaling next
+18997: Pirate: done signaling next
+18997: Pirate: waiting to be signaled
+18998: Pirate: got signaled!
+18998: Pirate: gonna check if can enter
+18998: Pirate: I can't enter :(
+18998: Pirate: signaling next
+18998: Pirate: done signaling next
+18998: Pirate: waiting to be signaled
+19001: Pirate: got signaled!
+19001: Pirate: gonna check if can enter
+19001: Pirate: I can't enter :(
+19001: Pirate: signaling next
+19001: Pirate: done signaling next
+19001: Pirate: waiting to be signaled
+19006: Pirate: got signaled!
+19006: Pirate: gonna check if can enter
+19006: Pirate: I can't enter :(
+19006: Pirate: signaling next
+19006: Pirate: done signaling next
+19006: Pirate: waiting to be signaled
+18996: Pirate: got signaled!
+18996: Pirate: gonna check if can enter
+18996: Pirate: I can't enter :(
+18996: Pirate: signaling next
+18996: Pirate: done signaling next
+18996: Pirate: waiting to be signaled
+19003: Pirate: got signaled!
+19003: Pirate: gonna check if can enter
+19003: Pirate: I can't enter :(
+19003: Pirate: signaling next
+19003: Pirate: done signaling next
+19003: Pirate: waiting to be signaled
+19004: Pirate: got signaled!
+19004: Pirate: gonna check if can enter
+19004: Pirate: I can't enter :(
+19004: Pirate: signaling next
+19004: Pirate: done signaling next
+19004: Pirate: waiting to be signaled
+19005: Pirate: got signaled!
+19005: Pirate: gonna check if can enter
+19005: Pirate: I can't enter :(
+19005: Pirate: signaling next
+19005: Pirate: done signaling next
+19005: Pirate: waiting to be signaled
+19008: Pirate: got signaled!
+19008: Pirate: gonna check if can enter
+19008: Pirate: I can't enter :(
+19008: Pirate: signaling next
+19008: Pirate: done signaling next
+19008: Pirate: waiting to be signaled
+19009: Pirate: got signaled!
+19009: Pirate: gonna check if can enter
+19009: Pirate: I can't enter :(
+19009: Pirate: signaling next
+19009: Pirate: done signaling next
+19009: Pirate: waiting to be signaled
+19010: Pirate: got signaled!
+19010: Pirate: gonna check if can enter
+19010: Pirate: I can't enter :(
+19010: Pirate: signaling next
+19010: Pirate: done signaling next
+19010: Pirate: waiting to be signaled
+19012: Pirate: got signaled!
+19012: Pirate: gonna check if can enter
+19012: Pirate: I can't enter :(
+19012: Pirate: signaling next
+19012: Pirate: done signaling next
+19012: Pirate: waiting to be signaled
+19014: Pirate: got signaled!
+19014: Pirate: gonna check if can enter
+19014: Pirate: I can't enter :(
+19014: Pirate: signaling next
+19014: Pirate: done signaling next
+19014: Pirate: waiting to be signaled
+19016: Pirate: got signaled!
+19016: Pirate: gonna check if can enter
+19016: Pirate: I can't enter :(
+19016: Pirate: signaling next
+19016: Pirate: done signaling next
+19016: Pirate: waiting to be signaled
+19018: Pirate: got signaled!
+19018: Pirate: gonna check if can enter
+19018: Pirate: I can't enter :(
+19018: Pirate: signaling next
+19018: Pirate: done signaling next
+19018: Pirate: waiting to be signaled
+19020: Pirate: got signaled!
+19020: Pirate: gonna check if can enter
+19020: Pirate: I can't enter :(
+19020: Pirate: signaling next
+19020: Pirate: done signaling next
+19020: Pirate: waiting to be signaled
+19015: Pirate: got signaled!
+19015: Pirate: gonna check if can enter
+19015: Pirate: I can't enter :(
+19015: Pirate: signaling next
+19015: Pirate: done signaling next
+19015: Pirate: waiting to be signaled
+19017: Pirate: got signaled!
+19017: Pirate: gonna check if can enter
+19017: Pirate: I can't enter :(
+19017: Pirate: signaling next
+19017: Pirate: done signaling next
+19017: Pirate: waiting to be signaled
+19019: Pirate: got signaled!
+19019: Pirate: gonna check if can enter
+19019: Pirate: I can't enter :(
+19019: Pirate: signaling next
+19019: Pirate: done signaling next
+19019: Pirate: waiting to be signaled
+19021: Pirate: got signaled!
+19021: Pirate: gonna check if can enter
+19021: Pirate: I can't enter :(
+19021: Pirate: signaling next
+19021: Pirate: done signaling next
+19021: Pirate: waiting to be signaled
+19023: Pirate: got signaled!
+19023: Pirate: gonna check if can enter
+19023: Pirate: I can't enter :(
+19023: Pirate: signaling next
+19023: Pirate: done signaling next
+19023: Pirate: waiting to be signaled
+19025: Pirate: got signaled!
+19025: Pirate: gonna check if can enter
+19025: Pirate: I can't enter :(
+19025: Pirate: signaling next
+19025: Pirate: done signaling next
+19025: Pirate: waiting to be signaled
+19024: Pirate: got signaled!
+19024: Pirate: gonna check if can enter
+19024: Pirate: I can't enter :(
+19024: Pirate: signaling next
+19024: Pirate: done signaling next
+19024: Pirate: waiting to be signaled
+19026: Pirate: got signaled!
+19026: Pirate: gonna check if can enter
+19026: Pirate: I can't enter :(
+19026: Pirate: signaling next
+19026: Pirate: done signaling next
+19026: Pirate: waiting to be signaled
+19028: Pirate: got signaled!
+19028: Pirate: gonna check if can enter
+19028: Pirate: I can't enter :(
+19028: Pirate: signaling next
+19028: Pirate: done signaling next
+19028: Pirate: waiting to be signaled
+19030: Pirate: got signaled!
+19030: Pirate: gonna check if can enter
+19030: Pirate: I can't enter :(
+19030: Pirate: signaling next
+19030: Pirate: done signaling next
+19030: Pirate: waiting to be signaled
+19031: Pirate: got signaled!
+19031: Pirate: gonna check if can enter
+19031: Pirate: I can't enter :(
+19031: Pirate: signaling next
+19031: Pirate: done signaling next
+19031: Pirate: waiting to be signaled
+19033: Pirate: got signaled!
+19033: Pirate: gonna check if can enter
+19033: Pirate: I can't enter :(
+19033: Pirate: signaling next
+19033: Pirate: done signaling next
+19033: Pirate: waiting to be signaled
+19032: Pirate: got signaled!
+19032: Pirate: gonna check if can enter
+19032: Pirate: I can't enter :(
+19032: Pirate: signaling next
+19032: Pirate: done signaling next
+19032: Pirate: waiting to be signaled
+19011: Pirate: got signaled!
+19011: Pirate: gonna check if can enter
+19011: Pirate: I can't enter :(
+19011: Pirate: signaling next
+19011: Pirate: done signaling next
+19011: Pirate: waiting to be signaled
+19034: Pirate: got signaled!
+19034: Pirate: gonna check if can enter
+19034: Pirate: I can't enter :(
+19034: Pirate: signaling next
+19034: Pirate: done signaling next
+19034: Pirate: waiting to be signaled
+19037: Pirate: got signaled!
+19037: Pirate: gonna check if can enter
+19037: Pirate: I can't enter :(
+19037: Pirate: signaling next
+19037: Pirate: done signaling next
+19037: Pirate: waiting to be signaled
+19038: Pirate: got signaled!
+19038: Pirate: gonna check if can enter
+19038: Pirate: I can't enter :(
+19038: Pirate: signaling next
+19038: Pirate: done signaling next
+19038: Pirate: waiting to be signaled
+19029: Pirate: got signaled!
+19029: Pirate: gonna check if can enter
+19029: Pirate: I can't enter :(
+19029: Pirate: signaling next
+19029: Pirate: done signaling next
+19029: Pirate: waiting to be signaled
+19027: Pirate: got signaled!
+19027: Pirate: gonna check if can enter
+19027: Pirate: I can't enter :(
+19027: Pirate: signaling next
+19027: Pirate: done signaling next
+19027: Pirate: waiting to be signaled
+19035: Pirate: got signaled!
+19035: Pirate: gonna check if can enter
+19035: Pirate: I can't enter :(
+19035: Pirate: signaling next
+19035: Pirate: done signaling next
+19035: Pirate: waiting to be signaled
+19013: Pirate: got signaled!
+19013: Pirate: gonna check if can enter
+19013: Pirate: I can't enter :(
+19013: Pirate: signaling next
+19013: Pirate: done signaling next
+19013: Pirate: waiting to be signaled
+19039: Pirate: got signaled!
+19039: Pirate: gonna check if can enter
+19039: Pirate: I can't enter :(
+19039: Pirate: signaling next
+19039: Pirate: done signaling next
+19039: Pirate: waiting to be signaled
+19007: Pirate: got signaled!
+19007: Pirate: gonna check if can enter
+19007: Pirate: I can't enter :(
+19007: Pirate: signaling next
+19007: Pirate: done signaling next
+19007: Pirate: waiting to be signaled
+19036: Pirate: got signaled!
+19036: Pirate: gonna check if can enter
+19036: Pirate: I can't enter :(
+19036: Pirate: signaling next
+19036: Pirate: done signaling next
+19036: Pirate: waiting to be signaled
+19022: Pirate: got signaled!
+19022: Pirate: gonna check if can enter
+19022: Pirate: I can't enter :(
+19022: Pirate: signaling next
+19022: Pirate: done signaling next
+19022: Pirate: waiting to be signaled
+19040: Pirate: got signaled!
+19040: Pirate: gonna check if can enter
+19040: Pirate: I can't enter :(
+19040: Pirate: signaling next
+19040: Pirate: done signaling next
+19040: Pirate: waiting to be signaled
+18943: Ninja: got signaled!
+18943: Ninja: gonna check if can enter
+18943: Ninja: I can't enter :(
+18943: Ninja: signaling next
+18943: Ninja: done signaling next
+18943: Ninja: waiting to be signaled
+18953: Ninja: got signaled!
+18953: Ninja: gonna check if can enter
+18953: Ninja: I can't enter :(
+18953: Ninja: waiting to be signaled
+18954: Ninja: woke up after costuming
+18954: Ninja: acquiring statistics lock
+18954: Ninja: Revenue is now 10
+18954: Ninja: releasing statistics lock
+18954: Ninja: getting lock...
+18954: Ninja: got the lock!
+18954: Ninja: leaving store
+18954: Ninja: left the store
+18954: Ninja: released costuming team
+18954: Ninja: removing self from list
+18954: Ninja: removed!
+18954: Ninja: checking if head exists
+18954: Ninja: head exists.. gonna signal
+18954: Ninja: head exists.. done signaling
+18954: Ninja: releasing lock...
+18954: Ninja: released lock!
+18954: Ninja: Going to come back!
+18942: Ninja: woke up after costuming
+18942: Ninja: acquiring statistics lock
+18942: Ninja: Revenue is now 11
+18942: Ninja: releasing statistics lock
+18942: Ninja: getting lock...
+18942: Ninja: got the lock!
+18942: Ninja: leaving store
+18942: Ninja: left the store
+18942: Ninja: released costuming team
+18942: Ninja: removing self from list
+18942: Ninja: removed!
+18942: Ninja: checking if head exists
+18942: Ninja: head exists.. gonna signal
+18942: Ninja: head exists.. done signaling
+18942: Ninja: releasing lock...
+18942: Ninja: released lock!
+18942: Ninja: Bye bye!
+18955: Ninja: got signaled!
+18955: Ninja: gonna check if can enter
+18955: Ninja: I can enter!
+18955: Ninja: entered store!
+18955: Ninja: getting costuming team
+18955: Ninja: got costuming team
+18955: Ninja: releasing lock
+18955: Ninja: released lock
+18955: Ninja: signaling
+18955: Ninja: done signaling
+18955: Ninja: about to sleep for 1.000000
+18944: Ninja: got signaled!
+18944: Ninja: gonna check if can enter
+18944: Ninja: I can enter!
+18944: Ninja: entered store!
+18944: Ninja: getting costuming team
+18944: Ninja: got costuming team
+18944: Ninja: releasing lock
+18944: Ninja: released lock
+18944: Ninja: signaling
+18944: Ninja: done signaling
+18944: Ninja: about to sleep for 1.000000
+18956: Ninja: got signaled!
+18956: Ninja: gonna check if can enter
+18956: Ninja: I can't enter :(
+18956: Ninja: signaling next
+18956: Ninja: done signaling next
+18956: Ninja: waiting to be signaled
+18946: Ninja: got signaled!
+18946: Ninja: gonna check if can enter
+18946: Ninja: I can't enter :(
+18946: Ninja: signaling next
+18946: Ninja: done signaling next
+18946: Ninja: waiting to be signaled
+18950: Ninja: got signaled!
+18950: Ninja: gonna check if can enter
+18950: Ninja: I can't enter :(
+18950: Ninja: signaling next
+18950: Ninja: done signaling next
+18950: Ninja: waiting to be signaled
+18957: Ninja: got signaled!
+18957: Ninja: gonna check if can enter
+18957: Ninja: I can't enter :(
+18957: Ninja: signaling next
+18957: Ninja: done signaling next
+18957: Ninja: waiting to be signaled
+18958: Ninja: got signaled!
+18958: Ninja: gonna check if can enter
+18958: Ninja: I can't enter :(
+18958: Ninja: signaling next
+18958: Ninja: done signaling next
+18958: Ninja: waiting to be signaled
+18961: Ninja: got signaled!
+18961: Ninja: gonna check if can enter
+18961: Ninja: I can't enter :(
+18961: Ninja: signaling next
+18961: Ninja: done signaling next
+18961: Ninja: waiting to be signaled
+18959: Ninja: got signaled!
+18959: Ninja: gonna check if can enter
+18959: Ninja: I can't enter :(
+18959: Ninja: signaling next
+18959: Ninja: done signaling next
+18959: Ninja: waiting to be signaled
+18960: Ninja: got signaled!
+18960: Ninja: gonna check if can enter
+18960: Ninja: I can't enter :(
+18960: Ninja: signaling next
+18960: Ninja: done signaling next
+18960: Ninja: waiting to be signaled
+18962: Ninja: got signaled!
+18962: Ninja: gonna check if can enter
+18962: Ninja: I can't enter :(
+18962: Ninja: signaling next
+18962: Ninja: done signaling next
+18962: Ninja: waiting to be signaled
+18948: Ninja: got signaled!
+18948: Ninja: gonna check if can enter
+18948: Ninja: I can't enter :(
+18948: Ninja: signaling next
+18948: Ninja: done signaling next
+18948: Ninja: waiting to be signaled
+18966: Ninja: got signaled!
+18966: Ninja: gonna check if can enter
+18966: Ninja: I can't enter :(
+18966: Ninja: signaling next
+18966: Ninja: done signaling next
+18966: Ninja: waiting to be signaled
+18965: Ninja: got signaled!
+18965: Ninja: gonna check if can enter
+18965: Ninja: I can't enter :(
+18965: Ninja: signaling next
+18965: Ninja: done signaling next
+18965: Ninja: waiting to be signaled
+18963: Ninja: got signaled!
+18963: Ninja: gonna check if can enter
+18963: Ninja: I can't enter :(
+18963: Ninja: signaling next
+18963: Ninja: done signaling next
+18963: Ninja: waiting to be signaled
+18964: Ninja: got signaled!
+18964: Ninja: gonna check if can enter
+18964: Ninja: I can't enter :(
+18964: Ninja: signaling next
+18964: Ninja: done signaling next
+18964: Ninja: waiting to be signaled
+18967: Ninja: got signaled!
+18967: Ninja: gonna check if can enter
+18967: Ninja: I can't enter :(
+18967: Ninja: signaling next
+18967: Ninja: done signaling next
+18967: Ninja: waiting to be signaled
+18969: Ninja: got signaled!
+18969: Ninja: gonna check if can enter
+18969: Ninja: I can't enter :(
+18969: Ninja: signaling next
+18969: Ninja: done signaling next
+18969: Ninja: waiting to be signaled
+18971: Ninja: got signaled!
+18971: Ninja: gonna check if can enter
+18971: Ninja: I can't enter :(
+18971: Ninja: signaling next
+18971: Ninja: done signaling next
+18971: Ninja: waiting to be signaled
+18974: Ninja: got signaled!
+18974: Ninja: gonna check if can enter
+18974: Ninja: I can't enter :(
+18974: Ninja: signaling next
+18974: Ninja: done signaling next
+18974: Ninja: waiting to be signaled
+18968: Ninja: got signaled!
+18968: Ninja: gonna check if can enter
+18968: Ninja: I can't enter :(
+18968: Ninja: signaling next
+18968: Ninja: done signaling next
+18968: Ninja: waiting to be signaled
+18972: Ninja: got signaled!
+18972: Ninja: gonna check if can enter
+18972: Ninja: I can't enter :(
+18972: Ninja: signaling next
+18972: Ninja: done signaling next
+18972: Ninja: waiting to be signaled
+18973: Ninja: got signaled!
+18973: Ninja: gonna check if can enter
+18973: Ninja: I can't enter :(
+18973: Ninja: signaling next
+18973: Ninja: done signaling next
+18973: Ninja: waiting to be signaled
+18975: Ninja: got signaled!
+18975: Ninja: gonna check if can enter
+18975: Ninja: I can't enter :(
+18975: Ninja: signaling next
+18975: Ninja: done signaling next
+18975: Ninja: waiting to be signaled
+18978: Ninja: got signaled!
+18978: Ninja: gonna check if can enter
+18978: Ninja: I can't enter :(
+18978: Ninja: signaling next
+18978: Ninja: done signaling next
+18978: Ninja: waiting to be signaled
+18979: Ninja: got signaled!
+18979: Ninja: gonna check if can enter
+18979: Ninja: I can't enter :(
+18979: Ninja: signaling next
+18979: Ninja: done signaling next
+18979: Ninja: waiting to be signaled
+18976: Ninja: got signaled!
+18976: Ninja: gonna check if can enter
+18976: Ninja: I can't enter :(
+18976: Ninja: signaling next
+18976: Ninja: done signaling next
+18976: Ninja: waiting to be signaled
+18977: Ninja: got signaled!
+18977: Ninja: gonna check if can enter
+18977: Ninja: I can't enter :(
+18977: Ninja: signaling next
+18977: Ninja: done signaling next
+18977: Ninja: waiting to be signaled
+18980: Ninja: got signaled!
+18980: Ninja: gonna check if can enter
+18980: Ninja: I can't enter :(
+18980: Ninja: signaling next
+18980: Ninja: done signaling next
+18980: Ninja: waiting to be signaled
+18983: Ninja: got signaled!
+18983: Ninja: gonna check if can enter
+18983: Ninja: I can't enter :(
+18983: Ninja: signaling next
+18983: Ninja: done signaling next
+18983: Ninja: waiting to be signaled
+18970: Ninja: got signaled!
+18970: Ninja: gonna check if can enter
+18970: Ninja: I can't enter :(
+18970: Ninja: signaling next
+18970: Ninja: done signaling next
+18970: Ninja: waiting to be signaled
+18982: Ninja: got signaled!
+18982: Ninja: gonna check if can enter
+18982: Ninja: I can't enter :(
+18982: Ninja: signaling next
+18982: Ninja: done signaling next
+18982: Ninja: waiting to be signaled
+18981: Ninja: got signaled!
+18981: Ninja: gonna check if can enter
+18981: Ninja: I can't enter :(
+18981: Ninja: signaling next
+18981: Ninja: done signaling next
+18981: Ninja: waiting to be signaled
+18985: Ninja: got signaled!
+18985: Ninja: gonna check if can enter
+18985: Ninja: I can't enter :(
+18985: Ninja: signaling next
+18985: Ninja: done signaling next
+18985: Ninja: waiting to be signaled
+18984: Ninja: got signaled!
+18984: Ninja: gonna check if can enter
+18984: Ninja: I can't enter :(
+18984: Ninja: signaling next
+18984: Ninja: done signaling next
+18984: Ninja: waiting to be signaled
+18986: Ninja: got signaled!
+18986: Ninja: gonna check if can enter
+18986: Ninja: I can't enter :(
+18986: Ninja: signaling next
+18986: Ninja: done signaling next
+18986: Ninja: waiting to be signaled
+18988: Ninja: got signaled!
+18988: Ninja: gonna check if can enter
+18988: Ninja: I can't enter :(
+18988: Ninja: signaling next
+18988: Ninja: done signaling next
+18988: Ninja: waiting to be signaled
+18987: Ninja: got signaled!
+18987: Ninja: gonna check if can enter
+18987: Ninja: I can't enter :(
+18987: Ninja: signaling next
+18987: Ninja: done signaling next
+18987: Ninja: waiting to be signaled
+18991: Pirate: got signaled!
+18991: Pirate: gonna check if can enter
+18991: Pirate: I can't enter :(
+18991: Pirate: signaling next
+18991: Pirate: done signaling next
+18991: Pirate: waiting to be signaled
+18992: Pirate: got signaled!
+18992: Pirate: gonna check if can enter
+18992: Pirate: I can't enter :(
+18992: Pirate: signaling next
+18992: Pirate: done signaling next
+18992: Pirate: waiting to be signaled
+18989: Ninja: got signaled!
+18989: Ninja: gonna check if can enter
+18989: Ninja: I can't enter :(
+18989: Ninja: signaling next
+18989: Ninja: done signaling next
+18989: Ninja: waiting to be signaled
+18990: Ninja: got signaled!
+18990: Ninja: gonna check if can enter
+18990: Ninja: I can't enter :(
+18990: Ninja: signaling next
+18990: Ninja: done signaling next
+18990: Ninja: waiting to be signaled
+18993: Pirate: got signaled!
+18993: Pirate: gonna check if can enter
+18993: Pirate: I can't enter :(
+18993: Pirate: signaling next
+18993: Pirate: done signaling next
+18993: Pirate: waiting to be signaled
+18994: Pirate: got signaled!
+18994: Pirate: gonna check if can enter
+18994: Pirate: I can't enter :(
+18994: Pirate: signaling next
+18994: Pirate: done signaling next
+18994: Pirate: waiting to be signaled
+18995: Pirate: got signaled!
+18995: Pirate: gonna check if can enter
+18995: Pirate: I can't enter :(
+18995: Pirate: signaling next
+18995: Pirate: done signaling next
+18995: Pirate: waiting to be signaled
+18999: Pirate: got signaled!
+18999: Pirate: gonna check if can enter
+18999: Pirate: I can't enter :(
+18999: Pirate: signaling next
+18999: Pirate: done signaling next
+18999: Pirate: waiting to be signaled
+19000: Pirate: got signaled!
+19000: Pirate: gonna check if can enter
+19000: Pirate: I can't enter :(
+19000: Pirate: signaling next
+19000: Pirate: done signaling next
+19000: Pirate: waiting to be signaled
+19002: Pirate: got signaled!
+19002: Pirate: gonna check if can enter
+19002: Pirate: I can't enter :(
+19002: Pirate: signaling next
+19002: Pirate: done signaling next
+19002: Pirate: waiting to be signaled
+18997: Pirate: got signaled!
+18997: Pirate: gonna check if can enter
+18997: Pirate: I can't enter :(
+18997: Pirate: signaling next
+18997: Pirate: done signaling next
+18997: Pirate: waiting to be signaled
+18998: Pirate: got signaled!
+18998: Pirate: gonna check if can enter
+18998: Pirate: I can't enter :(
+18998: Pirate: signaling next
+18998: Pirate: done signaling next
+18998: Pirate: waiting to be signaled
+19001: Pirate: got signaled!
+19001: Pirate: gonna check if can enter
+19001: Pirate: I can't enter :(
+19001: Pirate: signaling next
+19001: Pirate: done signaling next
+19001: Pirate: waiting to be signaled
+19006: Pirate: got signaled!
+19006: Pirate: gonna check if can enter
+19006: Pirate: I can't enter :(
+19006: Pirate: signaling next
+19006: Pirate: done signaling next
+19006: Pirate: waiting to be signaled
+18996: Pirate: got signaled!
+18996: Pirate: gonna check if can enter
+18996: Pirate: I can't enter :(
+18996: Pirate: signaling next
+18996: Pirate: done signaling next
+18996: Pirate: waiting to be signaled
+19003: Pirate: got signaled!
+19003: Pirate: gonna check if can enter
+19003: Pirate: I can't enter :(
+19003: Pirate: signaling next
+19003: Pirate: done signaling next
+19003: Pirate: waiting to be signaled
+19004: Pirate: got signaled!
+19004: Pirate: gonna check if can enter
+19004: Pirate: I can't enter :(
+19004: Pirate: signaling next
+19004: Pirate: done signaling next
+19004: Pirate: waiting to be signaled
+19005: Pirate: got signaled!
+19005: Pirate: gonna check if can enter
+19005: Pirate: I can't enter :(
+19005: Pirate: signaling next
+19005: Pirate: done signaling next
+19005: Pirate: waiting to be signaled
+19008: Pirate: got signaled!
+19008: Pirate: gonna check if can enter
+19008: Pirate: I can't enter :(
+19008: Pirate: signaling next
+19008: Pirate: done signaling next
+19008: Pirate: waiting to be signaled
+19009: Pirate: got signaled!
+19009: Pirate: gonna check if can enter
+19009: Pirate: I can't enter :(
+19009: Pirate: signaling next
+19009: Pirate: done signaling next
+19009: Pirate: waiting to be signaled
+19010: Pirate: got signaled!
+19010: Pirate: gonna check if can enter
+19010: Pirate: I can't enter :(
+19010: Pirate: signaling next
+19010: Pirate: done signaling next
+19010: Pirate: waiting to be signaled
+19012: Pirate: got signaled!
+19012: Pirate: gonna check if can enter
+19012: Pirate: I can't enter :(
+19012: Pirate: signaling next
+19012: Pirate: done signaling next
+19012: Pirate: waiting to be signaled
+19014: Pirate: got signaled!
+19014: Pirate: gonna check if can enter
+19014: Pirate: I can't enter :(
+19014: Pirate: signaling next
+19014: Pirate: done signaling next
+19014: Pirate: waiting to be signaled
+19016: Pirate: got signaled!
+19016: Pirate: gonna check if can enter
+19016: Pirate: I can't enter :(
+19016: Pirate: signaling next
+19016: Pirate: done signaling next
+19016: Pirate: waiting to be signaled
+19018: Pirate: got signaled!
+19018: Pirate: gonna check if can enter
+19018: Pirate: I can't enter :(
+19018: Pirate: signaling next
+19018: Pirate: done signaling next
+19018: Pirate: waiting to be signaled
+19020: Pirate: got signaled!
+19020: Pirate: gonna check if can enter
+19020: Pirate: I can't enter :(
+19020: Pirate: signaling next
+19020: Pirate: done signaling next
+19020: Pirate: waiting to be signaled
+19015: Pirate: got signaled!
+19015: Pirate: gonna check if can enter
+19015: Pirate: I can't enter :(
+19015: Pirate: signaling next
+19015: Pirate: done signaling next
+19015: Pirate: waiting to be signaled
+19017: Pirate: got signaled!
+19017: Pirate: gonna check if can enter
+19017: Pirate: I can't enter :(
+19017: Pirate: signaling next
+19017: Pirate: done signaling next
+19017: Pirate: waiting to be signaled
+19019: Pirate: got signaled!
+19019: Pirate: gonna check if can enter
+19019: Pirate: I can't enter :(
+19019: Pirate: signaling next
+19019: Pirate: done signaling next
+19019: Pirate: waiting to be signaled
+19021: Pirate: got signaled!
+19021: Pirate: gonna check if can enter
+19021: Pirate: I can't enter :(
+19021: Pirate: signaling next
+19021: Pirate: done signaling next
+19021: Pirate: waiting to be signaled
+19023: Pirate: got signaled!
+19023: Pirate: gonna check if can enter
+19023: Pirate: I can't enter :(
+19023: Pirate: signaling next
+19023: Pirate: done signaling next
+19023: Pirate: waiting to be signaled
+19025: Pirate: got signaled!
+19025: Pirate: gonna check if can enter
+19025: Pirate: I can't enter :(
+19025: Pirate: signaling next
+19025: Pirate: done signaling next
+19025: Pirate: waiting to be signaled
+19024: Pirate: got signaled!
+19024: Pirate: gonna check if can enter
+19024: Pirate: I can't enter :(
+19024: Pirate: signaling next
+19024: Pirate: done signaling next
+19024: Pirate: waiting to be signaled
+19026: Pirate: got signaled!
+19026: Pirate: gonna check if can enter
+19026: Pirate: I can't enter :(
+19026: Pirate: signaling next
+19026: Pirate: done signaling next
+19026: Pirate: waiting to be signaled
+19028: Pirate: got signaled!
+19028: Pirate: gonna check if can enter
+19028: Pirate: I can't enter :(
+19028: Pirate: signaling next
+19028: Pirate: done signaling next
+19028: Pirate: waiting to be signaled
+19030: Pirate: got signaled!
+19030: Pirate: gonna check if can enter
+19030: Pirate: I can't enter :(
+19030: Pirate: signaling next
+19030: Pirate: done signaling next
+19030: Pirate: waiting to be signaled
+19031: Pirate: got signaled!
+19031: Pirate: gonna check if can enter
+19031: Pirate: I can't enter :(
+19031: Pirate: signaling next
+19031: Pirate: done signaling next
+19031: Pirate: waiting to be signaled
+19033: Pirate: got signaled!
+19033: Pirate: gonna check if can enter
+19033: Pirate: I can't enter :(
+19033: Pirate: signaling next
+19033: Pirate: done signaling next
+19033: Pirate: waiting to be signaled
+19032: Pirate: got signaled!
+19032: Pirate: gonna check if can enter
+19032: Pirate: I can't enter :(
+19032: Pirate: signaling next
+19032: Pirate: done signaling next
+19032: Pirate: waiting to be signaled
+19011: Pirate: got signaled!
+19011: Pirate: gonna check if can enter
+19011: Pirate: I can't enter :(
+19011: Pirate: signaling next
+19011: Pirate: done signaling next
+19011: Pirate: waiting to be signaled
+19034: Pirate: got signaled!
+19034: Pirate: gonna check if can enter
+19034: Pirate: I can't enter :(
+19034: Pirate: signaling next
+19034: Pirate: done signaling next
+19034: Pirate: waiting to be signaled
+19037: Pirate: got signaled!
+19037: Pirate: gonna check if can enter
+19037: Pirate: I can't enter :(
+19037: Pirate: signaling next
+19037: Pirate: done signaling next
+19037: Pirate: waiting to be signaled
+19038: Pirate: got signaled!
+19038: Pirate: gonna check if can enter
+19038: Pirate: I can't enter :(
+19038: Pirate: signaling next
+19038: Pirate: done signaling next
+19038: Pirate: waiting to be signaled
+19029: Pirate: got signaled!
+19029: Pirate: gonna check if can enter
+19029: Pirate: I can't enter :(
+19029: Pirate: signaling next
+19029: Pirate: done signaling next
+19029: Pirate: waiting to be signaled
+19027: Pirate: got signaled!
+19027: Pirate: gonna check if can enter
+19027: Pirate: I can't enter :(
+19027: Pirate: signaling next
+19027: Pirate: done signaling next
+19027: Pirate: waiting to be signaled
+19035: Pirate: got signaled!
+19035: Pirate: gonna check if can enter
+19035: Pirate: I can't enter :(
+19035: Pirate: signaling next
+19035: Pirate: done signaling next
+19035: Pirate: waiting to be signaled
+19013: Pirate: got signaled!
+19013: Pirate: gonna check if can enter
+19013: Pirate: I can't enter :(
+19013: Pirate: signaling next
+19013: Pirate: done signaling next
+19013: Pirate: waiting to be signaled
+19039: Pirate: got signaled!
+19039: Pirate: gonna check if can enter
+19039: Pirate: I can't enter :(
+19039: Pirate: signaling next
+19039: Pirate: done signaling next
+19039: Pirate: waiting to be signaled
+19007: Pirate: got signaled!
+19007: Pirate: gonna check if can enter
+19007: Pirate: I can't enter :(
+19007: Pirate: signaling next
+19007: Pirate: done signaling next
+19007: Pirate: waiting to be signaled
+19036: Pirate: got signaled!
+19036: Pirate: gonna check if can enter
+19036: Pirate: I can't enter :(
+19036: Pirate: signaling next
+19036: Pirate: done signaling next
+19036: Pirate: waiting to be signaled
+19022: Pirate: got signaled!
+19022: Pirate: gonna check if can enter
+19022: Pirate: I can't enter :(
+19022: Pirate: signaling next
+19022: Pirate: done signaling next
+19022: Pirate: waiting to be signaled
+19040: Pirate: got signaled!
+19040: Pirate: gonna check if can enter
+19040: Pirate: I can't enter :(
+19040: Pirate: signaling next
+19040: Pirate: done signaling next
+19040: Pirate: waiting to be signaled
+18943: Ninja: got signaled!
+18943: Ninja: gonna check if can enter
+18943: Ninja: I can't enter :(
+18943: Ninja: signaling next
+18943: Ninja: done signaling next
+18943: Ninja: waiting to be signaled
+18953: Ninja: got signaled!
+18953: Ninja: gonna check if can enter
+18953: Ninja: I can't enter :(
+18953: Ninja: waiting to be signaled
+18954: Ninja: gonna check if can enter
+18954: Ninja: I can't enter :(
+18954: Ninja: added my node to list
+18954: Ninja: waiting to be signaled
+18955: Ninja: woke up after costuming
+18955: Ninja: acquiring statistics lock
+18955: Ninja: Revenue is now 12
+18955: Ninja: releasing statistics lock
+18955: Ninja: getting lock...
+18955: Ninja: got the lock!
+18955: Ninja: leaving store
+18955: Ninja: left the store
+18955: Ninja: released costuming team
+18955: Ninja: removing self from list
+18955: Ninja: removed!
+18955: Ninja: checking if head exists
+18955: Ninja: head exists.. gonna signal
+18955: Ninja: head exists.. done signaling
+18955: Ninja: releasing lock...
+18955: Ninja: released lock!
+18955: Ninja: Bye bye!
+18944: Ninja: woke up after costuming
+18944: Ninja: acquiring statistics lock
+18944: Ninja: Revenue is now 13
+18944: Ninja: releasing statistics lock
+18944: Ninja: getting lock...
+18944: Ninja: got the lock!
+18944: Ninja: leaving store
+18944: Ninja: left the store
+18944: Ninja: released costuming team
+18944: Ninja: removing self from list
+18944: Ninja: removed!
+18944: Ninja: checking if head exists
+18944: Ninja: head exists.. gonna signal
+18944: Ninja: head exists.. done signaling
+18944: Ninja: releasing lock...
+18944: Ninja: released lock!
+18944: Ninja: Going to come back!
+18956: Ninja: got signaled!
+18956: Ninja: gonna check if can enter
+18956: Ninja: I can enter!
+18956: Ninja: entered store!
+18956: Ninja: getting costuming team
+18956: Ninja: got costuming team
+18956: Ninja: releasing lock
+18956: Ninja: released lock
+18956: Ninja: signaling
+18956: Ninja: done signaling
+18956: Ninja: about to sleep for 1.000000
+18946: Ninja: got signaled!
+18946: Ninja: gonna check if can enter
+18946: Ninja: I can enter!
+18946: Ninja: entered store!
+18946: Ninja: getting costuming team
+18946: Ninja: got costuming team
+18946: Ninja: releasing lock
+18946: Ninja: released lock
+18946: Ninja: signaling
+18946: Ninja: done signaling
+18946: Ninja: about to sleep for 1.000000
+18950: Ninja: got signaled!
+18950: Ninja: gonna check if can enter
+18950: Ninja: I can't enter :(
+18950: Ninja: signaling next
+18950: Ninja: done signaling next
+18950: Ninja: waiting to be signaled
+18957: Ninja: got signaled!
+18957: Ninja: gonna check if can enter
+18957: Ninja: I can't enter :(
+18957: Ninja: signaling next
+18957: Ninja: done signaling next
+18957: Ninja: waiting to be signaled
+18958: Ninja: got signaled!
+18958: Ninja: gonna check if can enter
+18958: Ninja: I can't enter :(
+18958: Ninja: signaling next
+18958: Ninja: done signaling next
+18958: Ninja: waiting to be signaled
+18961: Ninja: got signaled!
+18961: Ninja: gonna check if can enter
+18961: Ninja: I can't enter :(
+18961: Ninja: signaling next
+18961: Ninja: done signaling next
+18961: Ninja: waiting to be signaled
+18959: Ninja: got signaled!
+18959: Ninja: gonna check if can enter
+18959: Ninja: I can't enter :(
+18959: Ninja: signaling next
+18959: Ninja: done signaling next
+18959: Ninja: waiting to be signaled
+18960: Ninja: got signaled!
+18960: Ninja: gonna check if can enter
+18960: Ninja: I can't enter :(
+18960: Ninja: signaling next
+18960: Ninja: done signaling next
+18960: Ninja: waiting to be signaled
+18962: Ninja: got signaled!
+18962: Ninja: gonna check if can enter
+18962: Ninja: I can't enter :(
+18962: Ninja: signaling next
+18962: Ninja: done signaling next
+18962: Ninja: waiting to be signaled
+18948: Ninja: got signaled!
+18948: Ninja: gonna check if can enter
+18948: Ninja: I can't enter :(
+18948: Ninja: signaling next
+18948: Ninja: done signaling next
+18948: Ninja: waiting to be signaled
+18966: Ninja: got signaled!
+18966: Ninja: gonna check if can enter
+18966: Ninja: I can't enter :(
+18966: Ninja: signaling next
+18966: Ninja: done signaling next
+18966: Ninja: waiting to be signaled
+18965: Ninja: got signaled!
+18965: Ninja: gonna check if can enter
+18965: Ninja: I can't enter :(
+18965: Ninja: signaling next
+18965: Ninja: done signaling next
+18965: Ninja: waiting to be signaled
+18963: Ninja: got signaled!
+18963: Ninja: gonna check if can enter
+18963: Ninja: I can't enter :(
+18963: Ninja: signaling next
+18963: Ninja: done signaling next
+18963: Ninja: waiting to be signaled
+18964: Ninja: got signaled!
+18964: Ninja: gonna check if can enter
+18964: Ninja: I can't enter :(
+18964: Ninja: signaling next
+18964: Ninja: done signaling next
+18964: Ninja: waiting to be signaled
+18967: Ninja: got signaled!
+18967: Ninja: gonna check if can enter
+18967: Ninja: I can't enter :(
+18967: Ninja: signaling next
+18967: Ninja: done signaling next
+18967: Ninja: waiting to be signaled
+18969: Ninja: got signaled!
+18969: Ninja: gonna check if can enter
+18969: Ninja: I can't enter :(
+18969: Ninja: signaling next
+18969: Ninja: done signaling next
+18969: Ninja: waiting to be signaled
+18971: Ninja: got signaled!
+18971: Ninja: gonna check if can enter
+18971: Ninja: I can't enter :(
+18971: Ninja: signaling next
+18971: Ninja: done signaling next
+18971: Ninja: waiting to be signaled
+18974: Ninja: got signaled!
+18974: Ninja: gonna check if can enter
+18974: Ninja: I can't enter :(
+18974: Ninja: signaling next
+18974: Ninja: done signaling next
+18974: Ninja: waiting to be signaled
+18968: Ninja: got signaled!
+18968: Ninja: gonna check if can enter
+18968: Ninja: I can't enter :(
+18968: Ninja: signaling next
+18968: Ninja: done signaling next
+18968: Ninja: waiting to be signaled
+18972: Ninja: got signaled!
+18972: Ninja: gonna check if can enter
+18972: Ninja: I can't enter :(
+18972: Ninja: signaling next
+18972: Ninja: done signaling next
+18972: Ninja: waiting to be signaled
+18973: Ninja: got signaled!
+18973: Ninja: gonna check if can enter
+18973: Ninja: I can't enter :(
+18973: Ninja: signaling next
+18973: Ninja: done signaling next
+18973: Ninja: waiting to be signaled
+18975: Ninja: got signaled!
+18975: Ninja: gonna check if can enter
+18975: Ninja: I can't enter :(
+18975: Ninja: signaling next
+18975: Ninja: done signaling next
+18975: Ninja: waiting to be signaled
+18978: Ninja: got signaled!
+18978: Ninja: gonna check if can enter
+18978: Ninja: I can't enter :(
+18978: Ninja: signaling next
+18978: Ninja: done signaling next
+18978: Ninja: waiting to be signaled
+18979: Ninja: got signaled!
+18979: Ninja: gonna check if can enter
+18979: Ninja: I can't enter :(
+18979: Ninja: signaling next
+18979: Ninja: done signaling next
+18979: Ninja: waiting to be signaled
+18976: Ninja: got signaled!
+18976: Ninja: gonna check if can enter
+18976: Ninja: I can't enter :(
+18976: Ninja: signaling next
+18976: Ninja: done signaling next
+18976: Ninja: waiting to be signaled
+18977: Ninja: got signaled!
+18977: Ninja: gonna check if can enter
+18977: Ninja: I can't enter :(
+18977: Ninja: signaling next
+18977: Ninja: done signaling next
+18977: Ninja: waiting to be signaled
+18980: Ninja: got signaled!
+18980: Ninja: gonna check if can enter
+18980: Ninja: I can't enter :(
+18980: Ninja: signaling next
+18980: Ninja: done signaling next
+18980: Ninja: waiting to be signaled
+18983: Ninja: got signaled!
+18983: Ninja: gonna check if can enter
+18983: Ninja: I can't enter :(
+18983: Ninja: signaling next
+18983: Ninja: done signaling next
+18983: Ninja: waiting to be signaled
+18970: Ninja: got signaled!
+18970: Ninja: gonna check if can enter
+18970: Ninja: I can't enter :(
+18970: Ninja: signaling next
+18970: Ninja: done signaling next
+18970: Ninja: waiting to be signaled
+18982: Ninja: got signaled!
+18982: Ninja: gonna check if can enter
+18982: Ninja: I can't enter :(
+18982: Ninja: signaling next
+18982: Ninja: done signaling next
+18982: Ninja: waiting to be signaled
+18981: Ninja: got signaled!
+18981: Ninja: gonna check if can enter
+18981: Ninja: I can't enter :(
+18981: Ninja: signaling next
+18981: Ninja: done signaling next
+18981: Ninja: waiting to be signaled
+18985: Ninja: got signaled!
+18985: Ninja: gonna check if can enter
+18985: Ninja: I can't enter :(
+18985: Ninja: signaling next
+18985: Ninja: done signaling next
+18985: Ninja: waiting to be signaled
+18984: Ninja: got signaled!
+18984: Ninja: gonna check if can enter
+18984: Ninja: I can't enter :(
+18984: Ninja: signaling next
+18984: Ninja: done signaling next
+18984: Ninja: waiting to be signaled
+18986: Ninja: got signaled!
+18986: Ninja: gonna check if can enter
+18986: Ninja: I can't enter :(
+18986: Ninja: signaling next
+18986: Ninja: done signaling next
+18986: Ninja: waiting to be signaled
+18988: Ninja: got signaled!
+18988: Ninja: gonna check if can enter
+18988: Ninja: I can't enter :(
+18988: Ninja: signaling next
+18988: Ninja: done signaling next
+18988: Ninja: waiting to be signaled
+18987: Ninja: got signaled!
+18987: Ninja: gonna check if can enter
+18987: Ninja: I can't enter :(
+18987: Ninja: signaling next
+18987: Ninja: done signaling next
+18987: Ninja: waiting to be signaled
+18991: Pirate: got signaled!
+18991: Pirate: gonna check if can enter
+18991: Pirate: I can't enter :(
+18991: Pirate: signaling next
+18991: Pirate: done signaling next
+18991: Pirate: waiting to be signaled
+18992: Pirate: got signaled!
+18992: Pirate: gonna check if can enter
+18992: Pirate: I can't enter :(
+18992: Pirate: signaling next
+18992: Pirate: done signaling next
+18992: Pirate: waiting to be signaled
+18989: Ninja: got signaled!
+18989: Ninja: gonna check if can enter
+18989: Ninja: I can't enter :(
+18989: Ninja: signaling next
+18989: Ninja: done signaling next
+18989: Ninja: waiting to be signaled
+18990: Ninja: got signaled!
+18990: Ninja: gonna check if can enter
+18990: Ninja: I can't enter :(
+18990: Ninja: signaling next
+18990: Ninja: done signaling next
+18990: Ninja: waiting to be signaled
+18993: Pirate: got signaled!
+18993: Pirate: gonna check if can enter
+18993: Pirate: I can't enter :(
+18993: Pirate: signaling next
+18993: Pirate: done signaling next
+18993: Pirate: waiting to be signaled
+18994: Pirate: got signaled!
+18994: Pirate: gonna check if can enter
+18994: Pirate: I can't enter :(
+18994: Pirate: signaling next
+18994: Pirate: done signaling next
+18994: Pirate: waiting to be signaled
+18995: Pirate: got signaled!
+18995: Pirate: gonna check if can enter
+18995: Pirate: I can't enter :(
+18995: Pirate: signaling next
+18995: Pirate: done signaling next
+18995: Pirate: waiting to be signaled
+18999: Pirate: got signaled!
+18999: Pirate: gonna check if can enter
+18999: Pirate: I can't enter :(
+18999: Pirate: signaling next
+18999: Pirate: done signaling next
+18999: Pirate: waiting to be signaled
+19000: Pirate: got signaled!
+19000: Pirate: gonna check if can enter
+19000: Pirate: I can't enter :(
+19000: Pirate: signaling next
+19000: Pirate: done signaling next
+19000: Pirate: waiting to be signaled
+19002: Pirate: got signaled!
+19002: Pirate: gonna check if can enter
+19002: Pirate: I can't enter :(
+19002: Pirate: signaling next
+19002: Pirate: done signaling next
+19002: Pirate: waiting to be signaled
+18997: Pirate: got signaled!
+18997: Pirate: gonna check if can enter
+18997: Pirate: I can't enter :(
+18997: Pirate: signaling next
+18997: Pirate: done signaling next
+18997: Pirate: waiting to be signaled
+18998: Pirate: got signaled!
+18998: Pirate: gonna check if can enter
+18998: Pirate: I can't enter :(
+18998: Pirate: signaling next
+18998: Pirate: done signaling next
+18998: Pirate: waiting to be signaled
+19001: Pirate: got signaled!
+19001: Pirate: gonna check if can enter
+19001: Pirate: I can't enter :(
+19001: Pirate: signaling next
+19001: Pirate: done signaling next
+19001: Pirate: waiting to be signaled
+19006: Pirate: got signaled!
+19006: Pirate: gonna check if can enter
+19006: Pirate: I can't enter :(
+19006: Pirate: signaling next
+19006: Pirate: done signaling next
+19006: Pirate: waiting to be signaled
+18996: Pirate: got signaled!
+18996: Pirate: gonna check if can enter
+18996: Pirate: I can't enter :(
+18996: Pirate: signaling next
+18996: Pirate: done signaling next
+18996: Pirate: waiting to be signaled
+19003: Pirate: got signaled!
+19003: Pirate: gonna check if can enter
+19003: Pirate: I can't enter :(
+19003: Pirate: signaling next
+19003: Pirate: done signaling next
+19003: Pirate: waiting to be signaled
+19004: Pirate: got signaled!
+19004: Pirate: gonna check if can enter
+19004: Pirate: I can't enter :(
+19004: Pirate: signaling next
+19004: Pirate: done signaling next
+19004: Pirate: waiting to be signaled
+19005: Pirate: got signaled!
+19005: Pirate: gonna check if can enter
+19005: Pirate: I can't enter :(
+19005: Pirate: signaling next
+19005: Pirate: done signaling next
+19005: Pirate: waiting to be signaled
+19008: Pirate: got signaled!
+19008: Pirate: gonna check if can enter
+19008: Pirate: I can't enter :(
+19008: Pirate: signaling next
+19008: Pirate: done signaling next
+19008: Pirate: waiting to be signaled
+19009: Pirate: got signaled!
+19009: Pirate: gonna check if can enter
+19009: Pirate: I can't enter :(
+19009: Pirate: signaling next
+19009: Pirate: done signaling next
+19009: Pirate: waiting to be signaled
+19010: Pirate: got signaled!
+19010: Pirate: gonna check if can enter
+19010: Pirate: I can't enter :(
+19010: Pirate: signaling next
+19010: Pirate: done signaling next
+19010: Pirate: waiting to be signaled
+19012: Pirate: got signaled!
+19012: Pirate: gonna check if can enter
+19012: Pirate: I can't enter :(
+19012: Pirate: signaling next
+19012: Pirate: done signaling next
+19012: Pirate: waiting to be signaled
+19014: Pirate: got signaled!
+19014: Pirate: gonna check if can enter
+19014: Pirate: I can't enter :(
+19014: Pirate: signaling next
+19014: Pirate: done signaling next
+19014: Pirate: waiting to be signaled
+19016: Pirate: got signaled!
+19016: Pirate: gonna check if can enter
+19016: Pirate: I can't enter :(
+19016: Pirate: signaling next
+19016: Pirate: done signaling next
+19016: Pirate: waiting to be signaled
+19018: Pirate: got signaled!
+19018: Pirate: gonna check if can enter
+19018: Pirate: I can't enter :(
+19018: Pirate: signaling next
+19018: Pirate: done signaling next
+19018: Pirate: waiting to be signaled
+19020: Pirate: got signaled!
+19020: Pirate: gonna check if can enter
+19020: Pirate: I can't enter :(
+19020: Pirate: signaling next
+19020: Pirate: done signaling next
+19020: Pirate: waiting to be signaled
+19015: Pirate: got signaled!
+19015: Pirate: gonna check if can enter
+19015: Pirate: I can't enter :(
+19015: Pirate: signaling next
+19015: Pirate: done signaling next
+19015: Pirate: waiting to be signaled
+19017: Pirate: got signaled!
+19017: Pirate: gonna check if can enter
+19017: Pirate: I can't enter :(
+19017: Pirate: signaling next
+19017: Pirate: done signaling next
+19017: Pirate: waiting to be signaled
+19019: Pirate: got signaled!
+19019: Pirate: gonna check if can enter
+19019: Pirate: I can't enter :(
+19019: Pirate: signaling next
+19019: Pirate: done signaling next
+19019: Pirate: waiting to be signaled
+19021: Pirate: got signaled!
+19021: Pirate: gonna check if can enter
+19021: Pirate: I can't enter :(
+19021: Pirate: signaling next
+19021: Pirate: done signaling next
+19021: Pirate: waiting to be signaled
+19023: Pirate: got signaled!
+19023: Pirate: gonna check if can enter
+19023: Pirate: I can't enter :(
+19023: Pirate: signaling next
+19023: Pirate: done signaling next
+19023: Pirate: waiting to be signaled
+19025: Pirate: got signaled!
+19025: Pirate: gonna check if can enter
+19025: Pirate: I can't enter :(
+19025: Pirate: signaling next
+19025: Pirate: done signaling next
+19025: Pirate: waiting to be signaled
+19024: Pirate: got signaled!
+19024: Pirate: gonna check if can enter
+19024: Pirate: I can't enter :(
+19024: Pirate: signaling next
+19024: Pirate: done signaling next
+19024: Pirate: waiting to be signaled
+19026: Pirate: got signaled!
+19026: Pirate: gonna check if can enter
+19026: Pirate: I can't enter :(
+19026: Pirate: signaling next
+19026: Pirate: done signaling next
+19026: Pirate: waiting to be signaled
+19028: Pirate: got signaled!
+19028: Pirate: gonna check if can enter
+19028: Pirate: I can't enter :(
+19028: Pirate: signaling next
+19028: Pirate: done signaling next
+19028: Pirate: waiting to be signaled
+19030: Pirate: got signaled!
+19030: Pirate: gonna check if can enter
+19030: Pirate: I can't enter :(
+19030: Pirate: signaling next
+19030: Pirate: done signaling next
+19030: Pirate: waiting to be signaled
+19031: Pirate: got signaled!
+19031: Pirate: gonna check if can enter
+19031: Pirate: I can't enter :(
+19031: Pirate: signaling next
+19031: Pirate: done signaling next
+19031: Pirate: waiting to be signaled
+19033: Pirate: got signaled!
+19033: Pirate: gonna check if can enter
+19033: Pirate: I can't enter :(
+19033: Pirate: signaling next
+19033: Pirate: done signaling next
+19033: Pirate: waiting to be signaled
+19032: Pirate: got signaled!
+19032: Pirate: gonna check if can enter
+19032: Pirate: I can't enter :(
+19032: Pirate: signaling next
+19032: Pirate: done signaling next
+19032: Pirate: waiting to be signaled
+19011: Pirate: got signaled!
+19011: Pirate: gonna check if can enter
+19011: Pirate: I can't enter :(
+19011: Pirate: signaling next
+19011: Pirate: done signaling next
+19011: Pirate: waiting to be signaled
+19034: Pirate: got signaled!
+19034: Pirate: gonna check if can enter
+19034: Pirate: I can't enter :(
+19034: Pirate: signaling next
+19034: Pirate: done signaling next
+19034: Pirate: waiting to be signaled
+19037: Pirate: got signaled!
+19037: Pirate: gonna check if can enter
+19037: Pirate: I can't enter :(
+19037: Pirate: signaling next
+19037: Pirate: done signaling next
+19037: Pirate: waiting to be signaled
+19038: Pirate: got signaled!
+19038: Pirate: gonna check if can enter
+19038: Pirate: I can't enter :(
+19038: Pirate: signaling next
+19038: Pirate: done signaling next
+19038: Pirate: waiting to be signaled
+19029: Pirate: got signaled!
+19029: Pirate: gonna check if can enter
+19029: Pirate: I can't enter :(
+19029: Pirate: signaling next
+19029: Pirate: done signaling next
+19029: Pirate: waiting to be signaled
+19027: Pirate: got signaled!
+19027: Pirate: gonna check if can enter
+19027: Pirate: I can't enter :(
+19027: Pirate: signaling next
+19027: Pirate: done signaling next
+19027: Pirate: waiting to be signaled
+19035: Pirate: got signaled!
+19035: Pirate: gonna check if can enter
+19035: Pirate: I can't enter :(
+19035: Pirate: signaling next
+19035: Pirate: done signaling next
+19035: Pirate: waiting to be signaled
+19013: Pirate: got signaled!
+19013: Pirate: gonna check if can enter
+19013: Pirate: I can't enter :(
+19013: Pirate: signaling next
+19013: Pirate: done signaling next
+19013: Pirate: waiting to be signaled
+19039: Pirate: got signaled!
+19039: Pirate: gonna check if can enter
+19039: Pirate: I can't enter :(
+19039: Pirate: signaling next
+19039: Pirate: done signaling next
+19039: Pirate: waiting to be signaled
+19007: Pirate: got signaled!
+19007: Pirate: gonna check if can enter
+19007: Pirate: I can't enter :(
+19007: Pirate: signaling next
+19007: Pirate: done signaling next
+19007: Pirate: waiting to be signaled
+19036: Pirate: got signaled!
+19036: Pirate: gonna check if can enter
+19036: Pirate: I can't enter :(
+19036: Pirate: signaling next
+19036: Pirate: done signaling next
+19036: Pirate: waiting to be signaled
+19022: Pirate: got signaled!
+19022: Pirate: gonna check if can enter
+19022: Pirate: I can't enter :(
+19022: Pirate: signaling next
+19022: Pirate: done signaling next
+19022: Pirate: waiting to be signaled
+19040: Pirate: got signaled!
+19040: Pirate: gonna check if can enter
+19040: Pirate: I can't enter :(
+19040: Pirate: signaling next
+19040: Pirate: done signaling19045: Spawned
+19050: Spawned
+19047: Spawned
+19048: Spawned
+19046: Spawned
+19044: Spawned
+19043: Spawned
+19048: Ninja: gonna check if can enter
+19048: Ninja: I can enter!
+19048: Ninja: entered store!
+19048: Ninja: getting costuming team
+19048: Ninja: got costuming team
+19048: Ninja: releasing lock
+19048: Ninja: released lock
+19048: Ninja: about to sleep for 4.028558
+19053: Spawned
+19049: Spawned
+19052: Spawned
+19051: Spawned
+19054: Spawned
+19057: Spawned
+19056: Spawned
+19055: Spawned
+19058: Spawned
+19060: Spawned
+19059: Spawned
+19059: Pirate: gonna check if can enter
+19059: Pirate: I can't enter :(
+19059: Pirate: added my node to list
+19059: Pirate: waiting to be signaled
+19061: Spawned
+19062: Spawned
+19048: Ninja: woke up after costuming
+19048: Ninja: acquiring statistics lock
+19048: Ninja: Revenue is now 5
+19048: Ninja: releasing statistics lock
+19048: Ninja: getting lock...
+19048: Ninja: got the lock!
+19048: Ninja: leaving store
+19048: Ninja: left the store
+19048: Ninja: released costuming team
+19048: Ninja: removing self from list
+19048: Ninja: removed!
+19048: Ninja: checking if head exists
+19048: Ninja: head exists.. gonna signal
+19048: Ninja: head exists.. done signaling
+19048: Ninja: releasing lock...
+19048: Ninja: released lock!
+19048: Ninja: Bye bye!
+19059: Pirate: got signaled!
+19059: Pirate: gonna check if can enter
+19059: Pirate: I can enter!
+19059: Pirate: entered store!
+19059: Pirate: getting costuming team
+19059: Pirate: got costuming team
+19059: Pirate: releasing lock
+19059: Pirate: released lock
+19059: Pirate: about to sleep for 3.496298
+19059: Pirate: woke up after costuming
+19059: Pirate: acquiring statistics lock
+19059: Pirate: Revenue is now 9
+19059: Pirate: releasing statistics lock
+19059: Pirate: getting lock...
+19059: Pirate: got the lock!
+19059: Pirate: leaving store
+19059: Pirate: left the store
+19059: Pirate: released costuming team
+19059: Pirate: removing self from list
+19059: Pirate: removed!
+19059: Pirate: checking if head exists
+19059: Pirate: releasing lock...
+19059: Pirate: released lock!
+19059: Pirate: Bye bye!
+19046: Ninja: gonna check if can enter
+19046: Ninja: I can enter!
+19046: Ninja: entered store!
+19046: Ninja: getting costuming team
+19046: Ninja: got costuming team
+19046: Ninja: releasing lock
+19046: Ninja: released lock
+19046: Ninja: about to sleep for 1.167832
+19046: Ninja: woke up after costuming
+19046: Ninja: acquiring statistics lock
+19046: Ninja: Revenue is now 11
+19046: Ninja: releasing statistics lock
+19046: Ninja: getting lock...
+19046: Ninja: got the lock!
+19046: Ninja: leaving store
+19046: Ninja: left the store
+19046: Ninja: released costuming team
+19046: Ninja: removing self from list
+19046: Ninja: removed!
+19046: Ninja: checking if head exists
+19046: Ninja: releasing lock...
+19046: Ninja: released lock!
+19046: Ninja: Bye bye!
+19052: Ninja: gonna check if can enter
+19052: Ninja: I can enter!
+19052: Ninja: entered store!
+19052: Ninja: getting costuming team
+19052: Ninja: got costuming team
+19052: Ninja: releasing lock
+19052: Ninja: released lock
+19052: Ninja: about to sleep for 2.546374
+19049: Ninja: gonna check if can enter
+19049: Ninja: I can enter!
+19049: Ninja: entered store!
+19049: Ninja: getting costuming team
+19049: Ninja: got costuming team
+19049: Ninja: releasing lock
+19049: Ninja: released lock
+19049: Ninja: about to sleep for 4.009079
+19051: Ninja: gonna check if can enter
+19051: Ninja: I can enter!
+19051: Ninja: entered store!
+19051: Ninja: getting costuming team
+19051: Ninja: got costuming team
+19051: Ninja: releasing lock
+19051: Ninja: released lock
+19051: Ninja: about to sleep for 1.609451
+19043: Ninja: gonna check if can enter
+19043: Ninja: I can't enter :(
+19043: Ninja: added my node to list
+19043: Ninja: waiting to be signaled
+19051: Ninja: woke up after costuming
+19051: Ninja: acquiring statistics lock
+19051: Ninja: Revenue is now 13
+19051: Ninja: releasing statistics lock
+19051: Ninja: getting lock...
+19051: Ninja: got the lock!
+19051: Ninja: leaving store
+19051: Ninja: left the store
+19051: Ninja: released costuming team
+19051: Ninja: removing self from list
+19051: Ninja: removed!
+19051: Ninja: checking if head exists
+19051: Ninja: head exists.. gonna signal
+19051: Ninja: head exists.. done signaling
+19051: Ninja: releasing lock...
+19051: Ninja: released lock!
+19051: Ninja: Bye bye!
+19043: Ninja: got signaled!
+19043: Ninja: gonna check if can enter
+19043: Ninja: I can enter!
+19043: Ninja: entered store!
+19043: Ninja: getting costuming team
+19043: Ninja: got costuming team
+19043: Ninja: releasing lock
+19043: Ninja: released lock
+19043: Ninja: about to sleep for 2.455136
+19052: Ninja: woke up after costuming
+19052: Ninja: acquiring statistics lock
+19052: Ninja: Revenue is now 16
+19052: Ninja: releasing statistics lock
+19052: Ninja: getting lock...
+19052: Ninja: got the lock!
+19052: Ninja: leaving store
+19052: Ninja: left the store
+19052: Ninja: released costuming team
+19052: Ninja: removing self from list
+19052: Ninja: removed!
+19052: Ninja: checking if head exists
+19052: Ninja: head exists.. gonna signal
+19052: Ninja: head exists.. done signaling
+19052: Ninja: releasing lock...
+19052: Ninja: released lock!
+19052: Ninja: Going to come back!
+19049: Ninja: woke up after costuming
+19049: Ninja: acquiring statistics lock
+19049: Ninja: Revenue is now 21
+19049: Ninja: releasing statistics lock
+19049: Ninja: getting lock...
+19049: Ninja: got the lock!
+19049: Ninja: leaving store
+19049: Ninja: left the store
+19049: Ninja: released costuming team
+19049: Ninja: removing self from list
+19049: Ninja: removed!
+19049: Ninja: checking if head exists
+19049: Ninja: head exists.. gonna signal
+19049: Ninja: head exists.. done signaling
+19049: Ninja: releasing lock...
+19049: Ninja: released lock!
+19049: Ninja: Bye bye!
+19043: Ninja: woke up after costuming
+19043: Ninja: acquiring statistics lock
+19043: Ninja: Revenue is now 24
+19043: Ninja: releasing statistics lock
+19043: Ninja: getting lock...
+19043: Ninja: got the lock!
+19043: Ninja: leaving store
+19043: Ninja: left the store
+19043: Ninja: released costuming team
+19043: Ninja: removing self from list
+19043: Ninja: removed!
+19043: Ninja: checking if head exists
+19043: Ninja: releasing lock...
+19043: Ninja: released lock!
+19043: Ninja: Going to come back!
+19057: Pirate: gonna check if can enter
+19057: Pirate: I can enter!
+19057: Pirate: entered store!
+19057: Pirate: getting costuming team
+19057: Pirate: got costuming team
+19057: Pirate: releasing lock
+19057: Pirate: released lock
+19057: Pirate: about to sleep for 4.715369
+19061: Pirate: gonna check if can enter
+19061: Pirate: I can enter!
+19061: Pirate: entered store!
+19061: Pirate: getting costuming team
+19061: Pirate: got costuming team
+19061: Pirate: releasing lock
+19061: Pirate: released lock
+19061: Pirate: about to sleep for 3.980392
+19057: Pirate: woke up after costuming
+19057: Pirate: acquiring statistics lock
+19057: Pirate: Revenue is now 29
+19057: Pirate: releasing statistics lock
+19057: Pirate: getting lock...
+19057: Pirate: got the lock!
+19057: Pirate: leaving store
+19057: Pirate: left the store
+19057: Pirate: released costuming team
+19057: Pirate: removing self from list
+19057: Pirate: removed!
+19057: Pirate: checking if head exists
+19057: Pirate: releasing lock...
+19057: Pirate: released lock!
+19057: Pirate: Bye bye!
+19061: Pirate: woke up after costuming
+19061: Pirate: acquiring statistics lock
+19061: Pirate: Revenue is now 33
+19061: Pirate: releasing statistics lock
+19061: Pirate: getting lock...
+19061: Pirate: got the lock!
+19061: Pirate: leaving store
+19061: Pirate: left the store
+19061: Pirate: released costuming team
+19061: Pirate: removing self from list
+19061: Pirate: removed!
+19061: Pirate: checking if head exists
+19061: Pirate: releasing lock...
+19061: Pirate: released lock!
+19061: Pirate: Bye bye!
+19060: Pirate: gonna check if can enter
+19060: Pirate: I can enter!
+19060: Pirate: entered store!
+19060: Pirate: getting costuming team
+19060: Pirate: got costuming team
+19060: Pirate: releasing lock
+19060: Pirate: released lock
+19060: Pirate: about to sleep for 3.941470
+19044: Ninja: gonna check if can enter
+19044: Ninja: I can't enter :(
+19044: Ninja: added my node to list
+19044: Ninja: waiting to be signaled
+19058: Pirate: gonna check if can enter
+19058: Pirate: I can enter!
+19058: Pirate: entered store!
+19058: Pirate: getting costuming team
+19058: Pirate: got costuming team
+19058: Pirate: releasing lock
+19058: Pirate: released lock
+19058: Pirate: about to sleep for 4.927096
+19055: Pirate: gonna check if can enter
+19055: Pirate: I can enter!
+19055: Pirate: entered store!
+19055: Pirate: getting costuming team
+19055: Pirate: got costuming team
+19055: Pirate: releasing lock
+19055: Pirate: released lock
+19055: Pirate: about to sleep for 4.537570
+19047: Ninja: gonna check if can enter
+19047: Ninja: I can't enter :(
+19047: Ninja: added my node to list
+19047: Ninja: waiting to be signaled
+19050: Ninja: gonna check if can enter
+19050: Ninja: I can't enter :(
+19050: Ninja: added my node to list
+19050: Ninja: waiting to be signaled
+19054: Pirate: gonna check if can enter
+19054: Pirate: I can't enter :(
+19054: Pirate: added my node to list
+19054: Pirate: waiting to be signaled
+19060: Pirate: woke up after costuming
+19060: Pirate: acquiring statistics lock
+19060: Pirate: Revenue is now 37
+19060: Pirate: releasing statistics lock
+19060: Pirate: getting lock...
+19060: Pirate: got the lock!
+19060: Pirate: leaving store
+19060: Pirate: left the store
+19060: Pirate: released costuming team
+19060: Pirate: removing self from list
+19060: Pirate: removed!
+19060: Pirate: checking if head exists
+19060: Pirate: head exists.. gonna signal
+19060: Pirate: head exists.. done signaling
+19060: Pirate: releasing lock...
+19060: Pirate: released lock!
+19060: Pirate: Bye bye!
+19044: Ninja: got signaled!
+19044: Ninja: gonna check if can enter
+19044: Ninja: I can't enter :(
+19044: Ninja: signaling next
+19044: Ninja: done signaling next
+19044: Ninja: waiting to be signaled
+19047: Ninja: got signaled!
+19047: Ninja: gonna check if can enter
+19047: Ninja: I can't enter :(
+19047: Ninja: signaling next
+19047: Ninja: done signaling next
+19047: Ninja: waiting to be signaled
+19050: Ninja: got signaled!
+19050: Ninja: gonna check if can enter
+19050: Ninja: I can't enter :(
+19050: Ninja: signaling next
+19050: Ninja: done signaling next
+19050: Ninja: waiting to be signaled
+19054: Pirate: got signaled!
+19054: Pirate: gonna check if can enter
+19054: Pirate: I can enter!
+19054: Pirate: entered store!
+19054: Pirate: getting costuming team
+19054: Pirate: got costuming team
+19054: Pirate: releasing lock
+19054: Pirate: released lock
+19054: Pirate: about to sleep for 3.841568
+19055: Pirate: woke up after costuming
+19055: Pirate: acquiring statistics lock
+19055: Pirate: Revenue is now 42
+19055: Pirate: releasing statistics lock
+19055: Pirate: getting lock...
+19055: Pirate: got the lock!
+19055: Pirate: leaving store
+19055: Pirate: left the store
+19055: Pirate: released costuming team
+19055: Pirate: removing self from list
+19055: Pirate: removed!
+19055: Pirate: checking if head exists
+19055: Pirate: head exists.. gonna signal
+19055: Pirate: head exists.. done signaling
+19055: Pirate: releasing lock...
+19055: Pirate: released lock!
+19055: Pirate: Going to come back!
+19044: Ninja: got signaled!
+19044: Ninja: gonna check if can enter
+19044: Ninja: I can't enter :(
+19044: Ninja: signaling next
+19044: Ninja: done signaling next
+19044: Ninja: waiting to be signaled
+19047: Ninja: got signaled!
+19047: Ninja: gonna check if can enter
+19047: Ninja: I can't enter :(
+19047: Ninja: signaling next
+19047: Ninja: done signaling next
+19047: Ninja: waiting to be signaled
+19050: Ninja: got signaled!
+19050: Ninja: gonna check if can enter
+19050: Ninja: I can't enter :(
+19050: Ninja: signaling next
+19050: Ninja: done signaling next
+19050: Ninja: waiting to be signaled
+19058: Pirate: woke up after costuming
+19058: Pirate: acquiring statistics lock
+19058: Pirate: Revenue is now 47
+19058: Pirate: releasing statistics lock
+19058: Pirate: getting lock...
+19058: Pirate: got the lock!
+19058: Pirate: leaving store
+19058: Pirate: left the store
+19058: Pirate: released costuming team
+19058: Pirate: removing self from list
+19058: Pirate: removed!
+19058: Pirate: checking if head exists
+19058: Pirate: head exists.. gonna signal
+19058: Pirate: head exists.. done signaling
+19058: Pirate: releasing lock...
+19058: Pirate: released lock!
+19058: Pirate: Bye bye!
+19044: Ninja: got signaled!
+19044: Ninja: gonna check if can enter
+19044: Ninja: I can't enter :(
+19044: Ninja: signaling next
+19044: Ninja: done signaling next
+19044: Ninja: waiting to be signaled
+19047: Ninja: got signaled!
+19047: Ninja: gonna check if can enter
+19047: Ninja: I can't enter :(
+19047: Ninja: signaling next
+19047: Ninja: done signaling next
+19047: Ninja: waiting to be signaled
+19050: Ninja: got signaled!
+19050: Ninja: gonna check if can enter
+19050: Ninja: I can't enter :(
+19050: Ninja: signaling next
+19050: Ninja: done signaling next
+19050: Ninja: waiting to be signaled
+19054: Pirate: woke up after costuming
+19054: Pirate: acquiring statistics lock
+19054: Pirate: Revenue is now 51
+19054: Pirate: releasing statistics lock
+19054: Pirate: getting lock...
+19054: Pirate: got the lock!
+19054: Pirate: leaving store
+19054: Pirate: left the store
+19054: Pirate: released costuming team
+19054: Pirate: removing self from list
+19054: Pirate: removed!
+19054: Pirate: checking if head exists
+19054: Pirate: head exists.. gonna signal
+19054: Pirate: head exists.. done signaling
+19054: Pirate: releasing lock...
+19054: Pirate: released lock!
+19054: Pirate: Bye bye!
+19044: Ninja: got signaled!
+19044: Ninja: gonna check if can enter
+19044: Ninja: I can enter!
+19044: Ninja: entered store!
+19044: Ninja: getting costuming team
+19044: Ninja: got costuming team
+19044: Ninja: releasing lock
+19044: Ninja: released lock
+19044: Ninja: signaling
+19047: Ninja: got signaled!
+19047: Ninja: gonna check if can enter
+19047: Ninja: I can enter!
+19047: Ninja: entered store!
+19047: Ninja: getting costuming team
+19047: Ninja: got costuming team
+19047: Ninja: releasing lock
+19047: Ninja: released lock
+19047: Ninja: signaling
+19047: Ninja: done signaling
+19047: Ninja: about to sleep for 3.288286
+19050: Ninja: got signaled!
+19050: Ninja: gonna check if can enter
+19050: Ninja: I can enter!
+19050: Ninja: entered store!
+19050: Ninja: getting costuming team
+19050: Ninja: got costuming team
+19050: Ninja: releasing lock
+19050: Ninja: released lock
+19050: Ninja: about to sleep for 3.605970
+19044: Ninja: done signaling
+19044: Ninja: about to sleep for 6.316355
+19043: Ninja: gonna check if can enter
+19043: Ninja: I can't enter :(
+19043: Ninja: added my node to list
+19043: Ninja: waiting to be signaled
+19053: Pirate: gonna check if can enter
+19053: Pirate: I can't enter :(
+19053: Pirate: added my node to list
+19053: Pirate: waiting to be signaled
+19062: Pirate: gonna check if can enter
+19062: Pirate: I can't enter :(
+19062: Pirate: added my node to list
+19062: Pirate: waiting to be signaled
+19047: Ninja: woke up after costuming
+19047: Ninja: acquiring statistics lock
+19047: Ninja: Revenue is now 55
+19047: Ninja: releasing statistics lock
+19047: Ninja: getting lock...
+19047: Ninja: got the lock!
+19047: Ninja: leaving store
+19047: Ninja: left the store
+19047: Ninja: released costuming team
+19047: Ninja: removing self from list
+19047: Ninja: removed!
+19047: Ninja: checking if head exists
+19047: Ninja: head exists.. gonna signal
+19047: Ninja: head exists.. done signaling
+19047: Ninja: releasing lock...
+19047: Ninja: released lock!
+19047: Ninja: Going to come back!
+19050: Ninja: woke up after costuming
+19050: Ninja: acquiring statistics lock
+19050: Ninja: Revenue is now 59
+19050: Ninja: releasing statistics lock
+19050: Ninja: getting lock...
+19050: Ninja: got the lock!
+19050: Ninja: leaving store
+19050: Ninja: left the store
+19050: Ninja: released costuming team
+19050: Ninja: removing self from list
+19050: Ninja: removed!
+19050: Ninja: checking if head exists
+19050: Ninja: head exists.. gonna signal
+19050: Ninja: head exists.. done signaling
+19050: Ninja: releasing lock...
+19050: Ninja: released lock!
+19050: Ninja: Going to come back!
+19052: Ninja: gonna check if can enter
+19052: Ninja: I can enter!
+19052: Ninja: entered store!
+19052: Ninja: getting costuming team
+19052: Ninja: got costuming team
+19052: Ninja: releasing lock
+19052: Ninja: released lock
+19052: Ninja: about to sleep for 2.698639
+19056: Pirate: gonna check if can enter
+19056: Pirate: I can't enter :(
+19056: Pirate: added my node to list
+19056: Pirate: waiting to be signaled
+19044: Ninja: woke up after costuming
+19044: Ninja: acquiring statistics lock
+19044: Ninja: Revenue is now 66
+19044: Ninja: releasing statistics lock
+19044: Ninja: getting lock...
+19044: Ninja: got the lock!
+19044: Ninja: leaving store
+19044: Ninja: left the store
+19044: Ninja: released costuming team
+19044: Ninja: removing self from list
+19044: Ninja: removed!
+19044: Ninja: checking if head exists
+19044: Ninja: head exists.. gonna signal
+19044: Ninja: head exists.. done signaling
+19044: Ninja: releasing lock...
+19044: Ninja: released lock!
+19044: Ninja: Bye bye!
+19043: Ninja: got signaled!
+19043: Ninja: gonna check if can enter
+19043: Ninja: I can enter!
+19043: Ninja: entered store!
+19043: Ninja: getting costuming team
+19043: Ninja: got costuming team
+19043: Ninja: releasing lock
+19043: Ninja: released lock
+19043: Ninja: signaling
+19043: Ninja: done signaling
+19043: Ninja: about to sleep for 2.846743
+19053: Pirate: got signaled!
+19053: Pirate: gonna check if can enter
+19053: Pirate: I can't enter :(
+19053: Pirate: signaling next
+19053: Pirate: done signaling next
+19053: Pirate: waiting to be signaled
+19062: Pirate: got signaled!
+19062: Pirate: gonna check if can enter
+19062: Pirate: I can't enter :(
+19062: Pirate: signaling next
+19062: Pirate: done signaling next
+19062: Pirate: waiting to be signaled
+19056: Pirate: got signaled!
+19056: Pirate: gonna check if can enter
+19056: Pirate: I can't enter :(
+19056: Pirate: waiting to be signaled
+19052: Ninja: woke up after costuming
+19052: Ninja: acquiring statistics lock
+19052: Ninja: Revenue is now 69
+19052: Ninja: releasing statistics lock
+19052: Ninja: getting lock...
+19052: Ninja: got the lock!
+19052: Ninja: leaving store
+19052: Ninja: left the store
+19052: Ninja: released costuming team
+19052: Ninja: removing self from list
+19052: Ninja: removed!
+19052: Ninja: checking if head exists
+19052: Ninja: head exists.. gonna signal
+19052: Ninja: head exists.. done signaling
+19052: Ninja: releasing lock...
+19052: Ninja: released lock!
+19052: Ninja: Bye bye!
+19043: Ninja: woke up after costuming
+19043: Ninja: acquiring statistics lock
+19043: Ninja: Revenue is now 72
+19043: Ninja: releasing statistics lock
+19043: Ninja: getting lock...
+19043: Ninja: got the lock!
+19043: Ninja: leaving store
+19043: Ninja: left the store
+19043: Ninja: released costuming team
+19043: Ninja: removing self from list
+19043: Ninja: removed!
+19043: Ninja: checking if head exists
+19043: Ninja: head exists.. gonna signal
+19043: Ninja: head exists.. done signaling
+19043: Ninja: releasing lock...
+19043: Ninja: released lock!
+19043: Ninja: Bye bye!
+19053: Pirate: got signaled!
+19053: Pirate: gonna check if can enter
+19053: Pirate: I can enter!
+19053: Pirate: entered store!
+19053: Pirate: getting costuming team
+19053: Pirate: got costuming team
+19053: Pirate: releasing lock
+19053: Pirate: released lock
+19053: Pirate: signaling
+19053: Pirate: done signaling
+19053: Pirate: about to sleep for 5.402820
+19062: Pirate: got signaled!
+19062: Pirate: gonna check if can enter
+19062: Pirate: I can enter!
+19062: Pirate: entered store!
+19062: Pirate: getting costuming team
+19062: Pirate: got costuming team
+19062: Pirate: releasing lock
+19062: Pirate: released lock
+19062: Pirate: signaling
+19062: Pirate: done signaling
+19062: Pirate: about to sleep for 4.828658
+19056: Pirate: got signaled!
+19056: Pirate: gonna check if can enter
+19056: Pirate: I can enter!
+19056: Pirate: entered store!
+19056: Pirate: getting costuming team
+19056: Pirate: got costuming team
+19056: Pirate: releasing lock
+19056: Pirate: released lock
+19056: Pirate: about to sleep for 5.011286
+19062: Pirate: woke up after costuming
+19062: Pirate: acquiring statistics lock
+19062: Pirate: Revenue is now 77
+19062: Pirate: releasing statistics lock
+19062: Pirate: getting lock...
+19062: Pirate: got the lock!
+19062: Pirate: leaving store
+19062: Pirate: left the store
+19062: Pirate: released costuming team
+19062: Pirate: removing self from list
+19062: Pirate: removed!
+19062: Pirate: checking if head exists
+19062: Pirate: head exists.. gonna signal
+19062: Pirate: head exists.. done signaling
+19062: Pirate: releasing lock...
+19062: Pirate: released lock!
+19062: Pirate: Bye bye!
+19056: Pirate: woke up after costuming
+19056: Pirate: acquiring statistics lock
+19056: Pirate: Revenue is now 83
+19056: Pirate: releasing statistics lock
+19056: Pirate: getting lock...
+19056: Pirate: got the lock!
+19056: Pirate: leaving store
+19056: Pirate: left the store
+19056: Pirate: released costuming team
+19056: Pirate: removing self from list
+19056: Pirate: removed!
+19056: Pirate: checking if head exists
+19056: Pirate: head exists.. gonna signal
+19056: Pirate: head exists.. done signaling
+19056: Pirate: releasing lock...
+19056: Pirate: released lock!
+19056: Pirate: Bye bye!
+19053: Pirate: woke up after costuming
+19053: Pirate: acquiring statistics lock
+19053: Pirate: Revenue is now 89
+19053: Pirate: releasing statistics lock
+19053: Pirate: getting lock...
+19053: Pirate: got the lock!
+19053: Pirate: leaving store
+19053: Pirate: left the store
+19053: Pirate: released costuming team
+19053: Pirate: removing self from list
+19053: Pirate: removed!
+19053: Pirate: checking if head exists
+19053: Pirate: releasing lock...
+19053: Pirate: released lock!
+19053: Pirate: Going to come back!
+19047: Ninja: gonna check if can enter
+19047: Ninja: I can enter!
+19047: Ninja: entered store!
+19047: Ninja: getting costuming team
+19047: Ninja: got costuming team
+19047: Ninja: releasing lock
+19047: Ninja: released lock
+19047: Ninja: about to sleep for 2.831935
+19047: Ninja: woke up after costuming
+19047: Ninja: acquiring statistics lock
+19047: Ninja: Revenue is now 92
+19047: Ninja: releasing statistics lock
+19047: Ninja: getting lock...
+19047: Ninja: got the lock!
+19047: Ninja: leaving store
+19047: Ninja: left the store
+19047: Ninja: released costuming team
+19047: Ninja: removing self from list
+19047: Ninja: removed!
+19047: Ninja: checking if head exists
+19047: Ninja: releasing lock...
+19047: Ninja: released lock!
+19047: Ninja: Bye bye!
+19050: Ninja: gonna check if can enter
+19050: Ninja: I can enter!
+19050: Ninja: entered store!
+19050: Ninja: getting costuming team
+19050: Ninja: got costuming team
+19050: Ninja: releasing lock
+19050: Ninja: released lock
+19050: Ninja: about to sleep for 1.484578
+19050: Ninja: woke up after costuming
+19050: Ninja: acquiring statistics lock
+19050: Ninja: Revenue is now 94
+19050: Ninja: releasing statistics lock
+19050: Ninja: getting lock...
+19050: Ninja: got the lock!
+19050: Ninja: leaving store
+19050: Ninja: left the store
+19050: Ninja: released costuming team
+19050: Ninja: removing self from list
+19050: Ninja: removed!
+19050: Ninja: checking if head exists
+19050: Ninja: releasing lock...
+19050: Ninja: released lock!
+19050: Ninja: Bye bye!
+19055: Pirate: gonna check if can enter
+19055: Pirate: I can enter!
+19055: Pirate: entered store!
+19055: Pirate: getting costuming team
+19055: Pirate: got costuming team
+19055: Pirate: releasing lock
+19055: Pirate: released lock
+19055: Pirate: about to sleep for 4.523552
+19055: Pirate: woke up after costuming
+19055: Pirate: acquiring statistics lock
+19055: Pirate: Revenue is now 99
+19055: Pirate: releasing statistics lock
+19055: Pirate: getting lock...
+19055: Pirate: got the lock!
+19055: Pirate: leaving store
+19055: Pirate: left the store
+19055: Pirate: released costuming team
+19055: Pirate: removing self from list
+19055: Pirate: removed!
+19055: Pirate: checking if head exists
+19055: Pirate: releasing lock...
+19055: Pirate: released lock!
+19055: Pirate: Bye bye!
+19053: Pirate: gonna check if can enter
+19053: Pirate: I can enter!
+19053: Pirate: entered store!
+19053: Pirate: getting costuming team
+19053: Pirate: got costuming team
+19053: Pirate: releasing lock
+19053: Pirate: released lock
+19053: Pirate: about to sleep for 4.534357
+19053: Pirate: woke up after costuming
+19053: Pirate: acquiring statistics lock
+19053: Pirate: Revenue is now 104
+19053: Pirate: releasing statistics lock
+19053: Pirate: getting lock...
+19053: Pirate: got the lock!
+19053: Pirate: leaving store
+19053: Pirate: left the store
+19053: Pirate: released costuming team
+19053: Pirate: removing self from list
+19053: Pirate: removed!
+19053: Pirate: checking if head exists
+19053: Pirate: releasing lock...
+19053: Pirate: released lock!
+19053: Pirate: Bye bye!
+19045: Ninja: gonna check if can enter
+19045: Ninja: I can enter!
+19045: Ninja: entered store!
+19045: Ninja: getting costuming team
+19045: Ninja: got costuming team
+19045: Ninja: releasing lock
+19045: Ninja: released lock
+19045: Ninja: about to sleep for 1.701961
+19045: Ninja: woke up after costuming
+19045: Ninja: acquiring statistics lock
+19045: Ninja: Revenue is now 106
+19045: Ninja: releasing statistics lock
+19045: Ninja: getting lock...
+19045: Ninja: got the lock!
+19045: Ninja: leaving store
+19045: Ninja: left the store
+19045: Ninja: released costuming team
+19045: Ninja: removing self from list
+19045: Ninja: removed!
+19045: Ninja: checking if head exists
+19045: Ninja: releasing lock...
+19045: Ninja: released lock!
+19045: Ninja: Going to come back!
+19045: Ninja: gonna check if can enter
+19045: Ninja: I can enter!
+19045: Ninja: entered store!
+19045: Ninja: getting costuming team
+19045: Ninja: got costuming team
+19045: Ninja: releasing lock
+19045: Ninja: released lock
+19045: Ninja: about to sleep for 1.178465
+19045: Ninja: woke up after costuming
+19045: Ninja: acquiring statistics lock
+19045: Ninja: Revenue is now 108
+19045: Ninja: releasing statistics lock
+19045: Ninja: getting lock...
+19045: Ninja: got the lock!
+19045: Ninja: leaving store
+19045: Ninja: left the store
+19045: Ninja: released costuming team
+19045: Ninja: removing self from list
+19045: Ninja: removed!
+19045: Ninja: checking if head exists
+19045: Ninja: releasing lock...
+19045: Ninja: released lock!
+19045: Ninja: Bye bye!
+
+
+now printing stats for Ninja #1
+	gold owed: 5
+	number of visits: 1
+	visit #1:
+		how long the wait was: 0 secs
+		how long the visit was: 240 secs
+
+
+now printing stats for Pirate #1
+	gold owed: 4
+	number of visits: 1
+	visit #1:
+		how long the wait was: 241 secs
+		how long the visit was: 180 secs
+
+
+now printing stats for Ninja #2
+	gold owed: 2
+	number of visits: 1
+	visit #1:
+		how long the wait was: 0 secs
+		how long the visit was: 60 secs
+
+
+now printing stats for Ninja #3
+	gold owed: 2
+	number of visits: 1
+	visit #1:
+		how long the wait was: 0 secs
+		how long the visit was: 60 secs
+
+
+now printing stats for Ninja #4
+	gold owed: 5
+	number of visits: 1
+	visit #1:
+		how long the wait was: 0 secs
+		how long the visit was: 240 secs
+
+
+now printing stats for Pirate #2
+	gold owed: 5
+	number of visits: 1
+	visit #1:
+		how long the wait was: 0 secs
+		how long the visit was: 240 secs
+
+
+now printing stats for Pirate #3
+	gold owed: 4
+	number of visits: 1
+	visit #1:
+		how long the wait was: 0 secs
+		how long the visit was: 180 secs
+
+
+now printing stats for Pirate #4
+	gold owed: 4
+	number of visits: 1
+	visit #1:
+		how long the wait was: 0 secs
+		how long the visit was: 180 secs
+
+
+now printing stats for Pirate #5
+	gold owed: 5
+	number of visits: 1
+	visit #1:
+		how long the wait was: 0 secs
+		how long the visit was: 240 secs
+
+
+now printing stats for Pirate #6
+	gold owed: 4
+	number of visits: 1
+	visit #1:
+		how long the wait was: 11 secs
+		how long the visit was: 180 secs
+
+
+now printing stats for Ninja #5
+	gold owed: 7
+	number of visits: 1
+	visit #1:
+		how long the wait was: 461 secs
+		how long the visit was: 360 secs
+
+
+now printing stats for Ninja #6
+	gold owed: 6
+	number of visits: 2
+	visit #1:
+		how long the wait was: 0 secs
+		how long the visit was: 120 secs
+	visit #2:
+		how long the wait was: 0 secs
+		how long the visit was: 120 secs
+
+
+now printing stats for Ninja #7
+	gold owed: 6
+	number of visits: 2
+	visit #1:
+		how long the wait was: 64 secs
+		how long the visit was: 120 secs
+	visit #2:
+		how long the wait was: 255 secs
+		how long the visit was: 120 secs
+
+
+now printing stats for Pirate #7
+	gold owed: 5
+	number of visits: 1
+	visit #1:
+		how long the wait was: 394 secs
+		how long the visit was: 240 secs
+
+
+now printing stats for Pirate #8
+	gold owed: 6
+	number of visits: 1
+	visit #1:
+		how long the wait was: 277 secs
+		how long the visit was: 300 secs
+
+
+now printing stats for Ninja #8
+	gold owed: 7
+	number of visits: 2
+	visit #1:
+		how long the wait was: 306 secs
+		how long the visit was: 180 secs
+	visit #2:
+		how long the wait was: 0 secs
+		how long the visit was: 120 secs
+
+
+now printing stats for Ninja #9
+	gold owed: 6
+	number of visits: 2
+	visit #1:
+		how long the wait was: 268 secs
+		how long the visit was: 180 secs
+	visit #2:
+		how long the wait was: 0 secs
+		how long the visit was: 60 secs
+
+
+now printing stats for Pirate #9
+	gold owed: 10
+	number of visits: 2
+	visit #1:
+		how long the wait was: 0 secs
+		how long the visit was: 240 secs
+	visit #2:
+		how long the wait was: 0 secs
+		how long the visit was: 240 secs
+
+
+now printing stats for Pirate #10
+	gold owed: 11
+	number of visits: 2
+	visit #1:
+		how long the wait was: 417 secs
+		how long the visit was: 300 secs
+	visit #2:
+		how long the wait was: 0 secs
+		how long the visit was: 240 secs
+
+
+now printing stats for Ninja #10
+	gold owed: 4
+	number of visits: 2
+	visit #1:
+		how long the wait was: 0 secs
+		how long the visit was: 60 secs
+	visit #2:
+		how long the wait was: 0 secs
+		how long the visit was: 60 secs
+Team #1
+	time spent busy: 3273 secs
+	time spent idle: 3447 secs
+Team #2
+	time spent busy: 1423 secs
+	time spent idle: 5297 secs
+Team #3
+	time spent busy: 1033 secs
+	time spent idle: 5687 secs
+spent a total of 15 gold coins to pay for the 3 teams over a course of 1 days
+total ammount of gold earned: 108
+average queue length: 0.401580
+gold per visit: 4
+total profits: 93

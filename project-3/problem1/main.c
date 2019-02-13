@@ -221,8 +221,8 @@ enum kind canEnter(){
     return Pirate;
 }
 
-// returns seconds of time as a double
-double generateTimeBeforeArrival(enum kind race) {
+// returns seconds of time as an int
+int generateTimeBeforeArrival(enum kind race) {
     double ret = 0;
     double a = drand48();
     double b = drand48();
@@ -235,11 +235,11 @@ double generateTimeBeforeArrival(enum kind race) {
     if (ret < 0){
         return 0;
     }
-    return ret;
+    return (int) ceil(ret);
 }
 
-// returns seconds of time as a double
-double generateCostumingTime(enum kind race) {
+// returns seconds of time as an int
+int generateCostumingTime(enum kind race) {
     double ret = 0;
     double a = drand48();
     //printf("generated a a val of %f\n", a);
@@ -255,7 +255,7 @@ double generateCostumingTime(enum kind race) {
     if (ret < 0){
         return 0;
     }
-    return ret;
+    return (int) ceil(ret);
 }
 
 /*
@@ -303,6 +303,7 @@ void *thread(void *r) {
     struct person_stats *stats = malloc(sizeof(struct person_stats));
     stats->visits = 0;
     stats->goldOwed = 0;
+    stats->head = NULL;
     int nextVisit = 0;
     int hasEntered = 0;
     int costumingTeam;
@@ -317,7 +318,7 @@ void *thread(void *r) {
     while (1) {
         hasEntered = 0;
         // get random amount of time that should sleep
-        usleep(generateTimeBeforeArrival(race) * 1000 * 1000);
+        sleep(generateTimeBeforeArrival(race));
 
         // create node
         n = malloc(sizeof(struct node));
@@ -354,7 +355,7 @@ void *thread(void *r) {
                 // sleep while we get help
                 costumingTime = generateCostumingTime(race);
                 printf("%d: %s: about to sleep for %f\n", tid, (race == Ninja) ? "Ninja" : "Pirate", costumingTime);
-                usleep(costumingTime * 1000 * 1000);
+                sleep(costumingTime);
                 printf("%d: %s: woke up after costuming\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 // adding to revenue stats
                 printf("%d: %s: acquiring statistics lock\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
@@ -493,6 +494,10 @@ int main(int argc, char** argv) {
     }
 
     persons = malloc(sizeof (struct persons_stats*)*(ninjas + pirates));
+    for(i = 0; i <ninjas+pirates; i++){
+        persons[i] = NULL;
+    }
+
     time_teams_busy_for = malloc(sizeof(unsigned long long)*teams);
     for (i = 0; i < teams; i++){
         time_teams_busy_for[i] = 0;
