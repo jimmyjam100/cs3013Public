@@ -10,9 +10,9 @@
 
 #define num_threads 20
 
-sem_t* sem_quads;
-sem_t sem_driving_permit;
-sem_t sem_can_use_other_sems;
+int* quads;
+int driving_permits;
+sem_t sem;
 
 pthread_t tids[num_threads];
 
@@ -80,8 +80,25 @@ int remove_top(int listIndex){
 
 
 int move(struct car* car){
+    sem_wait(&sem);
     if(car->cur_location == 0){
+        if(!contains_car(car, quad_intents[car->spawn_location - 1])){
+            add_car(car, car->spawn_location - 1);
+        }
+        if(quads[car->spawn_location -1] == 1 && quad_intents[car->spawn_location - 1]->car == car && driving_permits != 0){
+            printf("car %d: moving from lane to intersection quadrent %d", car->tid, car->spawn_location);
+            car->cur_location = car->spawn_location;
+            car->moves_left = car->moves_left - 1;
+            quads[cur_location - 1] = 0;
+            sem_post(&sem);
+            return 1;
+        }
+        printf("car %d: could not move into intersection due to it being blocked or other cars wanting to go first", car->tid);
+        sem_post(&sem);
+        return 0;
     }
+
+    sem_post(&sem);
     return 0;
         
 }
@@ -152,14 +169,12 @@ int main() {
     for (i = 0; i < 4; i++){
         quad_intents[i] = NULL;
     }
-    sem_quads = malloc(sizeof(sem_t)*4);
+    quads = malloc(sizeof(int)*4);
     for (i = 0; i < 4; i++){
-        if(sem_init(&sem_quads[i], 0, 1)){
-            return 1;
-        }
+        quads[i] = 1;
     }
-    err = sem_init(&sem_driving_permit, 0, 3);
-    err = err || sem_init(&sem_can_use_other_sems, 0, 1);
+    driving_permits = 3;
+    err = sem_init(&sem, 0, 1);
     if (err) { // error intializing semaphores
         return 1;
     }
