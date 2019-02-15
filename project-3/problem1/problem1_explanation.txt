@@ -1,6 +1,6 @@
-Our program bassically does the following.
+Our program basically does the following.
 
-When a pirate or ninja spawns it will wait a random ammount of time (where the average is set by the user)
+When a pirate or ninja spawns it will wait a random amount of time (where the average is set by the user)
 
 Then it will check to see if it can enter. The conditions to check to see if it can enter are as follows:
 	-if there is a person of the other type in the building it can not enter
@@ -9,15 +9,15 @@ Then it will check to see if it can enter. The conditions to check to see if it 
 	-if in the queue there is a person of the other type who has been waiting long enough that waiting 1.2 times current person's average costuming time would put them over 30 min of waiting, it can not enter
 	-otherwise it can enter
 
-If they can not enter they will enter the queue at the back, where they will be asleep untill signaled to wake up.
+If they can not enter they will enter the queue at the back, where they will be asleep until signaled to wake up.
 Once woken up they will recheck to see if they can enter and then signal the next person in the queue to wake up afterwards.
 
-If a person can enter they will set one of the teams status to busy, and wait a random ammount of time (where the average is set by the user).
+If a person can enter they will set one of the teams status to busy, and wait a random amount of time (where the average is set by the user).
 Then when they leave they will signal the person at the head of the queue to wake up.
 Then there will be a 25% chance they will repeat this process.
 
 
-We beleve that this is a good solution to the problum because it will not starve either side, because as soon as a persons wait time is approching the 30 min mark will prevent people of the oppisite type from entering. Because of this we beleve that no person will realisticly wait longer than 30 min. This will maxamize profits because no customer will get servus without paying.
+We believe that this is a good solution to the problem because it will not starve either side, because as soon as a persons wait time is approching the 30 min mark will prevent people of the oppisite type from entering. Because of this we believe that no person will realistically wait longer than 30 min. This will maximize profits because no customer will get servus without paying.
 
 
 
