@@ -13,6 +13,11 @@
 
 The following files are a part of the project:
 
+- Makefile
+- main.c (contains the source code for the intersection simulator)
+- problem2_explanation.txt (contains our explanation for phase 1 & 2)
+- intersection (WILL NOT BE IN THE ZIP FILE, WILL BE COMPILEd BY END USER)
+
 === Compiling ===
 
 There is an included Makefile. To compile the intersection executable, run:
@@ -23,9 +28,34 @@ To delete the generated files, run
 
 $ make clean
 
+NOTICE:
+
+Compiling into a 32 bit executable is being forced with the -m32 flag in the make file. This is to simulate the environment of the virtual machine if compiling outside the classroom VM. Of course, this program is still being tested on the classroom VM.
+
 === Running ===
 
+There are no parameters for the program. Simply run:
+
+$ ./intersection
+
 === Features & Limitations ===
+
+The output refers to quadrants and roads with numbers. Bellow is legend/key of the system we use.
+
+  * Quadrant Map:
+  *     North (2)
+  *    --------------
+  * W |      |       | E
+  * E |   2  |   1   | A
+  * S |      |       | S
+  * T  --------------  T
+  * ( |      |       | (
+  * 3 |  3   |   4   | 1
+  * ) |      |       | )
+  *    --------------
+  *     South (4)
+
+This system assigns the quadrant numbers that may be familiar from elementary graphs, and assigns the number of a road based off of the first quadrant that a car would move into if coming from that road.
 
 === Tests ===
 

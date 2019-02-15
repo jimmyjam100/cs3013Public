@@ -30,6 +30,10 @@ To delete the generated files, run
 
 $ make clean
 
+NOTICE:
+
+Compiling into a 32 bit executable is being forced with the -m32 flag in the make file. This is to simulate the environment of the virtual machine if compiling outside the classroom VM. Of course, this program is still being tested on the classroom VM.
+
 === Running ===
 
 In order to run the executable, run
