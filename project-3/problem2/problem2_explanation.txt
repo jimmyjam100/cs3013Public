@@ -1,29 +1,7 @@
-For problem 2, we are utilizing 6 semaphores for phase 2.
+Phase 1:
 
-There is a semaphore with an initial value of 1 for each quadrant, then a "locking semaphore" with an initial value of 1, which is used to check to see if you can move to a different quadrant and acquire the lock. Then we have a semaphore with an initial value of 3, which limits the amount of drivers on the intersection at any given time.
+The problem with Minnesotan drivers who follow the convention where whoever arrives at the intersection first proceed first, is that essentially the drivers are using only one lock, which means that while it prevents deadlocks and is very safe, it's also very inefficient as multiple drivers cannot go at the same time.
 
-The order of operations is simple for each thread:
+Phase 2:
 
-Let there be a function, named calculate_path, which returns a queue data structure where the entry in the front represents the quadrant that the car must get into next.
-
-
-down("license semaphore")
-while 1:
-    if queue returned from calculate_path is empty
-        up("license semaphore")
-        return 0; // we're done
-    down("locking semaphore")
-    label move;
-    if queue returned from calculate_path is empty
-            up("license semaphore")
-            return 0; // we're done
-    if try_down(semaphore for first entry in queue)
-        down(semaphore for first entry in queue)
-    else
-        up("locking semaphore")
-        sleep(C) // C is a constant, can be adjusted
-        continue; // goes back to the start of the while loop
-    set_position to first entry in queue
-    up(semaphore for first entry in queue)
-    recalculate queue
-    goto move;
+The problem with Massachusetts drivers who are happy to enter an intersection, even if only the front bumper of their car will fit, is that the Massachusetts drivers may end up getting themselves into a deadlock if there are for example four drivers, one coming from each direction, all trying to do a left turn. This deadlock can be prevented by a combination of not entering a tile if doing so would get in the path of another car, or by limiting the number of cars in the intersection at a time to 3.
