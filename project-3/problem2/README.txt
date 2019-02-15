@@ -13,6 +13,11 @@
 
 The following files are a part of the project:
 
+- Makefile
+- main.c (contains the source code for the intersection simulator)
+- problem2_explanation.txt (contains our explanation for phase 1 & 2)
+- intersection (WILL NOT BE IN THE ZIP FILE, WILL BE COMPILEd BY END USER)
+
 === Compiling ===
 
 There is an included Makefile. To compile the intersection executable, run:
@@ -22,6 +27,10 @@ $ make
 To delete the generated files, run
 
 $ make clean
+
+NOTICE:
+
+Compiling into a 32 bit executable is being forced with the -m32 flag in the make file. This is to simulate the environment of the virtual machine if compiling outside the classroom VM. Of course, this program is still being tested on the classroom VM.
 
 === Running ===
 
