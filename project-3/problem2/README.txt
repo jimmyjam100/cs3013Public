@@ -16,6 +16,7 @@ The following files are a part of the project:
 - Makefile
 - main.c (contains the source code for the intersection simulator)
 - problem2_explanation.txt (contains our explanation for phase 1 & 2)
+- output.txt
 - intersection (WILL NOT BE IN THE ZIP FILE, WILL BE COMPILEd BY END USER)
 
 === Compiling ===
@@ -58,6 +59,8 @@ The output refers to quadrants and roads with numbers. Bellow is legend/key of t
 This system assigns the quadrant numbers that may be familiar from elementary graphs, and assigns the number of a road based off of the first quadrant that a car would move into if coming from that road.
 
 === Tests ===
+
+Included is output.txt, which is the result of running the program for a minute. You should see output similar to this.
 
 === Credits ===
 
