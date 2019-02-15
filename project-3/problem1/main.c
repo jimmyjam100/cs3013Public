@@ -37,30 +37,25 @@ enum team_status *team_states;
 
 unsigned long long *time_teams_busy_for;
 
-int ninjaIn = 0;
-int pirateIn = 0;
-int justChanged = 0;
+int ninjaIn = 0; //ammount of ninjas in the building
+int pirateIn = 0; //ammount of pirates in the building
+int justChanged = 0; //if it just changed from one type of shop to another
 
-struct thread_stats {
-
-    
-
-};
-
+//The struct for the linked list of people waiting in line
 struct node {
     enum kind type;
     pthread_cond_t *cond;
     unsigned long long start;
     struct node *next;
 };
-
+//The struct for the linked list for each visit a pirate or ninja makes
 struct visit_stats {
     unsigned long long visitTime;
     unsigned long long waitTime;
     struct visit_stats *next;
     
 };
-
+//the struct for the stats of each individule person
 struct person_stats {
     int visits;
     int goldOwed;
@@ -102,15 +97,18 @@ int delete_node(int index){
     return 1;
 }
 
+/*
+add a node to the line
+*/
 int addNode(struct node *node){
-    if(node == NULL){
+    if(node == NULL){ //if input was null return 0
         return 0;
     }
-    if (head == NULL){
+    if (head == NULL){ //if the line is empty make the new node the line
         head = node;
         return 1;
     }
-    struct node *cur_node = head;
+    struct node *cur_node = head; //itorate through all of the nodes and find the end of the line then add yourself to the end
     while(cur_node->next != NULL){
         cur_node = cur_node->next;
     }
@@ -118,13 +116,16 @@ int addNode(struct node *node){
     return 1;
 }
 
+/*
+deletes the node that was inputed from the line and frees it from memory
+*/
 int delete_node_by_pointer(struct node *node){
-    if (head == node){
+    if (head == node){ //if the node is the head, make the head the next in line
         head = head->next;
         free(node);
         return  1;
     }
-    struct node *cur_node = head;
+    struct node *cur_node = head; //ittorate through all of the nodes and delete the input when you get to it
     if (cur_node == NULL) {
         return 0;
     }
@@ -138,7 +139,10 @@ int delete_node_by_pointer(struct node *node){
     }
     return 0;
 }
-
+/*
+returns 1 if node is in the line
+returns 0 otherwise
+*/
 int contains_node(struct node *node){
     if (head == node){
         return  1;
@@ -155,29 +159,35 @@ int contains_node(struct node *node){
     }
     return 0;
 }
-
+/*
+gets the current tim in millisecs
+*/
 unsigned long long getCurJSEpoch() {
     struct timeval t;
     gettimeofday(&t, NULL);
     return ((unsigned long long)(t.tv_sec) * 1000 + (unsigned long long)(t.tv_usec) / 1000);
 }
 
+/*
+gets the time Elapsed sense node was created in millisecs
+*/
 unsigned long long timeElapsed(struct node *n){
     struct timeval t1;
     gettimeofday(&t1, NULL);
 
-    // you might wonder why we're calling it jsEpoch
-    // that's because the normal unix epoch is based with seconds
-    // while epochs in javascript are based in milliseconds
-    // so if we just wrote epoch, I'd probably be wondering if it's seconds or millis
-    // but this way, any web developer will instantly know the units we're talking about
     unsigned long long jsEpocht0 = n->start;//n->start * 1000 + n->start / 1000;
     unsigned long long jsEpocht1 = (unsigned long long)(t1.tv_sec) * 1000 + (unsigned long long)(t1.tv_usec) / 1000;
     return jsEpocht1 - jsEpocht0;
 }
 
+/*
+returns None if no one can enter the building right now
+returns Pirate if only pirates can enter the building right now
+returns Ninja if onlly ninjas can enter the building right now
+returns Both if anyone can enter the building right now
+*/
 enum kind canEnter(){
-    if (ninjaIn == teams || pirateIn == teams){
+    if (ninjaIn == teams || pirateIn == teams){ //if building is full return none
         return None;
     }
     int currentlyIn = 0; //0 is for none, 1 is for ninjas, 2 is for pirates
@@ -193,18 +203,18 @@ enum kind canEnter(){
         }
         currentlyIn = 2;
     }
-    else if (pirateIn + ninjaIn == 0){
+    else if (pirateIn + ninjaIn == 0){ //if there is no one in the building let everyone in line who can come in, in regardless of how many people of the oppisite type have been waiting
         justChanged = 1;
     }
     struct node *cur_node = head;
     while (cur_node != NULL){
-        if (cur_node->type == Pirate && (timeElapsed(cur_node) > 30000 - nAvgCostume*1000*TIMEMULT)){
+        if (cur_node->type == Pirate && (timeElapsed(cur_node) > 30000 - nAvgCostume*1000*TIMEMULT)){ //if there is a pirate waiting for too long, let no Ninjas in (unless there was a ninja waiting longer)
             if(currentlyIn == 0 || currentlyIn == 2){
                 return Pirate;
             }
             return None;
         }
-        else if (cur_node->type == Ninja && (timeElapsed(cur_node) > 30000 - pAvgCostume*1000*TIMEMULT)){
+        else if (cur_node->type == Ninja && (timeElapsed(cur_node) > 30000 - pAvgCostume*1000*TIMEMULT)){ //if there is a ninja waiting for too long, let no Pirates in (unless there was a pirate waiting longer)
             if(currentlyIn == 0 || currentlyIn == 1){
                 return Ninja;
             }
@@ -212,6 +222,7 @@ enum kind canEnter(){
         }
 	cur_node = cur_node->next;
     }
+    //if no one has been waiting too long reutrn based on who is in the building
     if (currentlyIn == 0){
         return Both;
     } 
@@ -221,6 +232,7 @@ enum kind canEnter(){
     return Pirate;
 }
 
+// generates a random int for how long it takes someone to arrive
 // returns seconds of time as an int
 int generateTimeBeforeArrival(enum kind race) {
     double ret = 0;
@@ -238,6 +250,7 @@ int generateTimeBeforeArrival(enum kind race) {
     return (int) ceil(ret);
 }
 
+//generates a random int for how long it takes someone to costume
 // returns seconds of time as an int
 int generateCostumingTime(enum kind race) {
     double ret = 0;
@@ -357,7 +370,7 @@ void *thread(void *r) {
                 printf("%d: %s: about to sleep for %f\n", tid, (race == Ninja) ? "Ninja" : "Pirate", costumingTime);
                 sleep(costumingTime);
                 printf("%d: %s: woke up after costuming\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
-                // adding to revenue stats
+                // adding to revenue stats and updating own statistics
                 printf("%d: %s: acquiring statistics lock\n", tid, (race == Ninja) ? "Ninja" : "Pirate");
                 pthread_mutex_lock(&statistics_lock);
                 time_teams_busy_for[costumingTeam]+=costumingTime*1000*1000;
@@ -492,12 +505,12 @@ int main(int argc, char** argv) {
     for (i = 0; i < teams; i++) {
         team_states[i] = Ready;
     }
-
+    // Initilalize the array of people's states
     persons = malloc(sizeof (struct persons_stats*)*(ninjas + pirates));
     for(i = 0; i <ninjas+pirates; i++){
         persons[i] = NULL;
     }
-
+    // Initillize counter for how long each team is busy for
     time_teams_busy_for = malloc(sizeof(unsigned long long)*teams);
     for (i = 0; i < teams; i++){
         time_teams_busy_for[i] = 0;
@@ -572,7 +585,7 @@ int main(int argc, char** argv) {
     printf("total ammount of gold earned: %d\n", revenue);
     double avgQueue = ((((double)totalWaitTime)/1000))/((double)totalTime);
     printf("average queue length: %f\n", avgQueue);
-    printf("gold per visit: %d\n", revenue/numOfVisits);
+    printf("gold per visit: %f\n", ((double)revenue)/((double)numOfVisits));
     printf("total profits: %d\n", revenue-costs);
 
 
