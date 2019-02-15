@@ -103,7 +103,7 @@ int move(struct car* car){
             add_car(car, car->spawn_location - 1);
         }   
         if(quads[car->spawn_location -1] == 1 && driving_permits != 0 && (quad_intents[car->spawn_location - 1]->car->tid == car->tid) ){ //if there are less than 3 people driving and the quad that you want to drive into is not taken drive into it
-            printf("car %d: moved from lane to intersection quadrent %d\n", car->tid, car->spawn_location);
+            printf("car %d: moved from lane to intersection quadrant %d\n", car->tid, car->spawn_location);
             remove_car(car, car->spawn_location - 1);
             driving_permits--;
             car->cur_location = car->spawn_location;
@@ -112,7 +112,7 @@ int move(struct car* car){
             return 1;
         }
         //otherwise print out that you can not as well as some stats
-        printf("car %d: could not move from lane into quadrent %d due to it being blocked or other cars waiting to go that spawned eairler\n", car->tid, car->spawn_location);
+        printf("car %d: could not move from lane into quadrant %d due to it being blocked or other cars waiting to go that spawned earlier\n", car->tid, car->spawn_location);
         if (driving_permits != 0){
             printf("\tfirst in line is car %d\n", quad_intents[car->spawn_location - 1]->car->tid);
             printf("\tis quad full: %s\n", quads[car->spawn_location -1] ? "empty" : "full");
@@ -124,7 +124,7 @@ int move(struct car* car){
         return 0;
     }
     if(car->moves_left == 1){ //if it is moving from a quad into a lane move automaticlly
-        printf("car %d: leaving intersection from quadrent %d\n", car->tid, car->cur_location);
+        printf("car %d: leaving intersection from quadrant %d\n", car->tid, car->cur_location);
         driving_permits++;
         quads[car->cur_location - 1] = 1;
         car->cur_location = 0;
@@ -137,7 +137,7 @@ int move(struct car* car){
         add_car(car, (car->cur_location)%4);
     }
     if(quads[(car->cur_location)%4] == 1 && (quad_intents[(car->cur_location)%4]->car->tid == car->tid || driving_permits == 0)){ //if the quad is free and you are the first in line (or there are 3 people on the road already indicating that this is the only elligable move possible for any of the cars) move the car to the quad he wants to go to
-        printf("car %d: moved from quadrent %d to quadrent %d\n", car->tid, car->cur_location, (car->cur_location)%4 + 1);
+        printf("car %d: moved from quadrant %d to quadrant %d\n", car->tid, car->cur_location, (car->cur_location)%4 + 1);
         remove_car(car, (car->cur_location)%4);
         quads[car->cur_location - 1] = 1;
         car->cur_location = (car->cur_location)%4 +1;
@@ -147,7 +147,7 @@ int move(struct car* car){
         return 1;
     }
     //if he cannot print it out along with some stats
-    printf("car %d: could not move from quadrent %d into quadrent %d due to it being blocked or other cars waiting to go that spawned eairler\n", car->tid, car->cur_location, (car->cur_location)%4 + 1);
+    printf("car %d: could not move from quadrant %d into quadrant %d due to it being blocked or other cars waiting to go that spawned earlier\n", car->tid, car->cur_location, (car->cur_location)%4 + 1);
     printf("\tfirst in line is car %d\n", quad_intents[(car->cur_location)%4]->car->tid);
     printf("\tis quad full: %s\n", quads[(car->cur_location)%4] ? "empty" : "full");
     sem_post(&sem);
