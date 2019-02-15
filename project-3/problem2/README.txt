@@ -25,6 +25,10 @@ $ make clean
 
 === Running ===
 
+There are no parameters for the program. Simply run:
+
+$ ./intersection
+
 === Features & Limitations ===
 
 The output refers to quadrants and roads with numbers. Bellow is legend/key of the system we use.
