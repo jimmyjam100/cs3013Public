@@ -27,6 +27,23 @@ $ make clean
 
 === Features & Limitations ===
 
+The output refers to quadrants and roads with numbers. Bellow is legend/key of the system we use.
+
+  * Quadrant Map:
+  *     North (2)
+  *    --------------
+  * W |      |       | E
+  * E |   2  |   1   | A
+  * S |      |       | S
+  * T  --------------  T
+  * ( |      |       | (
+  * 3 |  3   |   4   | 1
+  * ) |      |       | )
+  *    --------------
+  *     South (4)
+
+This system assigns the quadrant numbers that may be familiar from elementary graphs, and assigns the number of a road based off of the first quadrant that a car would move into if coming from that road.
+
 === Tests ===
 
 === Credits ===
