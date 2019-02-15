@@ -101,7 +101,7 @@ int move(struct car* car){
         printf("car %d: could not move from lane into quadrent %d due to it being blocked or other cars waiting to go that spawned eairler\n", car->tid, car->spawn_location);
         if (quad_intents[car->spawn_location - 1] !=  NULL){
             printf("\tfirst in line is car %d\n", quad_intents[car->spawn_location - 1]->car->tid);
-            printf("\tis lane full: %s\n", quads[car->spawn_location -1] ? "empty" : "full");
+            printf("\tis quad full: %s\n", quads[car->spawn_location -1] ? "empty" : "full");
         }
         else{
             printf("\t3 cars are already on the intersection\n");
@@ -228,6 +228,11 @@ int main() {
 
         }
     }
-    sleep(50);
+
+    for (i = 0; i < num_threads; i++) {
+        if (tids[i] != 0) {
+            pthread_join(tids[i], NULL);
+        }
+    }
     return 0;
 }
