@@ -85,7 +85,11 @@ int move(struct car* car){
         if(!contains_car(car, quad_intents[car->spawn_location - 1])){
             add_car(car, car->spawn_location - 1);
         }
-        if(quads[car->spawn_location -1] == 1 && quad_intents[car->spawn_location - 1]->car == car && driving_permits != 0){
+        if(driving_permits == 0 && (quad_intents[car->spawn_location - 1]->car->tid == car->tid)){
+            remove_top(car->spawn_location - 1);
+        }
+            
+        if(quads[car->spawn_location -1] == 1 && driving_permits != 0 && (quad_intents[car->spawn_location - 1]->car->tid == car->tid) ){
             printf("car %d: moved from lane to intersection quadrent %d\n", car->tid, car->spawn_location);
             remove_top(car->spawn_location - 1);
             driving_permits--;
@@ -95,7 +99,13 @@ int move(struct car* car){
             return 1;
         }
         printf("car %d: could not move from lane into quadrent %d due to it being blocked or other cars waiting to go that spawned eairler\n", car->tid, car->spawn_location);
-        printf("\tfirst in line is car %d\n", quad_intents[car->spawn_location - 1]->car->tid);
+        if (quad_intents[car->spawn_location - 1] !=  NULL){
+            printf("\tfirst in line is car %d\n", quad_intents[car->spawn_location - 1]->car->tid);
+            printf("\tis lane full: %s\n", quads[car->spawn_location -1] ? "empty" : "full");
+        }
+        else{
+            printf("\t3 cars are already on the intersection\n");
+        }
         sem_post(&sem);
         return 0;
     }
@@ -111,18 +121,20 @@ int move(struct car* car){
     if(!contains_car(car, quad_intents[(car->cur_location)%4])){
         add_car(car, (car->cur_location)%4);
     }
-    if(quads[(car->cur_location)%4] == 1 && quad_intents[(car->cur_location)%4]-> car == car){
+    if(quads[(car->cur_location)%4] == 1 && (quad_intents[(car->cur_location)%4]->car->tid == car->tid)){
         printf("car %d: moved from quadrent %d to quadrent %d\n", car->tid, car->cur_location, (car->cur_location)%4 + 1);
         remove_top((car->cur_location)%4);
         quads[car->cur_location - 1] = 1;
-        car->cur_location = (car->cur_location)%4 + 1;
+        car->cur_location = (car->cur_location)%4 +1;
         quads[car->cur_location - 1] = 0;
         car->moves_left--;
         sem_post(&sem);
         return 1;
     }
     printf("car %d: could not move from quadrent %d into quadrent %d due to it being blocked or other cars waiting to go that spawned eairler\n", car->tid, car->cur_location, (car->cur_location)%4 + 1);
-    printf("\tfirst in line is car %d\n", quad_intents[car->spawn_location - 1]->car->tid);
+    printf("\tfirst in line is car %d\n", quad_intents[(car->cur_location)%4]->car->tid);
+    printf("\tis quad full: %s\n", quads[(car->cur_location)%4] ? "empty" : "full");
+    printf("\tis %d and %d equal: %s\n", car->tid, quad_intents[(car->cur_location)%4]->car->tid, (quad_intents[(car->cur_location)%4]->car->tid == car->tid) ? "yes" : "no");
     sem_post(&sem);
     return 0;
         
@@ -151,7 +163,7 @@ unsigned long long getCurJSEpoch() {
 }
 
 int generateRandomInt(int min, int max) {
-    int ret = lrand48() % (max - min + 1) + min;
+    int ret = (lrand48() % (max - min + 1)) + min;
     return ret;
 }
 
@@ -186,9 +198,9 @@ void* thread(void *args) {
         printf("car %d: Spawned in lane %d and is making %s turn\n", tid, this_vehicle->spawn_location, this_vehicle->moves_left == 1 ? "a right" : this_vehicle->moves_left == 2 ? "no" : "a left");
         while(this_vehicle->moves_left > 0){
             while(move(this_vehicle) == 0){
-                //sleep(1);
+                sleep(1);
             }
-            //sleep(1);
+            sleep(1);
         }
     }
 }
