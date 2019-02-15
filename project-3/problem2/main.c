@@ -10,8 +10,8 @@
 
 #define num_threads 20
 
-int* quads;
-int driving_permits;
+int* quads; //ints values to represent if a quad is full or not
+int driving_permits; //ints to represent how many people are on the road (3 means no one, 2 means one person ect.)
 sem_t sem;
 
 pthread_t tids[num_threads];
@@ -134,7 +134,6 @@ int move(struct car* car){
     printf("car %d: could not move from quadrent %d into quadrent %d due to it being blocked or other cars waiting to go that spawned eairler\n", car->tid, car->cur_location, (car->cur_location)%4 + 1);
     printf("\tfirst in line is car %d\n", quad_intents[(car->cur_location)%4]->car->tid);
     printf("\tis quad full: %s\n", quads[(car->cur_location)%4] ? "empty" : "full");
-    printf("\tis %d and %d equal: %s\n", car->tid, quad_intents[(car->cur_location)%4]->car->tid, (quad_intents[(car->cur_location)%4]->car->tid == car->tid) ? "yes" : "no");
     sem_post(&sem);
     return 0;
         
@@ -207,6 +206,18 @@ void* thread(void *args) {
 
 
 int main() {
+    printf("here is some ascci art for refrence when we talk about lane and quad 1, 2, 3, and 4\n");
+    printf("    North (2)\n");
+    printf("   --------------\n");
+    printf("W |      |       | E\n");
+    printf("E |   2  |   1   | A\n");
+    printf("S |      |       | S\n");
+    printf("T  --------------  T\n");
+    printf("( |      |       | (\n");
+    printf("3 |  3   |   4   | 1\n");
+    printf(") |      |       | )\n");
+    printf("   --------------\n");
+    printf("    South (4)\n\n\n");
     srand(time(NULL));
     int err, i;
     quad_intents = malloc(sizeof(struct intents*)*4);
