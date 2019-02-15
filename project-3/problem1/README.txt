@@ -18,6 +18,8 @@ The following files are a part of the project:
 - Makefile
 - main.c (contains the source code for the pirates vs ninja simulation)
 - problem1_explanation.txt (contains our explanation for problem 1)
+- output.txt
+- output2.txt
 - pvn (WILL NOT BE IN THE ZIP FILE, WILL BE COMPILED BY END USER)
 
 === Compiling ===
