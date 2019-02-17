@@ -24,6 +24,10 @@ void process(int pid, enum instructions instruction, int virtual_address, int va
 
 }
 
+void preProcess(char *input) {
+
+}
+
 
 int main() {
     while (1) {
