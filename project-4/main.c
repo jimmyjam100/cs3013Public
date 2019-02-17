@@ -1,6 +1,19 @@
 #include <stdio.h>
 #include <stdint.h>
 
+
+char memory[64];
+
+struct table_entry{
+    uint8_t alloc:1;
+    uint8_t valid:1;
+    uint8_t protection:1;
+    uint8_t frame:2;
+    uint8_t buff:3;
+};
+
+int page_table_start[4];
+
 enum instructions {
     load,
     store,
@@ -21,7 +34,7 @@ int main() {
             return 0;
         }
         // do stuff with instructions
-        printf("%s\n", instruction);1
+        printf("%s\n", instruction);
     }
     printf("Hello, World!\n");
     return 0;
