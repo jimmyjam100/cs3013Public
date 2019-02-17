@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
+#include <string.h>
+#include <stdlib.h>
 
 #define NOTALLOC -1
 #define SWAPED -2
@@ -25,6 +27,14 @@ enum instructions {
     load,
     store,
     map
+};
+
+struct user_input {
+    int valid;
+    int pid;
+    enum instructions instruction;
+    int virtual_address;
+    int value;
 };
 
 void mapInst(int pid, int virtual_address, int protection){
@@ -70,10 +80,9 @@ void storeInst(int pid, int virtual_address, int value){
 
 }
 
-void loadInst(int pid, int virtual_address){
+void loadInst(int pid, int virtual_address) {
 
 }
-
 
 void process(int pid, enum instructions instruction, int virtual_address, int value) {
     if(instruction == map){
@@ -88,10 +97,54 @@ void process(int pid, enum instructions instruction, int virtual_address, int va
 }
 
 
-void preProcess(char *input) {
+struct user_input preProcess(char *input) {
+    struct user_input ret;
+    ret.valid = 0;
 
+    int init_size = strlen(input);
+    char delim[] = ",";
+
+    char *ptr = strtok(input, delim);
+    char *unprocessed_pid = ptr;
+
+    ptr = strtok(NULL, delim);
+    if (ptr == NULL) return ret;
+    char *unprocessed_instruction= ptr;
+
+    ptr = strtok(NULL, delim);
+    if (ptr == NULL) return ret;
+    char *unprocessed_virtual_address = ptr;
+
+    ptr = strtok(NULL, delim);
+    if (ptr == NULL) return ret;
+    char *unprocessed_value = ptr;
+
+    // fill up the struct
+
+    // get pid value
+    ret.pid = atoi(unprocessed_pid);
+
+    // get instruction
+    if (strcmp(unprocessed_instruction, "store") == 0) {
+        ret.instruction = store;
+    } else if (strcmp(unprocessed_instruction, "load") == 0) {
+        ret.instruction = load;
+    } else if (strcmp(unprocessed_instruction, "map") == 0) {
+        ret.instruction = map;
+    } else {
+        ret.valid = -1;
+    }
+
+    // get the virtual address
+    ret.virtual_address = atoi(unprocessed_virtual_address);
+
+    // get the value
+    ret.value = atoi(unprocessed_value);
+
+    if (ret.valid == 0) ret.valid = 1;
+
+    return ret;
 }
-
 
 int main() {
     int i = 0;
@@ -110,8 +163,12 @@ int main() {
             return 0;
         }
         // do stuff with instructions
-        printf("%s\n", instruction);
+        printf("Input received: %s\n", instruction);
+        struct user_input ui = preProcess(instruction);
+        if (ui.valid != 1) {
+            printf("Invalid user input\n");
+        }
+        process(ui.pid, ui.instruction, ui.virtual_address, ui.value);
     }
-    printf("Hello, World!\n");
     return 0;
 }
