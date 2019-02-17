@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 #define NOTALLOC -1
-#define SWAPED -2
+#define SWAPPED -2
 
 #define EMPTY 0
 #define FULL 1
