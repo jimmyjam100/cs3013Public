@@ -77,10 +77,34 @@ void mapInst(int pid, int virtual_address, int protection){
 }
 
 void storeInst(int pid, int virtual_address, int value){
-
+    if (page_table_start[pid] != NOTALLOC){
+        struct table_entry* entry = (struct table_entry*)(&memory[page_table_start[pid]*16 + (virtual_address>>4)]);
+        if(entry->alloc == 0){
+            printf("error: space not allocated yet\n");
+            return;
+        }
+        if(entry->protection == 0){
+            printf("error: space is read only\n");
+            return;
+        }
+        int newAddress = ((virtual_address)&(0xf)) + (entry->frame << 4);
+        printf("storing the value %d at physical address %d", value, newAddress);
+        memory[newAddress] = value;
+    }
+    printf("error: space not allocated yet\n");
 }
 
 void loadInst(int pid, int virtual_address) {
+    if (page_table_start[pid] != NOTALLOC){
+        struct table_entry* entry = (struct table_entry*)(&memory[page_table_start[pid]*16 + (virtual_address>>4)]);
+        if(entry->alloc == 0){
+            printf("error: space not allocated yet\n");
+            return;
+        }
+        int newAddress = ((virtual_address)&(0xf)) + (entry->frame << 4);
+        printf("read the value %d at physical address %d", memory[newAddress], newAddress);
+    }
+    printf("error: space not allocated yet\n");
 
 }
 
