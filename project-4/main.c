@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdint.h>
 
 enum instructions {
     load,
@@ -20,7 +21,7 @@ int main() {
             return 0;
         }
         // do stuff with instructions
-        printf("%s\n", instruction);
+        printf("%s\n", instruction);1
     }
     printf("Hello, World!\n");
     return 0;
