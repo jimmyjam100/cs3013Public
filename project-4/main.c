@@ -147,27 +147,36 @@ struct user_input preProcess(char *input) {
 }
 
 int main() {
+    // Initializing memory valuess
     int i = 0;
     for (i = 0; i < 64; i++){
         memory[i] = 0;
     }
+    // Initializing free list
     for (i = 0; i < 4; i++){
         free_list[i] = EMPTY;
         page_table_start[i] = NOTALLOC;
     }
+    // Loop through to get user input
     while (1) {
         char instruction[100];
         printf("Instruction? ");
+        // If end of file detceted, stop the program
+        // Store input into the instruction array
         if (scanf("%s", instruction) == EOF) {
             printf("\nEnd of program\n");
             return 0;
         }
         // do stuff with instructions
+        // print out the input received
         printf("Input received: %s\n", instruction);
+        // parse the input into a struct with the correct data types
         struct user_input ui = preProcess(instruction);
+        // ensure the input was valid / no errors while parsing
         if (ui.valid != 1) {
             printf("Invalid user input\n");
         }
+        // call the process function with our input
         process(ui.pid, ui.instruction, ui.virtual_address, ui.value);
     }
     return 0;
