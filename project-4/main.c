@@ -21,7 +21,7 @@ int main() {
             return 0;
         }
         // do stuff with instructions
-        printf("%s\n", instruction);1
+        printf("%s\n", instruction);
     }
     printf("Hello, World!\n");
     return 0;
