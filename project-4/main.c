@@ -30,7 +30,7 @@ enum instructions {
 void mapInst(int pid, int virtual_address, int protection){
     if(page_table_start[pid] == NOTALLOC){
         int i = 0;
-        for(i = 0; i < 4 && free_list[i] == EMPTY; i++){}
+        for(i = 0; i < 4 && free_list[i] == FULL; i++){}
         if(i == 4){
             printf("error too full to create page table for pid %d\n", pid);
             return;
@@ -41,6 +41,28 @@ void mapInst(int pid, int virtual_address, int protection){
         }
     }
     struct table_entry* entry = (struct table_entry*)(&memory[page_table_start[pid]*16 + (virtual_address>>4)]);
+    
+    if(entry->alloc == 0){
+        printf("allocating new page\n");
+        int i = 0;
+        for(i = 0; i < 4 && free_list[i] == FULL; i++){}
+        if(i == 4){
+            printf("error too full to create page\n");
+            return;
+        }
+        else{
+            printf("allocated space to page %d\n", i);
+            free_list[i] = FULL;
+            entry->alloc = 1;
+            entry->valid = 1;
+            entry->protection = protection;
+            entry->frame = i;
+        }
+    }
+    else{
+        printf("page already allocated, updating protection\n");
+        entry->protection = protection;   
+    }
 
 }
 
