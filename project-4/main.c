@@ -1,5 +1,16 @@
 #include <stdio.h>
 
+enum instructions {
+    load,
+    store,
+    map
+};
+
+void process(int pid, enum instructions instruction, int virtual_address, int value) {
+
+}
+
+
 int main() {
     while (1) {
         char instruction[100];
