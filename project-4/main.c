@@ -52,6 +52,7 @@ void loadInst(int pid, int virtual_address){
 
 }
 
+
 void process(int pid, enum instructions instruction, int virtual_address, int value) {
     if(instruction == map){
         mapInst(pid, virtual_address, value);
@@ -65,6 +66,9 @@ void process(int pid, enum instructions instruction, int virtual_address, int va
 }
 
 
+void preProcess(char *input) {
+
+}
 
 
 int main() {
