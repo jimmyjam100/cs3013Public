@@ -48,6 +48,7 @@ void mapInst(int pid, int virtual_address, int protection){
         else{
             page_table_start[pid] = i;
             free_list[i] = FULL;
+            printf("Put page table for PID %d into physical frame %d\n", pid, i);
         }
     }
     struct table_entry* entry = (struct table_entry*)(&memory[page_table_start[pid]*16 + (virtual_address>>4)]);
@@ -61,7 +62,7 @@ void mapInst(int pid, int virtual_address, int protection){
             return;
         }
         else{
-            printf("allocated space to page %d\n", i);
+            printf("Mapped virtual_address %d (page %d) into physical frame %d\n", virtual_address, (virtual_address>>4), i);
             free_list[i] = FULL;
             entry->alloc = 1;
             entry->valid = 1;
@@ -88,8 +89,9 @@ void storeInst(int pid, int virtual_address, int value){
             return;
         }
         int newAddress = ((virtual_address)&(0xf)) + (entry->frame << 4);
-        printf("storing the value %d at physical address %d", value, newAddress);
+        printf("Stored value %d at virtual address %d (physical address %d)\n", value, virtual_address, newAddress);
         memory[newAddress] = value;
+        return;
     }
     printf("error: space not allocated yet\n");
 }
@@ -102,7 +104,8 @@ void loadInst(int pid, int virtual_address) {
             return;
         }
         int newAddress = ((virtual_address)&(0xf)) + (entry->frame << 4);
-        printf("read the value %d at physical address %d", memory[newAddress], newAddress);
+        printf("The value %d is virtual address %d (physical address %d)\n", memory[newAddress], virtual_address, newAddress);
+        return;
     }
     printf("error: space not allocated yet\n");
 
