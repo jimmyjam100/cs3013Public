@@ -16,7 +16,8 @@ struct table_entry{
     uint8_t valid:1;
     uint8_t protection:1;
     uint8_t frame:2;
-    uint8_t swapspace:11;
+    uint8_t swapspace:8;
+    uint8_t buffer:3;
 };
 
 int page_table_start[4];
