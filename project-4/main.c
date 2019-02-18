@@ -16,7 +16,8 @@ struct table_entry{
     uint8_t valid:1;
     uint8_t protection:1;
     uint8_t frame:2;
-    uint8_t buff:3;
+    uint8_t swapspace:8;
+    uint8_t buffer:3;
 };
 
 struct page {
@@ -26,6 +27,9 @@ struct page {
 int page_table_start[4];
 
 int free_list[4];
+
+int swapSize = 0;
+int nextSwap = 0;
 
 // the different types of instructions
 enum instructions {
@@ -59,7 +63,10 @@ struct page write_to_swap_location(char data[16]) {
 
 }
 
-
+void swapPage(int swapSpace, int pageIndex){
+    int thisEvict = swapIndex;
+    swapIndex = (swapIndex+1)%4;
+}
 
 void mapInst(int pid, int virtual_address, int protection){
     if(page_table_start[pid] == NOTALLOC){
