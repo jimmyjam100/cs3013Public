@@ -16,12 +16,14 @@ struct table_entry{
     uint8_t valid:1;
     uint8_t protection:1;
     uint8_t frame:2;
-    uint8_t buff:3;
+    uint8_t swapspace:11;
 };
 
 int page_table_start[4];
 
 int free_list[4];
+
+int swapIndex = 0;
 
 enum instructions {
     load,
@@ -36,6 +38,11 @@ struct user_input {
     int virtual_address;
     int value;
 };
+
+void swapPage(int swapSpace, int pageIndex){
+    int thisEvict = swapIndex;
+    swapIndex = (swapIndex+1)%4;
+}
 
 void mapInst(int pid, int virtual_address, int protection){
     if(page_table_start[pid] == NOTALLOC){
