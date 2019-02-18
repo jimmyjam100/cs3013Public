@@ -19,6 +19,10 @@ struct table_entry{
     uint8_t buff:3;
 };
 
+struct page {
+    char data[16];
+};
+
 int page_table_start[4];
 
 int free_list[4];
@@ -38,6 +42,24 @@ struct user_input {
     int virtual_address;
     int value;
 };
+
+int get_num_pages_in_swap() {
+
+}
+
+struct page get_page_from_swap(int index) {
+
+}
+
+int append_page_to_swap(char data[16]) {
+
+}
+
+struct page write_to_swap_location(char data[16]) {
+
+}
+
+
 
 void mapInst(int pid, int virtual_address, int protection){
     if(page_table_start[pid] == NOTALLOC){
