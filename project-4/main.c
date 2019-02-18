@@ -23,14 +23,17 @@ int page_table_start[4];
 
 int free_list[4];
 
-int swapIndex = 0;
+int swapSize = 0;
+int nextSwap = 0;
 
+// the different types of instructions
 enum instructions {
     load,
     store,
     map
 };
 
+// a struct used to store parsed user input
 struct user_input {
     int valid;
     int pid;
@@ -119,6 +122,7 @@ void loadInst(int pid, int virtual_address) {
 }
 
 void process(int pid, enum instructions instruction, int virtual_address, int value) {
+    // basically a switch statement determining which function to call based off of the instruction enum that was parsed from the input
     if(instruction == map){
         mapInst(pid, virtual_address, value);
     }
@@ -132,13 +136,19 @@ void process(int pid, enum instructions instruction, int virtual_address, int va
 
 
 struct user_input preProcess(char *input) {
+    // Create structure that will be returned to invoker
     struct user_input ret;
+    // Set the valid byte to zero. The invoker will check for a value of 1 to see if
+    // the input was able to be correctly parsed, else there was an error.
     ret.valid = 0;
 
     int init_size = strlen(input);
     char delim[] = ",";
 
     char *ptr = strtok(input, delim);
+    // set the value of unprocessed_pid to the pointer obtained from strstok
+    // it is called unprocessed_pid because it is just a char*, and has not
+    // yet been parsed into its proper data type
     char *unprocessed_pid = ptr;
 
     ptr = strtok(NULL, delim);
@@ -175,8 +185,10 @@ struct user_input preProcess(char *input) {
     // get the value
     ret.value = atoi(unprocessed_value);
 
+    // if no further issues were raised, then set the valid byte to 1
     if (ret.valid == 0) ret.valid = 1;
 
+    // return the struct
     return ret;
 }
 
