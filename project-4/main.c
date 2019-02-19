@@ -24,7 +24,8 @@ struct page {
     char data[16];
 };
 
-char memory[64];
+unsigned char memory[64];
+
 enum SWAP_STATES {
     FREE,
     CATALONIA // Occupied
@@ -63,6 +64,7 @@ int get_num_pages_in_swap() {
         }
         // above could be simplified to counter += swap_states[i] // but we're not a mad lad
     }
+    return counter;
 }
 
 struct page get_page_from_swap(int index) {
@@ -80,6 +82,7 @@ int append_page_to_swap(struct page page) {
 }
 
 struct page write_to_swap_location(struct page page, int index) {
+    swap_states[index] = CATALONIA;
     swap[index] = page;
 }
 
