@@ -174,13 +174,14 @@ void mapInst(int pid, int virtual_address, int protection){
         int i = 0;
         for(i = 0; i < 4 && free_list[i] == FULL; i++){}
         if(i == 4){
-            if(page_table_start[pid] != NOTALLOC){
+            if(page_table_start[pid] == NOTALLOC){
                 struct page newPage;
                 for(int j = 0; j < 16; j++){
                     newPage.data[j] = 0;
                 }
                 append_page_to_swap(newPage);
-                page_table_start[pid] = swapToIndex(get_num_pages_in_swap()-1);
+                page_table_start[pid] = swapToIndex(get_num_pages_in_swap() - 1);
+                printf("num of pages %d\n", get_num_pages_in_swap());
             }
             swapPage(indexToSwap(page_table_start[pid]), nextSwap);
             printf("error too full to create page table for pid %d\n", pid);
