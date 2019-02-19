@@ -9,7 +9,7 @@
 #define EMPTY 0
 #define FULL 1
 
-char memory[64];
+#define N_PROCESSES 4
 
 struct table_entry{
     uint8_t alloc:1;
@@ -23,6 +23,14 @@ struct table_entry{
 struct page {
     char data[16];
 };
+
+char memory[64];
+enum SWAP_STATES {
+    FREE,
+    CATALONIA // Occupied
+};
+enum SWAP_STATES swap_states[N_PROCESSES + N_PROCESSES * 4];
+struct page swap[N_PROCESSES + N_PROCESSES * 4];
 
 int page_table_start[4];
 
@@ -48,19 +56,31 @@ struct user_input {
 };
 
 int get_num_pages_in_swap() {
-
+    int counter = 0, i = 0;
+    for (i = 0; i < (N_PROCESSES + N_PROCESSES * 4); i++) {
+        if (swap_states[i] == CATALONIA) {
+            counter += 1;
+        }
+        // above could be simplified to counter += swap_states[i] // but we're not a mad lad
+    }
 }
 
 struct page get_page_from_swap(int index) {
-
+    return swap[index];
 }
 
 int append_page_to_swap(struct page page) {
-
+    int counter = 0, i = 0;
+    for (i = 0; i < (N_PROCESSES + N_PROCESSES * 4); i++) {
+        if (swap_states[i] == FREE) {
+            swap[i] = page;
+            return i;
+        }
+    }
 }
 
 struct page write_to_swap_location(struct page page, int index) {
-
+    swap[index] = page;
 }
 
 int indexToSwap(int index){
@@ -302,9 +322,17 @@ struct user_input preProcess(char *input) {
 
 int main() {
     // Initializing memory valuess
-    int i = 0;
+    int i = 0, j = 0;
     for (i = 0; i < 64; i++){
         memory[i] = 0;
+    }
+    for (i = 0; i < (N_PROCESSES + N_PROCESSES * 4); i++) {
+        swap_states[i] = FREE;
+        struct page new;
+        for (j = 0; j < 16; j++) {
+            new.data[j] = 0;
+        }
+        swap[i] = new;
     }
     // Initializing free list
     for (i = 0; i < 4; i++){
