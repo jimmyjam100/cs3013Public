@@ -92,7 +92,7 @@ int swapToIndex(int swap){
 }
 
 void swapPage(int swapSpace, int pageIndex){
-    printf("swaping out swap space %d into page index %d\n"swapSpace, pageIndex);
+    printf("swaping out swap space %d into page index %d\n", swapSpace, pageIndex);
     struct page swapIn = get_page_from_swap(swapSpace);
     struct page swapOut;
     strncpy((char *)(&swapOut), &memory[pageIndex*16], sizeof(struct page));
