@@ -72,6 +72,7 @@ int swapToIndex(int swap){
 }
 
 void swapPage(int swapSpace, int pageIndex){
+    printf("swaping out swap space %d into page index %d\n"swapSpace, pageIndex);
     struct page swapIn = get_page_from_swap(swapSpace);
     struct page swapOut;
     strncpy((char *)(&swapOut), &memory[pageIndex*16], sizeof(struct page));
@@ -213,6 +214,9 @@ void mapInst(int pid, int virtual_address, int protection){
 
 void storeInst(int pid, int virtual_address, int value){
     if (page_table_start[pid] != NOTALLOC){
+        if(page_table_start[pid] < 0 || page_table_start[pid] > 3){
+            swapPage(indexToSwap(page_table_start[pid]), nextSwap);
+        }
         struct table_entry* entry = (struct table_entry*)(&memory[page_table_start[pid]*16 + (virtual_address>>4)*2]);
         if(entry->alloc == 0){
             printf("error: space not allocated yet\n");
@@ -221,6 +225,11 @@ void storeInst(int pid, int virtual_address, int value){
         if(entry->protection == 0){
             printf("error: space is read only\n");
             return;
+        }
+        if(entry->valid == 0){
+            entry->valid = 1;
+            entry->frame = nextSwap;
+            swapPage(entry->swapspace, nextSwap);
         }
         int newAddress = ((virtual_address)&(0xf)) + (entry->frame << 4);
         printf("Stored value %d at virtual address %d (physical address %d)\n", value, virtual_address, newAddress);
@@ -232,10 +241,18 @@ void storeInst(int pid, int virtual_address, int value){
 
 void loadInst(int pid, int virtual_address) {
     if (page_table_start[pid] != NOTALLOC){
+        if(page_table_start[pid] < 0 || page_table_start[pid] > 3){
+            swapPage(indexToSwap(page_table_start[pid]), nextSwap);
+        }
         struct table_entry* entry = (struct table_entry*)(&memory[page_table_start[pid]*16 + (virtual_address>>4)*2]);
         if(entry->alloc == 0){
             printf("error: space not allocated yet\n");
             return;
+        }
+        if(entry->valid == 0){
+            entry->valid = 1;
+            entry->frame = nextSwap;
+            swapPage(entry->swapspace, nextSwap);
         }
         int newAddress = ((virtual_address)&(0xf)) + (entry->frame << 4);
         printf("The value %d is virtual address %d (physical address %d)\n", memory[newAddress], virtual_address, newAddress);
