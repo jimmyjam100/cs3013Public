@@ -76,6 +76,7 @@ int append_page_to_swap(struct page page) {
     for (i = 0; i < (N_PROCESSES + N_PROCESSES * 4); i++) {
         if (swap_states[i] == FREE) {
             swap[i] = page;
+            swap_states[i] = CATALONIA;
             return i;
         }
     }
