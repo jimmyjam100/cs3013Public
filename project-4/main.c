@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define NOTALLOC -1
+#define NOTALLOC 4
 #define SWAPPED -2
 
 #define EMPTY 0
@@ -55,26 +55,99 @@ struct page get_page_from_swap(int index) {
 
 }
 
-int append_page_to_swap(char data[16]) {
+int append_page_to_swap(struct page page) {
 
 }
 
-struct page write_to_swap_location(char data[16]) {
+struct page write_to_swap_location(struct page page, int index) {
 
+}
+
+int indexToSwap(int index){
+    return -(index+1);
+}
+
+int swapToIndex(int swap){
+    return -(swap+1);
 }
 
 void swapPage(int swapSpace, int pageIndex){
-    int thisEvict = swapIndex;
-    swapIndex = (swapIndex+1)%4;
+    struct page swapIn = get_page_from_swap(swapSpace);
+    struct page swapOut;
+    strncpy((char *)(&swapOut), &memory[pageIndex*16], sizeof(struct page));
+    for (int i = 0; i < 4; i++){
+        if(page_table_start[i] >= 0 && page_table_start[i] <= 3){
+            if (pageIndex == page_table_start[i]){
+                page_table_start[i] = swapToIndex(swapSpace);
+                write_to_swap_location(swapOut, swapSpace);
+                strncpy(&memory[pageIndex*16], (char *)(&swapIn), sizeof(struct page));
+                nextSwap = (nextSwap+1)%4;
+                return;    
+            }
+            else{
+                for(int j = 0; j < 4; j++){
+                    struct table_entry* entry = (struct table_entry*)(&memory[page_table_start[i]*16 + j*2]);
+                    if (entry->valid == 1 && entry->alloc == 1 && entry->frame == pageIndex){
+                        entry->valid = 0;
+                        entry->swapspace = swapSpace;
+                        write_to_swap_location(swapOut, swapSpace);
+                        strncpy(&memory[pageIndex*16], (char *)(&swapIn), sizeof(struct page));
+                        nextSwap = (nextSwap+1)%4;
+                        return;
+                    }
+                }
+            }
+        }
+        else if(indexToSwap(page_table_start[i]) == swapSpace){
+            for(int j = 0; j < 4; j++){
+                struct table_entry* entry = (struct table_entry*)(&(swapIn.data[j*2]));
+                if(entry->valid == 1 && entry->alloc == 1 && entry->frame == pageIndex){
+                    write_to_swap_location(swapOut, swapSpace);
+                    strncpy(&memory[pageIndex*16], (char *)(&swapIn), sizeof(struct page));
+                    entry = (struct table_entry*)(&memory[pageIndex*16 + j*2]);
+                    entry->valid  = 0;
+                    entry->swapspace = swapSpace;
+                    page_table_start[i] = pageIndex;
+                    nextSwap = (nextSwap+1)%4;
+                    return;
+                }
+            }
+        }
+        else{
+            struct page possibleTable =  get_page_from_swap(indexToSwap(page_table_start[i]));
+            for(int j = 0; j < 4; j++){
+                struct table_entry* entry = (struct table_entry*)(&(possibleTable.data[j*2]));
+                if(entry->valid == 1 && entry->alloc == 1 && entry->frame == pageIndex){
+                    swapPage(indexToSwap(page_table_start[i]), (pageIndex + 1)%4);
+                    entry = (struct table_entry*)(&(memory[page_table_start[i]*16 + j*2]));
+                    entry->valid = 0;
+                    entry->swapspace = swapSpace;
+                    write_to_swap_location(swapOut, swapSpace);
+                    strncpy(&memory[pageIndex*16], (char *)(&swapIn), sizeof(struct page));
+                    nextSwap = (nextSwap+1)%4;
+                    return;                   
+                }
+            }
+        }
+    }                   
 }
 
 void mapInst(int pid, int virtual_address, int protection){
-    if(page_table_start[pid] == NOTALLOC){
+    if(!(page_table_start[pid] >= 0 && page_table_start[pid] <=3)){
         int i = 0;
         for(i = 0; i < 4 && free_list[i] == FULL; i++){}
         if(i == 4){
+            if(page_table_start[pid] != NOTALLOC){
+                struct page newPage;
+                for(int j = 0; j < 16; j++){
+                    newPage.data[j] = 0;
+                }
+                append_page_to_swap(newPage);
+                page_table_start[pid] = swapToIndex(get_num_pages_in_swap()-1);
+            }
+            swapPage(indexToSwap(page_table_start[pid]), nextSwap);
             printf("error too full to create page table for pid %d\n", pid);
-            return;
+            //return;
         }
         else{
             page_table_start[pid] = i;
@@ -82,15 +155,29 @@ void mapInst(int pid, int virtual_address, int protection){
             printf("Put page table for PID %d into physical frame %d\n", pid, i);
         }
     }
-    struct table_entry* entry = (struct table_entry*)(&memory[page_table_start[pid]*16 + (virtual_address>>4)]);
+    struct table_entry* entry = (struct table_entry*)(&memory[page_table_start[pid]*16 + (virtual_address>>4)*2]);
     
-    if(entry->alloc == 0){
+    if(entry->alloc == 0 || entry->valid == 0){
         printf("allocating new page\n");
         int i = 0;
         for(i = 0; i < 4 && free_list[i] == FULL; i++){}
         if(i == 4){
-            printf("error too full to create page\n");
-            return;
+            //printf("error too full to create page\n");
+            int oldAlloc = entry->alloc;
+            entry->alloc = 1;
+            entry->valid = 1;
+            entry->protection = protection;
+            entry->frame = nextSwap;
+            if (oldAlloc == 0){
+                struct page newPage;
+                for(int j = 0; j < 16; j++){
+                    newPage.data[j] = 0;
+                }
+                append_page_to_swap(newPage);
+                entry->swapspace = get_num_pages_in_swap() - 1;
+            }
+            swapPage(entry->swapspace, nextSwap);
+            //return;
         }
         else{
             printf("Mapped virtual_address %d (page %d) into physical frame %d\n", virtual_address, (virtual_address>>4), i);
@@ -110,7 +197,7 @@ void mapInst(int pid, int virtual_address, int protection){
 
 void storeInst(int pid, int virtual_address, int value){
     if (page_table_start[pid] != NOTALLOC){
-        struct table_entry* entry = (struct table_entry*)(&memory[page_table_start[pid]*16 + (virtual_address>>4)]);
+        struct table_entry* entry = (struct table_entry*)(&memory[page_table_start[pid]*16 + (virtual_address>>4)*2]);
         if(entry->alloc == 0){
             printf("error: space not allocated yet\n");
             return;
@@ -129,7 +216,7 @@ void storeInst(int pid, int virtual_address, int value){
 
 void loadInst(int pid, int virtual_address) {
     if (page_table_start[pid] != NOTALLOC){
-        struct table_entry* entry = (struct table_entry*)(&memory[page_table_start[pid]*16 + (virtual_address>>4)]);
+        struct table_entry* entry = (struct table_entry*)(&memory[page_table_start[pid]*16 + (virtual_address>>4)*2]);
         if(entry->alloc == 0){
             printf("error: space not allocated yet\n");
             return;
