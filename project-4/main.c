@@ -135,43 +135,46 @@ void swapPage(int swapSpace, int pageIndex){
                 }
             }
         }
-        if(indexToSwap(page_table_start[i]) == swapSpace){
-            for(int j = 0; j < 4; j++){
-                struct table_entry* entry = (struct table_entry*)(&(swapIn.data[j*2]));
-                if(entry->valid == 1 && entry->alloc == 1 && entry->frame == pageIndex){
-                    printf("SWAPED AN ENTRY WITH ITS PAGE TABLE\n");
-                    write_to_swap_location(swapOut, swapSpace);
-                    strncpy(&memory[pageIndex*16], (char *)(&swapIn), sizeof(struct page));
-                    entry = (struct table_entry*)(&memory[pageIndex*16 + j*2]);
-                    entry->valid  = 0;
-                    entry->swapspace = swapSpace;
-                    page_table_start[i] = pageIndex;
-                    nextSwap = (nextSwap+1)%4;
-                    return;
-                }
-            }
-            
-            
-        }
-        struct page possibleTable =  get_page_from_swap(indexToSwap(page_table_start[i]));
-        for(int j = 0; j < 4; j++){
-            struct table_entry* entry = (struct table_entry*)(&(possibleTable.data[j*2]));
-            if(entry->valid == 1 && entry->alloc == 1 && entry->frame == pageIndex){
-                printf("SWAPED A ENTRY WITH NOT ITS PAGE TABLE I THINK ITS PAGE TABLE IS IN SWAPSPACE %d\n", indexToSwap(page_table_start[i]));
-                write_to_swap_location(swapOut, swapSpace);
-                strncpy(&memory[pageIndex*16], (char *)(&swapIn), sizeof(struct page));
-                for (int k = 0; k < 4; k++){
-                    if(indexToSwap(page_table_start[k]) == swapSpace){
-                        page_table_start[k] = pageIndex;
+        else{
+            if(indexToSwap(page_table_start[i]) == swapSpace){
+                for(int j = 0; j < 4; j++){
+                    struct table_entry* entry = (struct table_entry*)(&(swapIn.data[j*2]));
+                    if(entry->valid == 1 && entry->alloc == 1 && entry->frame == pageIndex){
+                        printf("SWAPED AN ENTRY WITH ITS PAGE TABLE\n");
+                        write_to_swap_location(swapOut, swapSpace);
+                        strncpy(&memory[pageIndex*16], (char *)(&swapIn), sizeof(struct page));
+                        entry = (struct table_entry*)(&memory[pageIndex*16 + j*2]);
+                        entry->valid  = 0;
+                        entry->swapspace = swapSpace;
+                        page_table_start[i] = pageIndex;
+                        nextSwap = (nextSwap+1)%4;
+                        return;
                     }
                 }
+            
+            
+            }
+            struct page possibleTable =  get_page_from_swap(indexToSwap(page_table_start[i]));
+            for(int j = 0; j < 4; j++){
+                struct table_entry* entry = (struct table_entry*)(&(possibleTable.data[j*2]));
+                if(entry->valid == 1 && entry->alloc == 1 && entry->frame == pageIndex){
+
+                    printf("SWAPED A ENTRY WITH NOT ITS PAGE TABLE I THINK ITS PAGE TABLE IS IN SWAPSPACE %d\n", indexToSwap(page_table_start[i]));
+                    write_to_swap_location(swapOut, swapSpace);
+                    strncpy(&memory[pageIndex*16], (char *)(&swapIn), sizeof(struct page));
+                    for (int k = 0; k < 4; k++){
+                        if(indexToSwap(page_table_start[k]) == swapSpace){
+                            page_table_start[k] = pageIndex;
+                        }
+                    }
                     
-                swapPage(indexToSwap(page_table_start[i]), (pageIndex + 1)%4);
-                entry = (struct table_entry*)(&(memory[page_table_start[i]*16 + j*2]));
-                entry->valid = 0;
-                entry->swapspace = swapSpace;
-                nextSwap = (nextSwap+1)%4;
-                return;                   
+                    swapPage(indexToSwap(page_table_start[i]), (pageIndex + 1)%4);
+                    entry = (struct table_entry*)(&(memory[page_table_start[i]*16 + j*2]));
+                    entry->valid = 0;
+                    entry->swapspace = swapSpace;
+                    nextSwap = (nextSwap+1)%4;
+                    return;                   
+                }
             }
         }
     }
