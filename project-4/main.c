@@ -96,13 +96,14 @@ int swapToIndex(int swap){
 }
 
 void swapPage(int swapSpace, int pageIndex){
-    printf("swaping out swap space %d into page index %d\n", swapSpace, pageIndex);
+    printf("Swapped frame %d and disk swapslot %d\n", pageIndex, swapSpace);
     struct page swapIn = get_page_from_swap(swapSpace);
     struct page swapOut;
     strncpy((char *)(&swapOut), &memory[pageIndex*16], sizeof(struct page));
     for (int i = 0; i < 4; i++){
         if(page_table_start[i] >= 0 && page_table_start[i] <= 3){
             if (pageIndex == page_table_start[i]){
+                printf("SWAPPED SOMETHING IN FOR A PAGE TABLE\n");
                 for (int k = 0; k < 4; k++){
                     if(indexToSwap(page_table_start[k]) == swapSpace){
                         page_table_start[k] = pageIndex;
@@ -118,6 +119,7 @@ void swapPage(int swapSpace, int pageIndex){
                 for(int j = 0; j < 4; j++){
                     struct table_entry* entry = (struct table_entry*)(&memory[page_table_start[i]*16 + j*2]);
                     if (entry->valid == 1 && entry->alloc == 1 && entry->frame == pageIndex){
+                        printf("SWAPED AN ENTRY OUT WHILE PAGE TABLE %d IS IN MEMORY IN INDEX %d\n", i, page_table_start[i]);
                         entry->valid = 0;
                         entry->swapspace = swapSpace;
                         write_to_swap_location(swapOut, swapSpace);
@@ -137,6 +139,7 @@ void swapPage(int swapSpace, int pageIndex){
             for(int j = 0; j < 4; j++){
                 struct table_entry* entry = (struct table_entry*)(&(swapIn.data[j*2]));
                 if(entry->valid == 1 && entry->alloc == 1 && entry->frame == pageIndex){
+                    printf("SWAPED AN ENTRY WITH ITS PAGE TABLE\n");
                     write_to_swap_location(swapOut, swapSpace);
                     strncpy(&memory[pageIndex*16], (char *)(&swapIn), sizeof(struct page));
                     entry = (struct table_entry*)(&memory[pageIndex*16 + j*2]);
@@ -154,6 +157,7 @@ void swapPage(int swapSpace, int pageIndex){
         for(int j = 0; j < 4; j++){
             struct table_entry* entry = (struct table_entry*)(&(possibleTable.data[j*2]));
             if(entry->valid == 1 && entry->alloc == 1 && entry->frame == pageIndex){
+                printf("SWAPED A ENTRY WITH NOT ITS PAGE TABLE I THINK ITS PAGE TABLE IS IN SWAPSPACE %d\n", indexToSwap(page_table_start[i]));
                 write_to_swap_location(swapOut, swapSpace);
                 strncpy(&memory[pageIndex*16], (char *)(&swapIn), sizeof(struct page));
                 for (int k = 0; k < 4; k++){
@@ -170,7 +174,8 @@ void swapPage(int swapSpace, int pageIndex){
                 return;                   
             }
         }
-    }                   
+    }
+    printf("ERROR: DID NOT SWAP FOR SOME REASON\n");                   
 }
 
 void mapInst(int pid, int virtual_address, int protection){
@@ -178,18 +183,23 @@ void mapInst(int pid, int virtual_address, int protection){
         int i = 0;
         for(i = 0; i < 4 && free_list[i] == FULL; i++){}
         if(i == 4){
+            int newPage = 0;
             if(page_table_start[pid] == NOTALLOC){
+                newPage = 1;
                 struct page newPage;
                 for(int j = 0; j < 16; j++){
                     newPage.data[j] = 0;
                 }
                 append_page_to_swap(newPage);
                 page_table_start[pid] = swapToIndex(get_num_pages_in_swap() - 1);
-                printf("num of pages %d\n", get_num_pages_in_swap());
+                //printf("num of pages %d\n", get_num_pages_in_swap());
             }
+            int oldSwap = nextSwap;
             swapPage(indexToSwap(page_table_start[pid]), nextSwap);
-            printf("error too full to create page table for pid %d\n", pid);
-            //return;
+            //page_table_start[pid] = oldSwap;
+            if(newPage){
+                 printf("Put page table for PID %d into physical frame %d\n", pid, oldSwap);
+            }
         }
         else{
             page_table_start[pid] = i;
@@ -204,12 +214,12 @@ void mapInst(int pid, int virtual_address, int protection){
         int i = 0;
         for(i = 0; i < 4 && free_list[i] == FULL; i++){}
         if(i == 4){
+            if(nextSwap == page_table_start[pid]){
+                nextSwap = (nextSwap + 1)%4;
+            }
             //printf("error too full to create page\n");
             int oldAlloc = entry->alloc;
-            entry->alloc = 1;
-            entry->valid = 1;
-            entry->protection = protection;
-            entry->frame = nextSwap;
+            int oldSwap = nextSwap;
             if (oldAlloc == 0){
                 struct page newPage;
                 for(int j = 0; j < 16; j++){
@@ -219,6 +229,10 @@ void mapInst(int pid, int virtual_address, int protection){
                 entry->swapspace = get_num_pages_in_swap() - 1;
             }
             swapPage(entry->swapspace, nextSwap);
+            entry->alloc = 1;
+            entry->valid = 1;
+            entry->protection = protection;
+            entry->frame = oldSwap;
             //return;
         }
         else{
@@ -231,8 +245,13 @@ void mapInst(int pid, int virtual_address, int protection){
         }
     }
     else{
-        printf("page already allocated, updating protection\n");
-        entry->protection = protection;   
+        if(entry->protection == protection){
+            printf("Error: virtual page %d is already mapped with rw_bit=%d\n", virtual_address>>4, protection);
+        }
+        else{
+            printf("page already allocated, updating protection\n");
+            entry->protection = protection;
+        }   
     }
 
 }
@@ -240,50 +259,62 @@ void mapInst(int pid, int virtual_address, int protection){
 void storeInst(int pid, int virtual_address, int value){
     if (page_table_start[pid] != NOTALLOC){
         if(page_table_start[pid] < 0 || page_table_start[pid] > 3){
+            int oldSwap = nextSwap;
             swapPage(indexToSwap(page_table_start[pid]), nextSwap);
+            //page_table_start[pid] = oldSwap;
         }
         struct table_entry* entry = (struct table_entry*)(&memory[page_table_start[pid]*16 + (virtual_address>>4)*2]);
         if(entry->alloc == 0){
-            printf("error: space not allocated yet\n");
+            printf("Error: space not allocated yet\n");
             return;
         }
         if(entry->protection == 0){
-            printf("error: space is read only\n");
+            printf("Error: space is read only\n");
             return;
         }
         if(entry->valid == 0){
+            if(nextSwap == page_table_start[pid]){
+                nextSwap = (nextSwap + 1)%4;
+            }
+            int oldSwap = nextSwap;
+            swapPage(entry->swapspace, nextSwap);
             entry->valid = 1;
             entry->frame = nextSwap;
-            swapPage(entry->swapspace, nextSwap);
         }
         int newAddress = ((virtual_address)&(0xf)) + (entry->frame << 4);
         printf("Stored value %d at virtual address %d (physical address %d)\n", value, virtual_address, newAddress);
         memory[newAddress] = value;
         return;
     }
-    printf("error: space not allocated yet\n");
+    printf("Error: space not allocated yet\n");
 }
 
 void loadInst(int pid, int virtual_address) {
     if (page_table_start[pid] != NOTALLOC){
         if(page_table_start[pid] < 0 || page_table_start[pid] > 3){
+            int oldSwap = nextSwap;
             swapPage(indexToSwap(page_table_start[pid]), nextSwap);
+            //page_table_start[pid] = oldSwap;
         }
         struct table_entry* entry = (struct table_entry*)(&memory[page_table_start[pid]*16 + (virtual_address>>4)*2]);
         if(entry->alloc == 0){
-            printf("error: space not allocated yet\n");
+            printf("Error: space not allocated yet\n");
             return;
         }
         if(entry->valid == 0){
-            entry->valid = 1;
-            entry->frame = nextSwap;
+            if(nextSwap == page_table_start[pid]){
+                nextSwap = (nextSwap + 1)%4;
+            }
+            int oldSwap = nextSwap;
             swapPage(entry->swapspace, nextSwap);
+            entry->valid = 1;
+            entry->frame = oldSwap;
         }
         int newAddress = ((virtual_address)&(0xf)) + (entry->frame << 4);
         printf("The value %d is virtual address %d (physical address %d)\n", memory[newAddress], virtual_address, newAddress);
         return;
     }
-    printf("error: space not allocated yet\n");
+    printf("Error: space not allocated yet\n");
 
 }
 
