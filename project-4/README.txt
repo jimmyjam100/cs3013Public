@@ -36,7 +36,9 @@ $ make clean
 
 NOTICE:
 
-Compiling into a 32 bit executable is being forced with the -m32 flag in the make file. This is to simulate the environment of the virtual machine if compiling outside the classroom VM. Of course, this program is still being tested on the classroom VM.
+Compiling into a 32 bit executable is being forced with the -m32 flag in the make file. This is to simulate the
+environment of the virtual machine if compiling outside the classroom VM. Of course, this
+program is still being tested on the classroom VM.
 
 === Running ===
 
@@ -48,6 +50,8 @@ $ ./memory-manager
 
 - User input may be a max of 99 characters per request for instructions (this will fail silently)
 - If EOF (End Of File) is detected while obtaining input, the program will finish running.
+- Our memory manager will refuse to swap out a page table that belongs to the PID that has issued the current instruction.
+  It will instead swap out the next page. There should only be one page table in use at a time.
 
 === Tests ===
 
