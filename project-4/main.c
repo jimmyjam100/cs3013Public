@@ -103,7 +103,7 @@ int swapToIndex(int swap){
     return -(swap+1);
 }
 
-void swapPage(int swapSpace, int pageIndex){
+void swapPage(int swapSpace, int pageIndex, int pid){
     printf("Swapped frame %d and disk swapslot %d\n", pageIndex, swapSpace);
     struct page swapIn = get_page_from_swap(swapSpace);
     struct page swapOut = copyPage((struct page*) (&memory[pageIndex*16]));
@@ -111,6 +111,12 @@ void swapPage(int swapSpace, int pageIndex){
     for (int i = 0; i < 4; i++){
         if(page_table_start[i] >= 0 && page_table_start[i] <= 3){
             if (pageIndex == page_table_start[i]){
+                if(i == pid){
+                    printf("sorry nevermind we are not doing that swap, instead we will do the following\n");
+                    nextSwap = (nextSwap+1)%4;
+                    swapPage(swapSpace, nextSwap, pid);
+                    return;
+                }
                 //printf("SWAPPED SOMETHING IN FOR A PAGE TABLE\n");
                 for (int k = 0; k < 4; k++){
                     if(indexToSwap(page_table_start[k]) == swapSpace){
@@ -180,7 +186,7 @@ void swapPage(int swapSpace, int pageIndex){
                         }
                     }
                     
-                    swapPage(indexToSwap(page_table_start[i]), (pageIndex + 1)%4);
+                    swapPage(indexToSwap(page_table_start[i]), (pageIndex + 1)%4, pid);
                     entry = (struct table_entry*)(&(memory[page_table_start[i]*16 + j*2]));
                     entry->valid = 0;
                     entry->swapspace = swapSpace;
@@ -210,7 +216,7 @@ void mapInst(int pid, int virtual_address, int protection){
                 //printf("num of pages %d\n", get_num_pages_in_swap());
             }
             int oldSwap = nextSwap;
-            swapPage(indexToSwap(page_table_start[pid]), nextSwap);
+            swapPage(indexToSwap(page_table_start[pid]), nextSwap, pid);
             //page_table_start[pid] = oldSwap;
             if(newPage){
                  printf("Put page table for PID %d into physical frame %d\n", pid, oldSwap);
@@ -246,7 +252,7 @@ void mapInst(int pid, int virtual_address, int protection){
                 append_page_to_swap(newPage);
                 entry->swapspace = get_num_pages_in_swap() - 1;
             }
-            swapPage(entry->swapspace, nextSwap);
+            swapPage(entry->swapspace, nextSwap, pid);
             entry->alloc = 1;
             entry->valid = 1;
             entry->protection = protection;
@@ -278,7 +284,7 @@ void storeInst(int pid, int virtual_address, int value){
     if (page_table_start[pid] != NOTALLOC){
         if(page_table_start[pid] < 0 || page_table_start[pid] > 3){
             int oldSwap = nextSwap;
-            swapPage(indexToSwap(page_table_start[pid]), nextSwap);
+            swapPage(indexToSwap(page_table_start[pid]), nextSwap, pid);
             //page_table_start[pid] = oldSwap;
         }
         struct table_entry* entry = (struct table_entry*)(&memory[page_table_start[pid]*16 + (virtual_address>>4)*2]);
@@ -295,7 +301,7 @@ void storeInst(int pid, int virtual_address, int value){
                 nextSwap = (nextSwap + 1)%4;
             }
             int oldSwap = nextSwap;
-            swapPage(entry->swapspace, nextSwap);
+            swapPage(entry->swapspace, nextSwap, pid);
             entry->valid = 1;
             entry->frame = oldSwap;
         }
@@ -311,7 +317,7 @@ void loadInst(int pid, int virtual_address) {
     if (page_table_start[pid] != NOTALLOC){
         if(page_table_start[pid] < 0 || page_table_start[pid] > 3){
             int oldSwap = nextSwap;
-            swapPage(indexToSwap(page_table_start[pid]), nextSwap);
+            swapPage(indexToSwap(page_table_start[pid]), nextSwap, pid);
             //page_table_start[pid] = oldSwap;
         }
         struct table_entry* entry = (struct table_entry*)(&memory[page_table_start[pid]*16 + (virtual_address>>4)*2]);
@@ -324,7 +330,7 @@ void loadInst(int pid, int virtual_address) {
                 nextSwap = (nextSwap + 1)%4;
             }
             int oldSwap = nextSwap;
-            swapPage(entry->swapspace, nextSwap);
+            swapPage(entry->swapspace, nextSwap, pid);
             entry->valid = 1;
             entry->frame = oldSwap;
         }
