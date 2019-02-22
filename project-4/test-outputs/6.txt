@@ -1,0 +1,222 @@
+Instruction? Input received: 3,store,0,252
+Error: space not allocated yet
+Instruction? Input received: 3,store,16,253
+Error: space not allocated yet
+Instruction? Input received: 3,store,32,254
+Error: space not allocated yet
+Instruction? Input received: 3,store,48,255
+Error: space not allocated yet
+Instruction? Input received: 0,load,0,0
+Error: space not allocated yet
+Instruction? Input received: 0,load,16,0
+Error: space not allocated yet
+Instruction? Input received: 0,load,32,0
+Error: space not allocated yet
+Instruction? Input received: 0,load,48,0
+Error: space not allocated yet
+Instruction? Input received: 1,load,0,0
+Error: space not allocated yet
+Instruction? Input received: 1,load,16,0
+Error: space not allocated yet
+Instruction? Input received: 1,load,32,0
+Error: space not allocated yet
+Instruction? Input received: 1,load,48,0
+Error: space not allocated yet
+Instruction? Input received: 2,load,0,0
+Error: space not allocated yet
+Instruction? Input received: 2,load,16,0
+Error: space not allocated yet
+Instruction? Input received: 2,load,32,0
+Error: space not allocated yet
+Instruction? Input received: 2,load,48,0
+Error: space not allocated yet
+Instruction? Input received: 3,load,0,0
+Error: space not allocated yet
+Instruction? Input received: 3,load,16,0
+Error: space not allocated yet
+Instruction? Input received: 3,load,32,0
+Error: space not allocated yet
+Instruction? Input received: 3,load,48,0
+Error: space not allocated yet
+Instruction? Input received: 0,map,0,1
+Put page table for PID 0 into physical frame 0
+allocating new page
+Mapped virtual_address 0 (page 0) into physical frame 1
+Instruction? Input received: 0,map,16,1
+allocating new page
+Mapped virtual_address 16 (page 1) into physical frame 2
+Instruction? Input received: 0,map,32,1
+allocating new page
+Mapped virtual_address 32 (page 2) into physical frame 3
+Instruction? Input received: 0,map,48,1
+allocating new page
+Swapped frame 1 and disk swapslot 0
+Instruction? Input received: 1,map,0,1
+Swapped frame 2 and disk swapslot 1
+Put page table for PID 1 into physical frame 2
+allocating new page
+Swapped frame 3 and disk swapslot 2
+Instruction? Input received: 1,map,16,1
+allocating new page
+Swapped frame 0 and disk swapslot 3
+Instruction? Input received: 1,map,32,1
+allocating new page
+Swapped frame 1 and disk swapslot 4
+Swapped frame 2 and disk swapslot 3
+sorry nevermind we are not doing that swap, instead we will do the following
+Swapped frame 2 and disk swapslot 3
+sorry nevermind we are not doing that swap, instead we will do the following
+Swapped frame 3 and disk swapslot 3
+Instruction? Input received: 1,map,48,1
+allocating new page
+Swapped frame 1 and disk swapslot 5
+Instruction? Input received: 0,store,0,240
+Swapped frame 2 and disk swapslot 0
+Stored value 240 at virtual address 0 (physical address 32)
+Instruction? Input received: 0,store,16,241
+Swapped frame 0 and disk swapslot 1
+Swapped frame 1 and disk swapslot 0
+Stored value 241 at virtual address 16 (physical address 0)
+Instruction? Input received: 0,store,32,242
+Swapped frame 2 and disk swapslot 2
+Stored value 242 at virtual address 32 (physical address 32)
+Instruction? Input received: 0,store,48,243
+Swapped frame 0 and disk swapslot 4
+Stored value 243 at virtual address 48 (physical address 0)
+Instruction? Input received: 2,map,0,1
+Swapped frame 1 and disk swapslot 6
+Put page table for PID 2 into physical frame 1
+allocating new page
+Swapped frame 2 and disk swapslot 7
+Instruction? Input received: 2,map,16,1
+allocating new page
+Swapped frame 3 and disk swapslot 8
+Instruction? Input received: 2,map,32,1
+allocating new page
+Swapped frame 0 and disk swapslot 9
+Swapped frame 1 and disk swapslot 8
+sorry nevermind we are not doing that swap, instead we will do the following
+Swapped frame 1 and disk swapslot 8
+sorry nevermind we are not doing that swap, instead we will do the following
+Swapped frame 2 and disk swapslot 8
+Instruction? Input received: 1,store,0,244
+Swapped frame 0 and disk swapslot 6
+Swapped frame 1 and disk swapslot 3
+Stored value 244 at virtual address 0 (physical address 16)
+Instruction? Input received: 1,store,16,245
+Swapped frame 2 and disk swapslot 1
+Stored value 245 at virtual address 16 (physical address 32)
+Instruction? Input received: 1,store,32,246
+Swapped frame 3 and disk swapslot 5
+Swapped frame 0 and disk swapslot 3
+sorry nevermind we are not doing that swap, instead we will do the following
+Swapped frame 0 and disk swapslot 3
+sorry nevermind we are not doing that swap, instead we will do the following
+Swapped frame 1 and disk swapslot 3
+Stored value 246 at virtual address 32 (physical address 48)
+Instruction? Input received: 1,store,48,247
+Swapped frame 3 and disk swapslot 0
+Stored value 247 at virtual address 48 (physical address 48)
+Instruction? Input received: 2,map,48,1
+allocating new page
+Swapped frame 0 and disk swapslot 10
+Instruction? Input received: 3,map,0,1
+Swapped frame 1 and disk swapslot 11
+Put page table for PID 3 into physical frame 1
+allocating new page
+Swapped frame 2 and disk swapslot 12
+Swapped frame 3 and disk swapslot 10
+Instruction? Input received: 2,store,0,248
+Swapped frame 0 and disk swapslot 11
+Swapped frame 1 and disk swapslot 8
+Stored value 248 at virtual address 0 (physical address 16)
+Instruction? Input received: 2,store,16,249
+Swapped frame 2 and disk swapslot 5
+Swapped frame 3 and disk swapslot 8
+Stored value 249 at virtual address 16 (physical address 32)
+Instruction? Input received: 2,store,32,250
+Swapped frame 1 and disk swapslot 6
+Stored value 250 at virtual address 32 (physical address 16)
+Instruction? Input received: 2,store,48,251
+Swapped frame 2 and disk swapslot 11
+Stored value 251 at virtual address 48 (physical address 32)
+Instruction? Input received: 3,map,16,1
+allocating new page
+Swapped frame 0 and disk swapslot 13
+Instruction? Input received: 3,map,32,1
+allocating new page
+Swapped frame 1 and disk swapslot 14
+Swapped frame 2 and disk swapslot 13
+Instruction? Input received: 3,map,48,1
+allocating new page
+Swapped frame 0 and disk swapslot 15
+Instruction? Input received: 3,store,0,252
+Swapped frame 1 and disk swapslot 5
+Stored value 252 at virtual address 0 (physical address 16)
+Instruction? Input received: 3,store,16,253
+Swapped frame 2 and disk swapslot 15
+Stored value 253 at virtual address 16 (physical address 32)
+Instruction? Input received: 3,store,32,254
+Swapped frame 0 and disk swapslot 5
+Stored value 254 at virtual address 32 (physical address 0)
+Instruction? Input received: 3,store,48,255
+Swapped frame 1 and disk swapslot 5
+Stored value 255 at virtual address 48 (physical address 16)
+Instruction? Input received: 0,load,0,0
+Swapped frame 2 and disk swapslot 1
+Swapped frame 3 and disk swapslot 2
+The value 240 is virtual address 0 (physical address 48)
+Instruction? Input received: 0,load,16,0
+Swapped frame 0 and disk swapslot 4
+Swapped frame 1 and disk swapslot 2
+The value 241 is virtual address 16 (physical address 0)
+Instruction? Input received: 0,load,32,0
+Swapped frame 3 and disk swapslot 7
+The value 242 is virtual address 32 (physical address 48)
+Instruction? Input received: 0,load,48,0
+Swapped frame 0 and disk swapslot 9
+The value 243 is virtual address 48 (physical address 0)
+Instruction? Input received: 1,load,0,0
+Swapped frame 1 and disk swapslot 8
+Swapped frame 2 and disk swapslot 3
+The value 244 is virtual address 0 (physical address 32)
+Instruction? Input received: 1,load,16,0
+Swapped frame 3 and disk swapslot 12
+Swapped frame 0 and disk swapslot 3
+The value 245 is virtual address 16 (physical address 48)
+Instruction? Input received: 1,load,32,0
+Swapped frame 2 and disk swapslot 0
+The value 246 is virtual address 32 (physical address 32)
+Instruction? Input received: 1,load,48,0
+Swapped frame 3 and disk swapslot 10
+The value 247 is virtual address 48 (physical address 48)
+Instruction? Input received: 2,load,0,0
+Swapped frame 0 and disk swapslot 15
+Swapped frame 1 and disk swapslot 6
+The value 248 is virtual address 0 (physical address 16)
+Instruction? Input received: 2,load,16,0
+Swapped frame 2 and disk swapslot 11
+Swapped frame 3 and disk swapslot 6
+The value 249 is virtual address 16 (physical address 32)
+Instruction? Input received: 2,load,32,0
+Swapped frame 1 and disk swapslot 14
+The value 250 is virtual address 32 (physical address 16)
+Instruction? Input received: 2,load,48,0
+Swapped frame 2 and disk swapslot 13
+The value 251 is virtual address 48 (physical address 32)
+Instruction? Input received: 3,load,0,0
+Swapped frame 3 and disk swapslot 8
+Swapped frame 0 and disk swapslot 5
+The value 252 is virtual address 0 (physical address 0)
+Instruction? Input received: 3,load,16,0
+Swapped frame 1 and disk swapslot 1
+Swapped frame 2 and disk swapslot 5
+The value 253 is virtual address 16 (physical address 16)
+Instruction? Input received: 3,load,32,0
+Swapped frame 0 and disk swapslot 4
+The value 254 is virtual address 32 (physical address 0)
+Instruction? Input received: 3,load,48,0
+Swapped frame 1 and disk swapslot 2
+The value 255 is virtual address 48 (physical address 16)
+Instruction?
+End of program
