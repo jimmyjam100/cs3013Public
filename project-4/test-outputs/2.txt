@@ -1,0 +1,31 @@
+Instruction? Input received: 0,map,0,0
+Put page table for PID 0 into physical frame 0
+allocating new page
+Mapped virtual_address 0 (page 0) into physical frame 1
+Instruction? Input received: 0,store,7,255
+Error: space is read only
+Instruction? Input received: 0,map,0,1
+page already allocated, updating protection
+Instruction? Input received: 0,store,7,255
+Stored value 255 at virtual address 7 (physical address 23)
+Instruction? Input received: 0,load,7,0
+The value 255 is virtual address 7 (physical address 23)
+Instruction? Input received: 0,map,10,1
+Error: virtual page 0 is already mapped with rw_bit=1
+Instruction? Input received: 0,map,16,1
+allocating new page
+Mapped virtual_address 16 (page 1) into physical frame 2
+Instruction? Input received: 0,map,32,1
+allocating new page
+Mapped virtual_address 32 (page 2) into physical frame 3
+Instruction? Input received: 1,map,0,0
+Swapped frame 0 and disk swapslot 0
+Put page table for PID 1 into physical frame 0
+allocating new page
+Swapped frame 1 and disk swapslot 1
+Swapped frame 2 and disk swapslot 0
+Instruction? Input received: 0,load,7,0
+Swapped frame 3 and disk swapslot 1
+The value 255 is virtual address 7 (physical address 55)
+Instruction?
+End of program

@@ -1,0 +1,10 @@
+Instruction? Input received: 0,map,0,0
+Put page table for PID 0 into physical frame 0
+allocating new page
+Mapped virtual_address 0 (page 0) into physical frame 1
+Instruction? Input received: 0,store,16,255
+Error: space not allocated yet
+Instruction? Input received: 0,load,16,0
+Error: space not allocated yet
+Instruction?
+End of program
