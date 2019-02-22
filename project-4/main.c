@@ -103,7 +103,7 @@ void swapPage(int swapSpace, int pageIndex){
     for (int i = 0; i < 4; i++){
         if(page_table_start[i] >= 0 && page_table_start[i] <= 3){
             if (pageIndex == page_table_start[i]){
-                printf("SWAPPED SOMETHING IN FOR A PAGE TABLE\n");
+                //printf("SWAPPED SOMETHING IN FOR A PAGE TABLE\n");
                 for (int k = 0; k < 4; k++){
                     if(indexToSwap(page_table_start[k]) == swapSpace){
                         page_table_start[k] = pageIndex;
@@ -119,7 +119,7 @@ void swapPage(int swapSpace, int pageIndex){
                 for(int j = 0; j < 4; j++){
                     struct table_entry* entry = (struct table_entry*)(&memory[page_table_start[i]*16 + j*2]);
                     if (entry->valid == 1 && entry->alloc == 1 && entry->frame == pageIndex){
-                        printf("SWAPED AN ENTRY OUT WHILE PAGE TABLE %d IS IN MEMORY IN INDEX %d\n", i, page_table_start[i]);
+                        //printf("SWAPED AN ENTRY OUT WHILE PAGE TABLE %d IS IN MEMORY IN INDEX %d\n", i, page_table_start[i]);
                         entry->valid = 0;
                         entry->swapspace = swapSpace;
                         write_to_swap_location(swapOut, swapSpace);
@@ -140,7 +140,7 @@ void swapPage(int swapSpace, int pageIndex){
                 for(int j = 0; j < 4; j++){
                     struct table_entry* entry = (struct table_entry*)(&(swapIn.data[j*2]));
                     if(entry->valid == 1 && entry->alloc == 1 && entry->frame == pageIndex){
-                        printf("SWAPED AN ENTRY WITH ITS PAGE TABLE\n");
+                        //printf("SWAPED AN ENTRY WITH ITS PAGE TABLE\n");
                         write_to_swap_location(swapOut, swapSpace);
                         strncpy(&memory[pageIndex*16], (char *)(&swapIn), sizeof(struct page));
                         entry = (struct table_entry*)(&memory[pageIndex*16 + j*2]);
@@ -159,7 +159,7 @@ void swapPage(int swapSpace, int pageIndex){
                 struct table_entry* entry = (struct table_entry*)(&(possibleTable.data[j*2]));
                 if(entry->valid == 1 && entry->alloc == 1 && entry->frame == pageIndex){
 
-                    printf("SWAPED A ENTRY WITH NOT ITS PAGE TABLE I THINK ITS PAGE TABLE IS IN SWAPSPACE %d\n", indexToSwap(page_table_start[i]));
+                    //printf("SWAPED A ENTRY WITH NOT ITS PAGE TABLE I THINK ITS PAGE TABLE IS IN SWAPSPACE %d\n", indexToSwap(page_table_start[i]));
                     write_to_swap_location(swapOut, swapSpace);
                     strncpy(&memory[pageIndex*16], (char *)(&swapIn), sizeof(struct page));
                     for (int k = 0; k < 4; k++){
@@ -211,9 +211,11 @@ void mapInst(int pid, int virtual_address, int protection){
         }
     }
     struct table_entry* entry = (struct table_entry*)(&memory[page_table_start[pid]*16 + (virtual_address>>4)*2]);
-    
-    if(entry->alloc == 0 || entry->valid == 0){
+    if(entry->alloc == 0){
         printf("allocating new page\n");
+    }
+    int oldAlloc = entry->alloc;
+    if(entry->alloc == 0 || entry->valid == 0){
         int i = 0;
         for(i = 0; i < 4 && free_list[i] == FULL; i++){}
         if(i == 4){
@@ -247,7 +249,7 @@ void mapInst(int pid, int virtual_address, int protection){
             entry->frame = i;
         }
     }
-    else{
+    if(oldAlloc == 1){
         if(entry->protection == protection){
             printf("Error: virtual page %d is already mapped with rw_bit=%d\n", virtual_address>>4, protection);
         }
