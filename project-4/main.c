@@ -297,7 +297,7 @@ void storeInst(int pid, int virtual_address, int value){
             int oldSwap = nextSwap;
             swapPage(entry->swapspace, nextSwap);
             entry->valid = 1;
-            entry->frame = nextSwap;
+            entry->frame = oldSwap;
         }
         int newAddress = ((virtual_address)&(0xf)) + (entry->frame << 4);
         printf("Stored value %d at virtual address %d (physical address %d)\n", value, virtual_address, newAddress);
