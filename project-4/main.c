@@ -82,9 +82,17 @@ int append_page_to_swap(struct page page) {
     }
 }
 
-struct page write_to_swap_location(struct page page, int index) {
+void write_to_swap_location(struct page page, int index) {
     swap_states[index] = CATALONIA;
     swap[index] = page;
+}
+
+struct page copyPage(struct page *page){
+    struct page ret;
+    for(int i = 0; i < 16; i++){
+        ret.data[i] = page->data[i];
+    }
+    return ret;
 }
 
 int indexToSwap(int index){
@@ -98,8 +106,8 @@ int swapToIndex(int swap){
 void swapPage(int swapSpace, int pageIndex){
     printf("Swapped frame %d and disk swapslot %d\n", pageIndex, swapSpace);
     struct page swapIn = get_page_from_swap(swapSpace);
-    struct page swapOut;
-    strncpy((char *)(&swapOut), &memory[pageIndex*16], sizeof(struct page));
+    struct page swapOut = copyPage((struct page*) (&memory[pageIndex*16]));
+    //strncpy((char *)(&swapOut), &memory[pageIndex*16], sizeof(struct page));
     for (int i = 0; i < 4; i++){
         if(page_table_start[i] >= 0 && page_table_start[i] <= 3){
             if (pageIndex == page_table_start[i]){
@@ -111,7 +119,8 @@ void swapPage(int swapSpace, int pageIndex){
                 }
                 page_table_start[i] = swapToIndex(swapSpace);
                 write_to_swap_location(swapOut, swapSpace);
-                strncpy(&memory[pageIndex*16], (char *)(&swapIn), sizeof(struct page));
+                *((struct page *)(&memory[pageIndex*16])) = copyPage(&swapIn);
+                //strncpy(&memory[pageIndex*16], (char *)(&swapIn), sizeof(struct page));
                 nextSwap = (nextSwap+1)%4;
                 return;    
             }
@@ -123,7 +132,8 @@ void swapPage(int swapSpace, int pageIndex){
                         entry->valid = 0;
                         entry->swapspace = swapSpace;
                         write_to_swap_location(swapOut, swapSpace);
-                        strncpy(&memory[pageIndex*16], (char *)(&swapIn), sizeof(struct page));
+                        *((struct page *)(&memory[pageIndex*16])) = copyPage(&swapIn);
+                        //strncpy(&memory[pageIndex*16], (char *)(&swapIn), sizeof(struct page));
                         for (int k = 0; k < 4; k++){
                             if(indexToSwap(page_table_start[k]) == swapSpace){
                                 page_table_start[k] = pageIndex;
@@ -142,7 +152,8 @@ void swapPage(int swapSpace, int pageIndex){
                     if(entry->valid == 1 && entry->alloc == 1 && entry->frame == pageIndex){
                         //printf("SWAPED AN ENTRY WITH ITS PAGE TABLE\n");
                         write_to_swap_location(swapOut, swapSpace);
-                        strncpy(&memory[pageIndex*16], (char *)(&swapIn), sizeof(struct page));
+                        *((struct page *)(&memory[pageIndex*16])) = copyPage(&swapIn);
+                        //strncpy(&memory[pageIndex*16], (char *)(&swapIn), sizeof(struct page));
                         entry = (struct table_entry*)(&memory[pageIndex*16 + j*2]);
                         entry->valid  = 0;
                         entry->swapspace = swapSpace;
@@ -161,7 +172,8 @@ void swapPage(int swapSpace, int pageIndex){
 
                     //printf("SWAPED A ENTRY WITH NOT ITS PAGE TABLE I THINK ITS PAGE TABLE IS IN SWAPSPACE %d\n", indexToSwap(page_table_start[i]));
                     write_to_swap_location(swapOut, swapSpace);
-                    strncpy(&memory[pageIndex*16], (char *)(&swapIn), sizeof(struct page));
+                    *((struct page *)(&memory[pageIndex*16])) = copyPage(&swapIn);
+                    //strncpy(&memory[pageIndex*16], (char *)(&swapIn), sizeof(struct page));
                     for (int k = 0; k < 4; k++){
                         if(indexToSwap(page_table_start[k]) == swapSpace){
                             page_table_start[k] = pageIndex;
