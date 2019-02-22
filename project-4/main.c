@@ -215,6 +215,7 @@ void mapInst(int pid, int virtual_address, int protection){
         printf("allocating new page\n");
     }
     int oldAlloc = entry->alloc;
+    int oldProt = entry->protection;
     if(entry->alloc == 0 || entry->valid == 0){
         int i = 0;
         for(i = 0; i < 4 && free_list[i] == FULL; i++){}
@@ -250,7 +251,7 @@ void mapInst(int pid, int virtual_address, int protection){
         }
     }
     if(oldAlloc == 1){
-        if(entry->protection == protection){
+        if(oldProt == protection){
             printf("Error: virtual page %d is already mapped with rw_bit=%d\n", virtual_address>>4, protection);
         }
         else{
